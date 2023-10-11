@@ -28,14 +28,14 @@ public class GameManager : MonoBehaviour
     {
         bool needsRandom = true;
         int randomized = 0;
-        /*
+        
         while (needsRandom == true) {
             randomized = UnityEngine.Random.Range(1, 10);
             if (!_numbersUsed.Contains(randomized)) {
                 needsRandom = false;
             }
             _numbersUsed.Add(randomized);
-        }*/
+        }
         return randomized;  
     }
 
@@ -43,9 +43,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _width; i++) {
             for (int j = 0; j > _height * -1; j--) {
                 var node = Instantiate(_nodePrefab, new Vector2(i, j * -1), Quaternion.identity);
-                if (i == _width - 1 || j == _height - 1) {
+                /*if (i == _width - 1 || j == _height - 1) {
                     break;
-                }
+                }*/
                 Block generatedBLock = SpawnBlock(node, GenerateNumber());
                 node.SetName(i, j);
                 node.SetBlockInNode(generatedBLock);
