@@ -36,14 +36,14 @@ public class Block : MonoBehaviour
    private void OnMouseUp()
    {
         _text.alpha = 1f;
-        Node nodeTouched = GetNodeTouched();
-        if (nodeTouched != null) {
-            nodeTouched.GetBlockInNode().transform.position = originalNode.transform.position;
+        Node nodeWhereBlockIsDropped = GetNodeTouched();
+        if (nodeWhereBlockIsDropped != null) {
+            nodeWhereBlockIsDropped.GetBlockInNode().transform.position = originalNode.transform.position;
+            var tempBlock = originalNode.GetBlockInNode();
+            originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
+            nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
+            gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
             UpdateOffsetPosition();
-            nodeTouched.GetBlockInNode().originalNode = originalNode;
-            nodeTouched.SetBlockInNode(gameObject.GetComponent<Block>());
-            gameObject.transform.position = nodeTouched.transform.position;
-            originalNode = nodeTouched;
         } else {
             UpdateOffsetPosition();
             gameObject.transform.position = originalNode.transform.position;

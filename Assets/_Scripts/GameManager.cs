@@ -41,11 +41,8 @@ public class GameManager : MonoBehaviour
 
     void GenerateGrid() {
         for (int i = 0; i < _width; i++) {
-            for (int j = 0; j > _height * -1; j--) {
-                var node = Instantiate(_nodePrefab, new Vector2(i, j * -1), Quaternion.identity);
-                /*if (i == _width - 1 || j == _height - 1) {
-                    break;
-                }*/
+            for (int j = 0; j < _height; j++) {
+                var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
                 Block generatedBLock = SpawnBlock(node, GenerateNumber());
                 node.SetName(i, j);
                 node.SetBlockInNode(generatedBLock);
