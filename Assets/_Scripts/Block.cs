@@ -5,22 +5,32 @@ using System.Linq;
 public class Block : MonoBehaviour
 {
     public int Value;
-    [SerializeField] private TextMeshPro _text;
+    [SerializeField] public TextMeshPro _text;
+    [SerializeField] public SpriteRenderer _sprite;
     Vector3 mousePositionOffset;
     Node originalNode;
+    private bool isInteractible = false;
     
-    public Block Init(int value) {
+    public Block Init(int value, bool interactible) {
         Value = value;
         _text.text = value.ToString();
+        isInteractible = interactible;
         gameObject.name = string.Concat("Block_", value.ToString());
+        if (!interactible) {
+            _sprite.color = new Color32(245, 245, 159, 255);
+            _text.color = new Color32(0, 0, 0, 255);
+        }
         return this;
     }
 
    private void OnMouseDown()
     {
-        UpdateOffsetPosition();
-        originalNode = GetNodeTouched();
-        _text.alpha = 0.4f;
+        if (isInteractible)
+        {
+            UpdateOffsetPosition();
+            originalNode = GetNodeTouched();
+            _text.alpha = 0.4f;
+        }
     }
 
     private void UpdateOffsetPosition()
@@ -30,23 +40,33 @@ public class Block : MonoBehaviour
 
     private void OnMouseDrag()
    {
-        transform.position = GetWorldMousePosition() + mousePositionOffset;
+        if (isInteractible)
+        {
+            transform.position = GetWorldMousePosition() + mousePositionOffset;
+        }
    }
 
    private void OnMouseUp()
    {
-        _text.alpha = 1f;
-        Node nodeWhereBlockIsDropped = GetNodeTouched();
-        if (nodeWhereBlockIsDropped != null) {
-            nodeWhereBlockIsDropped.GetBlockInNode().transform.position = originalNode.transform.position;
-            var tempBlock = originalNode.GetBlockInNode();
-            originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
-            nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
-            gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
-            UpdateOffsetPosition();
-        } else {
-            UpdateOffsetPosition();
-            gameObject.transform.position = originalNode.transform.position;
+        if (isInteractible)
+        {
+            _text.alpha = 1f;
+            Node nodeWhereBlockIsDropped = GetNodeTouched();
+            if (nodeWhereBlockIsDropped != null)
+            {
+                nodeWhereBlockIsDropped.GetBlockInNode().transform.position = originalNode.transform.position;
+                var tempBlock = originalNode.GetBlockInNode();
+                originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
+                nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
+                gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
+                UpdateOffsetPosition();
+                FindObjectOfType<GameManager>().CheckResult();
+            }
+            else
+            {
+                UpdateOffsetPosition();
+                gameObject.transform.position = originalNode.transform.position;
+            }
         }
    }
 
@@ -57,7 +77,9 @@ public class Block : MonoBehaviour
         hits = Physics.RaycastAll(camRay);
         if (hits != null && hits.Length > 0) {
             //Debug.Log("Touched node " + hits.First().collider.transform.name);
-            return hits.First().collider.GetComponent<Node>();
+            if (hits.First().collider.GetComponent<Node>().GetBlockInNode().isInteractible) {
+                return hits.First().collider.GetComponent<Node>();
+            }
         }
         return null;
     }
