@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Constants : MonoBehaviour
 {
+    // BOARD NUMBER COMBINATIONS
     public static int[] numbersForLvl1 = { 1, 1, 1, 1, 1, 1, 1, 1, 2 };
     public static int[] numbersForLvl2 = { 1, 1, 1, 1, 1, 1, 1, 2, 3 };
     public static int[] numbersForLvl3 = { 1, 1, 1, 1, 1, 1, 2, 3, 4 };
@@ -12,4 +13,8 @@ public class Constants : MonoBehaviour
     public static int[] numbersForLvl6 = { 1, 1, 1, 2, 3, 4, 5, 6, 7 };
     public static int[] numbersForLvl7 = { 1, 1, 2, 3, 4, 5, 6, 7, 8 };
     public static int[] numbersForLvl8 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    
+    // COLORS USED
+    public static Color successBackgroundColor = new Color32(16, 173, 18, 255);
+    public static Color inProgressBackgroundColor = new Color32(245, 245, 159, 255);
 }

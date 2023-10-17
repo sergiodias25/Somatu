@@ -10,8 +10,12 @@ public class Block : MonoBehaviour
     Vector3 mousePositionOffset;
     Node originalNode;
     private bool isInteractible = false;
+
+    public Node GetNode() {
+        return originalNode;
+    }
     
-    public Block Init(int value, bool interactible) {
+    public Block Init(int value, bool interactible, Node node) {
         Value = value;
         _text.text = value.ToString();
         isInteractible = interactible;
@@ -20,6 +24,7 @@ public class Block : MonoBehaviour
             _sprite.color = new Color32(245, 245, 159, 255);
             _text.color = new Color32(0, 0, 0, 255);
         }
+        originalNode = node;
         return this;
     }
 

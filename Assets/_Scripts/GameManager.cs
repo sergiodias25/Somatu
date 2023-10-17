@@ -19,18 +19,22 @@ public class GameManager : MonoBehaviour
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
     private List<Node> _allNodes = new List<Node>();
-    private Color successBackgroundColor = new Color32(16, 173, 18, 255);
-    private Color inProgressBackgroundColor = new Color32(245, 245, 159, 255);
     private Block firstRowSolutionBlock;
     private Block secondRowSolutionBlock;
     private Block thirdRowSolutionBlock;
     private Block firstColumnSolutionBlock;
     private Block secondColumnSolutionBlock;
     private Block thirdColumnSolutionBlock;
+    private int[] currentLevel;
 
     void Start()
     {
-        GenerateGrid(Constants.numbersForLvl1);
+        currentLevel = Constants.numbersForLvl1;
+        GenerateGrid(currentLevel);
+    }
+
+    public int[] GetCurrentLevel() {
+        return currentLevel;
     }
 
     private int GenerateNumber(int[] numbers)
@@ -63,6 +67,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void GenerateGrid(int[] numbers) {
+        currentLevel = numbers;
         for (int i = 0; i < _width; i++) {
             for (int j = 1; j < _height + 1; j++) {
                 var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
@@ -100,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     Block SpawnBlock(Node node, int value, bool interactible) {
         var block = Instantiate(_blockPrefab, node.Pos, Quaternion.identity);
-        return block.Init(value, interactible);
+        return block.Init(value, interactible, node);
     }
 
     public int GetFirstRowSum() {
@@ -155,7 +160,7 @@ public class GameManager : MonoBehaviour
             foreach (var node in _allNodes)
             {
                 node.GetBlockInNode().DisableInteraction();
-                node.GetBlockInNode()._sprite.color = successBackgroundColor;
+                node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
             }
             FindObjectOfType<RestartButton>().ActivateRestartButton();
         }
@@ -164,12 +169,12 @@ public class GameManager : MonoBehaviour
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block) {
         if (currentSum == expectedResult)
         {
-            block._sprite.color = successBackgroundColor;
+            block._sprite.color = Constants.successBackgroundColor;
             return true;
         }
         else
         {
-            block._sprite.color = inProgressBackgroundColor;
+            block._sprite.color = Constants.inProgressBackgroundColor;
         }
         return false;
     }
@@ -182,5 +187,33 @@ public class GameManager : MonoBehaviour
             _solution += solutionNumber;
         }
         Debug.Log("Solution: " + _solution);
+    }
+
+    internal void ResetBoard()
+    {
+        for (int i = 0; i < _allNodes.Count; i++)
+        {
+            DestroyBlock(_allNodes[i].GetBlockInNode());
+        }
+        for (int i = 0; i < _allNodes.Count; i++)
+        {
+            Destroy(_allNodes[i].gameObject);
+        }
+        DestroyBlock(firstRowSolutionBlock);
+        DestroyBlock(secondRowSolutionBlock);
+        DestroyBlock(thirdRowSolutionBlock);
+        DestroyBlock(firstColumnSolutionBlock);
+        DestroyBlock(secondColumnSolutionBlock);
+        DestroyBlock(thirdColumnSolutionBlock);
+        _allNodes = new List<Node>();
+        _indexesUsedForStartingPosition = new();
+        _indexesUsedForSolution = new();
+        _solutionNumbers = new();
+        _allNodes = new List<Node>();
+    }
+
+    private void DestroyBlock(Block block) {
+        Destroy(block.gameObject);
+        Destroy(block.GetNode().gameObject);
     }
 }
