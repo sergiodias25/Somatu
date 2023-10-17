@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Node _nodePrefab;
     [SerializeField] private Block _blockPrefab;
     [SerializeField] private SpriteRenderer _boardPrefab;
-    private static readonly int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    private List<int> _numbersUsed = new();
+    private List<int> _indexesUsedForStartingPosition = new();
+    private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
     private List<Node> _allNodes = new List<Node>();
     private Color successBackgroundColor = new Color32(16, 173, 18, 255);
@@ -30,43 +30,45 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GenerateGrid();
+        GenerateGrid(Constants.numbersForLvl1);
     }
 
-    private int GenerateNumber()
+    private int GenerateNumber(int[] numbers)
     {
         bool needsRandom = true;
-        int randomized = 0;
+        int randomized = -1;
         
         while (needsRandom == true) {
-            randomized = UnityEngine.Random.Range(1, 10);
-            if (!_numbersUsed.Contains(randomized)) {
+            randomized = UnityEngine.Random.Range(0, 9);
+            if (!_indexesUsedForStartingPosition.Contains(randomized)) {
                 needsRandom = false;
-                _numbersUsed.Add(randomized);
+                _indexesUsedForStartingPosition.Add(randomized);
             }
         }
-        return randomized;  
+        needsRandom = true;
+        return numbers[randomized];  
     }
 
-    private void GenerateSolutionNumber()
+    private void GenerateSolutionNumber(int[] numbers)
     {
         bool needsRandom = true;
         while (needsRandom == true) {
-            int randomized = UnityEngine.Random.Range(1, 10);
-            if (!_solutionNumbers.Contains(randomized)) {
+            int randomized = UnityEngine.Random.Range(0, 9);
+            if (!_indexesUsedForSolution.Contains(randomized)) {
                 needsRandom = false;
-                _solutionNumbers.Add(randomized);
+                _solutionNumbers.Add(numbers[randomized]);
+                _indexesUsedForSolution.Add(randomized);
             }
         }
     }
 
-    void GenerateGrid() {
+    public void GenerateGrid(int[] numbers) {
         for (int i = 0; i < _width; i++) {
             for (int j = 1; j < _height + 1; j++) {
                 var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
-                var generatedNumber = GenerateNumber();
+                var generatedNumber = GenerateNumber(numbers);
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
-                GenerateSolutionNumber();
+                GenerateSolutionNumber(numbers);
                 node.SetName(i, j);
                 node.SetBlockInNode(generatedBLock);
                 _allNodes.Add(node);
@@ -155,6 +157,7 @@ public class GameManager : MonoBehaviour
                 node.GetBlockInNode().DisableInteraction();
                 node.GetBlockInNode()._sprite.color = successBackgroundColor;
             }
+            FindObjectOfType<RestartButton>().ActivateRestartButton();
         }
     }
 
