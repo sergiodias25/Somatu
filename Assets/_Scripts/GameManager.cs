@@ -19,6 +19,14 @@ public class GameManager : MonoBehaviour
     private List<int> _numbersUsed = new();
     private List<int> _solutionNumbers = new();
     private List<Node> _allNodes = new List<Node>();
+    private Color successBackgroundColor = new Color32(16, 173, 18, 255);
+    private Color inProgressBackgroundColor = new Color32(245, 245, 159, 255);
+    private Block firstRowSolutionBlock;
+    private Block secondRowSolutionBlock;
+    private Block thirdRowSolutionBlock;
+    private Block firstColumnSolutionBlock;
+    private Block secondColumnSolutionBlock;
+    private Block thirdColumnSolutionBlock;
 
     void Start()
     {
@@ -54,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     void GenerateGrid() {
         for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
+            for (int j = 1; j < _height + 1; j++) {
                 var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
                 var generatedNumber = GenerateNumber();
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
@@ -69,20 +77,23 @@ public class GameManager : MonoBehaviour
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-        GenerateSolutionBlock(3, 2, GetSolutionFirstRowSum());
-        GenerateSolutionBlock(3, 1, GetSolutionSecondRowSum());
-        GenerateSolutionBlock(3, 0, GetSolutionThirdRowSum());
-        GenerateSolutionBlock(0, -1, GetSolutionFirstColumnSum());
-        GenerateSolutionBlock(1, -1, GetSolutionSecondColumnSum());
-        GenerateSolutionBlock(2, -1, GetSolutionThirdColumnSum());
+        firstRowSolutionBlock = GenerateSolutionBlock(3, 3, GetSolutionFirstRowSum());
+        secondRowSolutionBlock = GenerateSolutionBlock(3, 2, GetSolutionSecondRowSum());
+        thirdRowSolutionBlock = GenerateSolutionBlock(3, 1, GetSolutionThirdRowSum());
+        firstColumnSolutionBlock = GenerateSolutionBlock(0, 0, GetSolutionFirstColumnSum());
+        secondColumnSolutionBlock = GenerateSolutionBlock(1, 0, GetSolutionSecondColumnSum());
+        thirdColumnSolutionBlock = GenerateSolutionBlock(2, 0, GetSolutionThirdColumnSum());
+        CheckResult();
+        LogSolution();
     }
 
-    private void GenerateSolutionBlock(int x, int y, int numberValue)
+    private Block GenerateSolutionBlock(int x, int y, int numberValue)
     {
         var node = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity);
         Block generatedBLock = SpawnBlock(node, numberValue, false);
         node.SetName(x, y);
         node.SetBlockInNode(generatedBLock);
+        return generatedBLock;
     }
 
     Block SpawnBlock(Node node, int value, bool interactible) {
@@ -130,45 +141,43 @@ public class GameManager : MonoBehaviour
 
     internal void CheckResult()
     {
-        if (GetFirstRowSum() == GetSolutionFirstRowSum()) {
-            GameObject.Find("Node_3_2").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_3_2").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
-        if (GetSecondRowSum() == GetSolutionSecondRowSum()) {
-            GameObject.Find("Node_3_1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_3_1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
-        if (GetThirdRowSum() == GetSolutionThirdRowSum()) {
-            GameObject.Find("Node_3_0").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_3_0").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
-        if (GetFirstColumnSum() == GetSolutionFirstColumnSum()) {
-            GameObject.Find("Node_0_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_0_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
-        if (GetSecondColumnSum() == GetSolutionSecondColumnSum()) {
-            GameObject.Find("Node_1_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_1_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
-        if (GetThirdColumnSum() == GetSolutionThirdColumnSum()) {
-            GameObject.Find("Node_2_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(16, 173, 18, 255);
-        } else {
-            GameObject.Find("Node_2_-1").GetComponent<Node>().GetBlockInNode()._sprite.color = new Color32(245, 245, 159, 255);
-        }
+        bool firstRowCompleted = CheckLineOrColumnResult(GetFirstRowSum(), GetSolutionFirstRowSum(), firstRowSolutionBlock);
+        bool secondRowCompleted = CheckLineOrColumnResult(GetSecondRowSum(), GetSolutionSecondRowSum(), secondRowSolutionBlock);
+        bool thirdRowCompleted = CheckLineOrColumnResult(GetThirdRowSum(), GetSolutionThirdRowSum(), thirdRowSolutionBlock);
+        bool firstColumnCompleted = CheckLineOrColumnResult(GetFirstColumnSum(), GetSolutionFirstColumnSum(), firstColumnSolutionBlock);
+        bool secondColumnCompleted = CheckLineOrColumnResult(GetSecondColumnSum(), GetSolutionSecondColumnSum(), secondColumnSolutionBlock);
+        bool thirdColumnCompleted = CheckLineOrColumnResult(GetThirdColumnSum(), GetSolutionThirdColumnSum(), thirdColumnSolutionBlock);
 
-        if (GetFirstRowSum() == GetSolutionFirstRowSum() &&
-        GetSecondRowSum() == GetSolutionSecondRowSum() &&
-        GetThirdRowSum() == GetSolutionThirdRowSum() &&
-        GetFirstColumnSum() == GetSolutionFirstColumnSum() &&
-        GetSecondColumnSum() == GetSolutionSecondColumnSum() &&
-        GetThirdColumnSum() == GetSolutionThirdColumnSum()
-        ) {
-            EditorUtility.DisplayDialog("Game has ended", "WINNER!", "Fácil!");
+        if (firstRowCompleted && secondRowCompleted && thirdRowCompleted &&
+            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted) {
+            foreach (var node in _allNodes)
+            {
+                node.GetBlockInNode().DisableInteraction();
+                node.GetBlockInNode()._sprite.color = successBackgroundColor;
+            }
         }
+    }
+
+    private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block) {
+        if (currentSum == expectedResult)
+        {
+            block._sprite.color = successBackgroundColor;
+            return true;
+        }
+        else
+        {
+            block._sprite.color = inProgressBackgroundColor;
+        }
+        return false;
+    }
+
+    private void LogSolution()
+    {
+        string _solution = "";
+        foreach (var solutionNumber in _solutionNumbers)
+        {
+            _solution += solutionNumber;
+        }
+        Debug.Log("Solution: " + _solution);
     }
 }

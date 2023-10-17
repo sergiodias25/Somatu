@@ -100,4 +100,8 @@ public class Block : MonoBehaviour
     private Vector3 GetWorldMousePosition() {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
    }
+
+   public void DisableInteraction() {
+        isInteractible = false;
+   }
 }
