@@ -19,9 +19,9 @@ public class Timer : MonoBehaviour
     void Start()
     {
         _timeLimitValue = 0f;
-        _currentTime = 3f;
-        _isCountdown = true;
-        _hasLimit = true;
+        _currentTime = 0f;
+        _isCountdown = false;
+        _hasLimit = false;
     }
 
     void Update()
@@ -35,6 +35,11 @@ public class Timer : MonoBehaviour
             // Time limit reached
         }
         UpdateTimerText();
+    }
+
+    public void StopTimer() {
+        _timerText.color = Color.green;
+        enabled = false;
     }
 
     private void UpdateTimerText()

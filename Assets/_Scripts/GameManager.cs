@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Node _nodePrefab;
     [SerializeField] private Block _blockPrefab;
     [SerializeField] private SpriteRenderer _boardPrefab;
+    [SerializeField] public TextMeshProUGUI _timesSolved;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -29,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentLevel = Constants.numbersForLvl1;
+        currentLevel = Constants.starterLevel;
+        _timesSolved.text = "0";
         GenerateGrid(currentLevel);
     }
 
@@ -156,14 +158,31 @@ public class GameManager : MonoBehaviour
         bool thirdColumnCompleted = CheckLineOrColumnResult(GetThirdColumnSum(), GetSolutionThirdColumnSum(), thirdColumnSolutionBlock);
 
         if (firstRowCompleted && secondRowCompleted && thirdRowCompleted &&
-            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted) {
-            foreach (var node in _allNodes)
-            {
-                node.GetBlockInNode().DisableInteraction();
-                node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
-            }
-            FindObjectOfType<RestartButton>().ActivateRestartButton();
+            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted)
+        {
+            DoEndGameActions();
         }
+    }
+
+    private void DoEndGameActions()
+    {
+        foreach (var node in _allNodes)
+        {
+            node.GetBlockInNode().DisableInteraction();
+            node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
+        }
+        FindObjectOfType<RestartButton>().ActivateRestartButton();
+        _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString() ;
+
+        if (currentLevel.Equals(Constants.endLevel)) {
+            CompletedFinalLevel();
+        }
+    }
+
+    private void CompletedFinalLevel(){
+        FindObjectOfType<Timer>().StopTimer();
+        _timesSolved.color = Color.green;
+        FindObjectOfType<RestartButton>().HideRestartButton();
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block) {
