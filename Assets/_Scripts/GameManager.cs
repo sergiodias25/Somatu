@@ -16,20 +16,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Block _blockPrefab;
     [SerializeField] private SpriteRenderer _boardPrefab;
     [SerializeField] public TextMeshProUGUI _timesSolved;
+    [SerializeField] public TextMeshProUGUI _correctBlocksCount;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
     private List<Node> _allNodes = new List<Node>();
-    private Block firstRowSolutionBlock;
-    private Block secondRowSolutionBlock;
-    private Block thirdRowSolutionBlock;
-    private Block firstColumnSolutionBlock;
-    private Block secondColumnSolutionBlock;
-    private Block thirdColumnSolutionBlock;
+    private Block firstRowResultBlock;
+    private Block secondRowResultBlock;
+    private Block thirdRowResultBlock;
+    private Block firstColumnResultBlock;
+    private Block secondColumnResultBlock;
+    private Block thirdColumnResultBlock;
     private int[] currentLevel;
 
     void Start()
     {
+        var center = new Vector2((float) (_width + 1) /2 - 0.5f,(float) (_height + 1) / 2 -0.5f);
+        // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
+        // board.size = new Vector2(_width, _height);
+        Camera.main.transform.position = new Vector3(center.x, center.y, -10);
+
         currentLevel = Constants.starterLevel;
         _timesSolved.text = "0";
         GenerateGrid(currentLevel);
@@ -86,22 +92,18 @@ public class GameManager : MonoBehaviour
                 _allNodes.Add(node);
             }
         }
-        
-        var center = new Vector2((float) (_width + 1) /2 - 0.5f,(float) (_height + 1) / 2 -0.5f);
-        // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
-        // board.size = new Vector2(_width, _height);
-        Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-        firstRowSolutionBlock = GenerateSolutionBlock(3, 3, GetSolutionFirstRowSum());
-        secondRowSolutionBlock = GenerateSolutionBlock(3, 2, GetSolutionSecondRowSum());
-        thirdRowSolutionBlock = GenerateSolutionBlock(3, 1, GetSolutionThirdRowSum());
-        firstColumnSolutionBlock = GenerateSolutionBlock(0, 0, GetSolutionFirstColumnSum());
-        secondColumnSolutionBlock = GenerateSolutionBlock(1, 0, GetSolutionSecondColumnSum());
-        thirdColumnSolutionBlock = GenerateSolutionBlock(2, 0, GetSolutionThirdColumnSum());
+
+        firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionFirstRowSum());
+        secondRowResultBlock = GenerateResultBlock(3, 2, GetSolutionSecondRowSum());
+        thirdRowResultBlock = GenerateResultBlock(3, 1, GetSolutionThirdRowSum());
+        firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionFirstColumnSum());
+        secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
+        thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
         CheckResult(false);
         LogSolution();
     }
 
-    private Block GenerateSolutionBlock(int x, int y, int numberValue)
+    private Block GenerateResultBlock(int x, int y, int numberValue)
     {
         var node = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity);
         Block generatedBLock = SpawnBlock(node, numberValue, false);
@@ -155,16 +157,26 @@ public class GameManager : MonoBehaviour
 
     internal bool CheckResult(bool isActionable)
     {
-        bool firstRowCompleted = CheckLineOrColumnResult(GetFirstRowSum(), GetSolutionFirstRowSum(), firstRowSolutionBlock);
-        bool secondRowCompleted = CheckLineOrColumnResult(GetSecondRowSum(), GetSolutionSecondRowSum(), secondRowSolutionBlock);
-        bool thirdRowCompleted = CheckLineOrColumnResult(GetThirdRowSum(), GetSolutionThirdRowSum(), thirdRowSolutionBlock);
-        bool firstColumnCompleted = CheckLineOrColumnResult(GetFirstColumnSum(), GetSolutionFirstColumnSum(), firstColumnSolutionBlock);
-        bool secondColumnCompleted = CheckLineOrColumnResult(GetSecondColumnSum(), GetSolutionSecondColumnSum(), secondColumnSolutionBlock);
-        bool thirdColumnCompleted = CheckLineOrColumnResult(GetThirdColumnSum(), GetSolutionThirdColumnSum(), thirdColumnSolutionBlock);
+        bool firstRowCompleted = CheckLineOrColumnResult(GetFirstRowSum(), GetSolutionFirstRowSum(), firstRowResultBlock);
+        bool secondRowCompleted = CheckLineOrColumnResult(GetSecondRowSum(), GetSolutionSecondRowSum(), secondRowResultBlock);
+        bool thirdRowCompleted = CheckLineOrColumnResult(GetThirdRowSum(), GetSolutionThirdRowSum(), thirdRowResultBlock);
+        bool firstColumnCompleted = CheckLineOrColumnResult(GetFirstColumnSum(), GetSolutionFirstColumnSum(), firstColumnResultBlock);
+        bool secondColumnCompleted = CheckLineOrColumnResult(GetSecondColumnSum(), GetSolutionSecondColumnSum(), secondColumnResultBlock);
+        bool thirdColumnCompleted = CheckLineOrColumnResult(GetThirdColumnSum(), GetSolutionThirdColumnSum(), thirdColumnResultBlock);
+
+        int _correctCount = 0;
+        for (int i = 0; i < _allNodes.Count; i++) {
+            if (_allNodes[i].GetBlockInNode().Value == _solutionNumbers[i]) {
+                _correctCount += 1;
+            } 
+        }
+        _correctBlocksCount.text = _correctCount.ToString();
+        if (_correctCount == _allNodes.Count) {
+            _correctBlocksCount.color = Color.green;
+        }
 
         if (firstRowCompleted && secondRowCompleted && thirdRowCompleted &&
-            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted)
-        {
+            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted) {
             if (isActionable) {
                 DoEndGameActions();
             }
@@ -175,8 +187,7 @@ public class GameManager : MonoBehaviour
 
     private void DoEndGameActions()
     {
-        foreach (var node in _allNodes)
-        {
+        foreach (var node in _allNodes) {
             node.GetBlockInNode().DisableInteraction();
             node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
         }
@@ -227,17 +238,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(_allNodes[i].gameObject);
         }
-        DestroyBlock(firstRowSolutionBlock);
-        DestroyBlock(secondRowSolutionBlock);
-        DestroyBlock(thirdRowSolutionBlock);
-        DestroyBlock(firstColumnSolutionBlock);
-        DestroyBlock(secondColumnSolutionBlock);
-        DestroyBlock(thirdColumnSolutionBlock);
+        DestroyBlock(firstRowResultBlock);
+        DestroyBlock(secondRowResultBlock);
+        DestroyBlock(thirdRowResultBlock);
+        DestroyBlock(firstColumnResultBlock);
+        DestroyBlock(secondColumnResultBlock);
+        DestroyBlock(thirdColumnResultBlock);
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
         _allNodes = new List<Node>();
+        _correctBlocksCount.color = Constants.textColor;
     }
 
     private void DestroyBlock(Block block) {
