@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
         currentLevel = Constants.starterLevel;
         _timesSolved.text = "0";
         GenerateGrid(currentLevel);
+        if (CheckResult(false)) {
+            ResetBoard();
+            GenerateGrid(currentLevel);
+        };
+
     }
 
     public int[] GetCurrentLevel() {
@@ -92,7 +97,7 @@ public class GameManager : MonoBehaviour
         firstColumnSolutionBlock = GenerateSolutionBlock(0, 0, GetSolutionFirstColumnSum());
         secondColumnSolutionBlock = GenerateSolutionBlock(1, 0, GetSolutionSecondColumnSum());
         thirdColumnSolutionBlock = GenerateSolutionBlock(2, 0, GetSolutionThirdColumnSum());
-        CheckResult();
+        CheckResult(false);
         LogSolution();
     }
 
@@ -148,7 +153,7 @@ public class GameManager : MonoBehaviour
         return _solutionNumbers[6] + _solutionNumbers[7] + _solutionNumbers[8];
     }
 
-    internal void CheckResult()
+    internal bool CheckResult(bool isActionable)
     {
         bool firstRowCompleted = CheckLineOrColumnResult(GetFirstRowSum(), GetSolutionFirstRowSum(), firstRowSolutionBlock);
         bool secondRowCompleted = CheckLineOrColumnResult(GetSecondRowSum(), GetSolutionSecondRowSum(), secondRowSolutionBlock);
@@ -160,8 +165,12 @@ public class GameManager : MonoBehaviour
         if (firstRowCompleted && secondRowCompleted && thirdRowCompleted &&
             firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted)
         {
-            DoEndGameActions();
+            if (isActionable) {
+                DoEndGameActions();
+            }
+            return true;
         }
+        return false;
     }
 
     private void DoEndGameActions()

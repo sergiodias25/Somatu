@@ -65,7 +65,7 @@ public class Block : MonoBehaviour
                 nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
                 gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
                 UpdateOffsetPosition();
-                FindObjectOfType<GameManager>().CheckResult();
+                FindObjectOfType<GameManager>().CheckResult(true);
             }
             else
             {
