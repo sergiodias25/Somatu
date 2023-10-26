@@ -14,14 +14,16 @@ public class Node : MonoBehaviour
         y = j;
     }
 
-    public void SetBlockInNode(Block block) {
+    public void SetBlockInNode(Block block)
+    {
         //if (_blockInNode != null) {
-         //   Debug.Log("node '" + name + "' changed from '" + _blockInNode.name + "' to '" + block.name + "'");
+        //   Debug.Log("node '" + name + "' changed from '" + _blockInNode.name + "' to '" + block.name + "'");
         //}
         _blockInNode = block;
     }
 
-    public Block GetBlockInNode() {
+    public Block GetBlockInNode()
+    {
         return _blockInNode;
     }
 }

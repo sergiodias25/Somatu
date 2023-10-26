@@ -26,8 +26,17 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        _currentTime = _isCountdown ? _currentTime -= Time.deltaTime : _currentTime += Time.deltaTime;
-        if (_hasLimit && ((_isCountdown && _currentTime <= _timeLimitValue + 1f) || (!_isCountdown && _currentTime <= _timeLimitValue + 1f))) {
+        _currentTime = _isCountdown
+            ? _currentTime -= Time.deltaTime
+            : _currentTime += Time.deltaTime;
+        if (
+            _hasLimit
+            && (
+                (_isCountdown && _currentTime <= _timeLimitValue + 1f)
+                || (!_isCountdown && _currentTime <= _timeLimitValue + 1f)
+            )
+        )
+        {
             _currentTime = _timeLimitValue;
             UpdateTimerText();
             _timerText.color = Color.red;
@@ -37,16 +46,17 @@ public class Timer : MonoBehaviour
         UpdateTimerText();
     }
 
-    public void StopTimer() {
+    public void StopTimer()
+    {
         _timerText.color = Color.green;
         enabled = false;
     }
 
     private void UpdateTimerText()
     {
-        int timeInSecondsInt = (int)_currentTime;  //We don't care about fractions of a second, so easy to drop them by just converting to an int
-        int minutes = (int)(_currentTime / 60);  //Get total minutes
-        int seconds = timeInSecondsInt - (minutes * 60);  //Get seconds for display alongside minutes
-        _timerText.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");  //Create the string representation, where both seconds and minutes are at minimum 2 digits
+        int timeInSecondsInt = (int)_currentTime; //We don't care about fractions of a second, so easy to drop them by just converting to an int
+        int minutes = (int)(_currentTime / 60); //Get total minutes
+        int seconds = timeInSecondsInt - (minutes * 60); //Get seconds for display alongside minutes
+        _timerText.text = minutes.ToString("D2") + ":" + seconds.ToString("D2"); //Create the string representation, where both seconds and minutes are at minimum 2 digits
     }
 }

@@ -14,9 +14,10 @@ public class Constants : MonoBehaviour
     public static int[] numbersForLvl7 = { 1, 1, 2, 3, 4, 5, 6, 7, 8 };
     public static int[] numbersForLvl8 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-    public static int[] starterLevel = numbersForLvl1;
-    public static int[] endLevel = numbersForLvl2;
-    
+    // GAME SETTINGS
+    public static int[] starterLevel = numbersForLvl6;
+    public static int[] endLevel = numbersForLvl8;
+
     // COLORS USED
     public static Color successBackgroundColor = new Color32(16, 173, 18, 255);
     public static Color inProgressBackgroundColor = new Color32(245, 245, 159, 255);

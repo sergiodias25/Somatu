@@ -10,13 +10,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int _width;
-    [SerializeField] private int _height;
-    [SerializeField] private Node _nodePrefab;
-    [SerializeField] private Block _blockPrefab;
-    [SerializeField] private SpriteRenderer _boardPrefab;
-    [SerializeField] public TextMeshProUGUI _timesSolved;
-    [SerializeField] public TextMeshProUGUI _correctBlocksCount;
+    [SerializeField]
+    private int _width;
+
+    [SerializeField]
+    private int _height;
+
+    [SerializeField]
+    private Node _nodePrefab;
+
+    [SerializeField]
+    private Block _blockPrefab;
+
+    [SerializeField]
+    private SpriteRenderer _boardPrefab;
+
+    [SerializeField]
+    public TextMeshProUGUI _timesSolved;
+
+    [SerializeField]
+    public TextMeshProUGUI _correctBlocksCount;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -31,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        var center = new Vector2((float) (_width + 1) /2 - 0.5f,(float) (_height + 1) / 2 -0.5f);
+        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 1) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
@@ -39,14 +52,16 @@ public class GameManager : MonoBehaviour
         currentLevel = Constants.starterLevel;
         _timesSolved.text = "0";
         GenerateGrid(currentLevel);
-        if (CheckResult(false)) {
+        if (CheckResult(false))
+        {
             ResetBoard();
             GenerateGrid(currentLevel);
-        };
-
+        }
+        ;
     }
 
-    public int[] GetCurrentLevel() {
+    public int[] GetCurrentLevel()
+    {
         return currentLevel;
     }
 
@@ -54,24 +69,28 @@ public class GameManager : MonoBehaviour
     {
         bool needsRandom = true;
         int randomized = -1;
-        
-        while (needsRandom == true) {
+
+        while (needsRandom == true)
+        {
             randomized = UnityEngine.Random.Range(0, 9);
-            if (!_indexesUsedForStartingPosition.Contains(randomized)) {
+            if (!_indexesUsedForStartingPosition.Contains(randomized))
+            {
                 needsRandom = false;
                 _indexesUsedForStartingPosition.Add(randomized);
             }
         }
         needsRandom = true;
-        return numbers[randomized];  
+        return numbers[randomized];
     }
 
     private void GenerateSolutionNumber(int[] numbers)
     {
         bool needsRandom = true;
-        while (needsRandom == true) {
+        while (needsRandom == true)
+        {
             int randomized = UnityEngine.Random.Range(0, 9);
-            if (!_indexesUsedForSolution.Contains(randomized)) {
+            if (!_indexesUsedForSolution.Contains(randomized))
+            {
                 needsRandom = false;
                 _solutionNumbers.Add(numbers[randomized]);
                 _indexesUsedForSolution.Add(randomized);
@@ -79,10 +98,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GenerateGrid(int[] numbers) {
+    public void GenerateGrid(int[] numbers)
+    {
         currentLevel = numbers;
-        for (int i = 0; i < _width; i++) {
-            for (int j = 1; j < _height + 1; j++) {
+        for (int i = 0; i < _width; i++)
+        {
+            for (int j = 1; j < _height + 1; j++)
+            {
                 var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
                 var generatedNumber = GenerateNumber(numbers);
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
@@ -112,72 +134,142 @@ public class GameManager : MonoBehaviour
         return generatedBLock;
     }
 
-    Block SpawnBlock(Node node, int value, bool interactible) {
+    Block SpawnBlock(Node node, int value, bool interactible)
+    {
         var block = Instantiate(_blockPrefab, node.Pos, Quaternion.identity);
         return block.Init(value, interactible, node);
     }
 
-    public int GetFirstRowSum() {
-        return _allNodes[2].GetBlockInNode().Value + _allNodes[5].GetBlockInNode().Value + _allNodes[8].GetBlockInNode().Value;
+    public int GetFirstRowSum()
+    {
+        return _allNodes[2].GetBlockInNode().Value
+            + _allNodes[5].GetBlockInNode().Value
+            + _allNodes[8].GetBlockInNode().Value;
     }
-    public int GetSecondRowSum() {
-        return _allNodes[1].GetBlockInNode().Value + _allNodes[4].GetBlockInNode().Value + _allNodes[7].GetBlockInNode().Value;
+
+    public int GetSecondRowSum()
+    {
+        return _allNodes[1].GetBlockInNode().Value
+            + _allNodes[4].GetBlockInNode().Value
+            + _allNodes[7].GetBlockInNode().Value;
     }
-    public int GetThirdRowSum() {
-        return _allNodes[0].GetBlockInNode().Value + _allNodes[3].GetBlockInNode().Value + _allNodes[6].GetBlockInNode().Value;
+
+    public int GetThirdRowSum()
+    {
+        return _allNodes[0].GetBlockInNode().Value
+            + _allNodes[3].GetBlockInNode().Value
+            + _allNodes[6].GetBlockInNode().Value;
     }
-    public int GetSolutionFirstRowSum() {
+
+    public int GetSolutionFirstRowSum()
+    {
         return _solutionNumbers[2] + _solutionNumbers[5] + _solutionNumbers[8];
     }
-    public int GetSolutionSecondRowSum() {
+
+    public int GetSolutionSecondRowSum()
+    {
         return _solutionNumbers[1] + _solutionNumbers[4] + _solutionNumbers[7];
     }
-    public int GetSolutionThirdRowSum() {
+
+    public int GetSolutionThirdRowSum()
+    {
         return _solutionNumbers[0] + _solutionNumbers[3] + _solutionNumbers[6];
     }
 
-    public int GetFirstColumnSum() {
-        return _allNodes[2].GetBlockInNode().Value + _allNodes[1].GetBlockInNode().Value + _allNodes[0].GetBlockInNode().Value;
+    public int GetFirstColumnSum()
+    {
+        return _allNodes[2].GetBlockInNode().Value
+            + _allNodes[1].GetBlockInNode().Value
+            + _allNodes[0].GetBlockInNode().Value;
     }
-    public int GetSecondColumnSum() {
-        return _allNodes[3].GetBlockInNode().Value + _allNodes[4].GetBlockInNode().Value + _allNodes[5].GetBlockInNode().Value;
+
+    public int GetSecondColumnSum()
+    {
+        return _allNodes[3].GetBlockInNode().Value
+            + _allNodes[4].GetBlockInNode().Value
+            + _allNodes[5].GetBlockInNode().Value;
     }
-    public int GetThirdColumnSum() {
-        return _allNodes[6].GetBlockInNode().Value + _allNodes[7].GetBlockInNode().Value + _allNodes[8].GetBlockInNode().Value;
+
+    public int GetThirdColumnSum()
+    {
+        return _allNodes[6].GetBlockInNode().Value
+            + _allNodes[7].GetBlockInNode().Value
+            + _allNodes[8].GetBlockInNode().Value;
     }
-    public int GetSolutionFirstColumnSum() {
+
+    public int GetSolutionFirstColumnSum()
+    {
         return _solutionNumbers[0] + _solutionNumbers[1] + _solutionNumbers[2];
     }
-    public int GetSolutionSecondColumnSum() {
+
+    public int GetSolutionSecondColumnSum()
+    {
         return _solutionNumbers[3] + _solutionNumbers[4] + _solutionNumbers[5];
     }
-    public int GetSolutionThirdColumnSum() {
+
+    public int GetSolutionThirdColumnSum()
+    {
         return _solutionNumbers[6] + _solutionNumbers[7] + _solutionNumbers[8];
     }
 
     internal bool CheckResult(bool isActionable)
     {
-        bool firstRowCompleted = CheckLineOrColumnResult(GetFirstRowSum(), GetSolutionFirstRowSum(), firstRowResultBlock);
-        bool secondRowCompleted = CheckLineOrColumnResult(GetSecondRowSum(), GetSolutionSecondRowSum(), secondRowResultBlock);
-        bool thirdRowCompleted = CheckLineOrColumnResult(GetThirdRowSum(), GetSolutionThirdRowSum(), thirdRowResultBlock);
-        bool firstColumnCompleted = CheckLineOrColumnResult(GetFirstColumnSum(), GetSolutionFirstColumnSum(), firstColumnResultBlock);
-        bool secondColumnCompleted = CheckLineOrColumnResult(GetSecondColumnSum(), GetSolutionSecondColumnSum(), secondColumnResultBlock);
-        bool thirdColumnCompleted = CheckLineOrColumnResult(GetThirdColumnSum(), GetSolutionThirdColumnSum(), thirdColumnResultBlock);
+        bool firstRowCompleted = CheckLineOrColumnResult(
+            GetFirstRowSum(),
+            GetSolutionFirstRowSum(),
+            firstRowResultBlock
+        );
+        bool secondRowCompleted = CheckLineOrColumnResult(
+            GetSecondRowSum(),
+            GetSolutionSecondRowSum(),
+            secondRowResultBlock
+        );
+        bool thirdRowCompleted = CheckLineOrColumnResult(
+            GetThirdRowSum(),
+            GetSolutionThirdRowSum(),
+            thirdRowResultBlock
+        );
+        bool firstColumnCompleted = CheckLineOrColumnResult(
+            GetFirstColumnSum(),
+            GetSolutionFirstColumnSum(),
+            firstColumnResultBlock
+        );
+        bool secondColumnCompleted = CheckLineOrColumnResult(
+            GetSecondColumnSum(),
+            GetSolutionSecondColumnSum(),
+            secondColumnResultBlock
+        );
+        bool thirdColumnCompleted = CheckLineOrColumnResult(
+            GetThirdColumnSum(),
+            GetSolutionThirdColumnSum(),
+            thirdColumnResultBlock
+        );
 
         int _correctCount = 0;
-        for (int i = 0; i < _allNodes.Count; i++) {
-            if (_allNodes[i].GetBlockInNode().Value == _solutionNumbers[i]) {
+        for (int i = 0; i < _allNodes.Count; i++)
+        {
+            if (_allNodes[i].GetBlockInNode().Value == _solutionNumbers[i])
+            {
                 _correctCount += 1;
-            } 
+            }
         }
         _correctBlocksCount.text = _correctCount.ToString();
-        if (_correctCount == _allNodes.Count) {
+        if (_correctCount == _allNodes.Count)
+        {
             _correctBlocksCount.color = Color.green;
         }
 
-        if (firstRowCompleted && secondRowCompleted && thirdRowCompleted &&
-            firstColumnCompleted && secondColumnCompleted && thirdColumnCompleted) {
-            if (isActionable) {
+        if (
+            firstRowCompleted
+            && secondRowCompleted
+            && thirdRowCompleted
+            && firstColumnCompleted
+            && secondColumnCompleted
+            && thirdColumnCompleted
+        )
+        {
+            if (isActionable)
+            {
                 DoEndGameActions();
             }
             return true;
@@ -187,25 +279,29 @@ public class GameManager : MonoBehaviour
 
     private void DoEndGameActions()
     {
-        foreach (var node in _allNodes) {
+        foreach (var node in _allNodes)
+        {
             node.GetBlockInNode().DisableInteraction();
             node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
         }
         FindObjectOfType<RestartButton>().ActivateRestartButton();
-        _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString() ;
+        _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
 
-        if (currentLevel.Equals(Constants.endLevel)) {
+        if (currentLevel.Equals(Constants.endLevel))
+        {
             CompletedFinalLevel();
         }
     }
 
-    private void CompletedFinalLevel(){
+    private void CompletedFinalLevel()
+    {
         FindObjectOfType<Timer>().StopTimer();
         _timesSolved.color = Color.green;
         FindObjectOfType<RestartButton>().HideRestartButton();
     }
 
-    private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block) {
+    private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
+    {
         if (currentSum == expectedResult)
         {
             block._sprite.color = Constants.successBackgroundColor;
@@ -252,7 +348,8 @@ public class GameManager : MonoBehaviour
         _correctBlocksCount.color = Constants.textColor;
     }
 
-    private void DestroyBlock(Block block) {
+    private void DestroyBlock(Block block)
+    {
         Destroy(block.gameObject);
         Destroy(block.GetNode().gameObject);
     }
