@@ -253,7 +253,22 @@ public class GameManager : MonoBehaviour
                 _correctCount += 1;
             }
         }
+
+        int _previousCorrectCount = int.Parse(_correctBlocksCount.text);
         _correctBlocksCount.text = _correctCount.ToString();
+        if (!isActionable || _previousCorrectCount == _correctCount)
+        {
+            _correctBlocksCount.color = Color.white;
+        }
+        else if (_previousCorrectCount > _correctCount)
+        {
+            _correctBlocksCount.color = Color.red;
+        }
+        else if (_previousCorrectCount < _correctCount)
+        {
+            _correctBlocksCount.color = Color.blue;
+        }
+
         if (_correctCount == _allNodes.Count)
         {
             _correctBlocksCount.color = Color.green;
