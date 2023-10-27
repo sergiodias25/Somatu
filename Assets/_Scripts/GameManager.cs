@@ -10,11 +10,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private int _width;
+    private int _width = 3;
 
-    [SerializeField]
-    private int _height;
+    private int _height = 3;
 
     [SerializeField]
     private Node _nodePrefab;
@@ -52,12 +50,39 @@ public class GameManager : MonoBehaviour
         currentLevel = Constants.starterLevel;
         _timesSolved.text = "0";
         GenerateGrid(currentLevel);
+        ApplyDifficultySettings();
+
         if (CheckResult(false))
         {
             ResetBoard();
             GenerateGrid(currentLevel);
         }
         ;
+    }
+
+    public static Color ChangeAlpha(Color originalColor, float newAlpha)
+    {
+        var newColor = originalColor;
+        newColor.a = newAlpha;
+        return newColor;
+    }
+
+    private void ApplyDifficultySettings()
+    {
+        if (Constants.GameDifficulty == Constants.Difficulty.Insane) { }
+        if (Constants.GameDifficulty >= Constants.Difficulty.Hard) { }
+        if (Constants.GameDifficulty >= Constants.Difficulty.Medium)
+        {
+            TextMeshProUGUI _correctCountLabel = GameObject
+                .Find("CorrectCountLabel")
+                .GetComponent<TextMeshProUGUI>();
+            _correctCountLabel.color = ChangeAlpha(_correctCountLabel.color, 0f);
+
+            TextMeshProUGUI _correctCountText = GameObject
+                .Find("CorrectCount")
+                .GetComponent<TextMeshProUGUI>();
+            _correctCountText.color = ChangeAlpha(_correctCountText.color, 0f);
+        }
     }
 
     public int[] GetCurrentLevel()
@@ -254,24 +279,27 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        int _previousCorrectCount = int.Parse(_correctBlocksCount.text);
-        _correctBlocksCount.text = _correctCount.ToString();
-        if (!isActionable || _previousCorrectCount == _correctCount)
+        if (Constants.GameDifficulty < Constants.Difficulty.Medium)
         {
-            _correctBlocksCount.color = Color.white;
-        }
-        else if (_previousCorrectCount > _correctCount)
-        {
-            _correctBlocksCount.color = Color.red;
-        }
-        else if (_previousCorrectCount < _correctCount)
-        {
-            _correctBlocksCount.color = Color.blue;
-        }
+            int _previousCorrectCount = int.Parse(_correctBlocksCount.text);
+            _correctBlocksCount.text = _correctCount.ToString();
+            if (!isActionable || _previousCorrectCount == _correctCount)
+            {
+                _correctBlocksCount.color = Color.white;
+            }
+            else if (_previousCorrectCount > _correctCount)
+            {
+                _correctBlocksCount.color = Color.red;
+            }
+            else if (_previousCorrectCount < _correctCount)
+            {
+                _correctBlocksCount.color = Color.blue;
+            }
 
-        if (_correctCount == _allNodes.Count)
-        {
-            _correctBlocksCount.color = Color.green;
+            if (_correctCount == _allNodes.Count)
+            {
+                _correctBlocksCount.color = Color.green;
+            }
         }
 
         if (
@@ -299,6 +327,12 @@ public class GameManager : MonoBehaviour
             node.GetBlockInNode().DisableInteraction();
             node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
         }
+        firstRowResultBlock._sprite.color = Constants.successBackgroundColor;
+        secondRowResultBlock._sprite.color = Constants.successBackgroundColor;
+        thirdRowResultBlock._sprite.color = Constants.successBackgroundColor;
+        firstColumnResultBlock._sprite.color = Constants.successBackgroundColor;
+        secondColumnResultBlock._sprite.color = Constants.successBackgroundColor;
+        thirdColumnResultBlock._sprite.color = Constants.successBackgroundColor;
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
 
@@ -319,7 +353,10 @@ public class GameManager : MonoBehaviour
     {
         if (currentSum == expectedResult)
         {
-            block._sprite.color = Constants.successBackgroundColor;
+            if (Constants.GameDifficulty < Constants.Difficulty.Hard)
+            {
+                block._sprite.color = Constants.successBackgroundColor;
+            }
             return true;
         }
         else
@@ -360,7 +397,10 @@ public class GameManager : MonoBehaviour
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
         _allNodes = new List<Node>();
-        _correctBlocksCount.color = Constants.textColor;
+        if (Constants.GameDifficulty < Constants.Difficulty.Medium)
+        {
+            _correctBlocksCount.color = Constants.textColor;
+        }
     }
 
     private void DestroyBlock(Block block)

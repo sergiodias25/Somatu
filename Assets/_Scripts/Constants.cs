@@ -15,8 +15,18 @@ public class Constants : MonoBehaviour
     public static int[] numbersForLvl8 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     // GAME SETTINGS
-    public static int[] starterLevel = numbersForLvl6;
+
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard,
+        Insane
+    };
+
+    public static int[] starterLevel = numbersForLvl1;
     public static int[] endLevel = numbersForLvl8;
+    public static Difficulty GameDifficulty = Difficulty.Easy;
 
     // COLORS USED
     public static Color successBackgroundColor = new Color32(16, 173, 18, 255);
