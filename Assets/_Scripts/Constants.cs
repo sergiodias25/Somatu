@@ -30,10 +30,10 @@ public class Constants : MonoBehaviour
         DoubleClick
     }
 
-    public static int[] StarterLevel = NumbersForLvl1;
+    public static int[] StarterLevel = NumbersForLvl8;
     public static int[] LastLevel = NumbersForLvl8;
     public static Difficulty GameDifficulty = Difficulty.Easy;
-    public static ControlMethod SelectedControlMethod = ControlMethod.DoubleClick;
+    public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
     // COLORS USED
     public static Color SuccessBackgroundColor = new Color32(16, 173, 18, 255);

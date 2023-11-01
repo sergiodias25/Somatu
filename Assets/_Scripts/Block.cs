@@ -33,6 +33,7 @@ public class Block : MonoBehaviour
             _text.color = new Color32(0, 0, 0, 255);
         }
         _originalNode = node;
+        transform.SetParent(node.transform);
         return this;
     }
 
@@ -71,10 +72,12 @@ public class Block : MonoBehaviour
                         selectedBlock.transform.position = transform.position;
                         selectedBlock._sprite.color = Constants.UnselectedBlock;
                         selectedBlock._originalNode = _originalNode;
+                        selectedBlock.transform.SetParent(_originalNode.transform);
                         selectedBlock._originalNode.SetBlockInNode(selectedBlock);
                         selectedBlock.IsSelected = false;
 
                         transform.position = tempPosition;
+                        transform.SetParent(tempNode.transform);
                         _originalNode = tempNode;
                         _originalNode.SetBlockInNode(this);
 
@@ -111,9 +114,16 @@ public class Block : MonoBehaviour
                     .transform
                     .position;
                 var tempBlock = _originalNode.GetBlockInNode();
+
                 _originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
+                _originalNode.GetBlockInNode().transform.SetParent(_originalNode.transform);
+
                 nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
+                nodeWhereBlockIsDropped
+                    .GetBlockInNode()
+                    .transform.SetParent(nodeWhereBlockIsDropped.transform);
                 gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
+
                 UpdateOffsetPosition();
                 FindObjectOfType<GameManager>().CheckResult(true);
             }
