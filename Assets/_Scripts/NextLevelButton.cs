@@ -7,10 +7,10 @@ using TMPro;
 public class RestartButton : MonoBehaviour
 {
     [SerializeField]
-    public TextMeshProUGUI _text;
+    private TextMeshProUGUI _text;
 
     [SerializeField]
-    public SpriteRenderer _button;
+    private SpriteRenderer _button;
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class RestartButton : MonoBehaviour
         _text.enabled = false;
         _text.alpha = 0f;
         enabled = false;
-        _button.color = Constants.nextLevelButtonDisabled;
+        _button.color = Constants.NextLevelButtonDisabled;
     }
 
     private void ShowButton()
@@ -47,40 +47,40 @@ public class RestartButton : MonoBehaviour
         _text.alpha = 1f;
         _text.enabled = true;
         enabled = true;
-        _button.color = Constants.nextLevelButtonEnabled;
+        _button.color = Constants.NextLevelButtonEnabled;
     }
 
     private int[] CalculateNextLevel(GameManager gameManager)
     {
         int[] currentLevel = gameManager.GetCurrentLevel();
-        if (currentLevel == Constants.numbersForLvl1)
+        if (currentLevel == Constants.NumbersForLvl1)
         {
-            return Constants.numbersForLvl2;
+            return Constants.NumbersForLvl2;
         }
-        if (currentLevel == Constants.numbersForLvl2)
+        if (currentLevel == Constants.NumbersForLvl2)
         {
-            return Constants.numbersForLvl3;
+            return Constants.NumbersForLvl3;
         }
-        if (currentLevel == Constants.numbersForLvl3)
+        if (currentLevel == Constants.NumbersForLvl3)
         {
-            return Constants.numbersForLvl4;
+            return Constants.NumbersForLvl4;
         }
-        if (currentLevel == Constants.numbersForLvl4)
+        if (currentLevel == Constants.NumbersForLvl4)
         {
-            return Constants.numbersForLvl5;
+            return Constants.NumbersForLvl5;
         }
-        if (currentLevel == Constants.numbersForLvl5)
+        if (currentLevel == Constants.NumbersForLvl5)
         {
-            return Constants.numbersForLvl6;
+            return Constants.NumbersForLvl6;
         }
-        if (currentLevel == Constants.numbersForLvl6)
+        if (currentLevel == Constants.NumbersForLvl6)
         {
-            return Constants.numbersForLvl7;
+            return Constants.NumbersForLvl7;
         }
-        if (currentLevel == Constants.numbersForLvl7)
+        if (currentLevel == Constants.NumbersForLvl7)
         {
-            return Constants.numbersForLvl8;
+            return Constants.NumbersForLvl8;
         }
-        return Constants.numbersForLvl1;
+        return Constants.NumbersForLvl1;
     }
 }

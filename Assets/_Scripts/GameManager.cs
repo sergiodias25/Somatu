@@ -24,21 +24,21 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer _boardPrefab;
 
     [SerializeField]
-    public TextMeshProUGUI _timesSolved;
+    private TextMeshProUGUI _timesSolved;
 
     [SerializeField]
-    public TextMeshProUGUI _correctBlocksCount;
+    private TextMeshProUGUI _correctBlocksCount;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
     private List<Node> _allNodes = new List<Node>();
-    private Block firstRowResultBlock;
-    private Block secondRowResultBlock;
-    private Block thirdRowResultBlock;
-    private Block firstColumnResultBlock;
-    private Block secondColumnResultBlock;
-    private Block thirdColumnResultBlock;
-    private int[] currentLevel;
+    private Block _firstRowResultBlock;
+    private Block _secondRowResultBlock;
+    private Block _thirdRowResultBlock;
+    private Block _firstColumnResultBlock;
+    private Block _secondColumnResultBlock;
+    private Block _thirdColumnResultBlock;
+    private int[] _currentLevel;
 
     void Start()
     {
@@ -47,15 +47,15 @@ public class GameManager : MonoBehaviour
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
 
-        currentLevel = Constants.starterLevel;
+        _currentLevel = Constants.StarterLevel;
         _timesSolved.text = "0";
-        GenerateGrid(currentLevel);
+        GenerateGrid(_currentLevel);
         ApplyDifficultySettings();
 
         if (CheckResult(false))
         {
             ResetBoard();
-            GenerateGrid(currentLevel);
+            GenerateGrid(_currentLevel);
         }
         ;
     }
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public int[] GetCurrentLevel()
     {
-        return currentLevel;
+        return _currentLevel;
     }
 
     private int GenerateNumber(int[] numbers)
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void GenerateGrid(int[] numbers)
     {
-        currentLevel = numbers;
+        _currentLevel = numbers;
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
@@ -140,12 +140,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionFirstRowSum());
-        secondRowResultBlock = GenerateResultBlock(3, 2, GetSolutionSecondRowSum());
-        thirdRowResultBlock = GenerateResultBlock(3, 1, GetSolutionThirdRowSum());
-        firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionFirstColumnSum());
-        secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
-        thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
+        _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionFirstRowSum());
+        _secondRowResultBlock = GenerateResultBlock(3, 2, GetSolutionSecondRowSum());
+        _thirdRowResultBlock = GenerateResultBlock(3, 1, GetSolutionThirdRowSum());
+        _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionFirstColumnSum());
+        _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
+        _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
         CheckResult(false);
         LogSolution();
     }
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     Block SpawnBlock(Node node, int value, bool interactible)
     {
-        var block = Instantiate(_blockPrefab, node.Pos, Quaternion.identity);
+        var block = Instantiate(_blockPrefab, node.transform.position, Quaternion.identity);
         return block.Init(value, interactible, node);
     }
 
@@ -242,32 +242,32 @@ public class GameManager : MonoBehaviour
         bool firstRowCompleted = CheckLineOrColumnResult(
             GetFirstRowSum(),
             GetSolutionFirstRowSum(),
-            firstRowResultBlock
+            _firstRowResultBlock
         );
         bool secondRowCompleted = CheckLineOrColumnResult(
             GetSecondRowSum(),
             GetSolutionSecondRowSum(),
-            secondRowResultBlock
+            _secondRowResultBlock
         );
         bool thirdRowCompleted = CheckLineOrColumnResult(
             GetThirdRowSum(),
             GetSolutionThirdRowSum(),
-            thirdRowResultBlock
+            _thirdRowResultBlock
         );
         bool firstColumnCompleted = CheckLineOrColumnResult(
             GetFirstColumnSum(),
             GetSolutionFirstColumnSum(),
-            firstColumnResultBlock
+            _firstColumnResultBlock
         );
         bool secondColumnCompleted = CheckLineOrColumnResult(
             GetSecondColumnSum(),
             GetSolutionSecondColumnSum(),
-            secondColumnResultBlock
+            _secondColumnResultBlock
         );
         bool thirdColumnCompleted = CheckLineOrColumnResult(
             GetThirdColumnSum(),
             GetSolutionThirdColumnSum(),
-            thirdColumnResultBlock
+            _thirdColumnResultBlock
         );
 
         int _correctCount = 0;
@@ -325,18 +325,18 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.GetBlockInNode()._sprite.color = Constants.successBackgroundColor;
+            node.GetBlockInNode().UpdateColor(Constants.SuccessBackgroundColor);
         }
-        firstRowResultBlock._sprite.color = Constants.successBackgroundColor;
-        secondRowResultBlock._sprite.color = Constants.successBackgroundColor;
-        thirdRowResultBlock._sprite.color = Constants.successBackgroundColor;
-        firstColumnResultBlock._sprite.color = Constants.successBackgroundColor;
-        secondColumnResultBlock._sprite.color = Constants.successBackgroundColor;
-        thirdColumnResultBlock._sprite.color = Constants.successBackgroundColor;
+        _firstRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _secondRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _thirdRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _firstColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _secondColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _thirdColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
 
-        if (currentLevel.Equals(Constants.endLevel))
+        if (_currentLevel.Equals(Constants.LastLevel))
         {
             CompletedFinalLevel();
         }
@@ -355,13 +355,13 @@ public class GameManager : MonoBehaviour
         {
             if (Constants.GameDifficulty < Constants.Difficulty.Hard)
             {
-                block._sprite.color = Constants.successBackgroundColor;
+                block.UpdateColor(Constants.SuccessBackgroundColor);
             }
             return true;
         }
         else
         {
-            block._sprite.color = Constants.inProgressBackgroundColor;
+            block.UpdateColor(Constants.InProgressBackgroundColor);
         }
         return false;
     }
@@ -386,12 +386,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(_allNodes[i].gameObject);
         }
-        DestroyBlock(firstRowResultBlock);
-        DestroyBlock(secondRowResultBlock);
-        DestroyBlock(thirdRowResultBlock);
-        DestroyBlock(firstColumnResultBlock);
-        DestroyBlock(secondColumnResultBlock);
-        DestroyBlock(thirdColumnResultBlock);
+        DestroyBlock(_firstRowResultBlock);
+        DestroyBlock(_secondRowResultBlock);
+        DestroyBlock(_thirdRowResultBlock);
+        DestroyBlock(_firstColumnResultBlock);
+        DestroyBlock(_secondColumnResultBlock);
+        DestroyBlock(_thirdColumnResultBlock);
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
@@ -399,7 +399,7 @@ public class GameManager : MonoBehaviour
         _allNodes = new List<Node>();
         if (Constants.GameDifficulty < Constants.Difficulty.Medium)
         {
-            _correctBlocksCount.color = Constants.textColor;
+            _correctBlocksCount.color = Constants.TextColor;
         }
     }
 

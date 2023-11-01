@@ -7,43 +7,43 @@ public class Block : MonoBehaviour
     public int Value;
 
     [SerializeField]
-    public TextMeshPro _text;
+    private TextMeshPro _text;
 
     [SerializeField]
-    public SpriteRenderer _sprite;
-    Vector3 mousePositionOffset;
-    Node originalNode;
-    private bool isInteractible = false;
+    private SpriteRenderer _sprite;
+    private Vector3 mousePositionOffset;
+    private Node _originalNode;
+    private bool _isInteractible = false;
     public bool IsSelected = false;
 
     public Node GetNode()
     {
-        return originalNode;
+        return _originalNode;
     }
 
     public Block Init(int value, bool interactible, Node node)
     {
         Value = value;
         _text.text = value.ToString();
-        isInteractible = interactible;
+        _isInteractible = interactible;
         gameObject.name = string.Concat("Block_", value.ToString());
         if (!interactible)
         {
             _sprite.color = new Color32(245, 245, 159, 255);
             _text.color = new Color32(0, 0, 0, 255);
         }
-        originalNode = node;
+        _originalNode = node;
         return this;
     }
 
     private void OnMouseDown()
     {
-        if (isInteractible)
+        if (_isInteractible)
         {
             if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
             {
                 UpdateOffsetPosition();
-                originalNode = GetNodeTouched();
+                _originalNode = GetNodeTouched();
                 _text.alpha = 0.4f;
             }
             else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
@@ -56,27 +56,27 @@ public class Block : MonoBehaviour
                     IsSelected = true;
                     _sprite.color = Constants.SelectedBlock;
                 }
-                else if (selectedBlock.originalNode.name == originalNode.name)
+                else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     _sprite.color = Constants.UnselectedBlock;
                 }
-                else if (selectedBlock.originalNode.name != originalNode.name)
+                else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
                         var tempPosition = selectedBlock.transform.position;
-                        var tempNode = selectedBlock.originalNode;
+                        var tempNode = selectedBlock._originalNode;
 
                         selectedBlock.transform.position = transform.position;
                         selectedBlock._sprite.color = Constants.UnselectedBlock;
-                        selectedBlock.originalNode = originalNode;
-                        selectedBlock.originalNode.SetBlockInNode(selectedBlock);
+                        selectedBlock._originalNode = _originalNode;
+                        selectedBlock._originalNode.SetBlockInNode(selectedBlock);
                         selectedBlock.IsSelected = false;
 
                         transform.position = tempPosition;
-                        originalNode = tempNode;
-                        originalNode.SetBlockInNode(this);
+                        _originalNode = tempNode;
+                        _originalNode.SetBlockInNode(this);
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
@@ -93,7 +93,7 @@ public class Block : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+        if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
             transform.position = GetWorldMousePosition() + mousePositionOffset;
         }
@@ -101,17 +101,17 @@ public class Block : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+        if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
             _text.alpha = 1f;
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null)
             {
-                nodeWhereBlockIsDropped.GetBlockInNode().transform.position = originalNode
+                nodeWhereBlockIsDropped.GetBlockInNode().transform.position = _originalNode
                     .transform
                     .position;
-                var tempBlock = originalNode.GetBlockInNode();
-                originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
+                var tempBlock = _originalNode.GetBlockInNode();
+                _originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
                 nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
                 gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
                 UpdateOffsetPosition();
@@ -120,7 +120,7 @@ public class Block : MonoBehaviour
             else
             {
                 UpdateOffsetPosition();
-                gameObject.transform.position = originalNode.transform.position;
+                gameObject.transform.position = _originalNode.transform.position;
             }
         }
     }
@@ -133,7 +133,7 @@ public class Block : MonoBehaviour
         if (hits != null && hits.Length > 0)
         {
             //Debug.Log("Touched node " + hits.First().collider.transform.name);
-            if (hits.First().collider.GetComponent<Node>().GetBlockInNode().isInteractible)
+            if (hits.First().collider.GetComponent<Node>().GetBlockInNode()._isInteractible)
             {
                 return hits.First().collider.GetComponent<Node>();
             }
@@ -162,6 +162,11 @@ public class Block : MonoBehaviour
 
     public void DisableInteraction()
     {
-        isInteractible = false;
+        _isInteractible = false;
+    }
+
+    public void UpdateColor(Color newColor)
+    {
+        _sprite.color = newColor;
     }
 }
