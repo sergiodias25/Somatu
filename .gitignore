@@ -73,3 +73,4 @@ crashlytics-build.properties
 .vscode/extensions.json
 .vscode/launch.json
 .vscode/settings.json
+.config/dotnet-tools.json

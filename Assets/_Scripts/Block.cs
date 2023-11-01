@@ -14,6 +14,7 @@ public class Block : MonoBehaviour
     Vector3 mousePositionOffset;
     Node originalNode;
     private bool isInteractible = false;
+    public bool IsSelected = false;
 
     public Node GetNode()
     {
@@ -39,9 +40,49 @@ public class Block : MonoBehaviour
     {
         if (isInteractible)
         {
-            UpdateOffsetPosition();
-            originalNode = GetNodeTouched();
-            _text.alpha = 0.4f;
+            if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+            {
+                UpdateOffsetPosition();
+                originalNode = GetNodeTouched();
+                _text.alpha = 0.4f;
+            }
+            else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
+            {
+                Node nodeClickedOn = GetNodeTouched();
+                Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
+                if (selectedBlock == null)
+                {
+                    FindObjectOfType<GameManager>().ResetSelectedBlock();
+                    IsSelected = true;
+                    _sprite.color = Constants.SelectedBlock;
+                }
+                else if (selectedBlock.originalNode.name == originalNode.name)
+                {
+                    FindObjectOfType<GameManager>().ResetSelectedBlock();
+                    _sprite.color = Constants.UnselectedBlock;
+                }
+                else if (selectedBlock.originalNode.name != originalNode.name)
+                {
+                    if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
+                    {
+                        var tempPosition = selectedBlock.transform.position;
+                        var tempNode = selectedBlock.originalNode;
+
+                        selectedBlock.transform.position = transform.position;
+                        selectedBlock._sprite.color = Constants.UnselectedBlock;
+                        selectedBlock.originalNode = originalNode;
+                        selectedBlock.originalNode.SetBlockInNode(selectedBlock);
+                        selectedBlock.IsSelected = false;
+
+                        transform.position = tempPosition;
+                        originalNode = tempNode;
+                        originalNode.SetBlockInNode(this);
+
+                        FindObjectOfType<GameManager>().ResetSelectedBlock();
+                        FindObjectOfType<GameManager>().CheckResult(true);
+                    }
+                }
+            }
         }
     }
 
@@ -52,7 +93,7 @@ public class Block : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isInteractible)
+        if (isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
             transform.position = GetWorldMousePosition() + mousePositionOffset;
         }
@@ -60,7 +101,7 @@ public class Block : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isInteractible)
+        if (isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
             _text.alpha = 1f;
             Node nodeWhereBlockIsDropped = GetNodeTouched();

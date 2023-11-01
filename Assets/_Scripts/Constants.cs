@@ -24,9 +24,16 @@ public class Constants : MonoBehaviour
         Insane
     };
 
+    public enum ControlMethod
+    {
+        Drag,
+        DoubleClick
+    }
+
     public static int[] starterLevel = numbersForLvl1;
     public static int[] endLevel = numbersForLvl8;
     public static Difficulty GameDifficulty = Difficulty.Easy;
+    public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
     // COLORS USED
     public static Color successBackgroundColor = new Color32(16, 173, 18, 255);
@@ -34,4 +41,6 @@ public class Constants : MonoBehaviour
     public static Color nextLevelButtonEnabled = new Color32(144, 136, 130, 255);
     public static Color nextLevelButtonDisabled = new Color32(144, 136, 130, 0);
     public static Color textColor = Color.white;
+    public static Color SelectedBlock = Color.yellow;
+    public static Color UnselectedBlock = Color.gray;
 }

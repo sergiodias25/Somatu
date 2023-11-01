@@ -293,7 +293,7 @@ public class GameManager : MonoBehaviour
             }
             else if (_previousCorrectCount < _correctCount)
             {
-                _correctBlocksCount.color = Color.blue;
+                _correctBlocksCount.color = Color.cyan;
             }
 
             if (_correctCount == _allNodes.Count)
@@ -407,5 +407,25 @@ public class GameManager : MonoBehaviour
     {
         Destroy(block.gameObject);
         Destroy(block.GetNode().gameObject);
+    }
+
+    public Block GetSelectedBlock()
+    {
+        foreach (Node node in _allNodes)
+        {
+            if (node.GetBlockInNode().IsSelected)
+            {
+                return node.GetBlockInNode();
+            }
+        }
+        return null;
+    }
+
+    public void ResetSelectedBlock()
+    {
+        foreach (Node node in _allNodes)
+        {
+            node.GetBlockInNode().IsSelected = false;
+        }
     }
 }
