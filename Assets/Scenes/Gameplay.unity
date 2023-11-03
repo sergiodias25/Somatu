@@ -814,8 +814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c10c1bf7111548409a17e0795766f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 3
-  _height: 3
   _nodePrefab: {fileID: 7780418195154399205, guid: 9f491a88520c28c46b1b089ae29937a3, type: 3}
   _blockPrefab: {fileID: 5257517540207989833, guid: 83cb48f7b84ff02409a3af12ac4b78d1, type: 3}
   _boardPrefab: {fileID: 7402686945365529957, guid: 8ac7988626ddccf4b99dbed878fe114c, type: 3}
@@ -1025,7 +1023,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pr\xF3ximo N\xEDvel"
+  m_text: Jogar de novo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1249,7 +1247,7 @@ GameObject:
   - component: {fileID: 1999152748}
   - component: {fileID: 1999152749}
   m_Layer: 0
-  m_Name: NextLevelButton
+  m_Name: PlayAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

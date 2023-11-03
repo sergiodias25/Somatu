@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     private Block _firstColumnResultBlock;
     private Block _secondColumnResultBlock;
     private Block _thirdColumnResultBlock;
-    private int[] _currentLevel;
 
     void Start()
     {
@@ -46,18 +45,44 @@ public class GameManager : MonoBehaviour
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-
-        _currentLevel = Constants.StarterLevel;
         _timesSolved.text = "0";
-        GenerateGrid(_currentLevel);
+        GenerateGrid(
+            GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
+        );
+
         ApplyDifficultySettings();
 
         if (CheckResult(false))
         {
             ResetBoard();
-            GenerateGrid(_currentLevel);
+            GenerateGrid(
+                GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
+            );
         }
         ;
+    }
+
+    public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
+    {
+        List<int> currentPossibleValues = new List<int>(possibleValues);
+        List<int> result = new();
+        int randomized = UnityEngine.Random.Range(0, currentPossibleValues.Count);
+        if (repeatedCount > 0)
+        {
+            for (int i = 0; i < repeatedCount; i++)
+            {
+                result.Add(currentPossibleValues[randomized]);
+            }
+            currentPossibleValues.RemoveAt(randomized);
+        }
+
+        for (int i = repeatedCount; i < 9; i++)
+        {
+            int nextNumber = UnityEngine.Random.Range(0, currentPossibleValues.Count);
+            result.Add(currentPossibleValues[nextNumber]);
+            currentPossibleValues.RemoveAt(nextNumber);
+        }
+        return result;
     }
 
     public static Color ChangeAlpha(Color originalColor, float newAlpha)
@@ -85,12 +110,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int[] GetCurrentLevel()
-    {
-        return _currentLevel;
-    }
-
-    private int GenerateNumber(int[] numbers)
+    private int GenerateNumber(List<int> numbers)
     {
         bool needsRandom = true;
         int randomized = -1;
@@ -108,7 +128,7 @@ public class GameManager : MonoBehaviour
         return numbers[randomized];
     }
 
-    private void GenerateSolutionNumber(int[] numbers)
+    private void GenerateSolutionNumber(List<int> numbers)
     {
         bool needsRandom = true;
         while (needsRandom == true)
@@ -123,9 +143,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GenerateGrid(int[] numbers)
+    public void GenerateGrid(List<int> numbers)
     {
-        _currentLevel = numbers;
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
@@ -335,11 +354,6 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
-
-        if (_currentLevel.Equals(Constants.LastLevel))
-        {
-            CompletedFinalLevel();
-        }
     }
 
     private void CompletedFinalLevel()

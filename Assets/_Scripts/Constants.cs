@@ -5,17 +5,11 @@ using UnityEngine;
 public class Constants : MonoBehaviour
 {
     // BOARD NUMBER COMBINATIONS
-    public static int[] NumbersForLvl1 = { 1, 1, 1, 1, 1, 1, 1, 1, 2 };
-    public static int[] NumbersForLvl2 = { 1, 1, 1, 1, 1, 1, 1, 2, 3 };
-    public static int[] NumbersForLvl3 = { 1, 1, 1, 1, 1, 1, 2, 3, 4 };
-    public static int[] NumbersForLvl4 = { 1, 1, 1, 1, 1, 2, 3, 4, 5 };
-    public static int[] NumbersForLvl5 = { 1, 1, 1, 1, 2, 3, 4, 5, 6 };
-    public static int[] NumbersForLvl6 = { 1, 1, 1, 2, 3, 4, 5, 6, 7 };
-    public static int[] NumbersForLvl7 = { 1, 1, 2, 3, 4, 5, 6, 7, 8 };
-    public static int[] NumbersForLvl8 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public static List<int> NumbersForEasyMode = new List<int> { 1, 2, 3, 4 };
+    public static List<int> NumbersForMediumMode = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+    public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     // GAME SETTINGS
-
     public enum Difficulty
     {
         Easy,
@@ -30,10 +24,41 @@ public class Constants : MonoBehaviour
         DoubleClick
     }
 
-    public static int[] StarterLevel = NumbersForLvl8;
-    public static int[] LastLevel = NumbersForLvl8;
     public static Difficulty GameDifficulty = Difficulty.Easy;
     public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
+
+    public static List<int> GetNumbers()
+    {
+        switch (GameDifficulty)
+        {
+            case Difficulty.Easy:
+                return NumbersForEasyMode;
+            case Difficulty.Medium:
+                return NumbersForMediumMode;
+            case Difficulty.Hard:
+            case Difficulty.Insane:
+                return NumbersForHardMode;
+        }
+        return NumbersForHardMode;
+    }
+
+    public static int GetRepeatedNumbersCount()
+    {
+        switch (GameDifficulty)
+        {
+            case Difficulty.Easy:
+                // repeats betweeen 6 to 8 numbers
+                return Random.Range(6, 9);
+            case Difficulty.Medium:
+                // repeats betweeen 3 to 5 numbers
+                return Random.Range(3, 6);
+            case Difficulty.Hard:
+            case Difficulty.Insane:
+                // repeats betweeen 0 to 2 numbers
+                return Random.Range(0, 3);
+        }
+        return Random.Range(0, 10);
+    }
 
     // COLORS USED
     public static Color SuccessBackgroundColor = new Color32(16, 173, 18, 255);
