@@ -4,8 +4,12 @@ public class Node : MonoBehaviour
 {
     private Block _blockInNode;
 
-    internal void SetName(int i, int j)
+    [SerializeField]
+    private SpriteRenderer _sprite;
+
+    internal void Init(int i, int j)
     {
+        _sprite.color = Constants.UnselectedBlock;
         name = string.Concat("Node_", i, "_", j);
     }
 

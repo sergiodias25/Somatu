@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
                 var generatedNumber = GenerateNumber(numbers);
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
                 GenerateSolutionNumber(numbers);
-                node.SetName(i, j);
+                node.Init(i, j);
                 node.SetBlockInNode(generatedBLock);
                 _allNodes.Add(node);
             }
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
     {
         var node = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity);
         Block generatedBLock = SpawnBlock(node, numberValue, false);
-        node.SetName(x, y);
+        node.Init(x, y);
         node.SetBlockInNode(generatedBLock);
         return generatedBLock;
     }
