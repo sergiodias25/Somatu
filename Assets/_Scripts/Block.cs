@@ -15,6 +15,7 @@ public class Block : MonoBehaviour
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
+    private Block _lastHoveredBlock;
 
     public Node GetNode()
     {
@@ -45,7 +46,6 @@ public class Block : MonoBehaviour
             {
                 UpdateOffsetPosition();
                 _originalNode = GetNodeTouched();
-                _text.alpha = 0.4f;
             }
             else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
             {
@@ -99,6 +99,24 @@ public class Block : MonoBehaviour
         if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
             transform.position = GetWorldMousePosition() + mousePositionOffset;
+            Node nodeWhereBlockIsHovering = GetNodeTouched();
+            if (
+                nodeWhereBlockIsHovering != null
+                && nodeWhereBlockIsHovering.name != _originalNode.name
+            )
+            {
+                UpdateOpacity(nodeWhereBlockIsHovering.GetBlockInNode(), 0.2f);
+                if (nodeWhereBlockIsHovering != null) { }
+                _lastHoveredBlock = nodeWhereBlockIsHovering.GetBlockInNode();
+            }
+            else
+            {
+                if (_lastHoveredBlock != null)
+                {
+                    UpdateOpacity(_lastHoveredBlock, 1f);
+                    _lastHoveredBlock = null;
+                }
+            }
         }
     }
 
@@ -106,13 +124,13 @@ public class Block : MonoBehaviour
     {
         if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
         {
-            _text.alpha = 1f;
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null)
             {
                 nodeWhereBlockIsDropped.GetBlockInNode().transform.position = _originalNode
                     .transform
                     .position;
+                UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
                 var tempBlock = _originalNode.GetBlockInNode();
 
                 _originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
@@ -178,5 +196,10 @@ public class Block : MonoBehaviour
     public void UpdateColor(Color newColor)
     {
         _sprite.color = newColor;
+    }
+
+    private void UpdateOpacity(Block block, float value)
+    {
+        block._text.alpha = value;
     }
 }
