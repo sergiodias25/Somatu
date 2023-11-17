@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RestartButton : MonoBehaviour
@@ -10,7 +8,7 @@ public class RestartButton : MonoBehaviour
     private TextMeshProUGUI _text;
 
     [SerializeField]
-    private SpriteRenderer _button;
+    private Button _button;
 
     private void Start()
     {
@@ -22,7 +20,7 @@ public class RestartButton : MonoBehaviour
         ShowButton();
     }
 
-    private void OnMouseDown()
+    public void HandleClick()
     {
         if (enabled)
         {
@@ -42,15 +40,16 @@ public class RestartButton : MonoBehaviour
     {
         _text.enabled = false;
         _text.alpha = 0f;
-        enabled = false;
-        _button.color = Constants.NextLevelButtonDisabled;
+        _button.gameObject.GetComponent<Image>().enabled = false;
     }
 
     private void ShowButton()
     {
+        ColorBlock cb = _button.colors;
+        cb.normalColor = Constants.SuccessBackgroundColor;
+        _button.colors = cb;
         _text.alpha = 1f;
         _text.enabled = true;
-        enabled = true;
-        _button.color = Constants.NextLevelButtonEnabled;
+        _button.gameObject.GetComponent<Image>().enabled = true;
     }
 }

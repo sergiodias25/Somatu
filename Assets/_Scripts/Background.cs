@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
     void Update()
     {
         backgroundImage.uvRect = new Rect(
-            backgroundImage.uvRect.position + new Vector2(0.00f, 0f) * Time.deltaTime,
+            backgroundImage.uvRect.position + new Vector2(0.01f, 0f) * Time.deltaTime,
             backgroundImage.uvRect.size
         );
     }
