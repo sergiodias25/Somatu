@@ -61,6 +61,8 @@ public class Constants : MonoBehaviour
     }
 
     // COLORS USED
+    public static Color CorrectSumColor = new Color32(52, 235, 122, 255);
+    public static Color IncorrectSumColor = new Color32(244, 113, 116, 255);
     public static Color SuccessBackgroundColor = new Color32(16, 173, 18, 255);
     public static Color InProgressBackgroundColor = new Color32(245, 245, 159, 255);
     public static Color NextLevelButtonEnabled = new Color32(144, 136, 130, 255);
