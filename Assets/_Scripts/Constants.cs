@@ -70,4 +70,9 @@ public class Constants : MonoBehaviour
     public static Color TextColor = Color.white;
     public static Color SelectedBlock = Color.yellow;
     public static Color UnselectedBlock = Color.gray;
+
+    public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };
+    public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
+    public static Color[] GraysColors = { Color.gray, Color.gray, Color.black, Color.white };
+    public static Color[] SelectedColors = GraysColors;
 }

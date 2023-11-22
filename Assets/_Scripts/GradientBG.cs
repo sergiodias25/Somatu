@@ -48,10 +48,10 @@ public class GradientBg : MonoBehaviour
 
         // here to create gradient color
         Color[] colors = new Color[mf.mesh.vertices.Length];
-        colors[0] = Color.blue;
-        colors[1] = Color.blue;
-        colors[2] = Color.cyan;
-        colors[3] = Color.white;
+        colors[0] = Constants.SelectedColors[0];
+        colors[1] = Constants.SelectedColors[1];
+        colors[2] = Constants.SelectedColors[2];
+        colors[3] = Constants.SelectedColors[3];
         mf.mesh.colors = colors;
     }
 }
