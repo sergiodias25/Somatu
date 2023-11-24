@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _timesSolved;
 
     [SerializeField]
+    private TextMeshProUGUI _modeSelected;
+
+    [SerializeField]
     private TextMeshProUGUI _correctBlocksCount;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
@@ -41,11 +44,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 1) / 2 - 0.5f);
+        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 1.5) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
         _timesSolved.text = "0";
+        _modeSelected.text = Constants.GameDifficulty.ToString();
         GenerateGrid(
             GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
         );
@@ -155,6 +159,7 @@ public class GameManager : MonoBehaviour
                 GenerateSolutionNumber(numbers);
                 node.Init(i, j);
                 node.SetBlockInNode(generatedBLock);
+                node.transform.SetParent(GameObject.Find("GeneratedNodes").transform);
                 _allNodes.Add(node);
             }
         }
@@ -175,6 +180,7 @@ public class GameManager : MonoBehaviour
         Block generatedBLock = SpawnBlock(node, numberValue, false);
         node.Init(x, y);
         node.SetBlockInNode(generatedBLock);
+        node.transform.SetParent(GameObject.Find("SolutionNodes").transform);
         return generatedBLock;
     }
 
@@ -344,14 +350,14 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.GetBlockInNode().UpdateColor(Constants.SuccessBackgroundColor);
+            node.GetBlockInNode().UpdateColor(Constants.CorrectSumColor);
         }
-        _firstRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
-        _secondRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
-        _thirdRowResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
-        _firstColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
-        _secondColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
-        _thirdColumnResultBlock.UpdateColor(Constants.SuccessBackgroundColor);
+        _firstRowResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _secondRowResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _thirdRowResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _firstColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _secondColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _thirdColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
     }
@@ -369,13 +375,13 @@ public class GameManager : MonoBehaviour
         {
             if (Constants.GameDifficulty < Constants.Difficulty.Hard)
             {
-                block.UpdateColor(Constants.SuccessBackgroundColor);
+                block.UpdateColor(Constants.CorrectSumColor);
             }
             return true;
         }
         else
         {
-            block.UpdateColor(Constants.InProgressBackgroundColor);
+            block.UpdateColor(Constants.IncorrectSumColor);
         }
         return false;
     }
