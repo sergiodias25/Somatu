@@ -27,6 +27,14 @@ public class GradientBg : MonoBehaviour
         mr.material = mat;
         mr.enabled = true;
 
+        UpdateTheme(
+            Constants.ColorPalettes[FindObjectOfType<SettingsHandler>().SelectedColorsIndex]
+        );
+    }
+
+    public void UpdateTheme(Color[] colors)
+    {
+        MeshFilter mf = this.gameObject.GetComponent<MeshFilter>();
         // setting the background plane's 4 corner positions ( you def want to change them later )
         Vector3[] BackgroundPlaneVerteices = new Vector3[4];
         BackgroundPlaneVerteices[0] = new Vector3(0, 0, 0) * 0.25f;
@@ -47,11 +55,11 @@ public class GradientBg : MonoBehaviour
         mf.mesh.triangles = trianglesArray;
 
         // here to create gradient color
-        Color[] colors = new Color[mf.mesh.vertices.Length];
-        colors[0] = Constants.SelectedColors[0];
-        colors[1] = Constants.SelectedColors[1];
-        colors[2] = Constants.SelectedColors[2];
-        colors[3] = Constants.SelectedColors[3];
-        mf.mesh.colors = colors;
+        Color[] newCcolors = new Color[mf.mesh.vertices.Length];
+        newCcolors[0] = colors[0];
+        newCcolors[1] = colors[1];
+        newCcolors[2] = colors[2];
+        newCcolors[3] = colors[3];
+        mf.mesh.colors = newCcolors;
     }
 }

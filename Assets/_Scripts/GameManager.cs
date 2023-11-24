@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 2.5) / 2 - 0.5f);
+        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
