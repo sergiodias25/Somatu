@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
         _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
         CheckResult(false);
+        FindObjectOfType<Timer>().UnpauseTimer();
         LogSolution();
     }
 
@@ -358,6 +359,7 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         _secondColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         _thirdColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
+        FindObjectOfType<Timer>().PauseTimer();
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
     }
