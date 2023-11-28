@@ -2333,7 +2333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 111360923}
-  _button: {fileID: 1724741423}
+  _restartButton: {fileID: 1724741423}
 --- !u!1 &1764180681
 GameObject:
   m_ObjectHideFlags: 0
