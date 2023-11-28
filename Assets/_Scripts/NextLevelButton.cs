@@ -8,7 +8,7 @@ public class RestartButton : MonoBehaviour
     private TextMeshProUGUI _text;
 
     [SerializeField]
-    private Button _button;
+    private Button _restartButton;
 
     private void Start()
     {
@@ -40,16 +40,16 @@ public class RestartButton : MonoBehaviour
     {
         _text.enabled = false;
         _text.alpha = 0f;
-        _button.gameObject.GetComponent<Image>().enabled = false;
+        _restartButton.gameObject.GetComponent<Image>().enabled = false;
     }
 
     private void ShowButton()
     {
-        ColorBlock cb = _button.colors;
+        ColorBlock cb = _restartButton.colors;
         cb.normalColor = Constants.SuccessBackgroundColor;
-        _button.colors = cb;
+        _restartButton.colors = cb;
         _text.alpha = 1f;
         _text.enabled = true;
-        _button.gameObject.GetComponent<Image>().enabled = true;
+        _restartButton.gameObject.GetComponent<Image>().enabled = true;
     }
 }
