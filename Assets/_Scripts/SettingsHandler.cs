@@ -28,9 +28,19 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Sprite _musicOffSprite;
+
+    [SerializeField]
+    private Image _vibrateButtonImage;
+
+    [SerializeField]
+    private Sprite _vibrateOnSprite;
+
+    [SerializeField]
+    private Sprite _vibrateOffSprite;
     private AudioManager _audioManager;
     private bool _soundEnabled = true;
     private bool _musicEnabled = true;
+    public bool _vibrationEnabled = true;
 
     private void Start()
     {
@@ -38,7 +48,14 @@ public class SettingsHandler : MonoBehaviour
         if (_soundButtonImage != null)
         {
             UpdateSoundIcon();
+        }
+        if (_musicButtonImage != null)
+        {
             UpdateMusicIcon();
+        }
+        if (_vibrateButtonImage != null)
+        {
+            UpdateVibrateIcon();
         }
     }
 
@@ -108,5 +125,24 @@ public class SettingsHandler : MonoBehaviour
         _musicEnabled = !_musicEnabled;
         _audioManager.ToggleMusic(_musicEnabled);
         UpdateMusicIcon();
+    }
+
+    private void UpdateVibrateIcon()
+    {
+        if (_vibrationEnabled)
+        {
+            _vibrateButtonImage.sprite = _vibrateOnSprite;
+        }
+        else
+        {
+            _vibrateButtonImage.sprite = _vibrateOffSprite;
+        }
+    }
+
+    public void ChangeVibration()
+    {
+        _vibrationEnabled = !_vibrationEnabled;
+        _audioManager.ToggleVibration(_vibrationEnabled);
+        UpdateVibrateIcon();
     }
 }

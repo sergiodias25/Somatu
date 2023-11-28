@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource _sfxSource;
 
     public AudioClip DropBlock;
+    private bool _vibrationEnabled = true;
 
     public AudioClip DropBlockUndo;
     public AudioClip PuzzleSolved;
@@ -17,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip audioClip)
     {
         _sfxSource.PlayOneShot(audioClip);
+        Vibrate();
     }
 
     public void PlayMusic()
@@ -42,5 +44,20 @@ public class AudioManager : MonoBehaviour
         {
             _musicSource.UnPause();
         }
+    }
+
+    public void ToggleVibration(bool vibrationEnabled)
+    {
+        _vibrationEnabled = vibrationEnabled;
+    }
+
+    public void Vibrate()
+    {
+#if !UNITY_EDITOR
+        if (_vibrationEnabled)
+        {
+            Handheld.Vibrate();
+        }
+#endif
     }
 }
