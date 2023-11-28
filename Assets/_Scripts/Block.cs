@@ -11,11 +11,17 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _sprite;
+    private AudioManager _audioManager;
     private Vector3 mousePositionOffset;
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
     private Block _lastHoveredBlock;
+
+    private void Awake()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
 
     public Node GetNode()
     {
@@ -143,12 +149,22 @@ public class Block : MonoBehaviour
                 gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
 
                 UpdateOffsetPosition();
-                FindObjectOfType<GameManager>().CheckResult(true);
+
+                if (nodeWhereBlockIsDropped != _originalNode)
+                {
+                    FindObjectOfType<GameManager>().CheckResult(true);
+                    _audioManager.PlaySFX(_audioManager.DropBlock);
+                }
+                else
+                {
+                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                }
             }
             else
             {
                 UpdateOffsetPosition();
                 gameObject.transform.position = _originalNode.transform.position;
+                _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
         }
     }

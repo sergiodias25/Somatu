@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -9,6 +10,26 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     public Animator GameBarAnimator;
+
+    [SerializeField]
+    private Image _soundButtonImage;
+
+    [SerializeField]
+    private Sprite _soundOnSprite;
+
+    [SerializeField]
+    private Sprite _soundOffSprite;
+    private AudioManager _audioManager;
+    private bool _soundEnabled = true;
+
+    private void Start()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+        if (_soundButtonImage != null)
+        {
+            UpdateSoundIcon();
+        }
+    }
 
     public void ChangeTheme()
     {
@@ -38,5 +59,24 @@ public class SettingsHandler : MonoBehaviour
             SettingsBarAnimator.SetTrigger("Toggle");
             GameBarAnimator.SetTrigger("Toggle");
         }
+    }
+
+    private void UpdateSoundIcon()
+    {
+        if (_soundEnabled)
+        {
+            _soundButtonImage.sprite = _soundOnSprite;
+        }
+        else
+        {
+            _soundButtonImage.sprite = _soundOffSprite;
+        }
+    }
+
+    public void ChangeSound()
+    {
+        _soundEnabled = !_soundEnabled;
+        _audioManager.ToggleSFX(_soundEnabled);
+        UpdateSoundIcon();
     }
 }
