@@ -19,8 +19,18 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Sprite _soundOffSprite;
+
+    [SerializeField]
+    private Image _musicButtonImage;
+
+    [SerializeField]
+    private Sprite _musicOnSprite;
+
+    [SerializeField]
+    private Sprite _musicOffSprite;
     private AudioManager _audioManager;
     private bool _soundEnabled = true;
+    private bool _musicEnabled = true;
 
     private void Start()
     {
@@ -28,6 +38,7 @@ public class SettingsHandler : MonoBehaviour
         if (_soundButtonImage != null)
         {
             UpdateSoundIcon();
+            UpdateMusicIcon();
         }
     }
 
@@ -78,5 +89,24 @@ public class SettingsHandler : MonoBehaviour
         _soundEnabled = !_soundEnabled;
         _audioManager.ToggleSFX(_soundEnabled);
         UpdateSoundIcon();
+    }
+
+    private void UpdateMusicIcon()
+    {
+        if (_musicEnabled)
+        {
+            _musicButtonImage.sprite = _musicOnSprite;
+        }
+        else
+        {
+            _musicButtonImage.sprite = _musicOffSprite;
+        }
+    }
+
+    public void ChangeMusic()
+    {
+        _musicEnabled = !_musicEnabled;
+        _audioManager.ToggleMusic(_musicEnabled);
+        UpdateMusicIcon();
     }
 }

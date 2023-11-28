@@ -41,9 +41,12 @@ public class GameManager : MonoBehaviour
     private Block _firstColumnResultBlock;
     private Block _secondColumnResultBlock;
     private Block _thirdColumnResultBlock;
+    private AudioManager _audioManager;
 
     void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
+        _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 1.5) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
@@ -63,7 +66,6 @@ public class GameManager : MonoBehaviour
                 GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
             );
         }
-        ;
     }
 
     public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
@@ -362,6 +364,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<Timer>().PauseTimer();
         FindObjectOfType<RestartButton>().ActivateRestartButton();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
+        _audioManager.PlaySFX(_audioManager.PuzzleSolved);
     }
 
     private void CompletedFinalLevel()

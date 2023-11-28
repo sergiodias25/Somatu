@@ -12,10 +12,18 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip DropBlockUndo;
     public AudioClip PuzzleSolved;
+    public AudioClip MainMusicTheme;
 
     public void PlaySFX(AudioClip audioClip)
     {
         _sfxSource.PlayOneShot(audioClip);
+    }
+
+    public void PlayMusic()
+    {
+        _musicSource.loop = true;
+        _musicSource.clip = MainMusicTheme;
+        _musicSource.Play();
     }
 
     public void ToggleSFX(bool sfxEnabled)
@@ -26,5 +34,13 @@ public class AudioManager : MonoBehaviour
     public void ToggleMusic(bool musicEnabled)
     {
         _musicSource.mute = !musicEnabled;
+        if (_musicSource.mute)
+        {
+            _musicSource.Pause();
+        }
+        else
+        {
+            _musicSource.UnPause();
+        }
     }
 }
