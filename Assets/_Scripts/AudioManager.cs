@@ -7,48 +7,73 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource _sfxSource;
-
     public AudioClip DropBlock;
-    private bool _vibrationEnabled = true;
-
     public AudioClip DropBlockUndo;
     public AudioClip PuzzleSolved;
     public AudioClip MainMusicTheme;
+    public bool _sfxEnabled { get; private set; }
+    public bool _musicEnabled { get; private set; }
+    public bool _vibrationEnabled { get; private set; }
+
+    private void Start()
+    {
+        _sfxEnabled = true;
+        _musicEnabled = false;
+        _vibrationEnabled = true;
+    }
 
     public void PlaySFX(AudioClip audioClip)
     {
-        _sfxSource.PlayOneShot(audioClip);
-        Vibrate();
+        if (_sfxEnabled)
+        {
+            _sfxSource.PlayOneShot(audioClip);
+        }
+        if (_vibrationEnabled)
+        {
+            Vibrate();
+        }
     }
 
     public void PlayMusic()
     {
-        _musicSource.loop = true;
-        _musicSource.clip = MainMusicTheme;
-        _musicSource.Play();
+        if (_musicEnabled)
+        {
+            _musicSource.loop = true;
+            _musicSource.clip = MainMusicTheme;
+            _musicSource.Play();
+        }
     }
 
-    public void ToggleSFX(bool sfxEnabled)
+    public void ToggleSFX()
     {
-        _sfxSource.mute = !sfxEnabled;
+        _sfxEnabled = !_sfxEnabled;
+        _sfxSource.mute = !_sfxEnabled;
     }
 
-    public void ToggleMusic(bool musicEnabled)
+    public void ToggleMusic()
     {
-        _musicSource.mute = !musicEnabled;
-        if (_musicSource.mute)
+        _musicEnabled = !_musicEnabled;
+        _musicSource.mute = !_musicEnabled;
+        if (!_musicEnabled)
         {
             _musicSource.Pause();
         }
         else
         {
-            _musicSource.UnPause();
+            if (_musicSource.isPlaying)
+            {
+                _musicSource.UnPause();
+            }
+            else
+            {
+                PlayMusic();
+            }
         }
     }
 
-    public void ToggleVibration(bool vibrationEnabled)
+    public void ToggleVibration()
     {
-        _vibrationEnabled = vibrationEnabled;
+        _vibrationEnabled = !_vibrationEnabled;
     }
 
     public void Vibrate()

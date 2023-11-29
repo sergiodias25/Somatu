@@ -38,9 +38,6 @@ public class SettingsHandler : MonoBehaviour
     [SerializeField]
     private Sprite _vibrateOffSprite;
     private AudioManager _audioManager;
-    private bool _soundEnabled = true;
-    private bool _musicEnabled = true;
-    public bool _vibrationEnabled = true;
 
     private void Start()
     {
@@ -91,58 +88,66 @@ public class SettingsHandler : MonoBehaviour
 
     private void UpdateSoundIcon()
     {
-        if (_soundEnabled)
-        {
-            _soundButtonImage.sprite = _soundOnSprite;
-        }
-        else
-        {
-            _soundButtonImage.sprite = _soundOffSprite;
-        }
+        UpdateSetting(
+            _audioManager._sfxEnabled,
+            _soundButtonImage,
+            _soundOnSprite,
+            _soundOffSprite
+        );
     }
 
     public void ChangeSound()
     {
-        _soundEnabled = !_soundEnabled;
-        _audioManager.ToggleSFX(_soundEnabled);
+        _audioManager.ToggleSFX();
         UpdateSoundIcon();
     }
 
     private void UpdateMusicIcon()
     {
-        if (_musicEnabled)
-        {
-            _musicButtonImage.sprite = _musicOnSprite;
-        }
-        else
-        {
-            _musicButtonImage.sprite = _musicOffSprite;
-        }
+        UpdateSetting(
+            _audioManager._musicEnabled,
+            _musicButtonImage,
+            _musicOnSprite,
+            _musicOffSprite
+        );
     }
 
     public void ChangeMusic()
     {
-        _musicEnabled = !_musicEnabled;
-        _audioManager.ToggleMusic(_musicEnabled);
+        _audioManager.ToggleMusic();
         UpdateMusicIcon();
     }
 
     private void UpdateVibrateIcon()
     {
-        if (_vibrationEnabled)
-        {
-            _vibrateButtonImage.sprite = _vibrateOnSprite;
-        }
-        else
-        {
-            _vibrateButtonImage.sprite = _vibrateOffSprite;
-        }
+        UpdateSetting(
+            _audioManager._vibrationEnabled,
+            _vibrateButtonImage,
+            _vibrateOnSprite,
+            _vibrateOffSprite
+        );
     }
 
     public void ChangeVibration()
     {
-        _vibrationEnabled = !_vibrationEnabled;
-        _audioManager.ToggleVibration(_vibrationEnabled);
+        _audioManager.ToggleVibration();
         UpdateVibrateIcon();
+    }
+
+    private void UpdateSetting(
+        bool settingToChange,
+        Image imageToUpdate,
+        Sprite spriteOn,
+        Sprite spriteOff
+    )
+    {
+        if (settingToChange)
+        {
+            imageToUpdate.sprite = spriteOn;
+        }
+        else
+        {
+            imageToUpdate.sprite = spriteOff;
+        }
     }
 }
