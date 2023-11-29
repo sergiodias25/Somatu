@@ -12,6 +12,7 @@ public class Block : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
     private AudioManager _audioManager;
+    private AnimationsHandler _animationsHandler;
     private Vector3 mousePositionOffset;
     private Node _originalNode;
     private bool _isInteractible = false;
@@ -21,6 +22,7 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _animationsHandler = FindObjectOfType<AnimationsHandler>();
     }
 
     public Node GetNode()
@@ -46,6 +48,7 @@ public class Block : MonoBehaviour
 
     private void OnMouseDown()
     {
+        _animationsHandler.RestoreGameplayBar();
         if (_isInteractible)
         {
             if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
@@ -62,11 +65,13 @@ public class Block : MonoBehaviour
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
                     _sprite.color = Constants.SelectedBlock;
+                    _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     _sprite.color = Constants.UnselectedBlock;
+                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
@@ -89,6 +94,7 @@ public class Block : MonoBehaviour
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
+                        _audioManager.PlaySFX(_audioManager.DropBlock);
                     }
                 }
             }
