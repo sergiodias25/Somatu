@@ -12,9 +12,9 @@ public class Constants : MonoBehaviour
     // GAME SETTINGS
     public enum Difficulty
     {
-        Easy,
-        Medium,
-        Hard,
+        Fácil,
+        Médio,
+        Difícil,
         Insane
     };
 
@@ -24,35 +24,34 @@ public class Constants : MonoBehaviour
         DoubleClick
     }
 
-    public static Difficulty GameDifficulty = Difficulty.Easy;
     public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
-    public static List<int> GetNumbers()
+    public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {
-        switch (GameDifficulty)
+        switch (selectedDifficulty)
         {
-            case Difficulty.Easy:
+            case Difficulty.Fácil:
                 return NumbersForEasyMode;
-            case Difficulty.Medium:
+            case Difficulty.Médio:
                 return NumbersForMediumMode;
-            case Difficulty.Hard:
+            case Difficulty.Difícil:
             case Difficulty.Insane:
                 return NumbersForHardMode;
         }
         return NumbersForHardMode;
     }
 
-    public static int GetRepeatedNumbersCount()
+    public static int GetRepeatedNumbersCount(Difficulty selectedDifficulty)
     {
-        switch (GameDifficulty)
+        switch (selectedDifficulty)
         {
-            case Difficulty.Easy:
+            case Difficulty.Fácil:
                 // repeats betweeen 6 to 8 numbers
                 return Random.Range(6, 9);
-            case Difficulty.Medium:
+            case Difficulty.Médio:
                 // repeats betweeen 3 to 5 numbers
                 return Random.Range(3, 6);
-            case Difficulty.Hard:
+            case Difficulty.Difícil:
             case Difficulty.Insane:
                 // repeats betweeen 0 to 2 numbers
                 return Random.Range(0, 3);

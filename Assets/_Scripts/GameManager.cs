@@ -42,30 +42,31 @@ public class GameManager : MonoBehaviour
     private Block _secondColumnResultBlock;
     private Block _thirdColumnResultBlock;
     private AudioManager _audioManager;
+    public Constants.Difficulty SelectedDifficulty;
 
     void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _audioManager.PlayMusic();
-        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 1.5) / 2 - 0.5f);
+        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
+    }
+
+    public void Init(Constants.Difficulty selectedDifficulty)
+    {
+        SelectedDifficulty = selectedDifficulty;
         _timesSolved.text = "0";
-        _modeSelected.text = Constants.GameDifficulty.ToString();
+        _modeSelected.text = SelectedDifficulty.ToString();
+
         GenerateGrid(
-            GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
+            GenerateNumbersForLevel(
+                Constants.GetNumbers(SelectedDifficulty),
+                Constants.GetRepeatedNumbersCount(SelectedDifficulty)
+            )
         );
-
-        ApplyDifficultySettings();
-
-        if (CheckResult(false))
-        {
-            ResetBoard();
-            GenerateGrid(
-                GenerateNumbersForLevel(Constants.GetNumbers(), Constants.GetRepeatedNumbersCount())
-            );
-        }
+        ApplyDifficultySettings(SelectedDifficulty);
     }
 
     public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
@@ -98,11 +99,11 @@ public class GameManager : MonoBehaviour
         return newColor;
     }
 
-    private void ApplyDifficultySettings()
+    private void ApplyDifficultySettings(Constants.Difficulty selectedDifficulty)
     {
-        if (Constants.GameDifficulty == Constants.Difficulty.Insane) { }
-        if (Constants.GameDifficulty >= Constants.Difficulty.Hard) { }
-        if (Constants.GameDifficulty >= Constants.Difficulty.Medium)
+        if (selectedDifficulty == Constants.Difficulty.Insane) { }
+        if (selectedDifficulty >= Constants.Difficulty.Difícil) { }
+        if (selectedDifficulty >= Constants.Difficulty.Médio)
         {
             TextMeshProUGUI _correctCountLabel = GameObject
                 .Find("CorrectCountLabel")
@@ -172,7 +173,11 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionFirstColumnSum());
         _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
-        CheckResult(false);
+        if (CheckResult(false))
+        {
+            ResetBoard(false);
+            GenerateGrid(numbers);
+        }
         FindObjectOfType<Timer>().UnpauseTimer();
         LogSolution();
     }
@@ -307,7 +312,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Constants.GameDifficulty < Constants.Difficulty.Medium)
+        if (SelectedDifficulty < Constants.Difficulty.Médio)
         {
             int _previousCorrectCount = int.Parse(_correctBlocksCount.text);
             _correctBlocksCount.text = _correctCount.ToString();
@@ -362,23 +367,16 @@ public class GameManager : MonoBehaviour
         _secondColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         _thirdColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         FindObjectOfType<Timer>().PauseTimer();
-        FindObjectOfType<RestartButton>().ActivateRestartButton();
+        FindObjectOfType<UIManager>().ShowEndGameButtons();
         _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-    }
-
-    private void CompletedFinalLevel()
-    {
-        FindObjectOfType<Timer>().StopTimer();
-        _timesSolved.color = Color.green;
-        FindObjectOfType<RestartButton>().HideRestartButton();
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
     {
         if (currentSum == expectedResult)
         {
-            if (Constants.GameDifficulty < Constants.Difficulty.Hard)
+            if (SelectedDifficulty < Constants.Difficulty.Difícil)
             {
                 block.UpdateColor(Constants.CorrectSumColor);
             }
@@ -401,7 +399,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Solution: " + _solution);
     }
 
-    internal void ResetBoard()
+    internal void ResetBoard(bool isExit)
     {
         for (int i = 0; i < _allNodes.Count; i++)
         {
@@ -422,9 +420,14 @@ public class GameManager : MonoBehaviour
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
         _allNodes = new List<Node>();
-        if (Constants.GameDifficulty < Constants.Difficulty.Medium)
+        if (SelectedDifficulty < Constants.Difficulty.Médio)
         {
             _correctBlocksCount.color = Constants.TextColor;
+        }
+        if (isExit)
+        {
+            FindObjectOfType<Timer>().StopTimer();
+            _timesSolved.text = "0";
         }
     }
 

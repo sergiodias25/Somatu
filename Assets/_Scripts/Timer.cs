@@ -15,13 +15,20 @@ public class Timer : MonoBehaviour
     private bool _isCountdown;
     private bool _hasLimit;
     private double _timeLimitValue;
+    private bool _isPaused;
 
     void Start()
     {
         _timeLimitValue = 0f;
-        _currentTime = 0f;
         _isCountdown = false;
         _hasLimit = false;
+        Init();
+    }
+
+    private void Init()
+    {
+        _currentTime = 0f;
+        _isPaused = false;
     }
 
     void Update()
@@ -48,8 +55,10 @@ public class Timer : MonoBehaviour
 
     public void StopTimer()
     {
-        _timerText.color = Color.green;
+        _currentTime = 0f;
+        UpdateTimerText();
         enabled = false;
+        _isPaused = false;
     }
 
     private void UpdateTimerText()
@@ -63,10 +72,25 @@ public class Timer : MonoBehaviour
     public void PauseTimer()
     {
         enabled = false;
+        _isPaused = true;
     }
 
     public void UnpauseTimer()
     {
         enabled = true;
+        _isPaused = false;
+    }
+
+    public void CountTime()
+    {
+        if (_isPaused)
+        {
+            UnpauseTimer();
+        }
+        else
+        {
+            Init();
+            UnpauseTimer();
+        }
     }
 }
