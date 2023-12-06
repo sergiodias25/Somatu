@@ -15,7 +15,7 @@ public class Constants : MonoBehaviour
         Fácil,
         Médio,
         Difícil,
-        Insane
+        Extremo
     };
 
     public enum ControlMethod
@@ -35,7 +35,7 @@ public class Constants : MonoBehaviour
             case Difficulty.Médio:
                 return NumbersForMediumMode;
             case Difficulty.Difícil:
-            case Difficulty.Insane:
+            case Difficulty.Extremo:
                 return NumbersForHardMode;
         }
         return NumbersForHardMode;
@@ -52,7 +52,7 @@ public class Constants : MonoBehaviour
                 // repeats betweeen 3 to 5 numbers
                 return Random.Range(3, 6);
             case Difficulty.Difícil:
-            case Difficulty.Insane:
+            case Difficulty.Extremo:
                 // repeats betweeen 0 to 2 numbers
                 return Random.Range(0, 3);
         }

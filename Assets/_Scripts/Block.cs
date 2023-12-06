@@ -38,7 +38,6 @@ public class Block : MonoBehaviour
         gameObject.name = string.Concat("Block_", value.ToString());
         if (!interactible)
         {
-            _sprite.color = new Color32(245, 245, 159, 255);
             _text.color = new Color32(0, 0, 0, 255);
         }
         _originalNode = node;

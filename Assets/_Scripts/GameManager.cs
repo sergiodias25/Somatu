@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     private void ApplyDifficultySettings(Constants.Difficulty selectedDifficulty)
     {
-        if (selectedDifficulty == Constants.Difficulty.Insane) { }
+        if (selectedDifficulty == Constants.Difficulty.Extremo) { }
         if (selectedDifficulty >= Constants.Difficulty.Difícil) { }
         if (selectedDifficulty >= Constants.Difficulty.Médio)
         {
@@ -167,12 +167,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionFirstRowSum());
-        _secondRowResultBlock = GenerateResultBlock(3, 2, GetSolutionSecondRowSum());
-        _thirdRowResultBlock = GenerateResultBlock(3, 1, GetSolutionThirdRowSum());
-        _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionFirstColumnSum());
-        _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionSecondColumnSum());
-        _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionThirdColumnSum());
+        _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionGroupSum(2, 5, 8));
+        _secondRowResultBlock = GenerateResultBlock(3, 2, GetSolutionGroupSum(1, 4, 7));
+        _thirdRowResultBlock = GenerateResultBlock(3, 1, GetSolutionGroupSum(0, 3, 6));
+        _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionGroupSum(0, 1, 2));
+        _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionGroupSum(3, 4, 5));
+        _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionGroupSum(6, 7, 8));
         if (CheckResult(false))
         {
             ResetBoard(false);
@@ -198,108 +198,48 @@ public class GameManager : MonoBehaviour
         return block.Init(value, interactible, node);
     }
 
-    public int GetFirstRowSum()
+    private int GetNodesSum(int index1, int index2, int index3)
     {
-        return _allNodes[2].GetBlockInNode().Value
-            + _allNodes[5].GetBlockInNode().Value
-            + _allNodes[8].GetBlockInNode().Value;
+        return _allNodes[index1].GetBlockInNode().Value
+            + _allNodes[index2].GetBlockInNode().Value
+            + _allNodes[index3].GetBlockInNode().Value;
     }
 
-    public int GetSecondRowSum()
+    private int GetSolutionGroupSum(int index1, int index2, int index3)
     {
-        return _allNodes[1].GetBlockInNode().Value
-            + _allNodes[4].GetBlockInNode().Value
-            + _allNodes[7].GetBlockInNode().Value;
-    }
-
-    public int GetThirdRowSum()
-    {
-        return _allNodes[0].GetBlockInNode().Value
-            + _allNodes[3].GetBlockInNode().Value
-            + _allNodes[6].GetBlockInNode().Value;
-    }
-
-    public int GetSolutionFirstRowSum()
-    {
-        return _solutionNumbers[2] + _solutionNumbers[5] + _solutionNumbers[8];
-    }
-
-    public int GetSolutionSecondRowSum()
-    {
-        return _solutionNumbers[1] + _solutionNumbers[4] + _solutionNumbers[7];
-    }
-
-    public int GetSolutionThirdRowSum()
-    {
-        return _solutionNumbers[0] + _solutionNumbers[3] + _solutionNumbers[6];
-    }
-
-    public int GetFirstColumnSum()
-    {
-        return _allNodes[2].GetBlockInNode().Value
-            + _allNodes[1].GetBlockInNode().Value
-            + _allNodes[0].GetBlockInNode().Value;
-    }
-
-    public int GetSecondColumnSum()
-    {
-        return _allNodes[3].GetBlockInNode().Value
-            + _allNodes[4].GetBlockInNode().Value
-            + _allNodes[5].GetBlockInNode().Value;
-    }
-
-    public int GetThirdColumnSum()
-    {
-        return _allNodes[6].GetBlockInNode().Value
-            + _allNodes[7].GetBlockInNode().Value
-            + _allNodes[8].GetBlockInNode().Value;
-    }
-
-    public int GetSolutionFirstColumnSum()
-    {
-        return _solutionNumbers[0] + _solutionNumbers[1] + _solutionNumbers[2];
-    }
-
-    public int GetSolutionSecondColumnSum()
-    {
-        return _solutionNumbers[3] + _solutionNumbers[4] + _solutionNumbers[5];
-    }
-
-    public int GetSolutionThirdColumnSum()
-    {
-        return _solutionNumbers[6] + _solutionNumbers[7] + _solutionNumbers[8];
+        return _solutionNumbers[index1] + _solutionNumbers[index2] + _solutionNumbers[index3];
     }
 
     internal bool CheckResult(bool isActionable)
     {
         bool firstRowCompleted = CheckLineOrColumnResult(
-            GetFirstRowSum(),
-            GetSolutionFirstRowSum(),
+            GetNodesSum(2, 5, 8),
+            GetSolutionGroupSum(2, 5, 8),
             _firstRowResultBlock
         );
         bool secondRowCompleted = CheckLineOrColumnResult(
-            GetSecondRowSum(),
-            GetSolutionSecondRowSum(),
+            GetNodesSum(1, 4, 7),
+            GetSolutionGroupSum(1, 4, 7),
             _secondRowResultBlock
         );
         bool thirdRowCompleted = CheckLineOrColumnResult(
-            GetThirdRowSum(),
-            GetSolutionThirdRowSum(),
+            GetNodesSum(0, 3, 6),
+            GetSolutionGroupSum(0, 3, 6),
             _thirdRowResultBlock
         );
         bool firstColumnCompleted = CheckLineOrColumnResult(
-            GetFirstColumnSum(),
-            GetSolutionFirstColumnSum(),
+            GetNodesSum(0, 1, 2),
+            GetSolutionGroupSum(0, 1, 2),
             _firstColumnResultBlock
         );
         bool secondColumnCompleted = CheckLineOrColumnResult(
-            GetSecondColumnSum(),
-            GetSolutionSecondColumnSum(),
+            GetNodesSum(3, 4, 5),
+            GetSolutionGroupSum(3, 4, 5),
             _secondColumnResultBlock
         );
         bool thirdColumnCompleted = CheckLineOrColumnResult(
-            GetThirdColumnSum(),
-            GetSolutionThirdColumnSum(),
+            GetNodesSum(6, 7, 8),
+            GetSolutionGroupSum(6, 7, 8),
             _thirdColumnResultBlock
         );
 
@@ -374,17 +314,25 @@ public class GameManager : MonoBehaviour
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
     {
-        if (currentSum == expectedResult)
+        if (SelectedDifficulty < Constants.Difficulty.Extremo)
         {
-            if (SelectedDifficulty < Constants.Difficulty.Difícil)
+            if (currentSum == expectedResult)
             {
                 block.UpdateColor(Constants.CorrectSumColor);
             }
-            return true;
+            else
+            {
+                block.UpdateColor(Constants.IncorrectSumColor);
+            }
         }
         else
         {
-            block.UpdateColor(Constants.IncorrectSumColor);
+            block.UpdateColor(Constants.InProgressBackgroundColor);
+        }
+
+        if (currentSum == expectedResult)
+        {
+            return true;
         }
         return false;
     }
