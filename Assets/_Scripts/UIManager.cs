@@ -133,6 +133,14 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
     }
 
+    public void HelpClick()
+    {
+        if (_helpButton.enabled)
+        {
+            _gameManager.ShowHints();
+        }
+    }
+
     public void HideEndOfGameButtons()
     {
         HideButton(_playAgainButton);

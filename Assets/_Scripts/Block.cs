@@ -50,6 +50,7 @@ public class Block : MonoBehaviour
         _animationsHandler.RestoreGameplayBar();
         if (_isInteractible)
         {
+            FindObjectOfType<GameManager>().RemoveHints();
             if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
             {
                 UpdateOffsetPosition();

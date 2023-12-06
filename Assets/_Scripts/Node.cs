@@ -25,4 +25,9 @@ public class Node : MonoBehaviour
     {
         return _blockInNode;
     }
+
+    public void UpdateColor(Color newColor)
+    {
+        _sprite.color = newColor;
+    }
 }

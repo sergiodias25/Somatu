@@ -379,6 +379,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ShowHints()
+    {
+        for (int i = 0; i < _solutionNumbers.Count; i++)
+        {
+            if (_solutionNumbers[i] == _allNodes[i].GetBlockInNode().Value)
+            {
+                _allNodes[i].UpdateColor(Constants.CorrectSumColor);
+            }
+        }
+    }
+
+    public void RemoveHints()
+    {
+        for (int i = 0; i < _solutionNumbers.Count; i++)
+        {
+            _allNodes[i].UpdateColor(Constants.UnselectedBlock);
+        }
+    }
+
     private void DestroyBlock(Block block)
     {
         Destroy(block.gameObject);
