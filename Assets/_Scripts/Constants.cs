@@ -15,7 +15,8 @@ public class Constants : MonoBehaviour
         Fácil,
         Médio,
         Difícil,
-        Extremo
+        Extremo,
+        Desafio
     };
 
     public enum ControlMethod
@@ -26,11 +27,15 @@ public class Constants : MonoBehaviour
 
     public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
+    public static double ChallengeTimeLimit = 10.0f;
+    public static double ChallengePuzzleSolvedBonus = 10.0f;
+
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {
         switch (selectedDifficulty)
         {
             case Difficulty.Fácil:
+            case Difficulty.Desafio:
                 return NumbersForEasyMode;
             case Difficulty.Médio:
                 return NumbersForMediumMode;
@@ -46,15 +51,18 @@ public class Constants : MonoBehaviour
         switch (selectedDifficulty)
         {
             case Difficulty.Fácil:
+            case Difficulty.Desafio:
                 // repeats betweeen 6 to 8 numbers
                 return Random.Range(6, 9);
             case Difficulty.Médio:
                 // repeats betweeen 3 to 5 numbers
                 return Random.Range(3, 6);
             case Difficulty.Difícil:
-            case Difficulty.Extremo:
                 // repeats betweeen 0 to 2 numbers
                 return Random.Range(0, 3);
+            case Difficulty.Extremo:
+                // repeats betweeen 0 to 1 number
+                return Random.Range(0, 2);
         }
         return Random.Range(0, 10);
     }

@@ -5,9 +5,13 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private GameManager _gameManager;
+    private Timer _timer;
 
     [SerializeField]
     private Button _startGameButton;
+
+    [SerializeField]
+    private Button _survivalButton;
 
     [SerializeField]
     private Button _easyModeButton;
@@ -33,6 +37,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        _timer = FindObjectOfType<Timer>();
         HideSubMenus();
         HideEndOfGameButtons();
     }
@@ -48,6 +53,7 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         ShowButton(_startGameButton);
+        ShowButton(_survivalButton);
     }
 
     private void ShowSubMenus()
@@ -73,38 +79,47 @@ public class UIManager : MonoBehaviour
     public void ClickOnStartGame()
     {
         HideButton(_startGameButton);
+        HideButton(_survivalButton);
         ShowSubMenus();
+    }
+
+    public void ClickOnSurvival()
+    {
+        HideButton(_startGameButton);
+        HideButton(_survivalButton);
+        ShowGameplayButtons();
+        _gameManager.Init(Constants.Difficulty.Desafio);
     }
 
     public void ClickOnEasyMode()
     {
         HideSubMenus();
-        ShowEndGameButtons();
+        ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Fácil);
     }
 
     public void ClickOnMediumMode()
     {
         HideSubMenus();
-        ShowEndGameButtons();
+        ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Médio);
     }
 
     public void ClickOnHardMode()
     {
         HideSubMenus();
-        ShowEndGameButtons();
+        ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Difícil);
     }
 
     public void ClickOnExtremeMode()
     {
         HideSubMenus();
-        ShowEndGameButtons();
+        ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Extremo);
     }
 
-    public void ShowEndGameButtons()
+    public void ShowGameplayButtons()
     {
         ShowButton(_playAgainButton);
         ShowButton(_exitButton);
@@ -122,6 +137,15 @@ public class UIManager : MonoBehaviour
                     Constants.GetRepeatedNumbersCount(_gameManager.SelectedDifficulty)
                 )
             );
+            if (_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio)
+            {
+                _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio);
+                _gameManager.ResetTimesSolved();
+            }
+            else
+            {
+                _timer.UnpauseTimer();
+            }
         }
     }
 

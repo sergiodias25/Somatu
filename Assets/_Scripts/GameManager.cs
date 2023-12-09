@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _correctBlocksCount;
+    private Timer _timer;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _timer = FindObjectOfType<Timer>();
         _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
                 Constants.GetRepeatedNumbersCount(SelectedDifficulty)
             )
         );
+        _timer.Init(SelectedDifficulty == Constants.Difficulty.Desafio);
         ApplyDifficultySettings(SelectedDifficulty);
     }
 
@@ -178,7 +181,6 @@ public class GameManager : MonoBehaviour
             ResetBoard(false);
             GenerateGrid(numbers);
         }
-        FindObjectOfType<Timer>().UnpauseTimer();
         LogSolution();
     }
 
@@ -287,6 +289,17 @@ public class GameManager : MonoBehaviour
             if (isActionable)
             {
                 DoEndGameActions();
+                if (SelectedDifficulty == Constants.Difficulty.Desafio)
+                {
+                    ResetBoard(false);
+                    GenerateGrid(
+                        GenerateNumbersForLevel(
+                            Constants.GetNumbers(SelectedDifficulty),
+                            Constants.GetRepeatedNumbersCount(SelectedDifficulty)
+                        )
+                    );
+                }
+                _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
             }
             return true;
         }
@@ -306,9 +319,25 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         _secondColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
         _thirdColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
-        FindObjectOfType<Timer>().PauseTimer();
-        FindObjectOfType<UIManager>().ShowEndGameButtons();
-        _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
+        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        {
+            _timer.AddPuzzleSolvedBOnus();
+        }
+        else
+        {
+            _timer.PauseTimer();
+        }
+        FindObjectOfType<UIManager>().ShowGameplayButtons();
+        _audioManager.PlaySFX(_audioManager.PuzzleSolved);
+    }
+
+    public void PuzzleFailed()
+    {
+        foreach (var node in _allNodes)
+        {
+            node.GetBlockInNode().DisableInteraction();
+            node.GetBlockInNode().UpdateColor(Constants.IncorrectSumColor);
+        }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
     }
 
@@ -374,9 +403,14 @@ public class GameManager : MonoBehaviour
         }
         if (isExit)
         {
-            FindObjectOfType<Timer>().StopTimer();
+            _timer.StopTimer();
             _timesSolved.text = "0";
         }
+    }
+
+    public void ResetTimesSolved()
+    {
+        _timesSolved.text = "0";
     }
 
     public void ShowHints()

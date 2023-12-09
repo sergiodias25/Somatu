@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,45 +9,58 @@ public class Timer : MonoBehaviour
 
     [Header("Settings")]
     private double _currentTime;
+    GameManager _gameManager;
     private bool _isCountdown;
+    private bool _isRunning;
     private bool _hasLimit;
     private double _timeLimitValue;
-    private bool _isPaused;
 
-    void Start()
+    private void Awake()
     {
-        _timeLimitValue = 0f;
-        _isCountdown = false;
-        _hasLimit = false;
-        Init();
+        _gameManager = FindObjectOfType<GameManager>();
+        _isRunning = false;
     }
 
-    private void Init()
+    public void Init(bool isChallenge)
     {
-        _currentTime = 0f;
-        _isPaused = false;
+        enabled = true;
+        _timerText.color = Color.white;
+        _timeLimitValue = Constants.ChallengeTimeLimit;
+        _isCountdown = isChallenge;
+        _hasLimit = isChallenge;
+        _currentTime = isChallenge ? _timeLimitValue : 0f;
+        _isRunning = true;
     }
 
     void Update()
     {
-        _currentTime = _isCountdown
-            ? _currentTime -= Time.deltaTime
-            : _currentTime += Time.deltaTime;
-        if (
-            _hasLimit
-            && (
-                (_isCountdown && _currentTime <= _timeLimitValue + 1f)
-                || (!_isCountdown && _currentTime <= _timeLimitValue + 1f)
-            )
-        )
+        if (_isRunning)
         {
-            _currentTime = _timeLimitValue;
+            _currentTime = _isCountdown
+                ? _currentTime -= Time.deltaTime
+                : _currentTime += Time.deltaTime;
+            if (
+                _hasLimit
+                && (
+                    (_isCountdown && _currentTime <= 0.1f)
+                    || (!_isCountdown && _currentTime <= _timeLimitValue + 1f)
+                )
+            )
+            {
+                HandleTimerExpired();
+            }
             UpdateTimerText();
-            _timerText.color = Color.red;
-            enabled = false;
-            // Time limit reached
         }
+    }
+
+    private void HandleTimerExpired()
+    {
+        _currentTime = 0.0f;
         UpdateTimerText();
+        _timerText.color = Color.red;
+        enabled = false;
+        _isRunning = false;
+        _gameManager.PuzzleFailed();
     }
 
     public void StopTimer()
@@ -58,7 +68,7 @@ public class Timer : MonoBehaviour
         _currentTime = 0f;
         UpdateTimerText();
         enabled = false;
-        _isPaused = false;
+        _isRunning = false;
     }
 
     private void UpdateTimerText()
@@ -72,25 +82,17 @@ public class Timer : MonoBehaviour
     public void PauseTimer()
     {
         enabled = false;
-        _isPaused = true;
+        _isRunning = false;
     }
 
     public void UnpauseTimer()
     {
         enabled = true;
-        _isPaused = false;
+        _isRunning = true;
     }
 
-    public void CountTime()
+    public void AddPuzzleSolvedBOnus()
     {
-        if (_isPaused)
-        {
-            UnpauseTimer();
-        }
-        else
-        {
-            Init();
-            UnpauseTimer();
-        }
+        _currentTime += Constants.ChallengePuzzleSolvedBonus;
     }
 }
