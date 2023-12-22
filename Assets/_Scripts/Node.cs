@@ -7,10 +7,12 @@ public class Node : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
 
-    internal void Init(int i, int j)
+    internal void Init(int i, int j, Block block, string parentName)
     {
         _sprite.color = Constants.UnselectedBlock;
         name = string.Concat("Node_", i, "_", j);
+        SetBlockInNode(block);
+        transform.SetParent(GameObject.Find(parentName).transform);
     }
 
     public void SetBlockInNode(Block block)

@@ -20,9 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Block _blockPrefab;
 
+    /*
     [SerializeField]
     private SpriteRenderer _boardPrefab;
-
+    */
     [SerializeField]
     private TextMeshProUGUI _timesSolved;
 
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _correctBlocksCount;
+
+    [SerializeField]
+    private GameObject _generatedNodesObject;
     private Timer _timer;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
@@ -45,6 +49,60 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
 
+    struct SavedGameData
+    {
+        public List<int> _gameNumbersInProgress;
+        public List<int> _solutionNumbersInProgress;
+        public Constants.Difficulty? savedGameDifficulty;
+
+        public void ClearSavedGame()
+        {
+            _gameNumbersInProgress = new List<int>();
+            _solutionNumbersInProgress = new List<int>();
+            savedGameDifficulty = null;
+        }
+
+        public void UpdateSavedGame(
+            GameObject generatedNodesObject,
+            List<int> solutionNumbers,
+            Constants.Difficulty difficulty
+        )
+        {
+            for (int i = 0; i < generatedNodesObject.transform.childCount; i++)
+            {
+                Node node = generatedNodesObject.transform
+                    .GetChild(i)
+                    .gameObject.GetComponent<Node>();
+                if (
+                    _gameNumbersInProgress.Count == 9
+                    && _gameNumbersInProgress[i] != node.GetBlockInNode().Value
+                )
+                {
+                    _gameNumbersInProgress[i] = node.GetBlockInNode().Value;
+                }
+                else if (_gameNumbersInProgress.Count == i)
+                {
+                    _gameNumbersInProgress.Add(node.GetBlockInNode().Value);
+                }
+                if (
+                    _solutionNumbersInProgress.Count == 9
+                    && _solutionNumbersInProgress[i] != solutionNumbers[i]
+                )
+                {
+                    _solutionNumbersInProgress[i] = solutionNumbers[i];
+                }
+                else if (_solutionNumbersInProgress.Count == i)
+                {
+                    _solutionNumbersInProgress.Add(solutionNumbers[i]);
+                }
+            }
+
+            savedGameDifficulty = difficulty;
+        }
+    }
+
+    private SavedGameData _savedGameData;
+
     void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
@@ -54,9 +112,15 @@ public class GameManager : MonoBehaviour
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
+        _savedGameData.ClearSavedGame();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
+    {
+        Init(selectedDifficulty, false);
+    }
+
+    public void Init(Constants.Difficulty selectedDifficulty, bool loadGame)
     {
         SelectedDifficulty = selectedDifficulty;
         _timesSolved.text = "0";
@@ -66,7 +130,8 @@ public class GameManager : MonoBehaviour
             GenerateNumbersForLevel(
                 Constants.GetNumbers(SelectedDifficulty),
                 Constants.GetRepeatedNumbersCount(SelectedDifficulty)
-            )
+            ),
+            loadGame
         );
         _timer.Init(SelectedDifficulty == Constants.Difficulty.Desafio);
         ApplyDifficultySettings(SelectedDifficulty);
@@ -153,21 +218,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GenerateGrid(List<int> numbers)
+    public void GenerateGrid(List<int> numbers, bool loadGame)
     {
+        int _countTracker = 0;
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
             {
-                var node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
-                var generatedNumber = GenerateNumber(numbers);
+                Node node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
+                int generatedNumber;
+                if (loadGame && _savedGameData._gameNumbersInProgress.Count > 0)
+                {
+                    generatedNumber = _savedGameData._gameNumbersInProgress[_countTracker];
+                    _solutionNumbers.Add(_savedGameData._solutionNumbersInProgress[_countTracker]);
+                }
+                else
+                {
+                    generatedNumber = GenerateNumber(numbers);
+                    GenerateSolutionNumber(numbers);
+                }
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
-                GenerateSolutionNumber(numbers);
-                node.Init(i, j);
-                node.SetBlockInNode(generatedBLock);
-                node.transform.SetParent(GameObject.Find("GeneratedNodes").transform);
+                node.Init(i, j, generatedBLock, "GeneratedNodes");
                 _allNodes.Add(node);
+                _countTracker += 1;
             }
+        }
+        if (loadGame && _savedGameData._gameNumbersInProgress.Count > 0)
+        {
+            SelectedDifficulty = (Constants.Difficulty)_savedGameData.savedGameDifficulty;
+            _modeSelected.text = SelectedDifficulty.ToString();
         }
 
         _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionGroupSum(2, 5, 8));
@@ -178,8 +257,8 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionGroupSum(6, 7, 8));
         if (CheckResult(false))
         {
-            ResetBoard(false);
-            GenerateGrid(numbers);
+            ResetBoard(false, true);
+            GenerateGrid(numbers, false);
         }
         LogSolution();
     }
@@ -188,9 +267,7 @@ public class GameManager : MonoBehaviour
     {
         var node = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity);
         Block generatedBLock = SpawnBlock(node, numberValue, false);
-        node.Init(x, y);
-        node.SetBlockInNode(generatedBLock);
-        node.transform.SetParent(GameObject.Find("SolutionNodes").transform);
+        node.Init(x, y, generatedBLock, "SolutionNodes");
         return generatedBLock;
     }
 
@@ -291,17 +368,26 @@ public class GameManager : MonoBehaviour
                 DoEndGameActions();
                 if (SelectedDifficulty == Constants.Difficulty.Desafio)
                 {
-                    ResetBoard(false);
+                    ResetBoard(false, false);
                     GenerateGrid(
                         GenerateNumbersForLevel(
                             Constants.GetNumbers(SelectedDifficulty),
                             Constants.GetRepeatedNumbersCount(SelectedDifficulty)
-                        )
+                        ),
+                        false
                     );
                 }
                 _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
             }
             return true;
+        }
+        if (SelectedDifficulty != Constants.Difficulty.Desafio)
+        {
+            _savedGameData.UpdateSavedGame(
+                _generatedNodesObject,
+                _solutionNumbers,
+                SelectedDifficulty
+            );
         }
         return false;
     }
@@ -326,6 +412,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _timer.PauseTimer();
+            _savedGameData.ClearSavedGame();
         }
         FindObjectOfType<UIManager>().ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
@@ -376,7 +463,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Solution: " + _solution);
     }
 
-    internal void ResetBoard(bool isExit)
+    internal void ResetBoard(bool isExit, bool shouldClearSavedGame)
     {
         for (int i = 0; i < _allNodes.Count; i++)
         {
@@ -392,11 +479,15 @@ public class GameManager : MonoBehaviour
         DestroyBlock(_firstColumnResultBlock);
         DestroyBlock(_secondColumnResultBlock);
         DestroyBlock(_thirdColumnResultBlock);
+        _generatedNodesObject.transform.DetachChildren();
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
-        _allNodes = new List<Node>();
+        if (shouldClearSavedGame)
+        {
+            _savedGameData.ClearSavedGame();
+        }
         if (SelectedDifficulty < Constants.Difficulty.Médio)
         {
             _correctBlocksCount.color = Constants.TextColor;
@@ -456,5 +547,11 @@ public class GameManager : MonoBehaviour
         {
             node.GetBlockInNode().IsSelected = false;
         }
+    }
+
+    internal bool SavedGameExists()
+    {
+        return _savedGameData._gameNumbersInProgress != null
+            && _savedGameData._gameNumbersInProgress.Count == 9;
     }
 }

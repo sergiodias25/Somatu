@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     private Button _startGameButton;
 
     [SerializeField]
+    private Button _continueGameButton;
+
+    [SerializeField]
     private Button _survivalButton;
 
     [SerializeField]
@@ -40,6 +43,7 @@ public class UIManager : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
         HideSubMenus();
         HideEndOfGameButtons();
+        ToggleContinueButton();
     }
 
     private void HideSubMenus()
@@ -53,6 +57,7 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         ShowButton(_startGameButton);
+        ShowButton(_continueGameButton);
         ShowButton(_survivalButton);
     }
 
@@ -79,13 +84,24 @@ public class UIManager : MonoBehaviour
     public void ClickOnStartGame()
     {
         HideButton(_startGameButton);
+        HideButton(_continueGameButton);
         HideButton(_survivalButton);
         ShowSubMenus();
+    }
+
+    public void ClickOnContinueGame()
+    {
+        HideButton(_startGameButton);
+        HideButton(_continueGameButton);
+        HideButton(_survivalButton);
+        ShowGameplayButtons();
+        _gameManager.Init(_gameManager.SelectedDifficulty, true);
     }
 
     public void ClickOnSurvival()
     {
         HideButton(_startGameButton);
+        HideButton(_continueGameButton);
         HideButton(_survivalButton);
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Desafio);
@@ -130,12 +146,13 @@ public class UIManager : MonoBehaviour
     {
         if (_playAgainButton.enabled)
         {
-            _gameManager.ResetBoard(false);
+            _gameManager.ResetBoard(false, false);
             _gameManager.GenerateGrid(
                 GameManager.GenerateNumbersForLevel(
                     Constants.GetNumbers(_gameManager.SelectedDifficulty),
                     Constants.GetRepeatedNumbersCount(_gameManager.SelectedDifficulty)
-                )
+                ),
+                false
             );
             if (_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio)
             {
@@ -151,7 +168,7 @@ public class UIManager : MonoBehaviour
 
     public void ExitGameClick()
     {
-        _gameManager.ResetBoard(true);
+        _gameManager.ResetBoard(true, false);
         HideSubMenus();
         HideEndOfGameButtons();
         ShowMainMenu();
@@ -170,5 +187,18 @@ public class UIManager : MonoBehaviour
         HideButton(_playAgainButton);
         HideButton(_exitButton);
         HideButton(_helpButton);
+        ToggleContinueButton();
+    }
+
+    private void ToggleContinueButton()
+    {
+        if (!_gameManager.SavedGameExists())
+        {
+            _continueGameButton.enabled = false;
+        }
+        else
+        {
+            _continueGameButton.enabled = true;
+        }
     }
 }
