@@ -554,4 +554,12 @@ public class GameManager : MonoBehaviour
         return _savedGameData._gameNumbersInProgress != null
             && _savedGameData._gameNumbersInProgress.Count == 9;
     }
+
+    public void ResetAllBlocksOpacity()
+    {
+        for (int i = 0; i < _allNodes.Count; i++)
+        {
+            Block.UpdateOpacity(_allNodes[i].GetBlockInNode(), 1f);
+        }
+    }
 }

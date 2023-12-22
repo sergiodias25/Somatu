@@ -11,6 +11,7 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _sprite;
+    private GameManager _gameManager;
     private AudioManager _audioManager;
     private AnimationsHandler _animationsHandler;
     private Vector3 mousePositionOffset;
@@ -21,6 +22,7 @@ public class Block : MonoBehaviour
 
     private void Awake()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _audioManager = FindObjectOfType<AudioManager>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
     }
@@ -117,8 +119,8 @@ public class Block : MonoBehaviour
                 && nodeWhereBlockIsHovering.name != _originalNode.name
             )
             {
+                _gameManager.ResetAllBlocksOpacity();
                 UpdateOpacity(nodeWhereBlockIsHovering.GetBlockInNode(), 0.2f);
-                if (nodeWhereBlockIsHovering != null) { }
                 _lastHoveredBlock = nodeWhereBlockIsHovering.GetBlockInNode();
             }
             else
@@ -220,7 +222,7 @@ public class Block : MonoBehaviour
         _sprite.color = newColor;
     }
 
-    private void UpdateOpacity(Block block, float value)
+    public static void UpdateOpacity(Block block, float value)
     {
         block._text.alpha = value;
     }
