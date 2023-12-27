@@ -91,6 +91,7 @@ public class Block : MonoBehaviour
 
                         transform.position = tempPosition;
                         transform.SetParent(tempNode.transform);
+                        _gameManager.StoreUndoData(tempNode, _originalNode);
                         _originalNode = tempNode;
                         _originalNode.SetBlockInNode(this);
 
@@ -141,25 +142,13 @@ public class Block : MonoBehaviour
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null)
             {
-                nodeWhereBlockIsDropped.GetBlockInNode().transform.position = _originalNode
-                    .transform
-                    .position;
                 UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
-                var tempBlock = _originalNode.GetBlockInNode();
-
-                _originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
-                _originalNode.GetBlockInNode().transform.SetParent(_originalNode.transform);
-
-                nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
-                nodeWhereBlockIsDropped
-                    .GetBlockInNode()
-                    .transform.SetParent(nodeWhereBlockIsDropped.transform);
-                gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
-
                 UpdateOffsetPosition();
 
                 if (nodeWhereBlockIsDropped != _originalNode)
                 {
+                    _gameManager.StoreUndoData(nodeWhereBlockIsDropped, _originalNode);
+                    SwitchToNode(nodeWhereBlockIsDropped);
                     FindObjectOfType<GameManager>().CheckResult(true);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
@@ -225,5 +214,22 @@ public class Block : MonoBehaviour
     public static void UpdateOpacity(Block block, float value)
     {
         block._text.alpha = value;
+    }
+
+    public void SwitchToNode(Node nodeToChange)
+    {
+        Node _tempNode = nodeToChange;
+        Debug.Log("First node " + _originalNode.name);
+        Debug.Log("Second node " + nodeToChange.name);
+
+        nodeToChange.GetBlockInNode().transform.position = GetNode().transform.position;
+        nodeToChange.SetBlockInNode(this);
+        nodeToChange.GetBlockInNode().transform.SetParent(nodeToChange.transform);
+        nodeToChange.GetBlockInNode()._originalNode = this._originalNode;
+
+        transform.position = _tempNode.transform.position;
+        GetNode().SetBlockInNode(_tempNode.GetBlockInNode());
+        transform.SetParent(_tempNode.transform);
+        _originalNode = nodeToChange;
     }
 }

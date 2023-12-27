@@ -37,6 +37,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button _helpButton;
 
+    [SerializeField]
+    private Button _undoButton;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -44,6 +47,11 @@ public class UIManager : MonoBehaviour
         HideSubMenus();
         HideEndOfGameButtons();
         ToggleContinueButton();
+    }
+
+    private void Update()
+    {
+        _undoButton.enabled = _gameManager._undoMoveData.IsUndoEnabled();
     }
 
     private void HideSubMenus()
@@ -139,6 +147,7 @@ public class UIManager : MonoBehaviour
     {
         ShowButton(_playAgainButton);
         ShowButton(_exitButton);
+        ShowButton(_undoButton);
         ShowButton(_helpButton);
     }
 
@@ -182,11 +191,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UndoClick()
+    {
+        if (_undoButton.enabled)
+        {
+            _gameManager.UndoLastMove();
+        }
+    }
+
     public void HideEndOfGameButtons()
     {
         HideButton(_playAgainButton);
         HideButton(_exitButton);
         HideButton(_helpButton);
+        HideButton(_undoButton);
         ToggleContinueButton();
     }
 

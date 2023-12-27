@@ -49,6 +49,23 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
 
+    public struct UndoMoveData
+    {
+        public Node firstNode;
+        public Node secondNode;
+
+        public bool IsUndoEnabled()
+        {
+            return firstNode != null && secondNode != null;
+        }
+
+        public void ClearUndoData()
+        {
+            firstNode = null;
+            secondNode = null;
+        }
+    }
+
     struct SavedGameData
     {
         public List<int> _gameNumbersInProgress;
@@ -102,6 +119,7 @@ public class GameManager : MonoBehaviour
     }
 
     private SavedGameData _savedGameData;
+    public UndoMoveData _undoMoveData;
 
     void Start()
     {
@@ -512,6 +530,10 @@ public class GameManager : MonoBehaviour
             {
                 _allNodes[i].UpdateColor(Constants.CorrectSumColor);
             }
+            else
+            {
+                _allNodes[i].UpdateColor(Constants.IncorrectSumColor);
+            }
         }
     }
 
@@ -561,5 +583,17 @@ public class GameManager : MonoBehaviour
         {
             Block.UpdateOpacity(_allNodes[i].GetBlockInNode(), 1f);
         }
+    }
+
+    public void StoreUndoData(Node firstNode, Node secondNode)
+    {
+        _undoMoveData.firstNode = firstNode;
+        _undoMoveData.secondNode = secondNode;
+    }
+
+    public void UndoLastMove()
+    {
+        _undoMoveData.firstNode.GetBlockInNode().SwitchToNode(_undoMoveData.secondNode);
+        _undoMoveData.ClearUndoData();
     }
 }
