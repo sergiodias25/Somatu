@@ -66,34 +66,25 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
-                    _sprite.color = Constants.SelectedBlock;
+                    nodeClickedOn.UpdateColor(Constants.SelectedBlock);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    _sprite.color = Constants.UnselectedBlock;
+                    selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
-                        var tempPosition = selectedBlock.transform.position;
                         var tempNode = selectedBlock._originalNode;
 
-                        selectedBlock.transform.position = transform.position;
-                        selectedBlock._sprite.color = Constants.UnselectedBlock;
-                        selectedBlock._originalNode = _originalNode;
-                        selectedBlock.transform.SetParent(_originalNode.transform);
-                        selectedBlock._originalNode.SetBlockInNode(selectedBlock);
-                        selectedBlock.IsSelected = false;
-
-                        transform.position = tempPosition;
-                        transform.SetParent(tempNode.transform);
+                        selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
                         _gameManager.StoreUndoData(tempNode, _originalNode);
-                        _originalNode = tempNode;
-                        _originalNode.SetBlockInNode(this);
+                        selectedBlock.SwitchToNode(_originalNode, selectedBlock._originalNode);
+                        selectedBlock.IsSelected = false;
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
@@ -106,7 +97,7 @@ public class Block : MonoBehaviour
 
     private void UpdateOffsetPosition()
     {
-        mousePositionOffset = gameObject.transform.position - GetWorldMousePosition();
+        mousePositionOffset = _originalNode.transform.position - GetWorldMousePosition();
     }
 
     private void OnMouseDrag()
@@ -143,26 +134,26 @@ public class Block : MonoBehaviour
             if (nodeWhereBlockIsDropped != null)
             {
                 UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
-                UpdateOffsetPosition();
 
                 if (nodeWhereBlockIsDropped != _originalNode)
                 {
-                    _gameManager.StoreUndoData(nodeWhereBlockIsDropped, _originalNode);
-                    SwitchToNode(nodeWhereBlockIsDropped);
+                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
+                    SwitchToNode(_originalNode, nodeWhereBlockIsDropped);
                     FindObjectOfType<GameManager>().CheckResult(true);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                    gameObject.transform.position = _originalNode.transform.position;
                 }
             }
             else
             {
-                UpdateOffsetPosition();
                 gameObject.transform.position = _originalNode.transform.position;
                 _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
+            UpdateOffsetPosition();
         }
     }
 
@@ -216,20 +207,21 @@ public class Block : MonoBehaviour
         block._text.alpha = value;
     }
 
-    public void SwitchToNode(Node nodeToChange)
+    public void SwitchToNode(Node firstNode, Node secondNode)
     {
-        Node _tempNode = nodeToChange;
-        Debug.Log("First node " + _originalNode.name);
-        Debug.Log("Second node " + nodeToChange.name);
+        Node _tempNode = firstNode;
+        var tempBlock = firstNode.GetBlockInNode();
+        Debug.Log("First node " + firstNode.name);
+        Debug.Log("Second node " + secondNode.name);
 
-        nodeToChange.GetBlockInNode().transform.position = GetNode().transform.position;
-        nodeToChange.SetBlockInNode(this);
-        nodeToChange.GetBlockInNode().transform.SetParent(nodeToChange.transform);
-        nodeToChange.GetBlockInNode()._originalNode = this._originalNode;
+        firstNode.GetBlockInNode().transform.position = secondNode.transform.position;
+        firstNode.SetBlockInNode(secondNode.GetBlockInNode());
+        firstNode.GetBlockInNode().transform.SetParent(firstNode.transform);
+        firstNode.GetBlockInNode()._originalNode = firstNode;
 
-        transform.position = _tempNode.transform.position;
-        GetNode().SetBlockInNode(_tempNode.GetBlockInNode());
-        transform.SetParent(_tempNode.transform);
-        _originalNode = nodeToChange;
+        secondNode.GetBlockInNode().transform.position = _tempNode.transform.position;
+        secondNode.SetBlockInNode(tempBlock);
+        secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
+        secondNode.GetBlockInNode()._originalNode = secondNode;
     }
 }

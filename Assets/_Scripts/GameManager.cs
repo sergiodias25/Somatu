@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _generatedNodesObject;
     private Timer _timer;
+    private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -125,6 +126,7 @@ public class GameManager : MonoBehaviour
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
+        _uiManager = FindObjectOfType<UIManager>();
         _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
@@ -278,6 +280,7 @@ public class GameManager : MonoBehaviour
             ResetBoard(false, true);
             GenerateGrid(numbers, false);
         }
+        _uiManager.ToggleHelpButton(true);
         LogSolution();
     }
 
@@ -396,6 +399,9 @@ public class GameManager : MonoBehaviour
                     );
                 }
                 _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
+                _uiManager.ToggleUndoButton(false);
+                _uiManager.ToggleHelpButton(false);
+                _undoMoveData.ClearUndoData();
             }
             return true;
         }
@@ -432,7 +438,7 @@ public class GameManager : MonoBehaviour
             _timer.PauseTimer();
             _savedGameData.ClearSavedGame();
         }
-        FindObjectOfType<UIManager>().ShowGameplayButtons();
+        _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
     }
 
@@ -589,11 +595,16 @@ public class GameManager : MonoBehaviour
     {
         _undoMoveData.firstNode = firstNode;
         _undoMoveData.secondNode = secondNode;
+        _uiManager.ToggleUndoButton(true);
     }
 
     public void UndoLastMove()
     {
-        _undoMoveData.firstNode.GetBlockInNode().SwitchToNode(_undoMoveData.secondNode);
+        _undoMoveData.firstNode
+            .GetBlockInNode()
+            .SwitchToNode(_undoMoveData.firstNode, _undoMoveData.secondNode);
         _undoMoveData.ClearUndoData();
+        _uiManager.ToggleUndoButton(false);
+        CheckResult(true);
     }
 }

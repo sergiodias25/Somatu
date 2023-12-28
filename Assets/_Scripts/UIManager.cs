@@ -196,6 +196,7 @@ public class UIManager : MonoBehaviour
         if (_undoButton.enabled)
         {
             _gameManager.UndoLastMove();
+            FindObjectOfType<GameManager>().RemoveHints();
         }
     }
 
@@ -218,5 +219,15 @@ public class UIManager : MonoBehaviour
         {
             _continueGameButton.enabled = true;
         }
+    }
+
+    internal void ToggleUndoButton(bool enabled)
+    {
+        _undoButton.enabled = enabled;
+    }
+
+    internal void ToggleHelpButton(bool enabled)
+    {
+        _helpButton.enabled = enabled;
     }
 }
