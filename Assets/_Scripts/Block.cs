@@ -66,33 +66,25 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
-                    _sprite.color = Constants.SelectedBlock;
+                    nodeClickedOn.UpdateColor(Constants.SelectedBlock);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    _sprite.color = Constants.UnselectedBlock;
+                    selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
-                        var tempPosition = selectedBlock.transform.position;
                         var tempNode = selectedBlock._originalNode;
 
-                        selectedBlock.transform.position = transform.position;
-                        selectedBlock._sprite.color = Constants.UnselectedBlock;
-                        selectedBlock._originalNode = _originalNode;
-                        selectedBlock.transform.SetParent(_originalNode.transform);
-                        selectedBlock._originalNode.SetBlockInNode(selectedBlock);
+                        selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
+                        _gameManager.StoreUndoData(tempNode, _originalNode);
+                        SwitchNodes(_originalNode, selectedBlock._originalNode);
                         selectedBlock.IsSelected = false;
-
-                        transform.position = tempPosition;
-                        transform.SetParent(tempNode.transform);
-                        _originalNode = tempNode;
-                        _originalNode.SetBlockInNode(this);
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
@@ -105,7 +97,7 @@ public class Block : MonoBehaviour
 
     private void UpdateOffsetPosition()
     {
-        mousePositionOffset = gameObject.transform.position - GetWorldMousePosition();
+        mousePositionOffset = _originalNode.transform.position - GetWorldMousePosition();
     }
 
     private void OnMouseDrag()
@@ -141,39 +133,27 @@ public class Block : MonoBehaviour
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null)
             {
-                nodeWhereBlockIsDropped.GetBlockInNode().transform.position = _originalNode
-                    .transform
-                    .position;
                 UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
-                var tempBlock = _originalNode.GetBlockInNode();
-
-                _originalNode.SetBlockInNode(nodeWhereBlockIsDropped.GetBlockInNode());
-                _originalNode.GetBlockInNode().transform.SetParent(_originalNode.transform);
-
-                nodeWhereBlockIsDropped.SetBlockInNode(tempBlock);
-                nodeWhereBlockIsDropped
-                    .GetBlockInNode()
-                    .transform.SetParent(nodeWhereBlockIsDropped.transform);
-                gameObject.transform.position = nodeWhereBlockIsDropped.transform.position;
-
-                UpdateOffsetPosition();
 
                 if (nodeWhereBlockIsDropped != _originalNode)
                 {
+                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
+                    SwitchNodes(_originalNode, nodeWhereBlockIsDropped);
                     FindObjectOfType<GameManager>().CheckResult(true);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                    gameObject.transform.position = _originalNode.transform.position;
                 }
             }
             else
             {
-                UpdateOffsetPosition();
                 gameObject.transform.position = _originalNode.transform.position;
                 _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
+            UpdateOffsetPosition();
         }
     }
 
@@ -225,5 +205,21 @@ public class Block : MonoBehaviour
     public static void UpdateOpacity(Block block, float value)
     {
         block._text.alpha = value;
+    }
+
+    public static void SwitchNodes(Node firstNode, Node secondNode)
+    {
+        Node _tempNode = firstNode;
+        var tempBlock = firstNode.GetBlockInNode();
+
+        firstNode.GetBlockInNode().transform.position = secondNode.transform.position;
+        firstNode.SetBlockInNode(secondNode.GetBlockInNode());
+        firstNode.GetBlockInNode().transform.SetParent(firstNode.transform);
+        firstNode.GetBlockInNode()._originalNode = firstNode;
+
+        secondNode.GetBlockInNode().transform.position = _tempNode.transform.position;
+        secondNode.SetBlockInNode(tempBlock);
+        secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
+        secondNode.GetBlockInNode()._originalNode = secondNode;
     }
 }

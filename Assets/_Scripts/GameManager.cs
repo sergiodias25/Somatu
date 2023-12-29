@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _generatedNodesObject;
     private Timer _timer;
+    private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -49,17 +50,62 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
 
+    public struct UndoMoveData
+    {
+        public List<Node> firstNodes;
+        public List<Node> secondNodes;
+
+        public bool IsUndoEnabled()
+        {
+            return ThereIsDataToUndo();
+        }
+
+        public void UndoOneMove()
+        {
+            if (ThereIsDataToUndo())
+            {
+                firstNodes.RemoveAt(firstNodes.Count - 1);
+                secondNodes.RemoveAt(secondNodes.Count - 1);
+            }
+        }
+
+        public void ClearUndoData()
+        {
+            firstNodes.Clear();
+            secondNodes.Clear();
+        }
+
+        private bool ThereIsDataToUndo()
+        {
+            return firstNodes != null
+                && firstNodes.Count > 0
+                && secondNodes != null
+                && secondNodes.Count > 0;
+        }
+
+        internal void StoreMoveToUndo(Node firstNode, Node secondNode)
+        {
+            if (!ThereIsDataToUndo())
+            {
+                firstNodes = new List<Node>();
+                secondNodes = new List<Node>();
+            }
+            firstNodes.Add(firstNode);
+            secondNodes.Add(secondNode);
+        }
+    }
+
     struct SavedGameData
     {
         public List<int> _gameNumbersInProgress;
         public List<int> _solutionNumbersInProgress;
-        public Constants.Difficulty? savedGameDifficulty;
+        public Constants.Difficulty? _savedGameDifficulty;
 
         public void ClearSavedGame()
         {
             _gameNumbersInProgress = new List<int>();
             _solutionNumbersInProgress = new List<int>();
-            savedGameDifficulty = null;
+            _savedGameDifficulty = null;
         }
 
         public void UpdateSavedGame(
@@ -97,16 +143,18 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            savedGameDifficulty = difficulty;
+            _savedGameDifficulty = difficulty;
         }
     }
 
     private SavedGameData _savedGameData;
+    public UndoMoveData _undoMoveData;
 
     void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
+        _uiManager = FindObjectOfType<UIManager>();
         _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
@@ -245,7 +293,7 @@ public class GameManager : MonoBehaviour
         }
         if (loadGame && _savedGameData._gameNumbersInProgress.Count > 0)
         {
-            SelectedDifficulty = (Constants.Difficulty)_savedGameData.savedGameDifficulty;
+            SelectedDifficulty = (Constants.Difficulty)_savedGameData._savedGameDifficulty;
             _modeSelected.text = SelectedDifficulty.ToString();
         }
 
@@ -260,6 +308,7 @@ public class GameManager : MonoBehaviour
             ResetBoard(false, true);
             GenerateGrid(numbers, false);
         }
+        _uiManager.ToggleHelpButton(true);
         LogSolution();
     }
 
@@ -378,6 +427,9 @@ public class GameManager : MonoBehaviour
                     );
                 }
                 _timesSolved.text = (int.Parse(_timesSolved.text) + 1).ToString();
+                _uiManager.ToggleUndoButton(false);
+                _uiManager.ToggleHelpButton(false);
+                _undoMoveData.ClearUndoData();
             }
             return true;
         }
@@ -414,7 +466,7 @@ public class GameManager : MonoBehaviour
             _timer.PauseTimer();
             _savedGameData.ClearSavedGame();
         }
-        FindObjectOfType<UIManager>().ShowGameplayButtons();
+        _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
     }
 
@@ -484,6 +536,7 @@ public class GameManager : MonoBehaviour
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
+        _undoMoveData.ClearUndoData();
         if (shouldClearSavedGame)
         {
             _savedGameData.ClearSavedGame();
@@ -511,6 +564,10 @@ public class GameManager : MonoBehaviour
             if (_solutionNumbers[i] == _allNodes[i].GetBlockInNode().Value)
             {
                 _allNodes[i].UpdateColor(Constants.CorrectSumColor);
+            }
+            else
+            {
+                _allNodes[i].UpdateColor(Constants.IncorrectSumColor);
             }
         }
     }
@@ -561,5 +618,23 @@ public class GameManager : MonoBehaviour
         {
             Block.UpdateOpacity(_allNodes[i].GetBlockInNode(), 1f);
         }
+    }
+
+    public void StoreUndoData(Node firstNode, Node secondNode)
+    {
+        _undoMoveData.StoreMoveToUndo(firstNode, secondNode);
+        _uiManager.ToggleUndoButton(true);
+    }
+
+    public void UndoLastMove()
+    {
+        Block.SwitchNodes(
+            _undoMoveData.firstNodes[_undoMoveData.firstNodes.Count - 1],
+            _undoMoveData.secondNodes[_undoMoveData.secondNodes.Count - 1]
+        );
+        _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+        _undoMoveData.UndoOneMove();
+        _uiManager.ToggleUndoButton(false);
+        CheckResult(true);
     }
 }
