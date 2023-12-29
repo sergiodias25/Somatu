@@ -83,7 +83,7 @@ public class Block : MonoBehaviour
 
                         selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
                         _gameManager.StoreUndoData(tempNode, _originalNode);
-                        selectedBlock.SwitchToNode(_originalNode, selectedBlock._originalNode);
+                        SwitchNodes(_originalNode, selectedBlock._originalNode);
                         selectedBlock.IsSelected = false;
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
@@ -138,7 +138,7 @@ public class Block : MonoBehaviour
                 if (nodeWhereBlockIsDropped != _originalNode)
                 {
                     _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
-                    SwitchToNode(_originalNode, nodeWhereBlockIsDropped);
+                    SwitchNodes(_originalNode, nodeWhereBlockIsDropped);
                     FindObjectOfType<GameManager>().CheckResult(true);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
@@ -207,12 +207,10 @@ public class Block : MonoBehaviour
         block._text.alpha = value;
     }
 
-    public void SwitchToNode(Node firstNode, Node secondNode)
+    public static void SwitchNodes(Node firstNode, Node secondNode)
     {
         Node _tempNode = firstNode;
         var tempBlock = firstNode.GetBlockInNode();
-        Debug.Log("First node " + firstNode.name);
-        Debug.Log("Second node " + secondNode.name);
 
         firstNode.GetBlockInNode().transform.position = secondNode.transform.position;
         firstNode.SetBlockInNode(secondNode.GetBlockInNode());
