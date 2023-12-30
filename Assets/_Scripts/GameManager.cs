@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
             return ThereIsDataToUndo();
         }
 
-        public void UndoOneMove()
+        public void ClearMoveUndone()
         {
             if (ThereIsDataToUndo())
             {
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             secondNodes.Clear();
         }
 
-        private bool ThereIsDataToUndo()
+        public bool ThereIsDataToUndo()
         {
             return firstNodes != null
                 && firstNodes.Count > 0
@@ -536,7 +536,10 @@ public class GameManager : MonoBehaviour
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
-        _undoMoveData.ClearUndoData();
+        if (_undoMoveData.ThereIsDataToUndo())
+        {
+            _undoMoveData.ClearUndoData();
+        }
         if (shouldClearSavedGame)
         {
             _savedGameData.ClearSavedGame();
@@ -633,8 +636,7 @@ public class GameManager : MonoBehaviour
             _undoMoveData.secondNodes[_undoMoveData.secondNodes.Count - 1]
         );
         _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-        _undoMoveData.UndoOneMove();
-        _uiManager.ToggleUndoButton(false);
+        _undoMoveData.ClearMoveUndone();
         CheckResult(true);
     }
 }
