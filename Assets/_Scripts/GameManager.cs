@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         List<int> currentPossibleValues = new List<int>(possibleValues);
         List<int> result = new();
-        int randomized = UnityEngine.Random.Range(0, currentPossibleValues.Count);
+        int randomized = Random.Range(0, currentPossibleValues.Count);
         if (repeatedCount > 0)
         {
             for (int i = 0; i < repeatedCount; i++)

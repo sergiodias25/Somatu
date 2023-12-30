@@ -5,8 +5,8 @@ using UnityEngine;
 public class Constants : MonoBehaviour
 {
     // BOARD NUMBER COMBINATIONS
-    public static List<int> NumbersForEasyMode = new List<int> { 1, 2, 3, 4 };
-    public static List<int> NumbersForMediumMode = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+    public static List<int> NumbersForEasyMode = new List<int> { 1, 2, 3 };
+    public static List<int> NumbersForMediumMode = new List<int> { 1, 2, 3, 4, 5 };
     public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     // GAME SETTINGS
@@ -52,17 +52,17 @@ public class Constants : MonoBehaviour
         {
             case Difficulty.Fácil:
             case Difficulty.Desafio:
-                // repeats betweeen 6 to 8 numbers
-                return Random.Range(6, 9);
+                // repeats betweeen 7 to 8 numbers
+                return Random.Range(7, 9);
             case Difficulty.Médio:
-                // repeats betweeen 3 to 5 numbers
-                return Random.Range(3, 6);
+                // repeats betweeen 5 to 6 numbers
+                return Random.Range(5, 7);
             case Difficulty.Difícil:
-                // repeats betweeen 0 to 2 numbers
+                // repeats betweeen 0 to 4 numbers
                 return Random.Range(0, 3);
             case Difficulty.Extremo:
                 // repeats betweeen 0 to 1 number
-                return Random.Range(0, 2);
+                return Random.Range(0, 3);
         }
         return Random.Range(0, 10);
     }

@@ -6,7 +6,7 @@ public class SavedGameData
     public List<int> _gameNumbersInProgress;
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Fácil;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Desafio;
     private int _timesBeatenCurrentDifficulty = 0;
 
     public SavedGameData()
