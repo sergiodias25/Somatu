@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private Button _continueGameButton;
 
     [SerializeField]
-    private Button _survivalButton;
+    private Button _challengeButton;
 
     [SerializeField]
     private Button _easyModeButton;
@@ -52,6 +52,18 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         _undoButton.enabled = _gameManager._undoMoveData.IsUndoEnabled();
+        _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Médio
+        );
+        _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Difícil
+        );
+        _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Extremo
+        );
+        _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Desafio
+        );
     }
 
     private void HideSubMenus()
@@ -66,7 +78,7 @@ public class UIManager : MonoBehaviour
     {
         ShowButton(_startGameButton);
         ShowButton(_continueGameButton);
-        ShowButton(_survivalButton);
+        ShowButton(_challengeButton);
     }
 
     private void ShowSubMenus()
@@ -93,7 +105,7 @@ public class UIManager : MonoBehaviour
     {
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
-        HideButton(_survivalButton);
+        HideButton(_challengeButton);
         ShowSubMenus();
     }
 
@@ -101,7 +113,7 @@ public class UIManager : MonoBehaviour
     {
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
-        HideButton(_survivalButton);
+        HideButton(_challengeButton);
         ShowGameplayButtons();
         _gameManager.Init(_gameManager.SelectedDifficulty, true);
     }
@@ -110,7 +122,7 @@ public class UIManager : MonoBehaviour
     {
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
-        HideButton(_survivalButton);
+        HideButton(_challengeButton);
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Desafio);
     }

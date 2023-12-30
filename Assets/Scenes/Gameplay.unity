@@ -1720,9 +1720,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.081768125
+    x: 0.00020295382
     y: 0
-    width: 0.83646375
+    width: 0.9995941
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -3608,7 +3608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startGameButton: {fileID: 441086231}
   _continueGameButton: {fileID: 1705800264}
-  _survivalButton: {fileID: 1704377785}
+  _challengeButton: {fileID: 1704377785}
   _easyModeButton: {fileID: 778201891}
   _mediumModeButton: {fileID: 570440368}
   _hardModeButton: {fileID: 842919371}
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodePrefab: {fileID: 7780418195154399205, guid: 9f491a88520c28c46b1b089ae29937a3, type: 3}
   _blockPrefab: {fileID: 5257517540207989833, guid: 83cb48f7b84ff02409a3af12ac4b78d1, type: 3}
-  _timesSolved: {fileID: 1764180683}
+  _timesSolvedText: {fileID: 1764180683}
   _modeSelected: {fileID: 1485985327}
   _correctBlocksCount: {fileID: 575379645}
   _generatedNodesObject: {fileID: 1993008454}
@@ -4764,7 +4764,7 @@ GameObject:
   - component: {fileID: 1704377784}
   - component: {fileID: 1704377783}
   m_Layer: 5
-  m_Name: SurvivalButton
+  m_Name: ChallengeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

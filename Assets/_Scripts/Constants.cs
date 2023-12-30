@@ -67,6 +67,22 @@ public class Constants : MonoBehaviour
         return Random.Range(0, 10);
     }
 
+    public static int GetNumberOfSolvesToUnlockNextDifficulty(Difficulty difficulty)
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Fácil:
+                return 1;
+            case Difficulty.Médio:
+                return 1;
+            case Difficulty.Difícil:
+                return 1;
+            case Difficulty.Extremo:
+                return 1;
+        }
+        return -1;
+    }
+
     // COLORS USED
     public static Color CorrectSumColor = new Color32(52, 235, 122, 255);
     public static Color IncorrectSumColor = new Color32(244, 113, 116, 255);
