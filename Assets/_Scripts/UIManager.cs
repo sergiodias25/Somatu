@@ -40,10 +40,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button _undoButton;
 
+    private AnimationsHandler _animationsHandler;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
+        _animationsHandler = FindObjectOfType<AnimationsHandler>();
         HideSubMenus();
         HideEndOfGameButtons();
         ToggleContinueButton();
@@ -193,6 +196,8 @@ public class UIManager : MonoBehaviour
         HideSubMenus();
         HideEndOfGameButtons();
         ShowMainMenu();
+
+        _animationsHandler.HideGameplayBar();
     }
 
     public void HelpClick()

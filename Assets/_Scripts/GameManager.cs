@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private GameObject _generatedNodesObject;
     private Timer _timer;
     private UIManager _uiManager;
+    private AnimationsHandler _animationsHandler;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
         _uiManager = FindObjectOfType<UIManager>();
+        _animationsHandler = FindObjectOfType<AnimationsHandler>();
         _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
@@ -251,6 +253,7 @@ public class GameManager : MonoBehaviour
             GenerateGrid(numbers, false);
         }
         _uiManager.ToggleHelpButton(true);
+        _animationsHandler.RestoreGameplayBar();
         LogSolution();
     }
 
@@ -582,5 +585,14 @@ public class GameManager : MonoBehaviour
         _audioManager.PlaySFX(_audioManager.DropBlockUndo);
         _undoMoveData.ClearMoveUndone();
         CheckResult(true);
+    }
+
+    public bool IsGameInProgress()
+    {
+        if (_generatedNodesObject.transform.childCount == 9)
+        {
+            return true;
+        }
+        return false;
     }
 }
