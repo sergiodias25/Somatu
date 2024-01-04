@@ -29,9 +29,6 @@ public class UIManager : MonoBehaviour
     private Button _extremeModeButton;
 
     [SerializeField]
-    private Button _exitButton;
-
-    [SerializeField]
     private Button _playAgainButton;
 
     [SerializeField]
@@ -161,7 +158,6 @@ public class UIManager : MonoBehaviour
     public void ShowGameplayButtons()
     {
         ShowButton(_playAgainButton);
-        ShowButton(_exitButton);
         ShowButton(_undoButton);
         ShowButton(_helpButton);
     }
@@ -192,7 +188,10 @@ public class UIManager : MonoBehaviour
 
     public void ExitGameClick()
     {
-        _gameManager.ResetBoard(true, false);
+        if (_gameManager.IsGameInProgress())
+        {
+            _gameManager.ResetBoard(true, false);
+        }
         HideSubMenus();
         HideEndOfGameButtons();
         ShowMainMenu();
@@ -220,7 +219,6 @@ public class UIManager : MonoBehaviour
     public void HideEndOfGameButtons()
     {
         HideButton(_playAgainButton);
-        HideButton(_exitButton);
         HideButton(_helpButton);
         HideButton(_undoButton);
         ToggleContinueButton();
