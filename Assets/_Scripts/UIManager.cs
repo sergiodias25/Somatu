@@ -181,7 +181,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                _timer.UnpauseTimer();
+                _timer.RestartTimer();
             }
         }
     }
@@ -190,6 +190,7 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.IsGameInProgress())
         {
+            _gameManager.CheckResult(false);
             _gameManager.ResetBoard(true, false);
         }
         HideSubMenus();

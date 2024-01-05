@@ -6,6 +6,7 @@ public class SavedGameData
     public List<int> _gameNumbersInProgress;
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
+    public double _timerValue;
     public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Desafio;
     private int _timesBeatenCurrentDifficulty = 0;
 
@@ -48,12 +49,14 @@ public class SavedGameData
         _gameNumbersInProgress = new List<int>();
         _solutionNumbersInProgress = new List<int>();
         _savedGameDifficulty = null;
+        _timerValue = 0.0;
     }
 
     public void UpdateInProgressSavedGame(
         GameObject generatedNodesObject,
         List<int> solutionNumbers,
-        Constants.Difficulty difficulty
+        Constants.Difficulty difficulty,
+        double timerValue
     )
     {
         for (int i = 0; i < generatedNodesObject.transform.childCount; i++)
@@ -84,5 +87,6 @@ public class SavedGameData
         }
 
         _savedGameDifficulty = difficulty;
+        _timerValue = timerValue;
     }
 }

@@ -125,7 +125,10 @@ public class GameManager : MonoBehaviour
             ),
             loadGame
         );
-        _timer.Init(SelectedDifficulty == Constants.Difficulty.Desafio);
+        _timer.Init(
+            SelectedDifficulty == Constants.Difficulty.Desafio,
+            _savedGameData != null ? _savedGameData._timerValue : 0d
+        );
         ApplyDifficultySettings(SelectedDifficulty);
     }
 
@@ -239,6 +242,7 @@ public class GameManager : MonoBehaviour
         {
             SelectedDifficulty = (Constants.Difficulty)_savedGameData._savedGameDifficulty;
             _modeSelected.text = SelectedDifficulty.ToString();
+            _timer.SetTimerValue(_savedGameData._timerValue);
         }
 
         _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionGroupSum(2, 5, 8));
@@ -384,7 +388,8 @@ public class GameManager : MonoBehaviour
             _savedGameData.UpdateInProgressSavedGame(
                 _generatedNodesObject,
                 _solutionNumbers,
-                SelectedDifficulty
+                SelectedDifficulty,
+                _timer.GetTimerValue()
             );
         }
         return false;
@@ -424,6 +429,7 @@ public class GameManager : MonoBehaviour
             node.GetBlockInNode().UpdateColor(Constants.IncorrectSumColor);
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
+        _uiManager.ToggleHelpButton(false);
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)

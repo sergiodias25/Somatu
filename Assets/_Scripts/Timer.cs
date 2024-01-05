@@ -21,15 +21,38 @@ public class Timer : MonoBehaviour
         _isRunning = false;
     }
 
+    public void Init(bool isChallenge, double timerValue)
+    {
+        Init();
+        _isCountdown = isChallenge;
+        _hasLimit = isChallenge;
+        _currentTime = isChallenge ? _timeLimitValue : timerValue;
+    }
+
     public void Init(bool isChallenge)
+    {
+        Init();
+        _isCountdown = isChallenge;
+        _hasLimit = isChallenge;
+        _currentTime = isChallenge ? _timeLimitValue : 0f;
+    }
+
+    private void Init()
     {
         enabled = true;
         _timerText.color = Color.white;
         _timeLimitValue = Constants.ChallengeTimeLimit;
-        _isCountdown = isChallenge;
-        _hasLimit = isChallenge;
-        _currentTime = isChallenge ? _timeLimitValue : 0f;
         _isRunning = true;
+    }
+
+    public double GetTimerValue()
+    {
+        return _currentTime;
+    }
+
+    public void SetTimerValue(double timerValue)
+    {
+        _currentTime = timerValue;
     }
 
     void Update()
@@ -69,6 +92,12 @@ public class Timer : MonoBehaviour
         UpdateTimerText();
         enabled = false;
         _isRunning = false;
+    }
+
+    public void RestartTimer()
+    {
+        StopTimer();
+        UnpauseTimer();
     }
 
     private void UpdateTimerText()
