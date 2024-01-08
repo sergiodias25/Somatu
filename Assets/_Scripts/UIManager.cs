@@ -36,14 +36,15 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Button _undoButton;
-
     private AnimationsHandler _animationsHandler;
+    private PlayerStats _playerStats;
 
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
+        _playerStats = FindObjectOfType<PlayerStats>();
         HideSubMenus();
         HideEndOfGameButtons();
         ToggleContinueButton();
@@ -174,6 +175,8 @@ public class UIManager : MonoBehaviour
                 ),
                 false
             );
+            _playerStats.StartedGame(_gameManager.SelectedDifficulty);
+
             if (_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio)
             {
                 _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio);
@@ -205,6 +208,7 @@ public class UIManager : MonoBehaviour
         if (_helpButton.enabled)
         {
             _gameManager.ShowHints();
+            _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
         }
     }
 

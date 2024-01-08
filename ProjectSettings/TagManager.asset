@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlayerStats
+    uniqueID: 1642278501
+    locked: 0
+  - name: TopBar
+    uniqueID: 2862999943
+    locked: 0

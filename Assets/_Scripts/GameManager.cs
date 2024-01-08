@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public SavedGameData _savedGameData;
     public UndoMoveData _undoMoveData;
+    private PlayerStats _playerStats;
 
     void Start()
     {
@@ -105,11 +106,13 @@ public class GameManager : MonoBehaviour
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
         _savedGameData = new SavedGameData();
+        _playerStats = FindObjectOfType<PlayerStats>();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
     {
         Init(selectedDifficulty, false);
+        _playerStats.StartedGame(SelectedDifficulty);
     }
 
     public void Init(Constants.Difficulty selectedDifficulty, bool loadGame)
@@ -419,6 +422,7 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
+        _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue());
     }
 
     public void PuzzleFailed()

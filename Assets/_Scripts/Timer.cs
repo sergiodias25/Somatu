@@ -102,10 +102,7 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimerText()
     {
-        int timeInSecondsInt = (int)_currentTime; //We don't care about fractions of a second, so easy to drop them by just converting to an int
-        int minutes = (int)(_currentTime / 60); //Get total minutes
-        int seconds = timeInSecondsInt - (minutes * 60); //Get seconds for display alongside minutes
-        _timerText.text = minutes.ToString("D2") + ":" + seconds.ToString("D2"); //Create the string representation, where both seconds and minutes are at minimum 2 digits
+        _timerText.text = FormatTime(_currentTime);
     }
 
     public void PauseTimer()
@@ -123,5 +120,13 @@ public class Timer : MonoBehaviour
     public void AddPuzzleSolvedBOnus()
     {
         _currentTime += Constants.ChallengePuzzleSolvedBonus;
+    }
+
+    public static string FormatTime(double timeValue)
+    {
+        int timeInSecondsInt = (int)timeValue; //We don't care about fractions of a second, so easy to drop them by just converting to an int
+        int minutes = (int)(timeValue / 60); //Get total minutes
+        int seconds = timeInSecondsInt - (minutes * 60); //Get seconds for display alongside minutes
+        return minutes.ToString("D2") + ":" + seconds.ToString("D2"); //Create the string representation, where both seconds and minutes are at minimum 2 digits}
     }
 }
