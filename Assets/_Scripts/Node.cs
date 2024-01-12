@@ -17,9 +17,6 @@ public class Node : MonoBehaviour
 
     public void SetBlockInNode(Block block)
     {
-        //if (_blockInNode != null) {
-        //   Debug.Log("node '" + name + "' changed from '" + _blockInNode.name + "' to '" + block.name + "'");
-        //}
         _blockInNode = block;
     }
 

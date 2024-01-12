@@ -7,13 +7,40 @@ public class SavedGameData
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
     public double _timerValue;
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Desafio;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Fácil;
     private int _timesBeatenCurrentDifficulty = 0;
+
+    public PlayerStats EasyStats;
+    public PlayerStats MediumStats;
+    public PlayerStats HardStats;
+    public PlayerStats ExtremeStats;
+
+    public class PlayerStats
+    {
+        public int GamesPlayed;
+        public int GamesCompleted;
+        public double TimeFastest;
+        public double TimeAverage;
+        public int HelpsUsed;
+
+        public PlayerStats()
+        {
+            GamesPlayed = 0;
+            GamesCompleted = 0;
+            TimeFastest = 0;
+            TimeAverage = 0;
+            HelpsUsed = 0;
+        }
+    }
 
     public SavedGameData()
     {
         _gameNumbersInProgress = new List<int>();
         _solutionNumbersInProgress = new List<int>();
+        EasyStats = new PlayerStats();
+        MediumStats = new PlayerStats();
+        HardStats = new PlayerStats();
+        ExtremeStats = new PlayerStats();
     }
 
     public void IncrementTimesBeaten(Constants.Difficulty difficulty)

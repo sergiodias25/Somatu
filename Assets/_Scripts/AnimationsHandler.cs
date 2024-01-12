@@ -11,10 +11,12 @@ public class AnimationsHandler : MonoBehaviour
     [SerializeField]
     public Animator _gameplayBarAnimator;
     private GameManager _gameManager;
+    private Timer _timer;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        _timer = FindObjectOfType<Timer>();
     }
 
     public void ClickOnSettings()
@@ -32,6 +34,7 @@ public class AnimationsHandler : MonoBehaviour
     public void ClickOnProfile()
     {
         _statsAnimator.SetTrigger("ToggleStats");
+        _timer.ToggleTimer();
     }
 
     public void RestoreGameplayBar()
@@ -61,14 +64,6 @@ public class AnimationsHandler : MonoBehaviour
 
     private void Update()
     {
-        /*Debug.Log(
-            IsInAnimationState(_settingsAnimator, "ShowSettings").ToString()
-                + " "
-                + _settingsAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString()
-                + " "
-                + _settingsAnimator.IsInTransition(0)
-        );*/
-
         if (
             _gameManager.IsGameInProgress()
             && IsInAnimationState(_gameplayBarAnimator, "ShowGameplayBar")

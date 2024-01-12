@@ -117,6 +117,18 @@ public class Timer : MonoBehaviour
         _isRunning = true;
     }
 
+    public void ToggleTimer()
+    {
+        if (_isRunning)
+        {
+            PauseTimer();
+        }
+        else if (!_gameManager.HasGameEnded())
+        {
+            UnpauseTimer();
+        }
+    }
+
     public void AddPuzzleSolvedBOnus()
     {
         _currentTime += Constants.ChallengePuzzleSolvedBonus;

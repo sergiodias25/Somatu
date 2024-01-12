@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
         _playerStats = FindObjectOfType<PlayerStats>();
+        ShowMainMenu();
         HideSubMenus();
         HideEndOfGameButtons();
         ToggleContinueButton();
@@ -52,19 +53,38 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        _undoButton.enabled = _gameManager._undoMoveData.IsUndoEnabled();
-        _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Médio
-        );
-        _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Difícil
-        );
-        _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Extremo
-        );
-        _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Desafio
-        );
+        if (_gameManager.IsGameInProgress())
+        {
+            _undoButton.enabled = _gameManager._undoMoveData.IsUndoEnabled();
+        }
+
+        if (_mediumModeButton.gameObject.activeInHierarchy)
+        {
+            _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+                Constants.Difficulty.Médio
+            );
+        }
+
+        if (_hardModeButton.gameObject.activeInHierarchy)
+        {
+            _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+                Constants.Difficulty.Difícil
+            );
+        }
+
+        if (_extremeModeButton.gameObject.activeInHierarchy)
+        {
+            _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+                Constants.Difficulty.Extremo
+            );
+        }
+
+        if (_challengeButton.gameObject.activeInHierarchy)
+        {
+            _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+                Constants.Difficulty.Desafio
+            );
+        }
     }
 
     private void HideSubMenus()
@@ -78,7 +98,7 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         ShowButton(_startGameButton);
-        ShowButton(_continueGameButton);
+        ToggleContinueButton();
         ShowButton(_challengeButton);
     }
 
@@ -92,14 +112,12 @@ public class UIManager : MonoBehaviour
 
     private void HideButton(Button button)
     {
-        button.image.enabled = false;
-        button.GetComponentInChildren<TMP_Text>().enabled = false;
+        button.gameObject.SetActive(false);
     }
 
     private void ShowButton(Button button)
     {
-        button.image.enabled = true;
-        button.GetComponentInChildren<TMP_Text>().enabled = true;
+        button.gameObject.SetActive(true);
     }
 
     public void ClickOnStartGame()
@@ -189,7 +207,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ExitGameClick()
+    public void HomeClick()
     {
         if (_gameManager.IsGameInProgress())
         {
@@ -231,14 +249,7 @@ public class UIManager : MonoBehaviour
 
     private void ToggleContinueButton()
     {
-        if (!_gameManager.SavedGameExists())
-        {
-            _continueGameButton.enabled = false;
-        }
-        else
-        {
-            _continueGameButton.enabled = true;
-        }
+        _continueGameButton.gameObject.SetActive(_gameManager.SavedGameExists());
     }
 
     internal void ToggleUndoButton(bool enabled)

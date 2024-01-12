@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _modeSelected;
 
     [SerializeField]
-    private TextMeshProUGUI _correctBlocksCount;
-
-    [SerializeField]
     private GameObject _generatedNodesObject;
     private Timer _timer;
     private UIManager _uiManager;
@@ -132,7 +129,6 @@ public class GameManager : MonoBehaviour
             SelectedDifficulty == Constants.Difficulty.Desafio,
             _savedGameData != null ? _savedGameData._timerValue : 0d
         );
-        ApplyDifficultySettings(SelectedDifficulty);
     }
 
     public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
@@ -156,31 +152,6 @@ public class GameManager : MonoBehaviour
             currentPossibleValues.RemoveAt(nextNumber);
         }
         return result;
-    }
-
-    public static Color ChangeAlpha(Color originalColor, float newAlpha)
-    {
-        var newColor = originalColor;
-        newColor.a = newAlpha;
-        return newColor;
-    }
-
-    private void ApplyDifficultySettings(Constants.Difficulty selectedDifficulty)
-    {
-        if (selectedDifficulty == Constants.Difficulty.Extremo) { }
-        if (selectedDifficulty >= Constants.Difficulty.Difícil) { }
-        if (selectedDifficulty >= Constants.Difficulty.Médio)
-        {
-            TextMeshProUGUI _correctCountLabel = GameObject
-                .Find("CorrectCountLabel")
-                .GetComponent<TextMeshProUGUI>();
-            _correctCountLabel.color = ChangeAlpha(_correctCountLabel.color, 0f);
-
-            TextMeshProUGUI _correctCountText = GameObject
-                .Find("CorrectCount")
-                .GetComponent<TextMeshProUGUI>();
-            _correctCountText.color = ChangeAlpha(_correctCountText.color, 0f);
-        }
     }
 
     private int GenerateNumber(List<int> numbers)
@@ -323,38 +294,6 @@ public class GameManager : MonoBehaviour
             _thirdColumnResultBlock
         );
 
-        int _correctCount = 0;
-        for (int i = 0; i < _allNodes.Count; i++)
-        {
-            if (_allNodes[i].GetBlockInNode().Value == _solutionNumbers[i])
-            {
-                _correctCount += 1;
-            }
-        }
-
-        if (SelectedDifficulty < Constants.Difficulty.Médio)
-        {
-            int _previousCorrectCount = int.Parse(_correctBlocksCount.text);
-            _correctBlocksCount.text = _correctCount.ToString();
-            if (!isActionable || _previousCorrectCount == _correctCount)
-            {
-                _correctBlocksCount.color = Color.white;
-            }
-            else if (_previousCorrectCount > _correctCount)
-            {
-                _correctBlocksCount.color = Color.red;
-            }
-            else if (_previousCorrectCount < _correctCount)
-            {
-                _correctBlocksCount.color = Color.cyan;
-            }
-
-            if (_correctCount == _allNodes.Count)
-            {
-                _correctBlocksCount.color = Color.green;
-            }
-        }
-
         if (
             firstRowCompleted
             && secondRowCompleted
@@ -403,14 +342,14 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.GetBlockInNode().UpdateColor(Constants.CorrectSumColor);
+            node.UpdateColor(Constants.CorrectSumColor);
         }
-        _firstRowResultBlock.UpdateColor(Constants.CorrectSumColor);
-        _secondRowResultBlock.UpdateColor(Constants.CorrectSumColor);
-        _thirdRowResultBlock.UpdateColor(Constants.CorrectSumColor);
-        _firstColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
-        _secondColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
-        _thirdColumnResultBlock.UpdateColor(Constants.CorrectSumColor);
+        _firstRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _secondRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _thirdRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _firstColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _secondColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
         if (SelectedDifficulty == Constants.Difficulty.Desafio)
         {
             _timer.AddPuzzleSolvedBOnus();
@@ -430,7 +369,7 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.GetBlockInNode().UpdateColor(Constants.IncorrectSumColor);
+            node.UpdateColor(Constants.IncorrectSumColor);
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
@@ -442,16 +381,16 @@ public class GameManager : MonoBehaviour
         {
             if (currentSum == expectedResult)
             {
-                block.UpdateColor(Constants.CorrectSumColor);
+                block.GetNode().UpdateColor(Constants.CorrectSumColor);
             }
             else
             {
-                block.UpdateColor(Constants.IncorrectSumColor);
+                block.GetNode().UpdateColor(Constants.IncorrectSumColor);
             }
         }
         else
         {
-            block.UpdateColor(Constants.InProgressBackgroundColor);
+            block.GetNode().UpdateColor(Constants.InProgressBackgroundColor);
         }
 
         if (currentSum == expectedResult)
@@ -499,10 +438,6 @@ public class GameManager : MonoBehaviour
         if (shouldClearSavedGame)
         {
             _savedGameData.ClearInProgressSavedGame();
-        }
-        if (SelectedDifficulty < Constants.Difficulty.Médio)
-        {
-            _correctBlocksCount.color = Constants.TextColor;
         }
         if (isExit)
         {
@@ -600,6 +535,22 @@ public class GameManager : MonoBehaviour
     public bool IsGameInProgress()
     {
         if (_generatedNodesObject.transform.childCount == 9)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool HasGameEnded()
+    {
+        if (
+            _generatedNodesObject.transform.childCount > 0
+            && !_generatedNodesObject.transform
+                .GetChild(0)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+        )
         {
             return true;
         }

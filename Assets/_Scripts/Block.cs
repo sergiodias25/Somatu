@@ -18,7 +18,7 @@ public class Block : MonoBehaviour
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
-    private Block _lastHoveredBlock;
+    private Node _lastHoveredNode;
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class Block : MonoBehaviour
     private void OnMouseDown()
     {
         _animationsHandler.RestoreGameplayBar();
-        if (_isInteractible)
+        if (GetNodeTouched() != null && _isInteractible)
         {
             FindObjectOfType<GameManager>().RemoveHints();
             if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
@@ -102,10 +102,14 @@ public class Block : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+        Node nodeWhereBlockIsHovering = GetNodeTouched();
+        if (
+            nodeWhereBlockIsHovering != null
+            && _isInteractible
+            && Constants.SelectedControlMethod == Constants.ControlMethod.Drag
+        )
         {
             transform.position = GetWorldMousePosition() + mousePositionOffset;
-            Node nodeWhereBlockIsHovering = GetNodeTouched();
             if (
                 nodeWhereBlockIsHovering != null
                 && nodeWhereBlockIsHovering.name != _originalNode.name
@@ -113,22 +117,27 @@ public class Block : MonoBehaviour
             {
                 _gameManager.ResetAllBlocksOpacity();
                 UpdateOpacity(nodeWhereBlockIsHovering.GetBlockInNode(), 0.2f);
-                _lastHoveredBlock = nodeWhereBlockIsHovering.GetBlockInNode();
+                _lastHoveredNode = nodeWhereBlockIsHovering;
             }
-            else
-            {
-                if (_lastHoveredBlock != null)
-                {
-                    UpdateOpacity(_lastHoveredBlock, 1f);
-                    _lastHoveredBlock = null;
-                }
-            }
+        }
+        else if (nodeWhereBlockIsHovering == null && _lastHoveredNode != null)
+        {
+            UpdateOpacity(_lastHoveredNode.GetBlockInNode(), 1f);
+            _lastHoveredNode = null;
+        }
+        else if (_lastHoveredNode != null)
+        {
+            UpdateOpacity(_lastHoveredNode.GetBlockInNode(), 1f);
         }
     }
 
     private void OnMouseUp()
     {
-        if (_isInteractible && Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+        if (
+            GetNodeTouched() != null
+            && _isInteractible
+            && Constants.SelectedControlMethod == Constants.ControlMethod.Drag
+        )
         {
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null)
@@ -155,38 +164,29 @@ public class Block : MonoBehaviour
             }
             UpdateOffsetPosition();
         }
+        else if (GetNodeTouched() == null)
+        {
+            gameObject.transform.position = _originalNode.transform.position;
+        }
     }
 
     private static Node GetNodeTouched()
     {
-        RaycastHit[] hits;
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        hits = Physics.RaycastAll(camRay);
-        if (hits != null && hits.Length > 0)
+        RaycastHit hitInfo;
+        if (
+            Physics.Raycast(camRay.origin, camRay.direction, out hitInfo)
+            && hitInfo.collider.GetComponent<Node>() != null
+        )
         {
-            //Debug.Log("Touched node " + hits.First().collider.transform.name);
-            if (hits.First().collider.GetComponent<Node>().GetBlockInNode()._isInteractible)
+            if (hitInfo.collider.GetComponent<Node>().GetBlockInNode()._isInteractible)
             {
-                return hits.First().collider.GetComponent<Node>();
+                return hitInfo.collider.GetComponent<Node>();
             }
         }
         return null;
     }
 
-    /*
-    private static Block GetBlockTouched() {
-    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null)
-            {
-                if (hit.collider != null)
-                {
-                    Debug.Log("Touched Block " + hit.collider.transform.name);
-                    return hit.collider.GetComponent<Block>();
-                }
-            }
-        return null;
-    }
-    */
     private Vector3 GetWorldMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -197,9 +197,9 @@ public class Block : MonoBehaviour
         _isInteractible = false;
     }
 
-    public void UpdateColor(Color newColor)
+    public bool IsInteractable()
     {
-        _sprite.color = newColor;
+        return _isInteractible;
     }
 
     public static void UpdateOpacity(Block block, float value)
