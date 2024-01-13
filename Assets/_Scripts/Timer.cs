@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    GameManager _gameManager;
+
     [Header("Component")]
     [SerializeField]
     private TextMeshProUGUI _timerText;
 
     [Header("Settings")]
     private double _currentTime;
-    GameManager _gameManager;
     private bool _isCountdown;
     private bool _isRunning;
-    private bool _hasLimit;
     private double _timeLimitValue;
 
     private void Awake()
@@ -25,7 +25,6 @@ public class Timer : MonoBehaviour
     {
         Init();
         _isCountdown = isChallenge;
-        _hasLimit = isChallenge;
         _currentTime = isChallenge ? _timeLimitValue : timerValue;
     }
 
@@ -33,7 +32,6 @@ public class Timer : MonoBehaviour
     {
         Init();
         _isCountdown = isChallenge;
-        _hasLimit = isChallenge;
         _currentTime = isChallenge ? _timeLimitValue : 0f;
     }
 
@@ -62,13 +60,7 @@ public class Timer : MonoBehaviour
             _currentTime = _isCountdown
                 ? _currentTime -= Time.deltaTime
                 : _currentTime += Time.deltaTime;
-            if (
-                _hasLimit
-                && (
-                    (_isCountdown && _currentTime <= 0.1f)
-                    || (!_isCountdown && _currentTime <= _timeLimitValue + 1f)
-                )
-            )
+            if (_isCountdown && _currentTime <= 1.0f)
             {
                 HandleTimerExpired();
             }
