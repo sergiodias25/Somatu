@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
 
     [Header("Settings")]
     private double _currentTime;
+    private double _elapsedTime;
     private bool _isCountdown;
     private bool _isRunning;
     private double _timeLimitValue;
@@ -60,6 +61,7 @@ public class Timer : MonoBehaviour
             _currentTime = _isCountdown
                 ? _currentTime -= Time.deltaTime
                 : _currentTime += Time.deltaTime;
+            _elapsedTime += Time.deltaTime;
             if (_isCountdown && _currentTime <= 1.0f)
             {
                 HandleTimerExpired();
@@ -75,12 +77,14 @@ public class Timer : MonoBehaviour
         _timerText.color = Color.red;
         enabled = false;
         _isRunning = false;
-        _gameManager.PuzzleFailed();
+        _gameManager.PuzzleFailed(_elapsedTime);
+        _elapsedTime = 0.0f;
     }
 
     public void StopTimer()
     {
         _currentTime = 0f;
+        _elapsedTime = 0.0f;
         UpdateTimerText();
         enabled = false;
         _isRunning = false;
@@ -121,7 +125,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void AddPuzzleSolvedBOnus()
+    public void AddPuzzleSolvedBonus()
     {
         _currentTime += Constants.ChallengePuzzleSolvedBonus;
     }

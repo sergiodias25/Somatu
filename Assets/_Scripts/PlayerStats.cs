@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using static Constants;
+using System;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -64,6 +65,24 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private TextMeshPro _extremeHelpsUsedText;
 
+    [SerializeField]
+    private TextMeshPro _challengeGamesPlayedText;
+
+    [SerializeField]
+    private TextMeshPro _challengeSolvesMaximumText;
+
+    [SerializeField]
+    private TextMeshPro _challengeSolvesAverageText;
+
+    [SerializeField]
+    private TextMeshPro _challengeTimeLongestText;
+
+    [SerializeField]
+    private TextMeshPro _challengeTimeAverageText;
+
+    [SerializeField]
+    private TextMeshPro _challengeHelpsUsedText;
+
     GameManager _gameManager;
 
     private void Awake()
@@ -88,6 +107,7 @@ public class PlayerStats : MonoBehaviour
                 _gameManager._savedGameData.ExtremeStats.GamesPlayed++;
                 break;
             case Difficulty.Desafio:
+                _gameManager._savedGameData.ChallengeStats.GamesPlayed++;
                 break;
         }
         UpdateValues();
@@ -114,6 +134,7 @@ public class PlayerStats : MonoBehaviour
                 ManageTime(timeToComplete, ref _gameManager._savedGameData.ExtremeStats);
                 break;
             case Difficulty.Desafio:
+                ManageChallengeTime(timeToComplete, ref _gameManager._savedGameData.ChallengeStats);
                 break;
         }
         UpdateValues();
@@ -136,19 +157,34 @@ public class PlayerStats : MonoBehaviour
                 _gameManager._savedGameData.ExtremeStats.HelpsUsed++;
                 break;
             case Difficulty.Desafio:
+                _gameManager._savedGameData.ChallengeStats.HelpsUsed++;
                 break;
         }
         UpdateValues();
     }
 
-    private void ManageTime(double timeToComplete, ref SavedGameData.PlayerStats playerStats)
+    private void ManageTime(double timeToComplete, ref SavedGameData.ModeStats playerStats)
     {
-        CheckFastestTime(timeToComplete, ref playerStats.TimeFastest);
+        CheckFastestTime(timeToComplete, ref playerStats.TimeBest);
         CalculateAverageTime(
             timeToComplete,
             ref playerStats.TimeAverage,
             playerStats.GamesCompleted
         );
+    }
+
+    private void ManageChallengeTime(double timeToComplete, ref SavedGameData.ModeStats playerStats)
+    {
+        CheckLongestTime(timeToComplete, ref playerStats.TimeBest);
+        CalculateAverageTime(timeToComplete, ref playerStats.TimeAverage, playerStats.GamesPlayed);
+    }
+
+    private void CheckLongestTime(double timeToComplete, ref double previousBestTime)
+    {
+        if (previousBestTime == 0.0 || timeToComplete > previousBestTime)
+        {
+            previousBestTime = timeToComplete;
+        }
     }
 
     private void CalculateAverageTime(
@@ -182,7 +218,7 @@ public class PlayerStats : MonoBehaviour
         _easyGamesCompletedText.text =
             _gameManager._savedGameData.EasyStats.GamesCompleted.ToString();
         _easyTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.EasyStats.TimeFastest
+            _gameManager._savedGameData.EasyStats.TimeBest
         );
         _easyTimeAverageText.text = Timer.FormatTime(
             _gameManager._savedGameData.EasyStats.TimeAverage
@@ -194,7 +230,7 @@ public class PlayerStats : MonoBehaviour
         _mediumGamesCompletedText.text =
             _gameManager._savedGameData.MediumStats.GamesCompleted.ToString();
         _mediumTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.MediumStats.TimeFastest
+            _gameManager._savedGameData.MediumStats.TimeBest
         );
         _mediumTimeAverageText.text = Timer.FormatTime(
             _gameManager._savedGameData.MediumStats.TimeAverage
@@ -205,7 +241,7 @@ public class PlayerStats : MonoBehaviour
         _hardGamesCompletedText.text =
             _gameManager._savedGameData.HardStats.GamesCompleted.ToString();
         _hardTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.HardStats.TimeFastest
+            _gameManager._savedGameData.HardStats.TimeBest
         );
         _hardTimeAverageText.text = Timer.FormatTime(
             _gameManager._savedGameData.HardStats.TimeAverage
@@ -217,11 +253,26 @@ public class PlayerStats : MonoBehaviour
         _extremeGamesCompletedText.text =
             _gameManager._savedGameData.ExtremeStats.GamesCompleted.ToString();
         _extremeTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.ExtremeStats.TimeFastest
+            _gameManager._savedGameData.ExtremeStats.TimeBest
         );
         _extremeTimeAverageText.text = Timer.FormatTime(
             _gameManager._savedGameData.ExtremeStats.TimeAverage
         );
         _extremeHelpsUsedText.text = _gameManager._savedGameData.ExtremeStats.HelpsUsed.ToString();
+
+        _challengeGamesPlayedText.text =
+            _gameManager._savedGameData.ChallengeStats.GamesPlayed.ToString();
+        _challengeSolvesMaximumText.text =
+            _gameManager._savedGameData.ChallengeStats.SolveCountBest.ToString();
+        _challengeSolvesAverageText.text =
+            _gameManager._savedGameData.ChallengeStats.SolveCountAverage.ToString();
+        _challengeTimeAverageText.text = Timer.FormatTime(
+            _gameManager._savedGameData.ChallengeStats.TimeAverage
+        );
+        _challengeTimeLongestText.text = Timer.FormatTime(
+            _gameManager._savedGameData.ChallengeStats.TimeBest
+        );
+        _challengeHelpsUsedText.text =
+            _gameManager._savedGameData.ChallengeStats.HelpsUsed.ToString();
     }
 }

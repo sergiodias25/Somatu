@@ -27,8 +27,9 @@ public class Constants : MonoBehaviour
 
     public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
-    public static double ChallengeTimeLimit = 10.0f;
-    public static double ChallengePuzzleSolvedBonus = 10.0f;
+    // 1 second does not count
+    public static double ChallengeTimeLimit = 5.0f;
+    public static double ChallengePuzzleSolvedBonus = 3.0f;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {

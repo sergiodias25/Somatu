@@ -352,19 +352,19 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
         if (SelectedDifficulty == Constants.Difficulty.Desafio)
         {
-            _timer.AddPuzzleSolvedBOnus();
+            _timer.AddPuzzleSolvedBonus();
         }
         else
         {
             _timer.PauseTimer();
             _savedGameData.ClearInProgressSavedGame();
+            _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue());
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-        _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue());
     }
 
-    public void PuzzleFailed()
+    public void PuzzleFailed(double _elapsedTime)
     {
         foreach (var node in _allNodes)
         {
@@ -373,6 +373,7 @@ public class GameManager : MonoBehaviour
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
+        _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime);
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
