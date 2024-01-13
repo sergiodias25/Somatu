@@ -23,37 +23,54 @@ public class AnimationsHandler : MonoBehaviour
     {
         if (_gameManager.IsGameInProgress())
         {
-            _gameplayBarAnimator.SetTrigger("ToggleGameplay");
+            HideGameplayBar();
         }
-        if (!_settingsAnimator.IsInTransition(0))
-        {
-            _settingsAnimator.SetTrigger("ToggleSettings");
-        }
+        HideStats();
+        ShowPanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
     }
 
     public void ClickOnProfile()
     {
         _statsAnimator.SetTrigger("ToggleStats");
         _timer.ToggleTimer();
+        HideSettings();
     }
 
     public void RestoreGameplayBar()
     {
-        if (!IsInAnimationState(_gameplayBarAnimator, "ShowGameplayBar"))
-        {
-            _gameplayBarAnimator.SetTrigger("ToggleGameplay");
-        }
-        if (IsInAnimationState(_settingsAnimator, "ShowSettings"))
-        {
-            _settingsAnimator.SetTrigger("ToggleSettings");
-        }
+        ShowPanelAnimation(_gameplayBarAnimator, "ShowGameplayBar", "ToggleGameplay");
+        HideSettings();
+        HideStats();
     }
 
     public void HideGameplayBar()
     {
-        if (IsInAnimationState(_gameplayBarAnimator, "ShowGameplayBar"))
+        HidePanelAnimation(_gameplayBarAnimator, "ShowGameplayBar", "ToggleGameplay");
+    }
+
+    public void HideStats()
+    {
+        HidePanelAnimation(_statsAnimator, "ShowStats", "ToggleStats");
+    }
+
+    public void HideSettings()
+    {
+        HidePanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
+    }
+
+    public void HidePanelAnimation(Animator animator, string activeStatusName, string triggerName)
+    {
+        if (IsInAnimationState(animator, activeStatusName))
         {
-            _gameplayBarAnimator.SetTrigger("ToggleGameplay");
+            animator.SetTrigger(triggerName);
+        }
+    }
+
+    public void ShowPanelAnimation(Animator animator, string activeStatusName, string triggerName)
+    {
+        if (!IsInAnimationState(animator, activeStatusName))
+        {
+            animator.SetTrigger(triggerName);
         }
     }
 

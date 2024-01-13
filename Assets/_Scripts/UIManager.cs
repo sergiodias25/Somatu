@@ -219,6 +219,8 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
 
         _animationsHandler.HideGameplayBar();
+        _animationsHandler.HideStats();
+        _animationsHandler.HideSettings();
     }
 
     public void HelpClick()
