@@ -544,8 +544,8 @@ public class GameManager : MonoBehaviour
     public bool HasGameEnded()
     {
         if (
-            _generatedNodesObject.transform.childCount > 0
-            && !_generatedNodesObject.transform
+            _generatedNodesObject.transform.childCount == 0
+            || !_generatedNodesObject.transform
                 .GetChild(0)
                 .gameObject.GetComponent<Node>()
                 .GetBlockInNode()
