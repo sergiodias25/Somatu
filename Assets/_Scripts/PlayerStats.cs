@@ -106,38 +106,56 @@ public class PlayerStats : MonoBehaviour
             case Difficulty.Extremo:
                 _gameManager._savedGameData.ExtremeStats.GamesPlayed++;
                 break;
+        }
+        UpdateValues();
+    }
+
+    public void CompletedGame(Difficulty difficulty, double timeToComplete, int solvesCount)
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Fácil:
+                ManageTime(timeToComplete, ref _gameManager._savedGameData.EasyStats);
+                _gameManager._savedGameData.EasyStats.GamesCompleted++;
+                break;
+            case Difficulty.Médio:
+                ManageTime(timeToComplete, ref _gameManager._savedGameData.MediumStats);
+                _gameManager._savedGameData.MediumStats.GamesCompleted++;
+                break;
+            case Difficulty.Difícil:
+                ManageTime(timeToComplete, ref _gameManager._savedGameData.HardStats);
+                _gameManager._savedGameData.HardStats.GamesCompleted++;
+                break;
+            case Difficulty.Extremo:
+                ManageTime(timeToComplete, ref _gameManager._savedGameData.ExtremeStats);
+                _gameManager._savedGameData.ExtremeStats.GamesCompleted++;
+                break;
             case Difficulty.Desafio:
-                _gameManager._savedGameData.ChallengeStats.GamesPlayed++;
+                ManageChallengeSolves(solvesCount, ref _gameManager._savedGameData.ChallengeStats);
+                ManageChallengeTime(timeToComplete, ref _gameManager._savedGameData.ChallengeStats);
+                _gameManager._savedGameData.ChallengeStats.GamesCompleted++;
                 break;
         }
         UpdateValues();
     }
 
-    public void CompletedGame(Difficulty difficulty, double timeToComplete)
+    private void ManageChallengeSolves(int solvesCount, ref SavedGameData.ModeStats challengeStats)
     {
-        switch (difficulty)
+        if (solvesCount > challengeStats.SolveCountBest)
         {
-            case Difficulty.Fácil:
-                _gameManager._savedGameData.EasyStats.GamesCompleted++;
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.EasyStats);
-                break;
-            case Difficulty.Médio:
-                _gameManager._savedGameData.MediumStats.GamesCompleted++;
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.MediumStats);
-                break;
-            case Difficulty.Difícil:
-                _gameManager._savedGameData.HardStats.GamesCompleted++;
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.HardStats);
-                break;
-            case Difficulty.Extremo:
-                _gameManager._savedGameData.ExtremeStats.GamesCompleted++;
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.ExtremeStats);
-                break;
-            case Difficulty.Desafio:
-                ManageChallengeTime(timeToComplete, ref _gameManager._savedGameData.ChallengeStats);
-                break;
+            challengeStats.SolveCountBest = solvesCount;
         }
-        UpdateValues();
+
+        if (challengeStats.GamesCompleted == 0)
+        {
+            challengeStats.SolveCountAverage = solvesCount;
+        }
+        else
+        {
+            challengeStats.SolveCountAverage =
+                ((challengeStats.GamesCompleted * challengeStats.SolveCountAverage) + solvesCount)
+                / (challengeStats.GamesCompleted + 1);
+        }
     }
 
     public void UsedHelp(Difficulty difficulty)
@@ -176,7 +194,11 @@ public class PlayerStats : MonoBehaviour
     private void ManageChallengeTime(double timeToComplete, ref SavedGameData.ModeStats playerStats)
     {
         CheckLongestTime(timeToComplete, ref playerStats.TimeBest);
-        CalculateAverageTime(timeToComplete, ref playerStats.TimeAverage, playerStats.GamesPlayed);
+        CalculateAverageTime(
+            timeToComplete,
+            ref playerStats.TimeAverage,
+            playerStats.GamesCompleted
+        );
     }
 
     private void CheckLongestTime(double timeToComplete, ref double previousBestTime)
@@ -193,7 +215,7 @@ public class PlayerStats : MonoBehaviour
         int gamesCompleted
     )
     {
-        if (previousTimeAverage == 0.0)
+        if (gamesCompleted == 0)
         {
             previousTimeAverage = timeToComplete;
         }
@@ -261,11 +283,14 @@ public class PlayerStats : MonoBehaviour
         _extremeHelpsUsedText.text = _gameManager._savedGameData.ExtremeStats.HelpsUsed.ToString();
 
         _challengeGamesPlayedText.text =
-            _gameManager._savedGameData.ChallengeStats.GamesPlayed.ToString();
+            _gameManager._savedGameData.ChallengeStats.GamesCompleted.ToString();
         _challengeSolvesMaximumText.text =
             _gameManager._savedGameData.ChallengeStats.SolveCountBest.ToString();
-        _challengeSolvesAverageText.text =
-            _gameManager._savedGameData.ChallengeStats.SolveCountAverage.ToString();
+        _challengeSolvesAverageText.text = Math.Round(
+                _gameManager._savedGameData.ChallengeStats.SolveCountAverage,
+                2
+            )
+            .ToString();
         _challengeTimeAverageText.text = Timer.FormatTime(
             _gameManager._savedGameData.ChallengeStats.TimeAverage
         );

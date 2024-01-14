@@ -134,7 +134,10 @@ public class UIManager : MonoBehaviour
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
         ShowGameplayButtons();
-        _gameManager.Init(_gameManager.SelectedDifficulty, true);
+        _gameManager.Init(
+            (Constants.Difficulty)_gameManager._savedGameData._savedGameDifficulty,
+            true
+        );
     }
 
     public void ClickOnSurvival()
@@ -185,11 +188,11 @@ public class UIManager : MonoBehaviour
     {
         if (_playAgainButton.enabled)
         {
-            _gameManager.ResetBoard(false, false);
+            _gameManager.ResetBoard(false, false, true);
             _gameManager.GenerateGrid(
                 GameManager.GenerateNumbersForLevel(
-                    Constants.GetNumbers(_gameManager.SelectedDifficulty),
-                    Constants.GetRepeatedNumbersCount(_gameManager.SelectedDifficulty)
+                    Constants.GetNumbers(_gameManager.ActualDifficulty),
+                    Constants.GetRepeatedNumbersCount(_gameManager.ActualDifficulty)
                 ),
                 false
             );
@@ -212,7 +215,7 @@ public class UIManager : MonoBehaviour
         if (_gameManager.IsGameInProgress())
         {
             _gameManager.CheckResult(false);
-            _gameManager.ResetBoard(true, false);
+            _gameManager.ResetBoard(true, false, true);
         }
         HideSubMenus();
         HideEndOfGameButtons();

@@ -7,7 +7,28 @@ public class Constants : MonoBehaviour
     // BOARD NUMBER COMBINATIONS
     public static List<int> NumbersForEasyMode = new List<int> { 1, 2, 3 };
     public static List<int> NumbersForMediumMode = new List<int> { 1, 2, 3, 4, 5 };
-    public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+    public static List<int> NumbersForExtremeMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+    public static int GetRepeatedNumbersCount(Difficulty selectedDifficulty)
+    {
+        switch (selectedDifficulty)
+        {
+            case Difficulty.Fácil:
+                // repeats betweeen 7 to 8 numbers
+                return Random.Range(7, 9);
+            case Difficulty.Médio:
+                // repeats betweeen 5 to 6 numbers
+                return Random.Range(5, 7);
+            case Difficulty.Difícil:
+                // repeats betweeen 2 to 4 numbers
+                return Random.Range(3, 5);
+            case Difficulty.Extremo:
+                // repeats betweeen 0 to 1 number
+                return Random.Range(0, 2);
+        }
+        return Random.Range(0, 10);
+    }
 
     // GAME SETTINGS
     public enum Difficulty
@@ -36,36 +57,15 @@ public class Constants : MonoBehaviour
         switch (selectedDifficulty)
         {
             case Difficulty.Fácil:
-            case Difficulty.Desafio:
                 return NumbersForEasyMode;
             case Difficulty.Médio:
                 return NumbersForMediumMode;
             case Difficulty.Difícil:
-            case Difficulty.Extremo:
                 return NumbersForHardMode;
-        }
-        return NumbersForHardMode;
-    }
-
-    public static int GetRepeatedNumbersCount(Difficulty selectedDifficulty)
-    {
-        switch (selectedDifficulty)
-        {
-            case Difficulty.Fácil:
-            case Difficulty.Desafio:
-                // repeats betweeen 7 to 8 numbers
-                return Random.Range(7, 9);
-            case Difficulty.Médio:
-                // repeats betweeen 5 to 6 numbers
-                return Random.Range(5, 7);
-            case Difficulty.Difícil:
-                // repeats betweeen 0 to 4 numbers
-                return Random.Range(0, 3);
             case Difficulty.Extremo:
-                // repeats betweeen 0 to 1 number
-                return Random.Range(0, 3);
+                return NumbersForExtremeMode;
         }
-        return Random.Range(0, 10);
+        return NumbersForExtremeMode;
     }
 
     public static int GetNumberOfSolvesToUnlockNextDifficulty(Difficulty difficulty)
@@ -80,6 +80,20 @@ public class Constants : MonoBehaviour
                 return 1;
             case Difficulty.Extremo:
                 return 1;
+        }
+        return -1;
+    }
+
+    public static int GetNumberOfSolvesToProgressInChallenge(Difficulty difficulty)
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Fácil:
+                return 2;
+            case Difficulty.Médio:
+                return 4;
+            case Difficulty.Difícil:
+                return 6;
         }
         return -1;
     }

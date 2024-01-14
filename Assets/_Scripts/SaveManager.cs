@@ -23,7 +23,7 @@ public class SavedGameData
         public double TimeBest;
         public double TimeAverage;
         public int SolveCountBest;
-        public int SolveCountAverage;
+        public double SolveCountAverage;
         public int HelpsUsed;
 
         public ModeStats()
@@ -33,7 +33,7 @@ public class SavedGameData
             TimeBest = 0;
             TimeAverage = 0;
             SolveCountBest = 0;
-            SolveCountAverage = 0;
+            SolveCountAverage = 0.0;
             HelpsUsed = 0;
         }
     }

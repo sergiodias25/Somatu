@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private Block _thirdColumnResultBlock;
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
+    public Constants.Difficulty ActualDifficulty;
 
     public struct UndoMoveData
     {
@@ -115,13 +116,14 @@ public class GameManager : MonoBehaviour
     public void Init(Constants.Difficulty selectedDifficulty, bool loadGame)
     {
         SelectedDifficulty = selectedDifficulty;
+        ActualDifficulty = GetActualDifficulty();
         _timesSolvedText.text = "0";
         _modeSelected.text = SelectedDifficulty.ToString();
 
         GenerateGrid(
             GenerateNumbersForLevel(
-                Constants.GetNumbers(SelectedDifficulty),
-                Constants.GetRepeatedNumbersCount(SelectedDifficulty)
+                Constants.GetNumbers(ActualDifficulty),
+                Constants.GetRepeatedNumbersCount(ActualDifficulty)
             ),
             loadGame
         );
@@ -129,6 +131,37 @@ public class GameManager : MonoBehaviour
             SelectedDifficulty == Constants.Difficulty.Desafio,
             _savedGameData != null ? _savedGameData._timerValue : 0d
         );
+    }
+
+    public Constants.Difficulty GetActualDifficulty()
+    {
+        if (SelectedDifficulty != Constants.Difficulty.Desafio)
+        {
+            return SelectedDifficulty;
+        }
+        int _timesBeaten = int.Parse(_timesSolvedText.text);
+        if (
+            _timesBeaten
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Fácil)
+        )
+        {
+            return Constants.Difficulty.Fácil;
+        }
+        else if (
+            _timesBeaten
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Médio)
+        )
+        {
+            return Constants.Difficulty.Médio;
+        }
+        else if (
+            _timesBeaten
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Difícil)
+        )
+        {
+            return Constants.Difficulty.Difícil;
+        }
+        return Constants.Difficulty.Extremo;
     }
 
     public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
@@ -147,7 +180,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = repeatedCount; i < 9; i++)
         {
-            int nextNumber = UnityEngine.Random.Range(0, currentPossibleValues.Count);
+            int nextNumber = Random.Range(0, currentPossibleValues.Count);
             result.Add(currentPossibleValues[nextNumber]);
             currentPossibleValues.RemoveAt(nextNumber);
         }
@@ -227,7 +260,7 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionGroupSum(6, 7, 8));
         if (CheckResult(false))
         {
-            ResetBoard(false, true);
+            ResetBoard(false, true, false);
             GenerateGrid(numbers, false);
         }
         _uiManager.ToggleHelpButton(true);
@@ -306,22 +339,6 @@ public class GameManager : MonoBehaviour
             if (isActionable)
             {
                 DoEndGameActions();
-                if (SelectedDifficulty == Constants.Difficulty.Desafio)
-                {
-                    ResetBoard(false, false);
-                    GenerateGrid(
-                        GenerateNumbersForLevel(
-                            Constants.GetNumbers(SelectedDifficulty),
-                            Constants.GetRepeatedNumbersCount(SelectedDifficulty)
-                        ),
-                        false
-                    );
-                }
-                _savedGameData.IncrementTimesBeaten(SelectedDifficulty);
-                _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
-                _uiManager.ToggleUndoButton(false);
-                _uiManager.ToggleHelpButton(false);
-                _undoMoveData.ClearUndoData();
             }
             return true;
         }
@@ -350,6 +367,13 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
         _secondColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
         _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+
+        _savedGameData.IncrementTimesBeaten(SelectedDifficulty);
+        _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
+        _uiManager.ToggleUndoButton(false);
+        _uiManager.ToggleHelpButton(false);
+        _undoMoveData.ClearUndoData();
+
         if (SelectedDifficulty == Constants.Difficulty.Desafio)
         {
             _timer.AddPuzzleSolvedBonus();
@@ -358,10 +382,22 @@ public class GameManager : MonoBehaviour
         {
             _timer.PauseTimer();
             _savedGameData.ClearInProgressSavedGame();
-            _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue());
+            _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
+
+        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        {
+            ResetBoard(false, false, false);
+            GenerateGrid(
+                GenerateNumbersForLevel(
+                    Constants.GetNumbers(ActualDifficulty),
+                    Constants.GetRepeatedNumbersCount(ActualDifficulty)
+                ),
+                false
+            );
+        }
     }
 
     public void PuzzleFailed(double _elapsedTime)
@@ -373,12 +409,22 @@ public class GameManager : MonoBehaviour
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
-        _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime);
+        _playerStats.CompletedGame(
+            SelectedDifficulty,
+            _elapsedTime,
+            int.Parse(_timesSolvedText.text)
+        );
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
     {
-        if (SelectedDifficulty < Constants.Difficulty.Extremo)
+        if (
+            SelectedDifficulty < Constants.Difficulty.Extremo
+            || (
+                SelectedDifficulty == Constants.Difficulty.Desafio
+                && ActualDifficulty != Constants.Difficulty.Extremo
+            )
+        )
         {
             if (currentSum == expectedResult)
             {
@@ -389,7 +435,13 @@ public class GameManager : MonoBehaviour
                 block.GetNode().UpdateColor(Constants.IncorrectSumColor);
             }
         }
-        else
+        else if (
+            (
+                SelectedDifficulty == Constants.Difficulty.Desafio
+                && ActualDifficulty == Constants.Difficulty.Extremo
+            )
+            || SelectedDifficulty == Constants.Difficulty.Extremo
+        )
         {
             block.GetNode().UpdateColor(Constants.InProgressBackgroundColor);
         }
@@ -411,7 +463,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Solution: " + _solution);
     }
 
-    internal void ResetBoard(bool isExit, bool shouldClearSavedGame)
+    internal void ResetBoard(
+        bool isExit,
+        bool shouldClearSavedGame,
+        bool resetChallengeActualDifficulty
+    )
     {
         for (int i = 0; i < _allNodes.Count; i++)
         {
@@ -444,6 +500,14 @@ public class GameManager : MonoBehaviour
         {
             _timer.StopTimer();
             _timesSolvedText.text = "0";
+        }
+        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        {
+            if (resetChallengeActualDifficulty)
+            {
+                _timesSolvedText.text = "0";
+            }
+            ActualDifficulty = GetActualDifficulty();
         }
     }
 
