@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public SavedGameData _savedGameData;
+    public SavedGameData SavedGameData;
     public UndoMoveData _undoMoveData;
     private PlayerStats _playerStats;
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-        _savedGameData = new SavedGameData();
+        SavedGameData = new SavedGameData();
 
         _playerStats = FindObjectOfType<PlayerStats>();
         _audioManager = FindObjectOfType<AudioManager>();
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         );
         _timer.Init(
             SelectedDifficulty == Constants.Difficulty.Desafio,
-            _savedGameData != null ? _savedGameData._timerValue : 0d
+            SavedGameData != null ? SavedGameData._timerValue : 0d
         );
     }
 
@@ -225,10 +225,10 @@ public class GameManager : MonoBehaviour
             {
                 Node node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
                 int generatedNumber;
-                if (loadGame && _savedGameData._gameNumbersInProgress.Count > 0)
+                if (loadGame && SavedGameData._gameNumbersInProgress.Count > 0)
                 {
-                    generatedNumber = _savedGameData._gameNumbersInProgress[_countTracker];
-                    _solutionNumbers.Add(_savedGameData._solutionNumbersInProgress[_countTracker]);
+                    generatedNumber = SavedGameData._gameNumbersInProgress[_countTracker];
+                    _solutionNumbers.Add(SavedGameData._solutionNumbersInProgress[_countTracker]);
                 }
                 else
                 {
@@ -241,11 +241,11 @@ public class GameManager : MonoBehaviour
                 _countTracker += 1;
             }
         }
-        if (loadGame && _savedGameData._gameNumbersInProgress.Count > 0)
+        if (loadGame && SavedGameData._gameNumbersInProgress.Count > 0)
         {
-            SelectedDifficulty = (Constants.Difficulty)_savedGameData._savedGameDifficulty;
+            SelectedDifficulty = (Constants.Difficulty)SavedGameData._savedGameDifficulty;
             _modeSelected.text = SelectedDifficulty.ToString();
-            _timer.SetTimerValue(_savedGameData._timerValue);
+            _timer.SetTimerValue(SavedGameData._timerValue);
         }
 
         _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionGroupSum(2, 5, 8));
@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
         }
         if (SelectedDifficulty != Constants.Difficulty.Desafio)
         {
-            _savedGameData.UpdateInProgressSavedGame(
+            SavedGameData.UpdateInProgressSavedGame(
                 _generatedNodesObject,
                 _solutionNumbers,
                 SelectedDifficulty,
@@ -364,8 +364,8 @@ public class GameManager : MonoBehaviour
         _secondColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
         _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
 
-        _savedGameData.IncrementTimesBeaten(SelectedDifficulty);
-        _savedGameData.HelpsAvailable++;
+        SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
+        SavedGameData.HelpsAvailable++;
         _uiManager.ToggleHelpButton(false);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _timer.PauseTimer();
-            _savedGameData.ClearInProgressSavedGame();
+            SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
         }
         _uiManager.ShowGameplayButtons();
@@ -492,7 +492,7 @@ public class GameManager : MonoBehaviour
         }
         if (shouldClearSavedGame)
         {
-            _savedGameData.ClearInProgressSavedGame();
+            SavedGameData.ClearInProgressSavedGame();
         }
         if (isExit)
         {
@@ -565,9 +565,9 @@ public class GameManager : MonoBehaviour
 
     internal bool SavedGameExists()
     {
-        return _savedGameData != null
-            && _savedGameData._gameNumbersInProgress != null
-            && _savedGameData._gameNumbersInProgress.Count == 9;
+        return SavedGameData != null
+            && SavedGameData._gameNumbersInProgress != null
+            && SavedGameData._gameNumbersInProgress.Count == 9;
     }
 
     public void ResetAllBlocksOpacity()

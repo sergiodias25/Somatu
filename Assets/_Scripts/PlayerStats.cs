@@ -95,16 +95,16 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Fácil:
-                _gameManager._savedGameData.EasyStats.GamesPlayed++;
+                _gameManager.SavedGameData.EasyStats.GamesPlayed++;
                 break;
             case Difficulty.Médio:
-                _gameManager._savedGameData.MediumStats.GamesPlayed++;
+                _gameManager.SavedGameData.MediumStats.GamesPlayed++;
                 break;
             case Difficulty.Difícil:
-                _gameManager._savedGameData.HardStats.GamesPlayed++;
+                _gameManager.SavedGameData.HardStats.GamesPlayed++;
                 break;
             case Difficulty.Extremo:
-                _gameManager._savedGameData.ExtremeStats.GamesPlayed++;
+                _gameManager.SavedGameData.ExtremeStats.GamesPlayed++;
                 break;
         }
         UpdateValues();
@@ -115,25 +115,25 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Fácil:
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.EasyStats);
-                _gameManager._savedGameData.EasyStats.GamesCompleted++;
+                ManageTime(timeToComplete, ref _gameManager.SavedGameData.EasyStats);
+                _gameManager.SavedGameData.EasyStats.GamesCompleted++;
                 break;
             case Difficulty.Médio:
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.MediumStats);
-                _gameManager._savedGameData.MediumStats.GamesCompleted++;
+                ManageTime(timeToComplete, ref _gameManager.SavedGameData.MediumStats);
+                _gameManager.SavedGameData.MediumStats.GamesCompleted++;
                 break;
             case Difficulty.Difícil:
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.HardStats);
-                _gameManager._savedGameData.HardStats.GamesCompleted++;
+                ManageTime(timeToComplete, ref _gameManager.SavedGameData.HardStats);
+                _gameManager.SavedGameData.HardStats.GamesCompleted++;
                 break;
             case Difficulty.Extremo:
-                ManageTime(timeToComplete, ref _gameManager._savedGameData.ExtremeStats);
-                _gameManager._savedGameData.ExtremeStats.GamesCompleted++;
+                ManageTime(timeToComplete, ref _gameManager.SavedGameData.ExtremeStats);
+                _gameManager.SavedGameData.ExtremeStats.GamesCompleted++;
                 break;
             case Difficulty.Desafio:
-                ManageChallengeSolves(solvesCount, ref _gameManager._savedGameData.ChallengeStats);
-                ManageChallengeTime(timeToComplete, ref _gameManager._savedGameData.ChallengeStats);
-                _gameManager._savedGameData.ChallengeStats.GamesCompleted++;
+                ManageChallengeSolves(solvesCount, ref _gameManager.SavedGameData.ChallengeStats);
+                ManageChallengeTime(timeToComplete, ref _gameManager.SavedGameData.ChallengeStats);
+                _gameManager.SavedGameData.ChallengeStats.GamesCompleted++;
                 break;
         }
         UpdateValues();
@@ -163,19 +163,19 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Fácil:
-                _gameManager._savedGameData.EasyStats.HelpsUsed++;
+                _gameManager.SavedGameData.EasyStats.HelpsUsed++;
                 break;
             case Difficulty.Médio:
-                _gameManager._savedGameData.MediumStats.HelpsUsed++;
+                _gameManager.SavedGameData.MediumStats.HelpsUsed++;
                 break;
             case Difficulty.Difícil:
-                _gameManager._savedGameData.HardStats.HelpsUsed++;
+                _gameManager.SavedGameData.HardStats.HelpsUsed++;
                 break;
             case Difficulty.Extremo:
-                _gameManager._savedGameData.ExtremeStats.HelpsUsed++;
+                _gameManager.SavedGameData.ExtremeStats.HelpsUsed++;
                 break;
             case Difficulty.Desafio:
-                _gameManager._savedGameData.ChallengeStats.HelpsUsed++;
+                _gameManager.SavedGameData.ChallengeStats.HelpsUsed++;
                 break;
         }
         UpdateValues();
@@ -236,68 +236,63 @@ public class PlayerStats : MonoBehaviour
 
     private void UpdateValues()
     {
-        _easyGamesPlayedText.text = _gameManager._savedGameData.EasyStats.GamesPlayed.ToString();
+        _easyGamesPlayedText.text = _gameManager.SavedGameData.EasyStats.GamesPlayed.ToString();
         _easyGamesCompletedText.text =
-            _gameManager._savedGameData.EasyStats.GamesCompleted.ToString();
-        _easyTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.EasyStats.TimeBest
-        );
+            _gameManager.SavedGameData.EasyStats.GamesCompleted.ToString();
+        _easyTimeFastestText.text = Timer.FormatTime(_gameManager.SavedGameData.EasyStats.TimeBest);
         _easyTimeAverageText.text = Timer.FormatTime(
-            _gameManager._savedGameData.EasyStats.TimeAverage
+            _gameManager.SavedGameData.EasyStats.TimeAverage
         );
-        _easyHelpsUsedText.text = _gameManager._savedGameData.EasyStats.HelpsUsed.ToString();
+        _easyHelpsUsedText.text = _gameManager.SavedGameData.EasyStats.HelpsUsed.ToString();
 
-        _mediumGamesPlayedText.text =
-            _gameManager._savedGameData.MediumStats.GamesPlayed.ToString();
+        _mediumGamesPlayedText.text = _gameManager.SavedGameData.MediumStats.GamesPlayed.ToString();
         _mediumGamesCompletedText.text =
-            _gameManager._savedGameData.MediumStats.GamesCompleted.ToString();
+            _gameManager.SavedGameData.MediumStats.GamesCompleted.ToString();
         _mediumTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.MediumStats.TimeBest
+            _gameManager.SavedGameData.MediumStats.TimeBest
         );
         _mediumTimeAverageText.text = Timer.FormatTime(
-            _gameManager._savedGameData.MediumStats.TimeAverage
+            _gameManager.SavedGameData.MediumStats.TimeAverage
         );
-        _mediumHelpsUsedText.text = _gameManager._savedGameData.MediumStats.HelpsUsed.ToString();
+        _mediumHelpsUsedText.text = _gameManager.SavedGameData.MediumStats.HelpsUsed.ToString();
 
-        _hardGamesPlayedText.text = _gameManager._savedGameData.HardStats.GamesPlayed.ToString();
+        _hardGamesPlayedText.text = _gameManager.SavedGameData.HardStats.GamesPlayed.ToString();
         _hardGamesCompletedText.text =
-            _gameManager._savedGameData.HardStats.GamesCompleted.ToString();
-        _hardTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.HardStats.TimeBest
-        );
+            _gameManager.SavedGameData.HardStats.GamesCompleted.ToString();
+        _hardTimeFastestText.text = Timer.FormatTime(_gameManager.SavedGameData.HardStats.TimeBest);
         _hardTimeAverageText.text = Timer.FormatTime(
-            _gameManager._savedGameData.HardStats.TimeAverage
+            _gameManager.SavedGameData.HardStats.TimeAverage
         );
-        _hardHelpsUsedText.text = _gameManager._savedGameData.HardStats.HelpsUsed.ToString();
+        _hardHelpsUsedText.text = _gameManager.SavedGameData.HardStats.HelpsUsed.ToString();
 
         _extremeGamesPlayedText.text =
-            _gameManager._savedGameData.ExtremeStats.GamesPlayed.ToString();
+            _gameManager.SavedGameData.ExtremeStats.GamesPlayed.ToString();
         _extremeGamesCompletedText.text =
-            _gameManager._savedGameData.ExtremeStats.GamesCompleted.ToString();
+            _gameManager.SavedGameData.ExtremeStats.GamesCompleted.ToString();
         _extremeTimeFastestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.ExtremeStats.TimeBest
+            _gameManager.SavedGameData.ExtremeStats.TimeBest
         );
         _extremeTimeAverageText.text = Timer.FormatTime(
-            _gameManager._savedGameData.ExtremeStats.TimeAverage
+            _gameManager.SavedGameData.ExtremeStats.TimeAverage
         );
-        _extremeHelpsUsedText.text = _gameManager._savedGameData.ExtremeStats.HelpsUsed.ToString();
+        _extremeHelpsUsedText.text = _gameManager.SavedGameData.ExtremeStats.HelpsUsed.ToString();
 
         _challengeGamesPlayedText.text =
-            _gameManager._savedGameData.ChallengeStats.GamesCompleted.ToString();
+            _gameManager.SavedGameData.ChallengeStats.GamesCompleted.ToString();
         _challengeSolvesMaximumText.text =
-            _gameManager._savedGameData.ChallengeStats.SolveCountBest.ToString();
+            _gameManager.SavedGameData.ChallengeStats.SolveCountBest.ToString();
         _challengeSolvesAverageText.text = Math.Round(
-                _gameManager._savedGameData.ChallengeStats.SolveCountAverage,
+                _gameManager.SavedGameData.ChallengeStats.SolveCountAverage,
                 2
             )
             .ToString();
         _challengeTimeAverageText.text = Timer.FormatTime(
-            _gameManager._savedGameData.ChallengeStats.TimeAverage
+            _gameManager.SavedGameData.ChallengeStats.TimeAverage
         );
         _challengeTimeLongestText.text = Timer.FormatTime(
-            _gameManager._savedGameData.ChallengeStats.TimeBest
+            _gameManager.SavedGameData.ChallengeStats.TimeBest
         );
         _challengeHelpsUsedText.text =
-            _gameManager._savedGameData.ChallengeStats.HelpsUsed.ToString();
+            _gameManager.SavedGameData.ChallengeStats.HelpsUsed.ToString();
     }
 }

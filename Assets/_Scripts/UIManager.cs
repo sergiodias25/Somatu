@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
         ToggleContinueButton();
         ShowButton(_challengeButton);
 
-        _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+        _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Desafio
         );
     }
@@ -80,13 +80,13 @@ public class UIManager : MonoBehaviour
         ShowButton(_hardModeButton);
         ShowButton(_extremeModeButton);
 
-        _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+        _mediumModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Médio
         );
-        _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+        _hardModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Difícil
         );
-        _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+        _extremeModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Extremo
         );
     }
@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
         HideButton(_challengeButton);
         ShowGameplayButtons();
         _gameManager.Init(
-            (Constants.Difficulty)_gameManager._savedGameData._savedGameDifficulty,
+            (Constants.Difficulty)_gameManager.SavedGameData._savedGameDifficulty,
             true
         );
     }
@@ -213,7 +213,7 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.ShowHints();
             _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
-            _gameManager._savedGameData.HelpsAvailable--;
+            _gameManager.SavedGameData.HelpsAvailable--;
             ToggleHelpButton(true);
         }
     }
@@ -247,11 +247,11 @@ public class UIManager : MonoBehaviour
 
     internal void ToggleHelpButton(bool enabled)
     {
-        _helpButtonText.text = "Ajuda: " + _gameManager._savedGameData.HelpsAvailable.ToString();
+        _helpButtonText.text = "Ajuda: " + _gameManager.SavedGameData.HelpsAvailable.ToString();
         _helpButton.enabled =
             enabled
             && !_gameManager.HasGameEnded()
-            && _gameManager._savedGameData.HelpsAvailable > 0;
+            && _gameManager.SavedGameData.HelpsAvailable > 0;
         ;
     }
 }
