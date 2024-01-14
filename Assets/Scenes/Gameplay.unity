@@ -3067,6 +3067,7 @@ MonoBehaviour:
   _extremeModeButton: {fileID: 2018106647}
   _playAgainButton: {fileID: 1724741423}
   _helpButton: {fileID: 1264756787}
+  _helpButtonText: {fileID: 2072664027}
   _undoButton: {fileID: 1804349051}
 --- !u!114 &1236780590 stripped
 MonoBehaviour:

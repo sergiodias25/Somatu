@@ -35,6 +35,9 @@ public class UIManager : MonoBehaviour
     private Button _helpButton;
 
     [SerializeField]
+    private TextMeshProUGUI _helpButtonText;
+
+    [SerializeField]
     private Button _undoButton;
     private AnimationsHandler _animationsHandler;
     private PlayerStats _playerStats;
@@ -51,42 +54,6 @@ public class UIManager : MonoBehaviour
         ToggleContinueButton();
     }
 
-    private void Update()
-    {
-        if (_gameManager.IsGameInProgress())
-        {
-            _undoButton.enabled = _gameManager._undoMoveData.IsUndoEnabled();
-        }
-
-        if (_mediumModeButton.gameObject.activeInHierarchy)
-        {
-            _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-                Constants.Difficulty.Médio
-            );
-        }
-
-        if (_hardModeButton.gameObject.activeInHierarchy)
-        {
-            _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-                Constants.Difficulty.Difícil
-            );
-        }
-
-        if (_extremeModeButton.gameObject.activeInHierarchy)
-        {
-            _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-                Constants.Difficulty.Extremo
-            );
-        }
-
-        if (_challengeButton.gameObject.activeInHierarchy)
-        {
-            _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
-                Constants.Difficulty.Desafio
-            );
-        }
-    }
-
     private void HideSubMenus()
     {
         HideButton(_easyModeButton);
@@ -100,6 +67,10 @@ public class UIManager : MonoBehaviour
         ShowButton(_startGameButton);
         ToggleContinueButton();
         ShowButton(_challengeButton);
+
+        _challengeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Desafio
+        );
     }
 
     private void ShowSubMenus()
@@ -108,6 +79,16 @@ public class UIManager : MonoBehaviour
         ShowButton(_mediumModeButton);
         ShowButton(_hardModeButton);
         ShowButton(_extremeModeButton);
+
+        _mediumModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Médio
+        );
+        _hardModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Difícil
+        );
+        _extremeModeButton.enabled = _gameManager._savedGameData.IsDifficultyUnlocked(
+            Constants.Difficulty.Extremo
+        );
     }
 
     private void HideButton(Button button)
@@ -232,6 +213,8 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.ShowHints();
             _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
+            _gameManager._savedGameData.HelpsAvailable--;
+            ToggleHelpButton(true);
         }
     }
 
@@ -264,6 +247,11 @@ public class UIManager : MonoBehaviour
 
     internal void ToggleHelpButton(bool enabled)
     {
-        _helpButton.enabled = enabled;
+        _helpButtonText.text = "Ajuda: " + _gameManager._savedGameData.HelpsAvailable.ToString();
+        _helpButton.enabled =
+            enabled
+            && !_gameManager.HasGameEnded()
+            && _gameManager._savedGameData.HelpsAvailable > 0;
+        ;
     }
 }

@@ -7,7 +7,7 @@ public class SavedGameData
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
     public double _timerValue;
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Desafio;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Médio;
     private int _timesBeatenCurrentDifficulty = 0;
 
     public ModeStats EasyStats;
@@ -15,6 +15,7 @@ public class SavedGameData
     public ModeStats HardStats;
     public ModeStats ExtremeStats;
     public ModeStats ChallengeStats;
+    public int HelpsAvailable = 0;
 
     public class ModeStats
     {

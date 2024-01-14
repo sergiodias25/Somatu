@@ -48,11 +48,6 @@ public class GameManager : MonoBehaviour
         public List<Node> firstNodes;
         public List<Node> secondNodes;
 
-        public bool IsUndoEnabled()
-        {
-            return ThereIsDataToUndo();
-        }
-
         public void ClearMoveUndone()
         {
             if (ThereIsDataToUndo())
@@ -94,17 +89,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
-        _timer = FindObjectOfType<Timer>();
-        _uiManager = FindObjectOfType<UIManager>();
-        _animationsHandler = FindObjectOfType<AnimationsHandler>();
-        _audioManager.PlayMusic();
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
         _savedGameData = new SavedGameData();
+
         _playerStats = FindObjectOfType<PlayerStats>();
+        _audioManager = FindObjectOfType<AudioManager>();
+        _timer = FindObjectOfType<Timer>();
+        _uiManager = FindObjectOfType<UIManager>();
+        _animationsHandler = FindObjectOfType<AnimationsHandler>();
+        _audioManager.PlayMusic();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
@@ -369,6 +365,8 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
 
         _savedGameData.IncrementTimesBeaten(SelectedDifficulty);
+        _savedGameData.HelpsAvailable++;
+        _uiManager.ToggleHelpButton(false);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);

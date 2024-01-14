@@ -21,11 +21,8 @@ public class AnimationsHandler : MonoBehaviour
 
     public void ClickOnSettings()
     {
-        if (_gameManager.IsGameInProgress())
-        {
-            HideGameplayBar();
-        }
         HideStats();
+        HideGameplayBar();
         ShowPanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
     }
 
@@ -33,6 +30,7 @@ public class AnimationsHandler : MonoBehaviour
     {
         _statsAnimator.SetTrigger("ToggleStats");
         _timer.ToggleTimer();
+        HideGameplayBar();
         HideSettings();
     }
 
@@ -77,27 +75,5 @@ public class AnimationsHandler : MonoBehaviour
     private bool IsInAnimationState(Animator animator, string state)
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsName(state);
-    }
-
-    private void Update()
-    {
-        if (
-            _gameManager.IsGameInProgress()
-            && IsInAnimationState(_gameplayBarAnimator, "ShowGameplayBar")
-            && IsInAnimationState(_settingsAnimator, "ShowSettings")
-            && !_settingsAnimator.IsInTransition(0)
-        )
-        {
-            _settingsAnimator.SetTrigger("ToggleSettings");
-        }
-        if (
-            _gameManager.IsGameInProgress()
-            && !IsInAnimationState(_gameplayBarAnimator, "ShowGameplayBar")
-            && !IsInAnimationState(_settingsAnimator, "ShowSettings")
-            && !_gameplayBarAnimator.IsInTransition(0)
-        )
-        {
-            _gameplayBarAnimator.SetTrigger("ToggleGameplay");
-        }
     }
 }
