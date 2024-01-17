@@ -7,7 +7,7 @@ public class SavedGameData
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
     public double _timerValue;
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Médio;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Challenge;
     private int _timesBeatenCurrentDifficulty = 0;
 
     public ModeStats EasyStats;
@@ -67,7 +67,7 @@ public class SavedGameData
     public void UnlockNextLevel(Constants.Difficulty difficulty)
     {
         if (
-            difficulty != Constants.Difficulty.Desafio
+            difficulty != Constants.Difficulty.Challenge
             && difficulty >= _unlockedDifficulty
             && _timesBeatenCurrentDifficulty
                 >= Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty)

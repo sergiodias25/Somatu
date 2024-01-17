@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 
@@ -89,6 +90,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LocalizationManager.Read();
+        LocalizationManager.Language = "Spanish";
+        //FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
+        // This way you can subscribe to LocalizationChanged event.
+        //LocalizationManager.OnLocalizationChanged += () => FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
+
         var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
@@ -114,7 +121,9 @@ public class GameManager : MonoBehaviour
         SelectedDifficulty = selectedDifficulty;
         ActualDifficulty = GetActualDifficulty();
         _timesSolvedText.text = "0";
-        _modeSelected.text = SelectedDifficulty.ToString();
+        _modeSelected.text = LocalizationManager.Localize(
+            "mode-" + SelectedDifficulty.ToString().ToLower()
+        );
 
         GenerateGrid(
             GenerateNumbersForLevel(
@@ -124,40 +133,40 @@ public class GameManager : MonoBehaviour
             loadGame
         );
         _timer.Init(
-            SelectedDifficulty == Constants.Difficulty.Desafio,
+            SelectedDifficulty == Constants.Difficulty.Challenge,
             SavedGameData != null ? SavedGameData._timerValue : 0d
         );
     }
 
     public Constants.Difficulty GetActualDifficulty()
     {
-        if (SelectedDifficulty != Constants.Difficulty.Desafio)
+        if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
             return SelectedDifficulty;
         }
         int _timesBeaten = int.Parse(_timesSolvedText.text);
         if (
             _timesBeaten
-            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Fácil)
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Easy)
         )
         {
-            return Constants.Difficulty.Fácil;
+            return Constants.Difficulty.Easy;
         }
         else if (
             _timesBeaten
-            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Médio)
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Medium)
         )
         {
-            return Constants.Difficulty.Médio;
+            return Constants.Difficulty.Medium;
         }
         else if (
             _timesBeaten
-            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Difícil)
+            < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Hard)
         )
         {
-            return Constants.Difficulty.Difícil;
+            return Constants.Difficulty.Hard;
         }
-        return Constants.Difficulty.Extremo;
+        return Constants.Difficulty.Extreme;
     }
 
     public static List<int> GenerateNumbersForLevel(List<int> possibleValues, int repeatedCount)
@@ -244,7 +253,9 @@ public class GameManager : MonoBehaviour
         if (loadGame && SavedGameData._gameNumbersInProgress.Count > 0)
         {
             SelectedDifficulty = (Constants.Difficulty)SavedGameData._savedGameDifficulty;
-            _modeSelected.text = SelectedDifficulty.ToString();
+            _modeSelected.text = LocalizationManager.Localize(
+                "mode-" + SelectedDifficulty.ToString().ToLower()
+            );
             _timer.SetTimerValue(SavedGameData._timerValue);
         }
 
@@ -338,7 +349,7 @@ public class GameManager : MonoBehaviour
             }
             return true;
         }
-        if (SelectedDifficulty != Constants.Difficulty.Desafio)
+        if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
             SavedGameData.UpdateInProgressSavedGame(
                 _generatedNodesObject,
@@ -372,7 +383,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleHelpButton(false);
         _undoMoveData.ClearUndoData();
 
-        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             _timer.AddPuzzleSolvedBonus();
         }
@@ -385,7 +396,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
 
-        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             ResetBoard(false, false, false);
             GenerateGrid(
@@ -417,10 +428,10 @@ public class GameManager : MonoBehaviour
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
     {
         if (
-            SelectedDifficulty < Constants.Difficulty.Extremo
+            SelectedDifficulty < Constants.Difficulty.Extreme
             || (
-                SelectedDifficulty == Constants.Difficulty.Desafio
-                && ActualDifficulty != Constants.Difficulty.Extremo
+                SelectedDifficulty == Constants.Difficulty.Challenge
+                && ActualDifficulty != Constants.Difficulty.Extreme
             )
         )
         {
@@ -435,10 +446,10 @@ public class GameManager : MonoBehaviour
         }
         else if (
             (
-                SelectedDifficulty == Constants.Difficulty.Desafio
-                && ActualDifficulty == Constants.Difficulty.Extremo
+                SelectedDifficulty == Constants.Difficulty.Challenge
+                && ActualDifficulty == Constants.Difficulty.Extreme
             )
-            || SelectedDifficulty == Constants.Difficulty.Extremo
+            || SelectedDifficulty == Constants.Difficulty.Extreme
         )
         {
             block.GetNode().UpdateColor(Constants.InProgressBackgroundColor);
@@ -499,7 +510,7 @@ public class GameManager : MonoBehaviour
             _timer.StopTimer();
             _timesSolvedText.text = "0";
         }
-        if (SelectedDifficulty == Constants.Difficulty.Desafio)
+        if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             if (resetChallengeActualDifficulty)
             {

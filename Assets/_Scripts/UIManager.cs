@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
         ShowButton(_challengeButton);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Desafio
+            Constants.Difficulty.Challenge
         );
     }
 
@@ -81,13 +81,13 @@ public class UIManager : MonoBehaviour
         ShowButton(_extremeModeButton);
 
         _mediumModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Médio
+            Constants.Difficulty.Medium
         );
         _hardModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Difícil
+            Constants.Difficulty.Hard
         );
         _extremeModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Extremo
+            Constants.Difficulty.Extreme
         );
     }
 
@@ -127,35 +127,35 @@ public class UIManager : MonoBehaviour
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
         ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Desafio);
+        _gameManager.Init(Constants.Difficulty.Challenge);
     }
 
     public void ClickOnEasyMode()
     {
         HideSubMenus();
         ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Fácil);
+        _gameManager.Init(Constants.Difficulty.Easy);
     }
 
     public void ClickOnMediumMode()
     {
         HideSubMenus();
         ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Médio);
+        _gameManager.Init(Constants.Difficulty.Medium);
     }
 
     public void ClickOnHardMode()
     {
         HideSubMenus();
         ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Difícil);
+        _gameManager.Init(Constants.Difficulty.Hard);
     }
 
     public void ClickOnExtremeMode()
     {
         HideSubMenus();
         ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Extremo);
+        _gameManager.Init(Constants.Difficulty.Extreme);
     }
 
     public void ShowGameplayButtons()
@@ -179,9 +179,9 @@ public class UIManager : MonoBehaviour
             );
             _playerStats.StartedGame(_gameManager.SelectedDifficulty);
 
-            if (_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio)
+            if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
             {
-                _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Desafio);
+                _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge);
                 _gameManager.ResetTimesSolved();
             }
             else

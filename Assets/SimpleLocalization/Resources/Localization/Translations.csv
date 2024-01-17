@@ -1,0 +1,20 @@
+Key,English,Portuguese,Spanish
+,en,pt,es
+btn-play,Play,Jogar,Jugar
+btn-continue,Continue,Continuar,Continuar
+btn-challenge,Challenge,Desafio,Desafío
+mode-easy,Easy,Fácil,Fácil
+mode-medium,Moderate,Médio,Moderado
+mode-hard,Hard,Difícil,Duro
+mode-extreme,Extreme,Extremo,Extremo
+mode-challenge,Challenge,Desafio,Desafío
+game-time,Time,Tempo,Tiempo
+game-solved,Solved,Resolvido,Resuelto
+stats-games-played,Games Played,Jogos jogados,Juegos jugados
+stats-games-finished,Games Completed,Jogos concluídos,Juegos completados
+stats-average-time,Average Time,Tempo médio,Tiempo promedio
+stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido
+stats-helps-used,Helps Used,Ajuda usada,Ayuda usado
+stats-average-solves,Average Solves,Média resolve,Resueltos promedio
+stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos
+stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo

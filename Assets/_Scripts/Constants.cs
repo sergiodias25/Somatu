@@ -14,16 +14,16 @@ public class Constants : MonoBehaviour
     {
         switch (selectedDifficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 // repeats betweeen 7 to 8 numbers
                 return Random.Range(7, 9);
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 // repeats betweeen 5 to 6 numbers
                 return Random.Range(5, 7);
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 // repeats betweeen 2 to 4 numbers
                 return Random.Range(3, 5);
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 // repeats betweeen 0 to 1 number
                 return Random.Range(0, 2);
         }
@@ -33,11 +33,11 @@ public class Constants : MonoBehaviour
     // GAME SETTINGS
     public enum Difficulty
     {
-        Fácil,
-        Médio,
-        Difícil,
-        Extremo,
-        Desafio
+        Easy,
+        Medium,
+        Hard,
+        Extreme,
+        Challenge
     };
 
     public enum ControlMethod
@@ -56,13 +56,13 @@ public class Constants : MonoBehaviour
     {
         switch (selectedDifficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 return NumbersForEasyMode;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 return NumbersForMediumMode;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 return NumbersForHardMode;
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 return NumbersForExtremeMode;
         }
         return NumbersForExtremeMode;
@@ -72,13 +72,13 @@ public class Constants : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 return 1;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 return 1;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 return 1;
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 return 1;
         }
         return -1;
@@ -88,11 +88,11 @@ public class Constants : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 return 2;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 return 4;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 return 6;
         }
         return -1;

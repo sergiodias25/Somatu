@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 8452367329182211317}
   - component: {fileID: 5550345862343787482}
   - component: {fileID: 3632960249373220565}
+  - component: {fileID: 8210192785934366650}
   m_Layer: 6
   m_Name: ButtonText
   m_TagString: Untagged
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 4.59
-  m_fontSizeMax: 14.66
+  m_fontSizeMax: 7
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -267,3 +268,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8210192785934366650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607402916477335016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfec3f0547029264b9ea1c0ab9abdd93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalizationKey: 

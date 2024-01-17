@@ -94,16 +94,16 @@ public class PlayerStats : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 _gameManager.SavedGameData.EasyStats.GamesPlayed++;
                 break;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 _gameManager.SavedGameData.MediumStats.GamesPlayed++;
                 break;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 _gameManager.SavedGameData.HardStats.GamesPlayed++;
                 break;
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 _gameManager.SavedGameData.ExtremeStats.GamesPlayed++;
                 break;
         }
@@ -114,23 +114,23 @@ public class PlayerStats : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 ManageTime(timeToComplete, ref _gameManager.SavedGameData.EasyStats);
                 _gameManager.SavedGameData.EasyStats.GamesCompleted++;
                 break;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 ManageTime(timeToComplete, ref _gameManager.SavedGameData.MediumStats);
                 _gameManager.SavedGameData.MediumStats.GamesCompleted++;
                 break;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 ManageTime(timeToComplete, ref _gameManager.SavedGameData.HardStats);
                 _gameManager.SavedGameData.HardStats.GamesCompleted++;
                 break;
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 ManageTime(timeToComplete, ref _gameManager.SavedGameData.ExtremeStats);
                 _gameManager.SavedGameData.ExtremeStats.GamesCompleted++;
                 break;
-            case Difficulty.Desafio:
+            case Difficulty.Challenge:
                 ManageChallengeSolves(solvesCount, ref _gameManager.SavedGameData.ChallengeStats);
                 ManageChallengeTime(timeToComplete, ref _gameManager.SavedGameData.ChallengeStats);
                 _gameManager.SavedGameData.ChallengeStats.GamesCompleted++;
@@ -162,19 +162,19 @@ public class PlayerStats : MonoBehaviour
     {
         switch (difficulty)
         {
-            case Difficulty.Fácil:
+            case Difficulty.Easy:
                 _gameManager.SavedGameData.EasyStats.HelpsUsed++;
                 break;
-            case Difficulty.Médio:
+            case Difficulty.Medium:
                 _gameManager.SavedGameData.MediumStats.HelpsUsed++;
                 break;
-            case Difficulty.Difícil:
+            case Difficulty.Hard:
                 _gameManager.SavedGameData.HardStats.HelpsUsed++;
                 break;
-            case Difficulty.Extremo:
+            case Difficulty.Extreme:
                 _gameManager.SavedGameData.ExtremeStats.HelpsUsed++;
                 break;
-            case Difficulty.Desafio:
+            case Difficulty.Challenge:
                 _gameManager.SavedGameData.ChallengeStats.HelpsUsed++;
                 break;
         }
