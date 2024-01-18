@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LocalizationManager.Read();
-        LocalizationManager.Language = "Spanish";
+        LocalizationManager.Language = "English";
         //FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
         // This way you can subscribe to LocalizationChanged event.
         //LocalizationManager.OnLocalizationChanged += () => FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);

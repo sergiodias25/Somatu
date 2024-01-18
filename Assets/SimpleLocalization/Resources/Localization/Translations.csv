@@ -1,20 +1,20 @@
-Key,English,Portuguese,Spanish
-,en,pt,es
-btn-play,Play,Jogar,Jugar
-btn-continue,Continue,Continuar,Continuar
-btn-challenge,Challenge,Desafio,Desafío
-mode-easy,Easy,Fácil,Fácil
-mode-medium,Moderate,Médio,Moderado
-mode-hard,Hard,Difícil,Duro
-mode-extreme,Extreme,Extremo,Extremo
-mode-challenge,Challenge,Desafio,Desafío
-game-time,Time,Tempo,Tiempo
-game-solved,Solved,Resolvido,Resuelto
-stats-games-played,Games Played,Jogos jogados,Juegos jugados
-stats-games-finished,Games Completed,Jogos concluídos,Juegos completados
-stats-average-time,Average Time,Tempo médio,Tiempo promedio
-stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido
-stats-helps-used,Helps Used,Ajuda usada,Ayuda usado
-stats-average-solves,Average Solves,Média resolve,Resueltos promedio
-stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos
-stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo
+Key,English,Portuguese,Spanish,Japanese,Korean
+,en,pt,es,ja,ko
+btn-play,Play,Jogar,Jugar,遊ぶ,놀다
+btn-continue,Continue,Continuar,Continuar,続く,계속하다
+btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
+mode-easy,Easy,Fácil,Fácil,簡単,쉬운
+mode-medium,Moderate,Médio,Moderado,適度,보통의
+mode-hard,Hard,Difícil,Duro,難しい,딱딱한
+mode-extreme,Extreme,Extremo,Extremo,過激,극심한
+mode-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
+game-time,Time,Tempo,Tiempo,時間,시간
+game-solved,Solved,Resolvido,Resuelto,解決した,해결되었습니다
+stats-games-played,Games Played,Jogos jogados,Juegos jugados,ゲームが再生されました,게임이 재생되었습니다
+stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,ゲームが完了しました,게임이 완료되었습니다
+stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간
+stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,最速の時間,가장 빠른 시간
+stats-helps-used,Helps Used,Ajuda usada,Ayuda usado,使用するのに役立ちます,사용하는 데 도움이됩니다
+stats-average-solves,Average Solves,Média resolve,Resueltos promedio,平均的な解決,평균 해결
+stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos,ほとんどが解決します,대부분의 해결
+stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간
