@@ -139,7 +139,7 @@ public class PlayerStats : MonoBehaviour
         UpdateValues();
     }
 
-    private void ManageChallengeSolves(int solvesCount, ref SavedGameData.ModeStats challengeStats)
+    private void ManageChallengeSolves(int solvesCount, ref SaveGame.ModeStats challengeStats)
     {
         if (solvesCount > challengeStats.SolveCountBest)
         {
@@ -181,7 +181,7 @@ public class PlayerStats : MonoBehaviour
         UpdateValues();
     }
 
-    private void ManageTime(double timeToComplete, ref SavedGameData.ModeStats playerStats)
+    private void ManageTime(double timeToComplete, ref SaveGame.ModeStats playerStats)
     {
         CheckFastestTime(timeToComplete, ref playerStats.TimeBest);
         CalculateAverageTime(
@@ -191,7 +191,7 @@ public class PlayerStats : MonoBehaviour
         );
     }
 
-    private void ManageChallengeTime(double timeToComplete, ref SavedGameData.ModeStats playerStats)
+    private void ManageChallengeTime(double timeToComplete, ref SaveGame.ModeStats playerStats)
     {
         CheckLongestTime(timeToComplete, ref playerStats.TimeBest);
         CalculateAverageTime(

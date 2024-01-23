@@ -1,22 +1,123 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SavedGameData
+public class SaveGame
 {
-    public List<int> _gameNumbersInProgress;
-    public List<int> _solutionNumbersInProgress;
-    public Constants.Difficulty? _savedGameDifficulty = null;
-    public double _timerValue;
     public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Easy;
     private int _timesBeatenCurrentDifficulty = 0;
     public int HelpsAvailable = 0;
-    public UndoMoveData UndoMoveNodesData;
-
+    public GameInProgress GameInProgressData;
     public ModeStats EasyStats;
     public ModeStats MediumStats;
     public ModeStats HardStats;
     public ModeStats ExtremeStats;
     public ModeStats ChallengeStats;
+
+    public class GameInProgress
+    {
+        public List<int> GameNumbers { get; private set; }
+        public List<int> SolutionNumbers { get; private set; }
+        public Constants.Difficulty? Difficulty { get; private set; }
+        public double TimerValue { get; private set; }
+        public Undo UndoData { get; private set; }
+
+        public GameInProgress()
+        {
+            GameNumbers = new List<int>();
+            SolutionNumbers = new List<int>();
+            Difficulty = null;
+            UndoData = new Undo();
+        }
+
+        public void ClearInProgressSavedGame()
+        {
+            GameNumbers = new List<int>();
+            SolutionNumbers = new List<int>();
+            Difficulty = null;
+            TimerValue = 0.0;
+            UndoData = new Undo();
+        }
+
+        public void UpdateInProgressSavedGame(
+            GameObject generatedNodesObject,
+            List<int> solutionNumbers,
+            Constants.Difficulty difficulty,
+            double timerValue
+        )
+        {
+            for (int i = 0; i < generatedNodesObject.transform.childCount; i++)
+            {
+                Node node = generatedNodesObject.transform
+                    .GetChild(i)
+                    .gameObject.GetComponent<Node>();
+                if (GameNumbers.Count == 9 && GameNumbers[i] != node.GetBlockInNode().Value)
+                {
+                    GameNumbers[i] = node.GetBlockInNode().Value;
+                }
+                else if (GameNumbers.Count == i)
+                {
+                    GameNumbers.Add(node.GetBlockInNode().Value);
+                }
+                if (SolutionNumbers.Count == 9 && SolutionNumbers[i] != solutionNumbers[i])
+                {
+                    SolutionNumbers[i] = solutionNumbers[i];
+                }
+                else if (SolutionNumbers.Count == i)
+                {
+                    SolutionNumbers.Add(solutionNumbers[i]);
+                }
+            }
+
+            Difficulty = difficulty;
+            TimerValue = timerValue;
+        }
+
+        public class Undo
+        {
+            public List<string> FirstNodes;
+            public List<string> SecondNodes;
+
+            public Undo()
+            {
+                FirstNodes = new List<string>();
+                SecondNodes = new List<string>();
+            }
+
+            public void ClearMoveUndone()
+            {
+                if (ThereIsDataToUndo())
+                {
+                    FirstNodes.RemoveAt(FirstNodes.Count - 1);
+                    SecondNodes.RemoveAt(SecondNodes.Count - 1);
+                }
+            }
+
+            public void ClearUndoData()
+            {
+                if (ThereIsDataToUndo())
+                {
+                    FirstNodes.Clear();
+                    SecondNodes.Clear();
+                }
+            }
+
+            public bool ThereIsDataToUndo()
+            {
+                return FirstNodes.Count > 0 && SecondNodes.Count > 0;
+            }
+
+            internal void StoreMoveToUndo(string firstNode, string secondNode)
+            {
+                if (!ThereIsDataToUndo())
+                {
+                    FirstNodes = new List<string>();
+                    SecondNodes = new List<string>();
+                }
+                FirstNodes.Add(firstNode);
+                SecondNodes.Add(secondNode);
+            }
+        }
+    }
 
     public class ModeStats
     {
@@ -40,50 +141,9 @@ public class SavedGameData
         }
     }
 
-    public struct UndoMoveData
+    public SaveGame()
     {
-        public List<string> firstNodes;
-        public List<string> secondNodes;
-
-        public void ClearMoveUndone()
-        {
-            if (ThereIsDataToUndo())
-            {
-                firstNodes.RemoveAt(firstNodes.Count - 1);
-                secondNodes.RemoveAt(secondNodes.Count - 1);
-            }
-        }
-
-        public void ClearUndoData()
-        {
-            firstNodes.Clear();
-            secondNodes.Clear();
-        }
-
-        public bool ThereIsDataToUndo()
-        {
-            return firstNodes != null
-                && firstNodes.Count > 0
-                && secondNodes != null
-                && secondNodes.Count > 0;
-        }
-
-        internal void StoreMoveToUndo(string firstNode, string secondNode)
-        {
-            if (!ThereIsDataToUndo())
-            {
-                firstNodes = new List<string>();
-                secondNodes = new List<string>();
-            }
-            firstNodes.Add(firstNode);
-            secondNodes.Add(secondNode);
-        }
-    }
-
-    public SavedGameData()
-    {
-        _gameNumbersInProgress = new List<int>();
-        _solutionNumbersInProgress = new List<int>();
+        GameInProgressData = new GameInProgress();
         EasyStats = new ModeStats();
         MediumStats = new ModeStats();
         HardStats = new ModeStats();
@@ -117,51 +177,5 @@ public class SavedGameData
             _unlockedDifficulty++;
             _timesBeatenCurrentDifficulty = 0;
         }
-    }
-
-    public void ClearInProgressSavedGame()
-    {
-        _gameNumbersInProgress = new List<int>();
-        _solutionNumbersInProgress = new List<int>();
-        _savedGameDifficulty = null;
-        _timerValue = 0.0;
-    }
-
-    public void UpdateInProgressSavedGame(
-        GameObject generatedNodesObject,
-        List<int> solutionNumbers,
-        Constants.Difficulty difficulty,
-        double timerValue
-    )
-    {
-        for (int i = 0; i < generatedNodesObject.transform.childCount; i++)
-        {
-            Node node = generatedNodesObject.transform.GetChild(i).gameObject.GetComponent<Node>();
-            if (
-                _gameNumbersInProgress.Count == 9
-                && _gameNumbersInProgress[i] != node.GetBlockInNode().Value
-            )
-            {
-                _gameNumbersInProgress[i] = node.GetBlockInNode().Value;
-            }
-            else if (_gameNumbersInProgress.Count == i)
-            {
-                _gameNumbersInProgress.Add(node.GetBlockInNode().Value);
-            }
-            if (
-                _solutionNumbersInProgress.Count == 9
-                && _solutionNumbersInProgress[i] != solutionNumbers[i]
-            )
-            {
-                _solutionNumbersInProgress[i] = solutionNumbers[i];
-            }
-            else if (_solutionNumbersInProgress.Count == i)
-            {
-                _solutionNumbersInProgress.Add(solutionNumbers[i]);
-            }
-        }
-
-        _savedGameDifficulty = difficulty;
-        _timerValue = timerValue;
     }
 }

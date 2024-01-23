@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
         HideButton(_challengeButton);
         ShowGameplayButtons();
         _gameManager.Init(
-            (Constants.Difficulty)_gameManager.SavedGameData._savedGameDifficulty,
+            (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
             true
         );
     }
@@ -164,14 +164,16 @@ public class UIManager : MonoBehaviour
         ShowButton(_undoButton);
         ShowButton(_helpButton);
 
-        ToggleUndoButton(_gameManager.SavedGameData.UndoMoveNodesData.ThereIsDataToUndo());
+        ToggleUndoButton(
+            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+        );
     }
 
     public void PlayAgainClick()
     {
         if (_playAgainButton.enabled)
         {
-            _gameManager.ResetBoard(false, false, true);
+            _gameManager.ResetBoard(false, true, true);
             _gameManager.GenerateGrid(
                 GameManager.GenerateNumbersForLevel(
                     Constants.GetNumbers(_gameManager.ActualDifficulty),
@@ -227,7 +229,9 @@ public class UIManager : MonoBehaviour
             _gameManager.UndoLastMove();
             FindObjectOfType<GameManager>().RemoveHints();
         }
-        ToggleUndoButton(_gameManager.SavedGameData.UndoMoveNodesData.ThereIsDataToUndo());
+        ToggleUndoButton(
+            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+        );
     }
 
     public void HideEndOfGameButtons()

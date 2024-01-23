@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
     public Constants.Difficulty ActualDifficulty;
-    public SavedGameData SavedGameData;
+    public SaveGame SavedGameData;
     private PlayerStats _playerStats;
 
     void Start()
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
         // board.size = new Vector2(_width, _height);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-        SavedGameData = new SavedGameData();
+        SavedGameData = new SaveGame();
 
         _playerStats = FindObjectOfType<PlayerStats>();
         _audioManager = FindObjectOfType<AudioManager>();
@@ -83,6 +83,12 @@ public class GameManager : MonoBehaviour
             "mode-" + SelectedDifficulty.ToString().ToLower()
         );
 
+        if (!loadGame)
+        {
+            SavedGameData.GameInProgressData.UndoData.ClearUndoData();
+            _uiManager.ToggleUndoButton(false);
+        }
+
         GenerateGrid(
             GenerateNumbersForLevel(
                 Constants.GetNumbers(ActualDifficulty),
@@ -92,7 +98,7 @@ public class GameManager : MonoBehaviour
         );
         _timer.Init(
             SelectedDifficulty == Constants.Difficulty.Challenge,
-            SavedGameData != null ? SavedGameData._timerValue : 0d
+            SavedGameData != null ? SavedGameData.GameInProgressData.TimerValue : 0d
         );
     }
 
@@ -192,10 +198,12 @@ public class GameManager : MonoBehaviour
             {
                 Node node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
                 int generatedNumber;
-                if (loadGame && SavedGameData._gameNumbersInProgress.Count > 0)
+                if (loadGame && SavedGameData.GameInProgressData.GameNumbers.Count > 0)
                 {
-                    generatedNumber = SavedGameData._gameNumbersInProgress[_countTracker];
-                    _solutionNumbers.Add(SavedGameData._solutionNumbersInProgress[_countTracker]);
+                    generatedNumber = SavedGameData.GameInProgressData.GameNumbers[_countTracker];
+                    _solutionNumbers.Add(
+                        SavedGameData.GameInProgressData.SolutionNumbers[_countTracker]
+                    );
                 }
                 else
                 {
@@ -208,13 +216,13 @@ public class GameManager : MonoBehaviour
                 _countTracker += 1;
             }
         }
-        if (loadGame && SavedGameData._gameNumbersInProgress.Count > 0)
+        if (loadGame && SavedGameData.GameInProgressData.GameNumbers.Count > 0)
         {
-            SelectedDifficulty = (Constants.Difficulty)SavedGameData._savedGameDifficulty;
+            SelectedDifficulty = (Constants.Difficulty)SavedGameData.GameInProgressData.Difficulty;
             _modeSelected.text = LocalizationManager.Localize(
                 "mode-" + SelectedDifficulty.ToString().ToLower()
             );
-            _timer.SetTimerValue(SavedGameData._timerValue);
+            _timer.SetTimerValue(SavedGameData.GameInProgressData.TimerValue);
         }
 
         _firstRowResultBlock = GenerateResultBlock(3, 3, GetSolutionGroupSum(2, 5, 8));
@@ -310,7 +318,7 @@ public class GameManager : MonoBehaviour
         }
         if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
-            SavedGameData.UpdateInProgressSavedGame(
+            SavedGameData.GameInProgressData.UpdateInProgressSavedGame(
                 _generatedNodesObject,
                 _solutionNumbers,
                 SelectedDifficulty,
@@ -339,7 +347,7 @@ public class GameManager : MonoBehaviour
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
-        SavedGameData.UndoMoveNodesData.ClearUndoData();
+        SavedGameData.GameInProgressData.UndoData.ClearUndoData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -348,7 +356,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _timer.PauseTimer();
-            SavedGameData.ClearInProgressSavedGame();
+            SavedGameData.GameInProgressData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
         }
         _uiManager.ShowGameplayButtons();
@@ -455,14 +463,14 @@ public class GameManager : MonoBehaviour
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
-        if (!isExit && SavedGameData.UndoMoveNodesData.ThereIsDataToUndo())
+        if (!isExit && SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo())
         {
-            SavedGameData.UndoMoveNodesData.ClearUndoData();
+            SavedGameData.GameInProgressData.UndoData.ClearUndoData();
             _uiManager.ToggleUndoButton(false);
         }
         if (shouldClearSavedGame)
         {
-            SavedGameData.ClearInProgressSavedGame();
+            SavedGameData.GameInProgressData.ClearInProgressSavedGame();
         }
         if (isExit)
         {
@@ -537,8 +545,8 @@ public class GameManager : MonoBehaviour
     internal bool SavedGameExists()
     {
         return SavedGameData != null
-            && SavedGameData._gameNumbersInProgress != null
-            && SavedGameData._gameNumbersInProgress.Count == 9;
+            && SavedGameData.GameInProgressData.GameNumbers != null
+            && SavedGameData.GameInProgressData.GameNumbers.Count == 9;
     }
 
     public void ResetAllBlocksOpacity()
@@ -551,31 +559,34 @@ public class GameManager : MonoBehaviour
 
     public void StoreUndoData(Node firstNode, Node secondNode)
     {
-        SavedGameData.UndoMoveNodesData.StoreMoveToUndo(firstNode.name, secondNode.name);
+        SavedGameData.GameInProgressData.UndoData.StoreMoveToUndo(firstNode.name, secondNode.name);
         _uiManager.ToggleUndoButton(true);
     }
 
     public void UndoLastMove()
     {
-        Block.SwitchNodes(
-            GameObject
-                .Find(
-                    SavedGameData.UndoMoveNodesData.firstNodes[
-                        SavedGameData.UndoMoveNodesData.firstNodes.Count - 1
-                    ]
-                )
-                .GetComponent<Node>(),
-            GameObject
-                .Find(
-                    SavedGameData.UndoMoveNodesData.secondNodes[
-                        SavedGameData.UndoMoveNodesData.secondNodes.Count - 1
-                    ]
-                )
-                .GetComponent<Node>()
-        );
-        _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-        SavedGameData.UndoMoveNodesData.ClearMoveUndone();
-        CheckResult(true);
+        if (SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo())
+        {
+            Block.SwitchNodes(
+                GameObject
+                    .Find(
+                        SavedGameData.GameInProgressData.UndoData.FirstNodes[
+                            SavedGameData.GameInProgressData.UndoData.FirstNodes.Count - 1
+                        ]
+                    )
+                    .GetComponent<Node>(),
+                GameObject
+                    .Find(
+                        SavedGameData.GameInProgressData.UndoData.SecondNodes[
+                            SavedGameData.GameInProgressData.UndoData.SecondNodes.Count - 1
+                        ]
+                    )
+                    .GetComponent<Node>()
+            );
+            _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+            SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
+            CheckResult(true);
+        }
     }
 
     public bool IsGameInProgress()
