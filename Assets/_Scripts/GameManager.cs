@@ -333,6 +333,7 @@ public class GameManager : MonoBehaviour
             GetSolutionGroupSum(6, 7, 8),
             _thirdColumnResultBlock
         );
+        //FindObjectOfType<AdRewarded>().LoadAd();
 
         if (
             firstRowCompleted
@@ -377,7 +378,6 @@ public class GameManager : MonoBehaviour
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.HelpsAvailable++;
-        _uiManager.ToggleHelpButton(false);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
@@ -546,6 +546,7 @@ public class GameManager : MonoBehaviour
         {
             _allNodes[i].UpdateColor(Constants.UnselectedBlock);
         }
+        _uiManager.ToggleHelpButton(true);
     }
 
     private void DestroyBlock(Block block)

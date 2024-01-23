@@ -163,6 +163,8 @@ public class UIManager : MonoBehaviour
         ShowButton(_playAgainButton);
         ShowButton(_undoButton);
         ShowButton(_helpButton);
+
+        ToggleUndoButton(_gameManager._undoMoveData.ThereIsDataToUndo());
     }
 
     public void PlayAgainClick()
@@ -214,7 +216,7 @@ public class UIManager : MonoBehaviour
             _gameManager.ShowHints();
             _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
             _gameManager.SavedGameData.HelpsAvailable--;
-            ToggleHelpButton(true);
+            ToggleHelpButton(false);
         }
     }
 
@@ -225,6 +227,7 @@ public class UIManager : MonoBehaviour
             _gameManager.UndoLastMove();
             FindObjectOfType<GameManager>().RemoveHints();
         }
+        ToggleUndoButton(_gameManager._undoMoveData.ThereIsDataToUndo());
     }
 
     public void HideEndOfGameButtons()
