@@ -164,7 +164,7 @@ public class UIManager : MonoBehaviour
         ShowButton(_undoButton);
         ShowButton(_helpButton);
 
-        ToggleUndoButton(_gameManager._undoMoveData.ThereIsDataToUndo());
+        ToggleUndoButton(_gameManager.SavedGameData.UndoMoveNodesData.ThereIsDataToUndo());
     }
 
     public void PlayAgainClick()
@@ -227,7 +227,7 @@ public class UIManager : MonoBehaviour
             _gameManager.UndoLastMove();
             FindObjectOfType<GameManager>().RemoveHints();
         }
-        ToggleUndoButton(_gameManager._undoMoveData.ThereIsDataToUndo());
+        ToggleUndoButton(_gameManager.SavedGameData.UndoMoveNodesData.ThereIsDataToUndo());
     }
 
     public void HideEndOfGameButtons()

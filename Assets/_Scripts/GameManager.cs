@@ -43,49 +43,7 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     public Constants.Difficulty SelectedDifficulty;
     public Constants.Difficulty ActualDifficulty;
-
-    public struct UndoMoveData
-    {
-        public List<Node> firstNodes;
-        public List<Node> secondNodes;
-
-        public void ClearMoveUndone()
-        {
-            if (ThereIsDataToUndo())
-            {
-                firstNodes.RemoveAt(firstNodes.Count - 1);
-                secondNodes.RemoveAt(secondNodes.Count - 1);
-            }
-        }
-
-        public void ClearUndoData()
-        {
-            firstNodes.Clear();
-            secondNodes.Clear();
-        }
-
-        public bool ThereIsDataToUndo()
-        {
-            return firstNodes != null
-                && firstNodes.Count > 0
-                && secondNodes != null
-                && secondNodes.Count > 0;
-        }
-
-        internal void StoreMoveToUndo(Node firstNode, Node secondNode)
-        {
-            if (!ThereIsDataToUndo())
-            {
-                firstNodes = new List<Node>();
-                secondNodes = new List<Node>();
-            }
-            firstNodes.Add(firstNode);
-            secondNodes.Add(secondNode);
-        }
-    }
-
     public SavedGameData SavedGameData;
-    public UndoMoveData _undoMoveData;
     private PlayerStats _playerStats;
 
     void Start()
@@ -381,7 +339,7 @@ public class GameManager : MonoBehaviour
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
-        _undoMoveData.ClearUndoData();
+        SavedGameData.UndoMoveNodesData.ClearUndoData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -497,9 +455,10 @@ public class GameManager : MonoBehaviour
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
-        if (_undoMoveData.ThereIsDataToUndo())
+        if (!isExit && SavedGameData.UndoMoveNodesData.ThereIsDataToUndo())
         {
-            _undoMoveData.ClearUndoData();
+            SavedGameData.UndoMoveNodesData.ClearUndoData();
+            _uiManager.ToggleUndoButton(false);
         }
         if (shouldClearSavedGame)
         {
@@ -592,18 +551,30 @@ public class GameManager : MonoBehaviour
 
     public void StoreUndoData(Node firstNode, Node secondNode)
     {
-        _undoMoveData.StoreMoveToUndo(firstNode, secondNode);
+        SavedGameData.UndoMoveNodesData.StoreMoveToUndo(firstNode.name, secondNode.name);
         _uiManager.ToggleUndoButton(true);
     }
 
     public void UndoLastMove()
     {
         Block.SwitchNodes(
-            _undoMoveData.firstNodes[_undoMoveData.firstNodes.Count - 1],
-            _undoMoveData.secondNodes[_undoMoveData.secondNodes.Count - 1]
+            GameObject
+                .Find(
+                    SavedGameData.UndoMoveNodesData.firstNodes[
+                        SavedGameData.UndoMoveNodesData.firstNodes.Count - 1
+                    ]
+                )
+                .GetComponent<Node>(),
+            GameObject
+                .Find(
+                    SavedGameData.UndoMoveNodesData.secondNodes[
+                        SavedGameData.UndoMoveNodesData.secondNodes.Count - 1
+                    ]
+                )
+                .GetComponent<Node>()
         );
         _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-        _undoMoveData.ClearMoveUndone();
+        SavedGameData.UndoMoveNodesData.ClearMoveUndone();
         CheckResult(true);
     }
 

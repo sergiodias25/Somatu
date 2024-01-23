@@ -7,15 +7,16 @@ public class SavedGameData
     public List<int> _solutionNumbersInProgress;
     public Constants.Difficulty? _savedGameDifficulty = null;
     public double _timerValue;
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Challenge;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Easy;
     private int _timesBeatenCurrentDifficulty = 0;
+    public int HelpsAvailable = 0;
+    public UndoMoveData UndoMoveNodesData;
 
     public ModeStats EasyStats;
     public ModeStats MediumStats;
     public ModeStats HardStats;
     public ModeStats ExtremeStats;
     public ModeStats ChallengeStats;
-    public int HelpsAvailable = 0;
 
     public class ModeStats
     {
@@ -36,6 +37,46 @@ public class SavedGameData
             SolveCountBest = 0;
             SolveCountAverage = 0.0;
             HelpsUsed = 0;
+        }
+    }
+
+    public struct UndoMoveData
+    {
+        public List<string> firstNodes;
+        public List<string> secondNodes;
+
+        public void ClearMoveUndone()
+        {
+            if (ThereIsDataToUndo())
+            {
+                firstNodes.RemoveAt(firstNodes.Count - 1);
+                secondNodes.RemoveAt(secondNodes.Count - 1);
+            }
+        }
+
+        public void ClearUndoData()
+        {
+            firstNodes.Clear();
+            secondNodes.Clear();
+        }
+
+        public bool ThereIsDataToUndo()
+        {
+            return firstNodes != null
+                && firstNodes.Count > 0
+                && secondNodes != null
+                && secondNodes.Count > 0;
+        }
+
+        internal void StoreMoveToUndo(string firstNode, string secondNode)
+        {
+            if (!ThereIsDataToUndo())
+            {
+                firstNodes = new List<string>();
+                secondNodes = new List<string>();
+            }
+            firstNodes.Add(firstNode);
+            secondNodes.Add(secondNode);
         }
     }
 
