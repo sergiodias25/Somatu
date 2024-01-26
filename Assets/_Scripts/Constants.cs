@@ -68,7 +68,7 @@ public class Constants : MonoBehaviour
     public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
 
     // 1 second does not count
-    public static double ChallengeTimeLimit = 5.0f;
+    public static double ChallengeTimeLimit = 15.0f;
     public static double ChallengePuzzleSolvedBonus = 3.0f;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
@@ -113,6 +113,22 @@ public class Constants : MonoBehaviour
                 return 4;
             case Difficulty.Hard:
                 return 6;
+        }
+        return -1;
+    }
+
+    public static int GetNumberOfHintsDisplayed(Difficulty difficulty)
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                return 4;
+            case Difficulty.Medium:
+                return 3;
+            case Difficulty.Hard:
+                return 2;
+            case Difficulty.Extreme:
+                return 1;
         }
         return -1;
     }

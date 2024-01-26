@@ -500,6 +500,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowHints()
     {
+        /*
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
             if (_solutionNumbers[i] == _allNodes[i].GetBlockInNode().Value)
@@ -509,6 +510,29 @@ public class GameManager : MonoBehaviour
             else
             {
                 _allNodes[i].UpdateColor(Constants.IncorrectSumColor);
+            }
+        }
+        */
+
+        List<Node> incorrectNodes = new List<Node>();
+        for (int i = 0; i < _solutionNumbers.Count; i++)
+        {
+            if (_solutionNumbers[i] != _allNodes[i].GetBlockInNode().Value)
+            {
+                incorrectNodes.Add(_allNodes[i]);
+            }
+        }
+        if (incorrectNodes.Count > 0)
+        {
+            int hintsLimit = Mathf.Min(
+                incorrectNodes.Count,
+                Constants.GetNumberOfHintsDisplayed(ActualDifficulty)
+            );
+            for (int i = 0; i <= hintsLimit - 1; i++)
+            {
+                int randomNodeIndex = Random.Range(0, incorrectNodes.Count);
+                incorrectNodes[randomNodeIndex].UpdateColor(Constants.IncorrectSumColor);
+                incorrectNodes.RemoveAt(randomNodeIndex);
             }
         }
     }

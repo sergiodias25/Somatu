@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SaveGame
 {
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Extreme;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Challenge;
     private int _timesBeatenCurrentDifficulty = 0;
-    public int HelpsAvailable = 0;
+    public int HelpsAvailable = 50;
     public GameInProgress GameInProgressData;
     public ModeStats EasyStats;
     public ModeStats MediumStats;
