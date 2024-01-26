@@ -177,7 +177,12 @@ public class UIManager : MonoBehaviour
             _gameManager.GenerateGrid(
                 GameManager.GenerateNumbersForLevel(
                     Constants.GetNumbers(_gameManager.ActualDifficulty),
-                    Constants.GetRepeatedNumbersCount(_gameManager.ActualDifficulty)
+                    Constants.GetRepeatedNumbersCount(
+                        _gameManager.ActualDifficulty,
+                        _gameManager.SavedGameData.IsHalfwayThroughCurrentDifficulty(
+                            _gameManager.ActualDifficulty
+                        )
+                    )
                 ),
                 false
             );

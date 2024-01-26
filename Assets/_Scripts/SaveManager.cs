@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SaveGame
 {
-    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Easy;
+    public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Extreme;
     private int _timesBeatenCurrentDifficulty = 0;
     public int HelpsAvailable = 0;
     public GameInProgress GameInProgressData;
@@ -177,5 +177,20 @@ public class SaveGame
             _unlockedDifficulty++;
             _timesBeatenCurrentDifficulty = 0;
         }
+    }
+
+    public bool IsHalfwayThroughCurrentDifficulty(Constants.Difficulty difficulty)
+    {
+        if (
+            (difficulty < _unlockedDifficulty)
+            || (
+                _timesBeatenCurrentDifficulty
+                >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty) / 2)
+            )
+        )
+        {
+            return true;
+        }
+        return false;
     }
 }

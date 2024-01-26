@@ -92,7 +92,10 @@ public class GameManager : MonoBehaviour
         GenerateGrid(
             GenerateNumbersForLevel(
                 Constants.GetNumbers(ActualDifficulty),
-                Constants.GetRepeatedNumbersCount(ActualDifficulty)
+                Constants.GetRepeatedNumbersCount(
+                    ActualDifficulty,
+                    SavedGameData.IsHalfwayThroughCurrentDifficulty(ActualDifficulty)
+                )
             ),
             loadGame
         );
@@ -368,7 +371,10 @@ public class GameManager : MonoBehaviour
             GenerateGrid(
                 GenerateNumbersForLevel(
                     Constants.GetNumbers(ActualDifficulty),
-                    Constants.GetRepeatedNumbersCount(ActualDifficulty)
+                    Constants.GetRepeatedNumbersCount(
+                        ActualDifficulty,
+                        SavedGameData.IsHalfwayThroughCurrentDifficulty(ActualDifficulty)
+                    )
                 ),
                 false
             );

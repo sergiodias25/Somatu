@@ -10,22 +10,41 @@ public class Constants : MonoBehaviour
     public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
     public static List<int> NumbersForExtremeMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-    public static int GetRepeatedNumbersCount(Difficulty selectedDifficulty)
+    public static int GetRepeatedNumbersCount(
+        Difficulty selectedDifficulty,
+        bool isHalfwayThroughCurrentDifficulty
+    )
     {
         switch (selectedDifficulty)
         {
             case Difficulty.Easy:
-                // repeats betweeen 7 to 8 numbers
-                return Random.Range(7, 9);
+                // repeats 7 or 8 numbers
+                if (isHalfwayThroughCurrentDifficulty)
+                {
+                    return 7;
+                }
+                return 8;
             case Difficulty.Medium:
-                // repeats betweeen 5 to 6 numbers
-                return Random.Range(5, 7);
+                // repeats 5 or 6 numbers
+                if (isHalfwayThroughCurrentDifficulty)
+                {
+                    return 5;
+                }
+                return 6;
             case Difficulty.Hard:
-                // repeats betweeen 2 to 4 numbers
-                return Random.Range(3, 5);
+                // repeats betweeen 3 to 4 numbers
+                if (isHalfwayThroughCurrentDifficulty)
+                {
+                    return 3;
+                }
+                return 4;
             case Difficulty.Extreme:
                 // repeats betweeen 0 to 1 number
-                return Random.Range(0, 2);
+                if (isHalfwayThroughCurrentDifficulty)
+                {
+                    return 0;
+                }
+                return 2;
         }
         return Random.Range(0, 10);
     }
@@ -73,13 +92,13 @@ public class Constants : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 1;
+                return 2;
             case Difficulty.Medium:
-                return 1;
+                return 2;
             case Difficulty.Hard:
-                return 1;
+                return 2;
             case Difficulty.Extreme:
-                return 1;
+                return 2;
         }
         return -1;
     }
