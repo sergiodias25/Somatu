@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
         _playerStats = FindObjectOfType<PlayerStats>();
-        ShowMainMenu();
+        //ShowMainMenu();
         HideSubMenus();
         HideEndOfGameButtons();
         ToggleContinueButton();

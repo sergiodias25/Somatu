@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using static Constants;
 using System;
+using Assets.Scripts.SaveGame;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -234,7 +235,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private void UpdateValues()
+    public void UpdateValues()
     {
         _easyGamesPlayedText.text = _gameManager.SavedGameData.EasyStats.GamesPlayed.ToString();
         _easyGamesCompletedText.text =
@@ -294,5 +295,10 @@ public class PlayerStats : MonoBehaviour
         );
         _challengeHelpsUsedText.text =
             _gameManager.SavedGameData.ChallengeStats.HelpsUsed.ToString();
+
+        _ = SaveService.SaveSlotData(
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
+            _gameManager.SavedGameData
+        );
     }
 }

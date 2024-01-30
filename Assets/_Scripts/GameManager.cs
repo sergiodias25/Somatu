@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
+using Assets.Scripts.SaveGame;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -302,7 +304,6 @@ public class GameManager : MonoBehaviour
             GetSolutionGroupSum(6, 7, 8),
             _thirdColumnResultBlock
         );
-        //FindObjectOfType<AdRewarded>().LoadAd();
 
         if (
             firstRowCompleted
@@ -328,6 +329,11 @@ public class GameManager : MonoBehaviour
                 _timer.GetTimerValue()
             );
         }
+
+        _ = SaveService.SaveSlotData(
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
+            SavedGameData
+        );
         return false;
     }
 
@@ -364,6 +370,11 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
+
+        _ = SaveService.SaveSlotData(
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
+            SavedGameData
+        );
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -642,5 +653,13 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public async void LoadSaveGame(string playerId)
+    {
+        Task<SaveGame> getSaveGame = SaveService.GetSavedGame<SaveGame>(playerId);
+        SavedGameData = await getSaveGame;
+        _uiManager.ShowMainMenu();
+        _playerStats.UpdateValues();
     }
 }
