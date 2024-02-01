@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
         }
         if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
-            SavedGameData.GameInProgressData.UpdateInProgressSavedGame(
+            SavedGameData.UpdateInProgressSavedGame(
                 _generatedNodesObject,
                 _solutionNumbers,
                 SelectedDifficulty,
@@ -330,10 +330,7 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        _ = SaveService.SaveSlotData(
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
-            SavedGameData
-        );
+        SavedGameData.UpdateSaveGame();
         return false;
     }
 
@@ -352,7 +349,7 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
-        SavedGameData.HelpsAvailable++;
+        SavedGameData.IncrementHelpsAvailable(1);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
@@ -365,16 +362,12 @@ public class GameManager : MonoBehaviour
         else
         {
             _timer.PauseTimer();
-            SavedGameData.GameInProgressData.ClearInProgressSavedGame();
+            SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-
-        _ = SaveService.SaveSlotData(
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
-            SavedGameData
-        );
+        SavedGameData.UpdateSaveGame();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -487,7 +480,7 @@ public class GameManager : MonoBehaviour
         }
         if (shouldClearSavedGame)
         {
-            SavedGameData.GameInProgressData.ClearInProgressSavedGame();
+            SavedGameData.ClearInProgressSavedGame();
         }
         if (isExit)
         {
@@ -655,10 +648,11 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public async void LoadSaveGame(string playerId)
+    public async void StartGame()
     {
-        Task<SaveGame> getSaveGame = SaveService.GetSavedGame<SaveGame>(playerId);
-        SavedGameData = await getSaveGame;
+        Task<SaveGame> load = SaveGame.LoadSaveGame();
+        await load;
+        SavedGameData = load.Result;
         _uiManager.ShowMainMenu();
         _playerStats.UpdateValues();
     }

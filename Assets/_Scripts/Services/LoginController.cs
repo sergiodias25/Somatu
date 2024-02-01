@@ -54,7 +54,7 @@ public class LoginController : MonoBehaviour
 
             // Shows how to get an access token
             Debug.Log($"Access Token: {AuthenticationService.Instance.AccessToken}");
-            _gameManager.LoadSaveGame(AuthenticationService.Instance.PlayerId);
+            _gameManager.StartGame();
         };
 
         AuthenticationService.Instance.SignInFailed += (err) =>

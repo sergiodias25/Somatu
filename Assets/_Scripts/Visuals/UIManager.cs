@@ -222,7 +222,6 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.ShowHints();
             _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
-            _gameManager.SavedGameData.HelpsAvailable--;
             ToggleHelpButton(false);
         }
     }

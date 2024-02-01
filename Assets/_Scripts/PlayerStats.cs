@@ -96,16 +96,24 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                _gameManager.SavedGameData.EasyStats.GamesPlayed++;
+                _gameManager.SavedGameData.IncrementGamesPlayed(
+                    _gameManager.SavedGameData.EasyStats
+                );
                 break;
             case Difficulty.Medium:
-                _gameManager.SavedGameData.MediumStats.GamesPlayed++;
+                _gameManager.SavedGameData.IncrementGamesPlayed(
+                    _gameManager.SavedGameData.MediumStats
+                );
                 break;
             case Difficulty.Hard:
-                _gameManager.SavedGameData.HardStats.GamesPlayed++;
+                _gameManager.SavedGameData.IncrementGamesPlayed(
+                    _gameManager.SavedGameData.HardStats
+                );
                 break;
             case Difficulty.Extreme:
-                _gameManager.SavedGameData.ExtremeStats.GamesPlayed++;
+                _gameManager.SavedGameData.IncrementGamesPlayed(
+                    _gameManager.SavedGameData.ExtremeStats
+                );
                 break;
         }
         UpdateValues();
@@ -116,47 +124,53 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                ManageTime(timeToComplete, ref _gameManager.SavedGameData.EasyStats);
-                _gameManager.SavedGameData.EasyStats.GamesCompleted++;
+                _gameManager.SavedGameData.ManageTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.EasyStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.EasyStats
+                );
                 break;
             case Difficulty.Medium:
-                ManageTime(timeToComplete, ref _gameManager.SavedGameData.MediumStats);
-                _gameManager.SavedGameData.MediumStats.GamesCompleted++;
+                _gameManager.SavedGameData.ManageTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.MediumStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.MediumStats
+                );
                 break;
             case Difficulty.Hard:
-                ManageTime(timeToComplete, ref _gameManager.SavedGameData.HardStats);
-                _gameManager.SavedGameData.HardStats.GamesCompleted++;
+                _gameManager.SavedGameData.ManageTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.HardStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.HardStats
+                );
                 break;
             case Difficulty.Extreme:
-                ManageTime(timeToComplete, ref _gameManager.SavedGameData.ExtremeStats);
-                _gameManager.SavedGameData.ExtremeStats.GamesCompleted++;
+                _gameManager.SavedGameData.ManageTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.ExtremeStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.ExtremeStats
+                );
                 break;
             case Difficulty.Challenge:
-                ManageChallengeSolves(solvesCount, ref _gameManager.SavedGameData.ChallengeStats);
-                ManageChallengeTime(timeToComplete, ref _gameManager.SavedGameData.ChallengeStats);
-                _gameManager.SavedGameData.ChallengeStats.GamesCompleted++;
+                _gameManager.SavedGameData.ManageChallengeSolves(solvesCount);
+                _gameManager.SavedGameData.ManageChallengeTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.ChallengeStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.ChallengeStats
+                );
                 break;
         }
         UpdateValues();
-    }
-
-    private void ManageChallengeSolves(int solvesCount, ref SaveGame.ModeStats challengeStats)
-    {
-        if (solvesCount > challengeStats.SolveCountBest)
-        {
-            challengeStats.SolveCountBest = solvesCount;
-        }
-
-        if (challengeStats.GamesCompleted == 0)
-        {
-            challengeStats.SolveCountAverage = solvesCount;
-        }
-        else
-        {
-            challengeStats.SolveCountAverage =
-                ((challengeStats.GamesCompleted * challengeStats.SolveCountAverage) + solvesCount)
-                / (challengeStats.GamesCompleted + 1);
-        }
     }
 
     public void UsedHelp(Difficulty difficulty)
@@ -164,75 +178,28 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                _gameManager.SavedGameData.EasyStats.HelpsUsed++;
+                _gameManager.SavedGameData.IncrementHelpsUsed(_gameManager.SavedGameData.EasyStats);
                 break;
             case Difficulty.Medium:
-                _gameManager.SavedGameData.MediumStats.HelpsUsed++;
+                _gameManager.SavedGameData.IncrementHelpsUsed(
+                    _gameManager.SavedGameData.MediumStats
+                );
                 break;
             case Difficulty.Hard:
-                _gameManager.SavedGameData.HardStats.HelpsUsed++;
+                _gameManager.SavedGameData.IncrementHelpsUsed(_gameManager.SavedGameData.HardStats);
                 break;
             case Difficulty.Extreme:
-                _gameManager.SavedGameData.ExtremeStats.HelpsUsed++;
+                _gameManager.SavedGameData.IncrementHelpsUsed(
+                    _gameManager.SavedGameData.ExtremeStats
+                );
                 break;
             case Difficulty.Challenge:
-                _gameManager.SavedGameData.ChallengeStats.HelpsUsed++;
+                _gameManager.SavedGameData.IncrementHelpsUsed(
+                    _gameManager.SavedGameData.ChallengeStats
+                );
                 break;
         }
         UpdateValues();
-    }
-
-    private void ManageTime(double timeToComplete, ref SaveGame.ModeStats playerStats)
-    {
-        CheckFastestTime(timeToComplete, ref playerStats.TimeBest);
-        CalculateAverageTime(
-            timeToComplete,
-            ref playerStats.TimeAverage,
-            playerStats.GamesCompleted
-        );
-    }
-
-    private void ManageChallengeTime(double timeToComplete, ref SaveGame.ModeStats playerStats)
-    {
-        CheckLongestTime(timeToComplete, ref playerStats.TimeBest);
-        CalculateAverageTime(
-            timeToComplete,
-            ref playerStats.TimeAverage,
-            playerStats.GamesCompleted
-        );
-    }
-
-    private void CheckLongestTime(double timeToComplete, ref double previousBestTime)
-    {
-        if (previousBestTime == 0.0 || timeToComplete > previousBestTime)
-        {
-            previousBestTime = timeToComplete;
-        }
-    }
-
-    private void CalculateAverageTime(
-        double timeToComplete,
-        ref double previousTimeAverage,
-        int gamesCompleted
-    )
-    {
-        if (gamesCompleted == 0)
-        {
-            previousTimeAverage = timeToComplete;
-        }
-        else
-        {
-            previousTimeAverage =
-                ((gamesCompleted * previousTimeAverage) + timeToComplete) / (gamesCompleted + 1);
-        }
-    }
-
-    private void CheckFastestTime(double timeToComplete, ref double previousTimeFastest)
-    {
-        if (previousTimeFastest == 0.0 || timeToComplete < previousTimeFastest)
-        {
-            previousTimeFastest = timeToComplete;
-        }
     }
 
     public void UpdateValues()
@@ -296,9 +263,6 @@ public class PlayerStats : MonoBehaviour
         _challengeHelpsUsedText.text =
             _gameManager.SavedGameData.ChallengeStats.HelpsUsed.ToString();
 
-        _ = SaveService.SaveSlotData(
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
-            _gameManager.SavedGameData
-        );
+        _gameManager.SavedGameData.UpdateSaveGame();
     }
 }

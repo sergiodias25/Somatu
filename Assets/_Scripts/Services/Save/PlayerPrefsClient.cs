@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-
 public class PlayerPrefClient : ISaveClient
 {
     public Task Delete(string key)
@@ -22,7 +21,8 @@ public class PlayerPrefClient : ISaveClient
     public Task<T> Load<T>(string key)
     {
         var data = PlayerPrefs.GetString(key);
-        if (!string.IsNullOrEmpty(data)) return Task.FromResult(JsonConvert.DeserializeObject<T>(data));
+        if (!string.IsNullOrEmpty(data))
+            return Task.FromResult(JsonConvert.DeserializeObject<T>(data));
         return Task.FromResult<T>(default);
     }
 
