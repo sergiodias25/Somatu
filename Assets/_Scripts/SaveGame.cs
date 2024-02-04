@@ -8,15 +8,34 @@ namespace Assets.Scripts.SaveGame
     public class SaveGame
     {
         public double TimeStamp;
-        public Constants.Difficulty? _unlockedDifficulty = Constants.Difficulty.Easy;
+        public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Easy;
         public int TimesBeatenCurrentDifficulty = 0;
         public int HelpsAvailable = 0;
         public GameInProgress GameInProgressData;
+        public Purchases PurchaseData;
+        public Settings SettingsData;
         public ModeStats EasyStats;
         public ModeStats MediumStats;
         public ModeStats HardStats;
         public ModeStats ExtremeStats;
         public ModeStats ChallengeStats;
+
+        public class Purchases
+        {
+            public bool UnlimitedHelps = false;
+            public bool RemovedAds = false;
+            public bool MetallicTheme = false;
+            public bool GoldTheme = false;
+        }
+
+        public class Settings
+        {
+            public bool SoundEnabled = true;
+            public bool MusicEnabled = false;
+            public bool VibrationEnabled = false;
+            public int SelectedThemeIndex = 0;
+            public int LanguageSelected = 0;
+        }
 
         public class GameInProgress
         {
@@ -106,6 +125,8 @@ namespace Assets.Scripts.SaveGame
         public SaveGame()
         {
             GameInProgressData = new GameInProgress();
+            PurchaseData = new Purchases();
+            SettingsData = new Settings();
             EasyStats = new ModeStats();
             MediumStats = new ModeStats();
             HardStats = new ModeStats();
@@ -116,38 +137,36 @@ namespace Assets.Scripts.SaveGame
 
         public void IncrementTimesBeaten(Constants.Difficulty difficulty)
         {
-            if (difficulty == _unlockedDifficulty)
+            if (difficulty == UnlockedDifficulty)
             {
                 TimesBeatenCurrentDifficulty++;
             }
             UnlockNextLevel(difficulty);
-            UpdateSaveGameTimeStamp();
         }
 
         public bool IsDifficultyUnlocked(Constants.Difficulty difficulty)
         {
-            return difficulty <= _unlockedDifficulty;
+            return difficulty <= UnlockedDifficulty;
         }
 
         public void UnlockNextLevel(Constants.Difficulty difficulty)
         {
             if (
                 difficulty != Constants.Difficulty.Challenge
-                && difficulty >= _unlockedDifficulty
+                && difficulty >= UnlockedDifficulty
                 && TimesBeatenCurrentDifficulty
                     >= Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty)
             )
             {
-                _unlockedDifficulty++;
+                UnlockedDifficulty++;
                 TimesBeatenCurrentDifficulty = 0;
-                UpdateSaveGameTimeStamp();
             }
         }
 
         public bool IsHalfwayThroughCurrentDifficulty(Constants.Difficulty difficulty)
         {
             if (
-                (difficulty < _unlockedDifficulty)
+                (difficulty < UnlockedDifficulty)
                 || (
                     TimesBeatenCurrentDifficulty
                     >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty) / 2)
@@ -159,6 +178,11 @@ namespace Assets.Scripts.SaveGame
             return false;
         }
 
+        public void UnlockAllLevels()
+        {
+            UnlockedDifficulty = Constants.Difficulty.Challenge;
+        }
+
         public void ClearInProgressSavedGame()
         {
             GameInProgressData.GameNumbers = new List<int>();
@@ -166,7 +190,6 @@ namespace Assets.Scripts.SaveGame
             GameInProgressData.Difficulty = null;
             GameInProgressData.TimerValue = 0.0;
             GameInProgressData.UndoData = new GameInProgress.Undo();
-            UpdateSaveGameTimeStamp();
         }
 
         public void UpdateInProgressSavedGame(
@@ -207,37 +230,52 @@ namespace Assets.Scripts.SaveGame
 
             GameInProgressData.Difficulty = difficulty;
             GameInProgressData.TimerValue = timerValue;
-            UpdateSaveGameTimeStamp();
         }
 
         public void IncrementGamesPlayed(ModeStats mode)
         {
             mode.GamesPlayed++;
-            UpdateSaveGameTimeStamp();
         }
 
         public void IncrementGamesCompleted(ModeStats mode)
         {
             mode.GamesCompleted++;
-            UpdateSaveGameTimeStamp();
         }
 
         public void UpdateSolvesCountBest(ModeStats mode, int newBest)
         {
             mode.SolveCountBest = newBest;
-            UpdateSaveGameTimeStamp();
         }
 
         public void IncrementHelpsUsed(ModeStats mode)
         {
             mode.HelpsUsed++;
             HelpsAvailable--;
-            UpdateSaveGameTimeStamp();
         }
 
         public void IncrementHelpsAvailable(int numberOfHelpsToAdd)
         {
             HelpsAvailable += numberOfHelpsToAdd;
+        }
+
+        public void GrantUnlimitedHelps()
+        {
+            PurchaseData.UnlimitedHelps = true;
+        }
+
+        public void RemoveAds()
+        {
+            PurchaseData.RemovedAds = true;
+        }
+
+        public void EnableMetallicTheme()
+        {
+            PurchaseData.MetallicTheme = true;
+        }
+
+        public void EnableGoldTheme()
+        {
+            PurchaseData.GoldTheme = true;
             UpdateSaveGameTimeStamp();
         }
 
@@ -321,8 +359,9 @@ namespace Assets.Scripts.SaveGame
             TimeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
         }
 
-        public async void UpdateSaveGame()
+        public async void PersistData()
         {
+            UpdateSaveGameTimeStamp();
             ISaveClient _client;
             try
             {

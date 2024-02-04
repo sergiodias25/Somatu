@@ -11,24 +11,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip DropBlockUndo;
     public AudioClip PuzzleSolved;
     public AudioClip MainMusicTheme;
-    public bool _sfxEnabled { get; private set; }
-    public bool _musicEnabled { get; private set; }
-    public bool _vibrationEnabled { get; private set; }
-
-    private void Start()
-    {
-        _sfxEnabled = true;
-        _musicEnabled = false;
-        _vibrationEnabled = true;
-    }
 
     public void PlaySFX(AudioClip audioClip)
     {
-        if (_sfxEnabled)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
             _sfxSource.PlayOneShot(audioClip);
         }
-        if (_vibrationEnabled)
+        if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
             Vibrate();
         }
@@ -36,7 +27,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        if (_musicEnabled)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager.SavedGameData.SettingsData.MusicEnabled)
         {
             _musicSource.loop = true;
             _musicSource.clip = MainMusicTheme;
@@ -46,15 +38,26 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleSFX()
     {
-        _sfxEnabled = !_sfxEnabled;
-        _sfxSource.mute = !_sfxEnabled;
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.SavedGameData.SettingsData.SoundEnabled = !gameManager
+            .SavedGameData
+            .SettingsData
+            .SoundEnabled;
+        gameManager.SavedGameData.PersistData();
+        _sfxSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
     }
 
     public void ToggleMusic()
     {
-        _musicEnabled = !_musicEnabled;
-        _musicSource.mute = !_musicEnabled;
-        if (!_musicEnabled)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.SavedGameData.SettingsData.MusicEnabled = !gameManager
+            .SavedGameData
+            .SettingsData
+            .MusicEnabled;
+        gameManager.SavedGameData.PersistData();
+
+        _musicSource.mute = !gameManager.SavedGameData.SettingsData.MusicEnabled;
+        if (!gameManager.SavedGameData.SettingsData.MusicEnabled)
         {
             _musicSource.Pause();
         }
@@ -73,7 +76,12 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleVibration()
     {
-        _vibrationEnabled = !_vibrationEnabled;
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.SavedGameData.SettingsData.VibrationEnabled = !gameManager
+            .SavedGameData
+            .SettingsData
+            .VibrationEnabled;
+        gameManager.SavedGameData.PersistData();
     }
 
     public void Vibrate()

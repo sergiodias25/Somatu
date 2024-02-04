@@ -1,10 +1,9 @@
+using Assets.Scripts.SaveGame;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsHandler : MonoBehaviour
 {
-    public int SelectedColorsIndex = 0;
-
     [SerializeField]
     private Image _soundButtonImage;
 
@@ -32,10 +31,20 @@ public class SettingsHandler : MonoBehaviour
     [SerializeField]
     private Sprite _vibrateOffSprite;
     private AudioManager _audioManager;
+    private GameManager _gameManager;
+    private GradientBg _gradientBg;
 
-    private void Start()
+    void Awake() { }
+
+    public void LoadData()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _gradientBg = FindObjectOfType<GradientBg>();
+        _gameManager = FindObjectOfType<GameManager>();
+        _gradientBg.UpdateTheme(
+            Constants.ColorPalettes[_gameManager.SavedGameData.SettingsData.SelectedThemeIndex]
+        );
+
         if (_soundButtonImage != null)
         {
             UpdateSoundIcon();
@@ -52,24 +61,55 @@ public class SettingsHandler : MonoBehaviour
 
     public void ChangeTheme()
     {
-        GradientBg gradientBg = FindObjectOfType<GradientBg>();
-        SelectedColorsIndex = GetNextIndex(Constants.ColorPalettes.Length);
-        gradientBg.UpdateTheme(Constants.ColorPalettes[SelectedColorsIndex]);
+        _gameManager = FindObjectOfType<GameManager>();
+        int _selectedColorsIndex = _gameManager.SavedGameData.SettingsData.SelectedThemeIndex;
+        _gradientBg.UpdateTheme(GetNextTheme(_selectedColorsIndex));
     }
 
-    private int GetNextIndex(int size)
+    private Color[] GetNextTheme(int selectedColorsIndex)
     {
-        if (SelectedColorsIndex == size - 1)
+        if (selectedColorsIndex == Constants.ColorPalettes.Length - 1)
         {
-            return 0;
+            selectedColorsIndex = 0;
+            _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
+            _gameManager.SavedGameData.PersistData();
+            return Constants.ColorPalettes[selectedColorsIndex];
         }
-        return SelectedColorsIndex + 1;
+        if (selectedColorsIndex == Constants.ColorPalettes.Length - 2)
+        {
+            if (_gameManager.SavedGameData.PurchaseData.GoldTheme)
+            {
+                selectedColorsIndex += 1;
+                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
+                _gameManager.SavedGameData.PersistData();
+                return Constants.ColorPalettes[selectedColorsIndex];
+            }
+            selectedColorsIndex = -1;
+            return GetNextTheme(selectedColorsIndex);
+        }
+        if (selectedColorsIndex == Constants.ColorPalettes.Length - 3)
+        {
+            if (_gameManager.SavedGameData.PurchaseData.MetallicTheme)
+            {
+                selectedColorsIndex += 1;
+                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
+                _gameManager.SavedGameData.PersistData();
+                return Constants.ColorPalettes[selectedColorsIndex];
+            }
+            selectedColorsIndex += 1;
+            return GetNextTheme(selectedColorsIndex);
+        }
+        selectedColorsIndex += 1;
+        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
+        _gameManager.SavedGameData.PersistData();
+        return Constants.ColorPalettes[selectedColorsIndex];
     }
 
     private void UpdateSoundIcon()
     {
+        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            _audioManager._sfxEnabled,
+            gameManager.SavedGameData.SettingsData.SoundEnabled,
             _soundButtonImage,
             _soundOnSprite,
             _soundOffSprite
@@ -84,8 +124,9 @@ public class SettingsHandler : MonoBehaviour
 
     private void UpdateMusicIcon()
     {
+        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            _audioManager._musicEnabled,
+            gameManager.SavedGameData.SettingsData.MusicEnabled,
             _musicButtonImage,
             _musicOnSprite,
             _musicOffSprite
@@ -100,8 +141,9 @@ public class SettingsHandler : MonoBehaviour
 
     private void UpdateVibrateIcon()
     {
+        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            _audioManager._vibrationEnabled,
+            gameManager.SavedGameData.SettingsData.VibrationEnabled,
             _vibrateButtonImage,
             _vibrateOnSprite,
             _vibrateOffSprite

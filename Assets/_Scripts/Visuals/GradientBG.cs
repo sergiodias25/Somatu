@@ -8,14 +8,10 @@ public class GradientBg : MonoBehaviour
         // put the backgorund plane in front of camera (you can change this later);
         //this.transform.position = new Vector3(-1.2f, -1.3f, -1f);
 
-        // position and orient main camera and the background plane
-        this.transform.rotation = Quaternion.identity;
-        Camera.main.transform.position = Vector3.zero;
-        Camera.main.transform.rotation = Quaternion.identity;
+        //Camera.main.transform.position = Vector3.zero;
+        //Camera.main.transform.rotation = Quaternion.identity;
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
 
-        //set background's plane transform parent to be the camera's transform, so the plane doesnt move as camera moves
-        this.transform.parent = Camera.main.transform;
         // create the background plane
         MeshFilter mf = this.gameObject.AddComponent<MeshFilter>();
         MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
@@ -26,10 +22,6 @@ public class GradientBg : MonoBehaviour
         mat.color = Color.white;
         mr.material = mat;
         mr.enabled = true;
-
-        UpdateTheme(
-            Constants.ColorPalettes[FindObjectOfType<SettingsHandler>().SelectedColorsIndex]
-        );
     }
 
     public void UpdateTheme(Color[] colors)

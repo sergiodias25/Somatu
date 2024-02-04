@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
     private PlayerStats _playerStats;
+    private AdBanner _adBanner;
+    private SettingsHandler _settingsHandler;
 
     void Start()
     {
@@ -67,7 +69,8 @@ public class GameManager : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
         _uiManager = FindObjectOfType<UIManager>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
-        _audioManager.PlayMusic();
+        _adBanner = FindObjectOfType<AdBanner>();
+        _settingsHandler = FindObjectOfType<SettingsHandler>();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
@@ -330,7 +333,7 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        SavedGameData.UpdateSaveGame();
+        SavedGameData.PersistData();
         return false;
     }
 
@@ -367,7 +370,7 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.ShowGameplayButtons();
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-        SavedGameData.UpdateSaveGame();
+        SavedGameData.PersistData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -655,5 +658,11 @@ public class GameManager : MonoBehaviour
         SavedGameData = load.Result;
         _uiManager.ShowMainMenu();
         _playerStats.UpdateValues();
+        if (!SavedGameData.PurchaseData.RemovedAds)
+        {
+            _adBanner.ShowBannerAd();
+        }
+        _settingsHandler.LoadData();
+        _audioManager.PlayMusic();
     }
 }

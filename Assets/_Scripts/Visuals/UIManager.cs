@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Button _undoButton;
+
+    [SerializeField]
+    private Button _shopButton;
     private AnimationsHandler _animationsHandler;
     private PlayerStats _playerStats;
 
@@ -64,9 +68,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         ShowButton(_startGameButton);
         ToggleContinueButton();
         ShowButton(_challengeButton);
+        ShowButton(_shopButton);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge
@@ -106,6 +112,7 @@ public class UIManager : MonoBehaviour
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
+        HideButton(_shopButton);
         ShowSubMenus();
     }
 
@@ -114,6 +121,7 @@ public class UIManager : MonoBehaviour
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
+        HideButton(_shopButton);
         ShowGameplayButtons();
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
@@ -121,11 +129,12 @@ public class UIManager : MonoBehaviour
         );
     }
 
-    public void ClickOnSurvival()
+    public void ClickOnChallenge()
     {
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
+        HideButton(_shopButton);
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Challenge);
     }
@@ -258,11 +267,24 @@ public class UIManager : MonoBehaviour
 
     internal void ToggleHelpButton(bool enabled)
     {
-        _helpButtonText.text = "Ajuda: " + _gameManager.SavedGameData.HelpsAvailable.ToString();
+        string translationText = LocalizationManager.Localize("btn-hint");
+
         _helpButton.enabled =
             enabled
             && !_gameManager.HasGameEnded()
-            && _gameManager.SavedGameData.HelpsAvailable > 0;
-        ;
+            && (
+                _gameManager.SavedGameData.HelpsAvailable != 0
+                || _gameManager.SavedGameData.PurchaseData.UnlimitedHelps
+            );
+
+        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
+        {
+            _helpButtonText.text =
+                translationText + ": " + _gameManager.SavedGameData.HelpsAvailable.ToString();
+        }
+        else
+        {
+            _helpButtonText.text = translationText;
+        }
     }
 }

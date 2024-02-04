@@ -14,7 +14,15 @@ stats-games-played,Games Played,Jogos jogados,Juegos jugados,ゲームが再生�
 stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,ゲームが完了しました,게임이 완료되었습니다
 stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간
 stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,最速の時間,가장 빠른 시간
-stats-helps-used,Helps Used,Ajuda usada,Ayuda usado,使用するのに役立ちます,사용하는 데 도움이됩니다
+stats-hints-used,Hints Used,Dicas usadas,Sugerencias utilizadas,使用されるヒント,사용 된 힌트
 stats-average-solves,Average Solves,Média resolve,Resueltos promedio,平均的な解決,평균 해결
 stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos,ほとんどが解決します,대부분의 해결
 stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간
+btn-hint,Hint,Dica,Pista,ヒント,힌트
+btn-shop,Shop,Comprar,Comercio,店,가게
+btn-shop-hints5,5 Hints,5 dicas,5 pistas,5つのヒント,5 힌트
+btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Pistas ilimitadas,無制限のヒント,무제한 힌트
+btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除します,모든 레벨을 잠금 해제하십시오
+btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除,광고를 제거하다
+btn-shop-metallictheme,Metallic Theme,Tema metálico,Tema metálico,メタリックテーマ,금속 테마
+btn-shop-goldtheme,Gold Theme,Tema de ouro,Tema de oro,ゴールドテーマ,금 테마
