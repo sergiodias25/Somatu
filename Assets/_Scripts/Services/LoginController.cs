@@ -3,14 +3,19 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoginController : MonoBehaviour
 {
-    private GameManager _gameManager;
+    [SerializeField]
+    private Canvas _loadingCanvas;
+
+    [SerializeField]
+    public Slider _slider;
 
     async void Awake()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _slider.value = 0.12f;
         try
         {
             await UnityServices.InitializeAsync();
@@ -25,6 +30,7 @@ public class LoginController : MonoBehaviour
 
     async Task SignInAnonymouslyAsync()
     {
+        _slider.value = 0.60f;
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
@@ -47,6 +53,7 @@ public class LoginController : MonoBehaviour
     // Setup authentication event handlers if desired
     void SetupEvents()
     {
+        _slider.value = 0.25f;
         AuthenticationService.Instance.SignedIn += () =>
         {
             // Shows how to get a playerID
@@ -54,7 +61,9 @@ public class LoginController : MonoBehaviour
 
             // Shows how to get an access token
             //Debug.Log($"Access Token: {AuthenticationService.Instance.AccessToken}");
-            _gameManager.StartGame();
+            GameManager _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.StartGame(_loadingCanvas);
+            _slider.value = 0.99f;
         };
 
         AuthenticationService.Instance.SignInFailed += (err) =>

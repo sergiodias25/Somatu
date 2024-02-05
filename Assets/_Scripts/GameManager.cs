@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _generatedNodesObject;
+
+    [SerializeField]
+    private Canvas _gameCanvas;
+
     private Timer _timer;
     private UIManager _uiManager;
     private AnimationsHandler _animationsHandler;
@@ -64,13 +68,9 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
         SavedGameData = new SaveGame();
 
-        _playerStats = FindObjectOfType<PlayerStats>();
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
-        _uiManager = FindObjectOfType<UIManager>();
-        _animationsHandler = FindObjectOfType<AnimationsHandler>();
         _adBanner = FindObjectOfType<AdBanner>();
-        _settingsHandler = FindObjectOfType<SettingsHandler>();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
@@ -651,11 +651,18 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public async void StartGame()
+    public async void StartGame(Canvas loadingCanvas)
     {
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;
+        _gameCanvas.gameObject.SetActive(true);
+
+        _uiManager = FindObjectOfType<UIManager>();
+        _playerStats = FindObjectOfType<PlayerStats>();
+        _settingsHandler = FindObjectOfType<SettingsHandler>();
+        _animationsHandler = FindObjectOfType<AnimationsHandler>();
+
         _uiManager.ShowMainMenu();
         _playerStats.UpdateValues();
         if (!SavedGameData.PurchaseData.RemovedAds)
@@ -664,6 +671,7 @@ public class GameManager : MonoBehaviour
         }
         _settingsHandler.LoadData();
         _audioManager.PlayMusic();
+        loadingCanvas.gameObject.SetActive(false);
     }
 
     private void OnApplicationFocus(bool focusedOn)
