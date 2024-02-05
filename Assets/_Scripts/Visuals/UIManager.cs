@@ -109,19 +109,13 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnStartGame()
     {
-        HideButton(_startGameButton);
-        HideButton(_continueGameButton);
-        HideButton(_challengeButton);
-        HideButton(_shopButton);
+        HideMainMenu();
         ShowSubMenus();
     }
 
     public void ClickOnContinueGame()
     {
-        HideButton(_startGameButton);
-        HideButton(_continueGameButton);
-        HideButton(_challengeButton);
-        HideButton(_shopButton);
+        HideMainMenu();
         ShowGameplayButtons();
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
@@ -131,12 +125,17 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnChallenge()
     {
+        HideMainMenu();
+        ShowGameplayButtons();
+        _gameManager.Init(Constants.Difficulty.Challenge);
+    }
+
+    public void HideMainMenu()
+    {
         HideButton(_startGameButton);
         HideButton(_continueGameButton);
         HideButton(_challengeButton);
         HideButton(_shopButton);
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Challenge);
     }
 
     public void ClickOnEasyMode()
