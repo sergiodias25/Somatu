@@ -290,6 +290,7 @@ public class UIManager : MonoBehaviour
 
     public async void DeleteSaves()
     {
+        _gameManager.SavedGameData = new Assets.Scripts.SaveGame.SaveGame();
         ISaveClient _client = new CloudSaveClient();
         await SaveService.DeleteData(
             _client,

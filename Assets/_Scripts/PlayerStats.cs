@@ -263,6 +263,6 @@ public class PlayerStats : MonoBehaviour
         _challengeHelpsUsedText.text =
             _gameManager.SavedGameData.ChallengeStats.HelpsUsed.ToString();
 
-        _gameManager.SavedGameData.PersistData();
+        //_gameManager.SavedGameData.PersistData();
     }
 }

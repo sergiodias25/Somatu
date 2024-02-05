@@ -333,7 +333,7 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        SavedGameData.PersistData();
+        //SavedGameData.PersistData();
         return false;
     }
 
@@ -664,5 +664,53 @@ public class GameManager : MonoBehaviour
         }
         _settingsHandler.LoadData();
         _audioManager.PlayMusic();
+    }
+
+    private void OnApplicationFocus(bool focusedOn)
+    {
+        if (!focusedOn)
+        {
+            Debug.Log("Save by lost focus");
+            LastResortSaveGame();
+        }
+    }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused)
+        {
+            Debug.Log("Save by pause");
+            LastResortSaveGame();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("Save by quit");
+        LastResortSaveGame();
+    }
+
+    private void LastResortSaveGame()
+    {
+        if (IsGameInProgress())
+        {
+            if (!HasGameEnded())
+            {
+                if (SelectedDifficulty != Constants.Difficulty.Challenge)
+                {
+                    SavedGameData.UpdateInProgressSavedGame(
+                        _generatedNodesObject,
+                        _solutionNumbers,
+                        SelectedDifficulty,
+                        _timer.GetTimerValue()
+                    );
+                }
+            }
+            else
+            {
+                SavedGameData.ClearInProgressSavedGame();
+            }
+        }
+        SavedGameData.PersistData();
     }
 }
