@@ -287,4 +287,18 @@ public class UIManager : MonoBehaviour
             _helpButtonText.text = translationText;
         }
     }
+
+    public async void DeleteSaves()
+    {
+        ISaveClient _client = new CloudSaveClient();
+        await SaveService.DeleteData(
+            _client,
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
+        );
+        ISaveClient _client2 = new PlayerPrefClient();
+        await SaveService.DeleteData(
+            _client2,
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
+        );
+    }
 }
