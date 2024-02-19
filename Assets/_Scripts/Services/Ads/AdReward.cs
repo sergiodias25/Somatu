@@ -4,9 +4,9 @@ using UnityEngine.Advertisements;
 
 public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField]
+    /*[SerializeField]
     Button _showAdButton;
-
+*/
     string _androidAdUnitId = "Rewarded_Android";
 
 #pragma warning disable 414
@@ -45,9 +45,9 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
         if (adUnitId.Equals(_adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
-            _showAdButton.onClick.AddListener(ShowAd);
+            //_showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
-            _showAdButton.interactable = true;
+            //_showAdButton.interactable = true;
         }
     }
 
@@ -108,6 +108,6 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
     void OnDestroy()
     {
         // Clean up the button listeners:
-        _showAdButton.onClick.RemoveAllListeners();
+        //_showAdButton.onClick.RemoveAllListeners();
     }
 }

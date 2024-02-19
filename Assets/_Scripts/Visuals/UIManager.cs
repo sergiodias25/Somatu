@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     private Button _undoButton;
 
     [SerializeField]
-    private Button _shopButton;
+    private GameObject _gameplayPanel;
     private AnimationsHandler _animationsHandler;
     private PlayerStats _playerStats;
 
@@ -54,25 +54,24 @@ public class UIManager : MonoBehaviour
         _playerStats = FindObjectOfType<PlayerStats>();
         //ShowMainMenu();
         HideSubMenus();
-        HideEndOfGameButtons();
+        HideObject(_gameplayPanel);
         ToggleContinueButton();
     }
 
     private void HideSubMenus()
     {
-        HideButton(_easyModeButton);
-        HideButton(_mediumModeButton);
-        HideButton(_hardModeButton);
-        HideButton(_extremeModeButton);
+        HideObject(_easyModeButton.gameObject);
+        HideObject(_mediumModeButton.gameObject);
+        HideObject(_hardModeButton.gameObject);
+        HideObject(_extremeModeButton.gameObject);
     }
 
     public void ShowMainMenu()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        ShowButton(_startGameButton);
+        ShowObject(_startGameButton.gameObject);
         ToggleContinueButton();
-        ShowButton(_challengeButton);
-        ShowButton(_shopButton);
+        ShowObject(_challengeButton.gameObject);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge
@@ -81,10 +80,10 @@ public class UIManager : MonoBehaviour
 
     private void ShowSubMenus()
     {
-        ShowButton(_easyModeButton);
-        ShowButton(_mediumModeButton);
-        ShowButton(_hardModeButton);
-        ShowButton(_extremeModeButton);
+        ShowObject(_easyModeButton.gameObject);
+        ShowObject(_mediumModeButton.gameObject);
+        ShowObject(_hardModeButton.gameObject);
+        ShowObject(_extremeModeButton.gameObject);
 
         _mediumModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Medium
@@ -97,14 +96,14 @@ public class UIManager : MonoBehaviour
         );
     }
 
-    private void HideButton(Button button)
+    private void HideObject(GameObject gameObject)
     {
-        button.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
-    private void ShowButton(Button button)
+    private void ShowObject(GameObject gameObject)
     {
-        button.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void ClickOnStartGame()
@@ -132,10 +131,9 @@ public class UIManager : MonoBehaviour
 
     public void HideMainMenu()
     {
-        HideButton(_startGameButton);
-        HideButton(_continueGameButton);
-        HideButton(_challengeButton);
-        HideButton(_shopButton);
+        HideObject(_startGameButton.gameObject);
+        HideObject(_continueGameButton.gameObject);
+        HideObject(_challengeButton.gameObject);
     }
 
     public void ClickOnEasyMode()
@@ -168,9 +166,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameplayButtons()
     {
-        ShowButton(_playAgainButton);
-        ShowButton(_undoButton);
-        ShowButton(_helpButton);
+        ShowObject(_gameplayPanel);
 
         ToggleUndoButton(
             _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
@@ -216,10 +212,10 @@ public class UIManager : MonoBehaviour
             _gameManager.ResetBoard(true, false, true);
         }
         HideSubMenus();
-        HideEndOfGameButtons();
+        HideObject(_gameplayPanel);
+        ToggleContinueButton();
         ShowMainMenu();
 
-        _animationsHandler.HideGameplayBar();
         _animationsHandler.HideStats();
         _animationsHandler.HideSettings();
     }
@@ -244,14 +240,6 @@ public class UIManager : MonoBehaviour
         ToggleUndoButton(
             _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
         );
-    }
-
-    public void HideEndOfGameButtons()
-    {
-        HideButton(_playAgainButton);
-        HideButton(_helpButton);
-        HideButton(_undoButton);
-        ToggleContinueButton();
     }
 
     private void ToggleContinueButton()

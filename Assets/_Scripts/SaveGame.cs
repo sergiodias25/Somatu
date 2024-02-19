@@ -363,6 +363,7 @@ namespace Assets.Scripts.SaveGame
         {
             UpdateSaveGameTimeStamp();
             ISaveClient _client;
+            /*
             try
             {
                 _client = new CloudSaveClient();
@@ -378,6 +379,7 @@ namespace Assets.Scripts.SaveGame
             {
                 Debug.LogError("Failed to save data in the Cloud");
             }
+            */
             try
             {
                 _client = new PlayerPrefClient();
@@ -399,21 +401,21 @@ namespace Assets.Scripts.SaveGame
             ISaveClient _client;
             Task<SaveGame> getCloudSaveGame = null;
             Task<SaveGame> getPlayerPrefsSaveGame = null;
-
-            try
-            {
-                _client = new CloudSaveClient();
-                //throw new Exception("Cloud Load Error");
-                getCloudSaveGame = SaveService.GetSavedGame<SaveGame>(
-                    _client,
-                    Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
-                );
-            }
-            catch (Exception)
-            {
-                Debug.LogError("Failed to load data from the cloud");
-            }
-
+            /*
+                        try
+                        {
+                            _client = new CloudSaveClient();
+                            //throw new Exception("Cloud Load Error");
+                            getCloudSaveGame = SaveService.GetSavedGame<SaveGame>(
+                                _client,
+                                Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
+                            );
+                        }
+                        catch (Exception)
+                        {
+                            Debug.LogError("Failed to load data from the cloud");
+                        }
+            */
             try
             {
                 _client = new PlayerPrefClient();

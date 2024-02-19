@@ -17,10 +17,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Block _blockPrefab;
 
-    /*
     [SerializeField]
-    private SpriteRenderer _boardPrefab;
-    */
+    private SpriteRenderer _gameBackground;
+
+    [SerializeField]
+    private SpriteRenderer _topBackground;
+
+    /*[SerializeField]
+    private GameObject _gamePanel;
+*/
     [SerializeField]
     private TextMeshProUGUI _timesSolvedText;
 
@@ -62,12 +67,10 @@ public class GameManager : MonoBehaviour
         // This way you can subscribe to LocalizationChanged event.
         //LocalizationManager.OnLocalizationChanged += () => FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
 
-        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.2) / 2 - 0.5f);
-        // var board = Instantiate(_boardPrefab, center, Quaternion.identity);
-        // board.size = new Vector2(_width, _height);
+        var center = new Vector2((float)(_width + 1) / 2 - 0.5f, (float)(_height + 3.5) / 2 - 0.5f);
         Camera.main.transform.position = new Vector3(center.x, center.y, -10);
-        SavedGameData = new SaveGame();
 
+        SavedGameData = new SaveGame();
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
         _adBanner = FindObjectOfType<AdBanner>();
@@ -200,6 +203,12 @@ public class GameManager : MonoBehaviour
     public void GenerateGrid(List<int> numbers, bool loadGame)
     {
         int _countTracker = 0;
+
+        var aboveBoard = new Vector2(0, 0); /*
+        _gamePanel.GetComponent<RectTransform>().localPosition = aboveBoard;
+        _gamePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(_width + 1.2f, 1);
+        _gamePanel.gameObject.SetActive(true);*/
+
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
@@ -672,6 +681,20 @@ public class GameManager : MonoBehaviour
         _settingsHandler.LoadData();
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);
+        var boardCenter = new Vector2(
+            (float)(_width + 1) / 2 - 0.5f,
+            (float)(_height + 2.5) / 2 - 0.5f
+        );
+        _gameBackground.transform.position = boardCenter;
+        _gameBackground.size = new Vector2(_width + 1.2f, _height + 3);
+        _gameBackground.gameObject.SetActive(true);
+
+        var topCenter = Camera.main.ScreenToWorldPoint(
+            new Vector3(Screen.width / 2, Screen.height - 10, 1)
+        );
+        _topBackground.transform.position = topCenter;
+        _topBackground.size = new Vector2(_width + 1.2f, 1.5f);
+        _topBackground.gameObject.SetActive(true);
     }
 
     private void OnApplicationFocus(bool focusedOn)

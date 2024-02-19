@@ -147,7 +147,7 @@ public class Constants : MonoBehaviour
     public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
     public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };
-    public static Color[] BlackColors = { Color.black, Color.black, Color.white, Color.gray };
+    public static Color[] BlackColors = { Color.black, Color.black, Color.black, Color.black };
     public static Color[] GoldColors = { Color.yellow, Color.yellow, Color.white, Color.black };
 
     public static Color[][] ColorPalettes =

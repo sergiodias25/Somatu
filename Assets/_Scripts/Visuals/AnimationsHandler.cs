@@ -7,22 +7,16 @@ public class AnimationsHandler : MonoBehaviour
 
     [SerializeField]
     public Animator _statsAnimator;
-
-    [SerializeField]
-    public Animator _gameplayBarAnimator;
-    private GameManager _gameManager;
     private Timer _timer;
 
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
     }
 
     public void ClickOnSettings()
     {
         HideStats();
-        HideGameplayBar();
         ShowPanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
     }
 
@@ -30,20 +24,13 @@ public class AnimationsHandler : MonoBehaviour
     {
         _statsAnimator.SetTrigger("ToggleStats");
         _timer.ToggleTimer();
-        HideGameplayBar();
         HideSettings();
     }
 
     public void RestoreGameplayBar()
     {
-        ShowPanelAnimation(_gameplayBarAnimator, "ShowGameplayBar", "ToggleGameplay");
         HideSettings();
         HideStats();
-    }
-
-    public void HideGameplayBar()
-    {
-        HidePanelAnimation(_gameplayBarAnimator, "ShowGameplayBar", "ToggleGameplay");
     }
 
     public void HideStats()
