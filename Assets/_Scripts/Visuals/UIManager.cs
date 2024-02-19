@@ -1,3 +1,4 @@
+using System;
 using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
@@ -45,6 +46,9 @@ public class UIManager : MonoBehaviour
     private GameObject _gameplayPanel;
     private AnimationsHandler _animationsHandler;
     private PlayerStats _playerStats;
+
+    [SerializeField]
+    private GameObject _gameNodes;
 
     void Start()
     {
@@ -254,8 +258,6 @@ public class UIManager : MonoBehaviour
 
     internal void ToggleHelpButton(bool enabled)
     {
-        string translationText = LocalizationManager.Localize("btn-hint");
-
         _helpButton.enabled =
             enabled
             && !_gameManager.HasGameEnded()
@@ -263,7 +265,12 @@ public class UIManager : MonoBehaviour
                 _gameManager.SavedGameData.HelpsAvailable != 0
                 || _gameManager.SavedGameData.PurchaseData.UnlimitedHelps
             );
+        UpdateHelpButtonText();
+    }
 
+    public void UpdateHelpButtonText()
+    {
+        string translationText = LocalizationManager.Localize("btn-hint");
         if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
         {
             _helpButtonText.text =
@@ -288,5 +295,54 @@ public class UIManager : MonoBehaviour
             _client2,
             Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
         );
+    }
+
+    public bool OpenShop()
+    {
+        ToggleShopElements(true);
+
+        if (_gameManager.IsGameInProgress())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void RestoreGameplayPanel()
+    {
+        ToggleGameplayElements(true);
+        _timer.ToggleTimer();
+    }
+
+    public void ToggleGameplayElements(bool statusToChangeTo)
+    {
+        if (statusToChangeTo)
+        {
+            ShowObject(_gameplayPanel);
+        }
+        else
+        {
+            HideObject(_gameplayPanel);
+        }
+        _gameNodes.SetActive(statusToChangeTo);
+    }
+
+    internal void ToggleShopElements(bool openedShop)
+    {
+        if (openedShop)
+        {
+            HideMainMenu();
+            HideSubMenus();
+            // hide settings
+            // hide player stats
+            if (_gameManager.IsGameInProgress())
+            {
+                ToggleGameplayElements(false);
+                _timer.ToggleTimer();
+            }
+        }
     }
 }

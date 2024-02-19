@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
@@ -179,7 +180,10 @@ public class Block : MonoBehaviour
             && hitInfo.collider.GetComponent<Node>() != null
         )
         {
-            if (hitInfo.collider.GetComponent<Node>().GetBlockInNode()._isInteractible)
+            if (
+                hitInfo.collider.GetComponent<Node>().GetBlockInNode()._isInteractible
+                && !EventSystem.current.IsPointerOverGameObject()
+            )
             {
                 return hitInfo.collider.GetComponent<Node>();
             }

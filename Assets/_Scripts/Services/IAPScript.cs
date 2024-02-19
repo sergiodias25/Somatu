@@ -19,11 +19,14 @@ public class IAPScript : MonoBehaviour
     public Button ButtonGoldTheme;
     private GameManager _gameManager;
     private AdBanner _adBanner;
+    private UIManager _uiManager;
+    private bool _wasGamePausedOnLaunch = false;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _adBanner = FindObjectOfType<AdBanner>();
+        _uiManager = FindObjectOfType<UIManager>();
         LoadIAPStatus();
     }
 
@@ -34,10 +37,12 @@ public class IAPScript : MonoBehaviour
             case HINTS_5:
                 _gameManager.SavedGameData.IncrementHelpsAvailable(5);
                 _gameManager.SavedGameData.PersistData();
+                _uiManager.UpdateHelpButtonText();
                 break;
             case HINTS_UNLIMITED:
                 _gameManager.SavedGameData.GrantUnlimitedHelps();
                 _gameManager.SavedGameData.PersistData();
+                _uiManager.UpdateHelpButtonText();
                 break;
             case UNLOCK_LEVELS:
                 _gameManager.SavedGameData.UnlockAllLevels();
@@ -98,5 +103,22 @@ public class IAPScript : MonoBehaviour
         Debug.LogError(
             $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
         );
+    }
+
+    private void OnEnable()
+    {
+        _wasGamePausedOnLaunch = _uiManager.OpenShop();
+    }
+
+    private void OnDisable()
+    {
+        if (_wasGamePausedOnLaunch)
+        {
+            _uiManager.RestoreGameplayPanel();
+        }
+        else
+        {
+            _uiManager.ShowMainMenu();
+        }
     }
 }
