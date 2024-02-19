@@ -50,6 +50,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameNodes;
 
+    [SerializeField]
+    private GameObject _shopPanel;
+
+    [SerializeField]
+    private GameObject _settingsPanel;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -76,6 +82,8 @@ public class UIManager : MonoBehaviour
         ShowObject(_startGameButton.gameObject);
         ToggleContinueButton();
         ShowObject(_challengeButton.gameObject);
+        _shopPanel.SetActive(false);
+        _settingsPanel.SetActive(false);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge
@@ -219,9 +227,10 @@ public class UIManager : MonoBehaviour
         HideObject(_gameplayPanel);
         ToggleContinueButton();
         ShowMainMenu();
+        ShowObject(_gameNodes);
 
         _animationsHandler.HideStats();
-        _animationsHandler.HideSettings();
+        ToggleSettings(false);
     }
 
     public void HelpClick()
@@ -299,16 +308,17 @@ public class UIManager : MonoBehaviour
 
     public bool OpenShop()
     {
-        ToggleShopElements(true);
-
+        HideMainMenu();
+        HideSubMenus();
+        ToggleSettings(false);
+        // hide player stats
         if (_gameManager.IsGameInProgress())
         {
+            ToggleGameplayElements(false);
+            _timer.ToggleTimer();
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public void RestoreGameplayPanel()
@@ -330,13 +340,25 @@ public class UIManager : MonoBehaviour
         _gameNodes.SetActive(statusToChangeTo);
     }
 
-    internal void ToggleShopElements(bool openedShop)
+    public void ToggleSettings()
     {
-        if (openedShop)
+        if (_settingsPanel.activeSelf)
+        {
+            ToggleSettings(false);
+        }
+        else
+        {
+            ToggleSettings(true);
+        }
+    }
+
+    private void ToggleSettings(bool enabled)
+    {
+        if (enabled)
         {
             HideMainMenu();
             HideSubMenus();
-            // hide settings
+            HideObject(_shopPanel);
             // hide player stats
             if (_gameManager.IsGameInProgress())
             {
@@ -344,5 +366,18 @@ public class UIManager : MonoBehaviour
                 _timer.ToggleTimer();
             }
         }
+        else
+        {
+            if (_gameManager.IsGameInProgress())
+            {
+                RestoreGameplayPanel();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
+        }
+
+        _settingsPanel.SetActive(enabled);
     }
 }

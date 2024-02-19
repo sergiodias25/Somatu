@@ -3,9 +3,6 @@ using UnityEngine;
 public class AnimationsHandler : MonoBehaviour
 {
     [SerializeField]
-    public Animator _settingsAnimator;
-
-    [SerializeField]
     public Animator _statsAnimator;
     private Timer _timer;
 
@@ -14,33 +11,20 @@ public class AnimationsHandler : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
     }
 
-    public void ClickOnSettings()
-    {
-        HideStats();
-        ShowPanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
-    }
-
     public void ClickOnProfile()
     {
         _statsAnimator.SetTrigger("ToggleStats");
         _timer.ToggleTimer();
-        HideSettings();
     }
 
     public void RestoreGameplayBar()
     {
-        HideSettings();
         HideStats();
     }
 
     public void HideStats()
     {
         HidePanelAnimation(_statsAnimator, "ShowStats", "ToggleStats");
-    }
-
-    public void HideSettings()
-    {
-        HidePanelAnimation(_settingsAnimator, "ShowSettings", "ToggleSettings");
     }
 
     public void HidePanelAnimation(Animator animator, string activeStatusName, string triggerName)
