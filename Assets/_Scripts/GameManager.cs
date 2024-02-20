@@ -61,8 +61,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        LocalizationManager.Read();
-        LocalizationManager.Language = "English";
         //FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
         // This way you can subscribe to LocalizationChanged event.
         //LocalizationManager.OnLocalizationChanged += () => FormattedText.text = LocalizationManager.Localize("Settings.Example.PlayTime", TimeSpan.FromHours(10.5f).TotalHours);
@@ -665,19 +663,22 @@ public class GameManager : MonoBehaviour
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;
-        _gameCanvas.gameObject.SetActive(true);
+
+        LocalizationManager.Read();
+        LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
+        if (!SavedGameData.PurchaseData.RemovedAds)
+        {
+            _adBanner.ShowBannerAd();
+        }
 
         _uiManager = FindObjectOfType<UIManager>();
         _playerStats = FindObjectOfType<PlayerStats>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
         _animationsHandler = FindObjectOfType<AnimationsHandler>();
 
+        _gameCanvas.gameObject.SetActive(true);
         _uiManager.ShowMainMenu();
         _playerStats.UpdateValues();
-        if (!SavedGameData.PurchaseData.RemovedAds)
-        {
-            _adBanner.ShowBannerAd();
-        }
         _settingsHandler.LoadData();
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);

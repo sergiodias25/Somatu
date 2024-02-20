@@ -310,7 +310,10 @@ public class UIManager : MonoBehaviour
     {
         HideMainMenu();
         HideSubMenus();
-        ToggleSettings(false);
+        if (_settingsPanel.activeSelf)
+        {
+            ToggleSettings(false);
+        }
         // hide player stats
         if (_gameManager.IsGameInProgress())
         {
@@ -349,6 +352,18 @@ public class UIManager : MonoBehaviour
         else
         {
             ToggleSettings(true);
+        }
+    }
+
+    public void ToggleShop()
+    {
+        if (_shopPanel.activeSelf)
+        {
+            HideObject(_shopPanel);
+        }
+        else
+        {
+            ShowObject(_shopPanel);
         }
     }
 

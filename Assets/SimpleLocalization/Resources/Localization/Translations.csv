@@ -1,5 +1,6 @@
 Key,English,Portuguese,Spanish,Japanese,Korean
 ,en,pt,es,ja,ko
+btn-language,English,Português,Español,,
 btn-play,Play,Jogar,Jugar,遊ぶ,놀다
 btn-continue,Continue,Continuar,Continuar,続く,계속하다
 btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
@@ -19,10 +20,14 @@ stats-average-solves,Average Solves,Média resolve,Resueltos promedio,平均的�
 stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos,ほとんどが解決します,대부분의 해결
 stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간
 btn-hint,Hint,Dica,Pista,ヒント,힌트
-btn-shop,Shop,Comprar,Comercio,店,가게
+btn-shop,Shop,Loja,Tienda,店,가게
 btn-shop-hints5,5 Hints,5 dicas,5 pistas,5つのヒント,5 힌트
 btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Pistas ilimitadas,無制限のヒント,무제한 힌트
 btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除します,모든 레벨을 잠금 해제하십시오
 btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除,광고를 제거하다
 btn-shop-metallictheme,Metallic Theme,Tema metálico,Tema metálico,メタリックテーマ,금속 테마
 btn-shop-goldtheme,Gold Theme,Tema de ouro,Tema de oro,ゴールドテーマ,금 테마
+btn-undo,Undo,Reverter,Deshacer,,
+btn-settings,Settings,Definições,Definiciones,,
+btn-home,Home,Início,Inicio,,
+btn-profile,Profile,Perfil,Perfil,,

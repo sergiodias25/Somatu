@@ -34,7 +34,7 @@ namespace Assets.Scripts.SaveGame
             public bool MusicEnabled = false;
             public bool VibrationEnabled = false;
             public int SelectedThemeIndex = 0;
-            public int LanguageSelected = 0;
+            public string LanguageSelected = "English";
         }
 
         public class GameInProgress

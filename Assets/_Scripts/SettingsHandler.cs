@@ -1,4 +1,5 @@
-using Assets.Scripts.SaveGame;
+using System.Collections.Generic;
+using Assets.SimpleLocalization.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -172,4 +173,26 @@ public class SettingsHandler : MonoBehaviour
             imageToUpdate.sprite = spriteOff;
         }
     }
+
+    public void ChangeLanguage()
+    {
+        List<string> languagesAvailable = new List<string>
+        {
+            "English",
+            "Portuguese",
+            "Spanish",
+            "Japanese",
+            "Korean"
+        };
+        int currentIndex = languagesAvailable.IndexOf(LocalizationManager.Language);
+        int nextIndex = currentIndex == languagesAvailable.Count - 1 ? 0 : currentIndex + 1;
+        LocalizationManager.Language = languagesAvailable[nextIndex];
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
+        gameManager.SavedGameData.PersistData();
+        UpdateLanguageIcon();
+    }
+
+    private void UpdateLanguageIcon() { }
 }
