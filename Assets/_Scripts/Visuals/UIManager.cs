@@ -56,6 +56,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _settingsPanel;
 
+    [SerializeField]
+    private GameObject _profilePanel;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -312,9 +315,12 @@ public class UIManager : MonoBehaviour
         HideSubMenus();
         if (_settingsPanel.activeSelf)
         {
-            ToggleSettings(false);
+            HideObject(_settingsPanel);
         }
-        // hide player stats
+        if (_profilePanel.activeSelf)
+        {
+            HideObject(_profilePanel);
+        }
         if (_gameManager.IsGameInProgress())
         {
             ToggleGameplayElements(false);
@@ -373,8 +379,14 @@ public class UIManager : MonoBehaviour
         {
             HideMainMenu();
             HideSubMenus();
-            HideObject(_shopPanel);
-            // hide player stats
+            if (_shopPanel.activeSelf)
+            {
+                HideObject(_shopPanel);
+            }
+            if (_profilePanel.activeSelf)
+            {
+                HideObject(_profilePanel);
+            }
             if (_gameManager.IsGameInProgress())
             {
                 ToggleGameplayElements(false);
@@ -394,5 +406,41 @@ public class UIManager : MonoBehaviour
         }
 
         _settingsPanel.SetActive(enabled);
+    }
+
+    public void ToggleProfile()
+    {
+        if (_profilePanel.activeSelf)
+        {
+            HideObject(_profilePanel);
+            if (_gameManager.IsGameInProgress())
+            {
+                RestoreGameplayPanel();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
+        }
+        else
+        {
+            if (_shopPanel.activeSelf)
+            {
+                HideObject(_shopPanel);
+            }
+            if (_settingsPanel.activeSelf)
+            {
+                HideObject(_settingsPanel);
+            }
+            HideMainMenu();
+            HideSubMenus();
+            if (_gameManager.IsGameInProgress())
+            {
+                ToggleGameplayElements(false);
+                _timer.ToggleTimer();
+            }
+
+            ShowObject(_profilePanel);
+        }
     }
 }

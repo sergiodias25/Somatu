@@ -7,19 +7,19 @@ using Assets.Scripts.SaveGame;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshPro _easyGamesPlayedText;
+    private TextMeshProUGUI _easyGamesPlayedText;
 
     [SerializeField]
-    private TextMeshPro _easyGamesCompletedText;
+    private TextMeshProUGUI _easyGamesCompletedText;
 
     [SerializeField]
-    private TextMeshPro _easyTimeFastestText;
+    private TextMeshProUGUI _easyTimeFastestText;
 
     [SerializeField]
-    private TextMeshPro _easyTimeAverageText;
+    private TextMeshProUGUI _easyTimeAverageText;
 
     [SerializeField]
-    private TextMeshPro _easyHelpsUsedText;
+    private TextMeshProUGUI _easyHelpsUsedText;
 
     [SerializeField]
     private TextMeshPro _mediumGamesPlayedText;
