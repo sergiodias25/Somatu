@@ -684,17 +684,15 @@ public class GameManager : MonoBehaviour
         loadingCanvas.gameObject.SetActive(false);
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
-            (float)(_height + 2.5) / 2 - 0.5f
+            (float)(_height + 2.68) / 2 - 0.5f
         );
         _gameBackground.transform.position = boardCenter;
-        _gameBackground.size = new Vector2(_width + 1.2f, _height + 3);
         _gameBackground.gameObject.SetActive(true);
 
         var topCenter = Camera.main.ScreenToWorldPoint(
             new Vector3(Screen.width / 2, Screen.height - 10, 1)
         );
         _topBackground.transform.position = topCenter;
-        _topBackground.size = new Vector2(_width + 1.2f, 1.5f);
         _topBackground.gameObject.SetActive(true);
     }
 
