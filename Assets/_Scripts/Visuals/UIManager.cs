@@ -87,6 +87,7 @@ public class UIManager : MonoBehaviour
         ShowObject(_challengeButton.gameObject);
         _shopPanel.SetActive(false);
         _settingsPanel.SetActive(false);
+        _profilePanel.SetActive(false);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge
@@ -181,6 +182,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameplayButtons()
     {
+        ShowObject(_gameNodes);
         ShowObject(_gameplayPanel);
 
         ToggleUndoButton(
@@ -227,13 +229,14 @@ public class UIManager : MonoBehaviour
             _gameManager.ResetBoard(true, false, true);
         }
         HideSubMenus();
-        HideObject(_gameplayPanel);
         ToggleContinueButton();
+        HideObject(_gameNodes);
+        HideObject(_gameplayPanel);
+        HideObject(_shopPanel);
+        HideObject(_profilePanel);
+        HideObject(_settingsPanel);
         ShowMainMenu();
-        ShowObject(_gameNodes);
-
         _animationsHandler.HideStats();
-        ToggleSettings(false);
     }
 
     public void HelpClick()
@@ -309,31 +312,10 @@ public class UIManager : MonoBehaviour
         );
     }
 
-    public bool OpenShop()
-    {
-        HideMainMenu();
-        HideSubMenus();
-        if (_settingsPanel.activeSelf)
-        {
-            HideObject(_settingsPanel);
-        }
-        if (_profilePanel.activeSelf)
-        {
-            HideObject(_profilePanel);
-        }
-        if (_gameManager.IsGameInProgress())
-        {
-            ToggleGameplayElements(false);
-            _timer.ToggleTimer();
-            return true;
-        }
-        return false;
-    }
-
     public void RestoreGameplayPanel()
     {
         ToggleGameplayElements(true);
-        _timer.ToggleTimer();
+        _timer.UnpauseTimer();
     }
 
     public void ToggleGameplayElements(bool statusToChangeTo)
@@ -349,36 +331,25 @@ public class UIManager : MonoBehaviour
         _gameNodes.SetActive(statusToChangeTo);
     }
 
-    public void ToggleSettings()
+    public void ToggleSettingsPanel()
     {
         if (_settingsPanel.activeSelf)
         {
-            ToggleSettings(false);
+            HideObject(_settingsPanel);
+            if (_gameManager.IsGameInProgress())
+            {
+                RestoreGameplayPanel();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
         }
         else
-        {
-            ToggleSettings(true);
-        }
-    }
-
-    public void ToggleShop()
-    {
-        if (_shopPanel.activeSelf)
-        {
-            HideObject(_shopPanel);
-        }
-        else
-        {
-            ShowObject(_shopPanel);
-        }
-    }
-
-    private void ToggleSettings(bool enabled)
-    {
-        if (enabled)
         {
             HideMainMenu();
             HideSubMenus();
+            ToggleGameplayElements(false);
             if (_shopPanel.activeSelf)
             {
                 HideObject(_shopPanel);
@@ -389,26 +360,13 @@ public class UIManager : MonoBehaviour
             }
             if (_gameManager.IsGameInProgress())
             {
-                ToggleGameplayElements(false);
-                _timer.ToggleTimer();
+                _timer.PauseTimer();
             }
+            ShowObject(_settingsPanel);
         }
-        else
-        {
-            if (_gameManager.IsGameInProgress())
-            {
-                RestoreGameplayPanel();
-            }
-            else
-            {
-                ShowMainMenu();
-            }
-        }
-
-        _settingsPanel.SetActive(enabled);
     }
 
-    public void ToggleProfile()
+    public void ToggleProfilePanel()
     {
         if (_profilePanel.activeSelf)
         {
@@ -424,6 +382,9 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            HideMainMenu();
+            HideSubMenus();
+            ToggleGameplayElements(false);
             if (_shopPanel.activeSelf)
             {
                 HideObject(_shopPanel);
@@ -432,15 +393,47 @@ public class UIManager : MonoBehaviour
             {
                 HideObject(_settingsPanel);
             }
-            HideMainMenu();
-            HideSubMenus();
             if (_gameManager.IsGameInProgress())
             {
-                ToggleGameplayElements(false);
-                _timer.ToggleTimer();
+                _timer.PauseTimer();
             }
 
             ShowObject(_profilePanel);
+        }
+    }
+
+    public void ToggleShopPanel()
+    {
+        if (_shopPanel.activeSelf)
+        {
+            HideObject(_shopPanel);
+            if (_gameManager.IsGameInProgress())
+            {
+                RestoreGameplayPanel();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
+        }
+        else
+        {
+            HideMainMenu();
+            HideSubMenus();
+            ToggleGameplayElements(false);
+            if (_settingsPanel.activeSelf)
+            {
+                HideObject(_settingsPanel);
+            }
+            if (_profilePanel.activeSelf)
+            {
+                HideObject(_profilePanel);
+            }
+            if (_gameManager.IsGameInProgress())
+            {
+                _timer.PauseTimer();
+            }
+            ShowObject(_shopPanel);
         }
     }
 }

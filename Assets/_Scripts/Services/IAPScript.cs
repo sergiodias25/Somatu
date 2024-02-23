@@ -20,7 +20,6 @@ public class IAPScript : MonoBehaviour
     private GameManager _gameManager;
     private AdBanner _adBanner;
     private UIManager _uiManager;
-    private bool _wasGamePausedOnLaunch = false;
 
     private void Awake()
     {
@@ -103,22 +102,5 @@ public class IAPScript : MonoBehaviour
         Debug.LogError(
             $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
         );
-    }
-
-    private void OnEnable()
-    {
-        _wasGamePausedOnLaunch = _uiManager.OpenShop();
-    }
-
-    private void OnDisable()
-    {
-        if (_wasGamePausedOnLaunch)
-        {
-            _uiManager.RestoreGameplayPanel();
-        }
-        else
-        {
-            _uiManager.ShowMainMenu();
-        }
     }
 }
