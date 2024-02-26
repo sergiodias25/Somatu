@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _gameplayPanel;
-    private AnimationsHandler _animationsHandler;
     private PlayerStats _playerStats;
 
     [SerializeField]
@@ -63,7 +62,6 @@ public class UIManager : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
-        _animationsHandler = FindObjectOfType<AnimationsHandler>();
         _playerStats = FindObjectOfType<PlayerStats>();
         //ShowMainMenu();
         HideSubMenus();
@@ -236,7 +234,6 @@ public class UIManager : MonoBehaviour
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
         ShowMainMenu();
-        _animationsHandler.HideStats();
     }
 
     public void HelpClick()
@@ -315,7 +312,10 @@ public class UIManager : MonoBehaviour
     public void RestoreGameplayPanel()
     {
         ToggleGameplayElements(true);
-        _timer.UnpauseTimer();
+        if (_gameManager.IsGameInProgress() && !_gameManager.HasGameEnded())
+        {
+            _timer.UnpauseTimer();
+        }
     }
 
     public void ToggleGameplayElements(bool statusToChangeTo)

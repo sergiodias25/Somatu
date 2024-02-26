@@ -38,9 +38,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Canvas _gameCanvas;
 
+    [SerializeField]
+    private PlayerStats _playerStats;
+
     private Timer _timer;
     private UIManager _uiManager;
-    private AnimationsHandler _animationsHandler;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
     private List<int> _solutionNumbers = new();
@@ -55,7 +57,6 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty SelectedDifficulty;
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
-    private PlayerStats _playerStats;
     private AdBanner _adBanner;
     private SettingsHandler _settingsHandler;
 
@@ -252,7 +253,6 @@ public class GameManager : MonoBehaviour
             GenerateGrid(numbers, false);
         }
         _uiManager.ToggleHelpButton(true);
-        _animationsHandler.RestoreGameplayBar();
         LogSolution();
     }
 
@@ -672,14 +672,12 @@ public class GameManager : MonoBehaviour
         }
 
         _uiManager = FindObjectOfType<UIManager>();
-        _playerStats = FindObjectOfType<PlayerStats>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
-        _animationsHandler = FindObjectOfType<AnimationsHandler>();
 
         _gameCanvas.gameObject.SetActive(true);
         _uiManager.ShowMainMenu();
-        _playerStats.UpdateValues();
         _settingsHandler.LoadData();
+        _playerStats.LoadData(this);
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);
         var boardCenter = new Vector2(

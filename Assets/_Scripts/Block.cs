@@ -14,7 +14,6 @@ public class Block : MonoBehaviour
     private SpriteRenderer _sprite;
     private GameManager _gameManager;
     private AudioManager _audioManager;
-    private AnimationsHandler _animationsHandler;
     private Vector3 mousePositionOffset;
     private Node _originalNode;
     private bool _isInteractible = false;
@@ -25,7 +24,6 @@ public class Block : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         _audioManager = FindObjectOfType<AudioManager>();
-        _animationsHandler = FindObjectOfType<AnimationsHandler>();
     }
 
     public Node GetNode()
@@ -50,7 +48,6 @@ public class Block : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _animationsHandler.RestoreGameplayBar();
         if (GetNodeTouched() != null && _isInteractible)
         {
             FindObjectOfType<GameManager>().RemoveHints();

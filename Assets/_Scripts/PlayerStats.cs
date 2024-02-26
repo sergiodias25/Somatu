@@ -22,73 +22,74 @@ public class PlayerStats : MonoBehaviour
     private TextMeshProUGUI _easyHelpsUsedText;
 
     [SerializeField]
-    private TextMeshPro _mediumGamesPlayedText;
+    private TextMeshProUGUI _mediumGamesPlayedText;
 
     [SerializeField]
-    private TextMeshPro _mediumGamesCompletedText;
+    private TextMeshProUGUI _mediumGamesCompletedText;
 
     [SerializeField]
-    private TextMeshPro _mediumTimeFastestText;
+    private TextMeshProUGUI _mediumTimeFastestText;
 
     [SerializeField]
-    private TextMeshPro _mediumTimeAverageText;
+    private TextMeshProUGUI _mediumTimeAverageText;
 
     [SerializeField]
-    private TextMeshPro _mediumHelpsUsedText;
+    private TextMeshProUGUI _mediumHelpsUsedText;
 
     [SerializeField]
-    private TextMeshPro _hardGamesPlayedText;
+    private TextMeshProUGUI _hardGamesPlayedText;
 
     [SerializeField]
-    private TextMeshPro _hardGamesCompletedText;
+    private TextMeshProUGUI _hardGamesCompletedText;
 
     [SerializeField]
-    private TextMeshPro _hardTimeFastestText;
+    private TextMeshProUGUI _hardTimeFastestText;
 
     [SerializeField]
-    private TextMeshPro _hardTimeAverageText;
+    private TextMeshProUGUI _hardTimeAverageText;
 
     [SerializeField]
-    private TextMeshPro _hardHelpsUsedText;
+    private TextMeshProUGUI _hardHelpsUsedText;
 
     [SerializeField]
-    private TextMeshPro _extremeGamesPlayedText;
+    private TextMeshProUGUI _extremeGamesPlayedText;
 
     [SerializeField]
-    private TextMeshPro _extremeGamesCompletedText;
+    private TextMeshProUGUI _extremeGamesCompletedText;
 
     [SerializeField]
-    private TextMeshPro _extremeTimeFastestText;
+    private TextMeshProUGUI _extremeTimeFastestText;
 
     [SerializeField]
-    private TextMeshPro _extremeTimeAverageText;
+    private TextMeshProUGUI _extremeTimeAverageText;
 
     [SerializeField]
-    private TextMeshPro _extremeHelpsUsedText;
+    private TextMeshProUGUI _extremeHelpsUsedText;
 
     [SerializeField]
-    private TextMeshPro _challengeGamesPlayedText;
+    private TextMeshProUGUI _challengeGamesPlayedText;
 
     [SerializeField]
-    private TextMeshPro _challengeSolvesMaximumText;
+    private TextMeshProUGUI _challengeSolvesMaximumText;
 
     [SerializeField]
-    private TextMeshPro _challengeSolvesAverageText;
+    private TextMeshProUGUI _challengeSolvesAverageText;
 
     [SerializeField]
-    private TextMeshPro _challengeTimeLongestText;
+    private TextMeshProUGUI _challengeTimeLongestText;
 
     [SerializeField]
-    private TextMeshPro _challengeTimeAverageText;
+    private TextMeshProUGUI _challengeTimeAverageText;
 
     [SerializeField]
-    private TextMeshPro _challengeHelpsUsedText;
+    private TextMeshProUGUI _challengeHelpsUsedText;
 
     GameManager _gameManager;
 
-    private void Awake()
+    public void LoadData(GameManager gameManager)
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager = gameManager;
+        UpdateValues();
     }
 
     public void StartedGame(Difficulty difficulty)
