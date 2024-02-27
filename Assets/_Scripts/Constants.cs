@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 
 public class Constants : MonoBehaviour
@@ -133,16 +134,15 @@ public class Constants : MonoBehaviour
         return -1;
     }
 
-    // COLORS USED
-    public static Color CorrectSumColor = new Color32(52, 235, 122, 255);
-    public static Color IncorrectSumColor = new Color32(244, 113, 116, 255);
-    public static Color SuccessBackgroundColor = new Color32(16, 173, 18, 255);
-    public static Color InProgressBackgroundColor = new Color32(245, 245, 159, 255);
-    public static Color NextLevelButtonEnabled = new Color32(144, 136, 130, 255);
-    public static Color NextLevelButtonDisabled = new Color32(144, 136, 130, 0);
-    public static Color TextColor = Color.white;
-    public static Color SelectedBlock = Color.yellow;
-    public static Color UnselectedBlock = Color.gray;
+    /* COLORS USED
+    0 - Main square and top background
+    1 - Main text color
+    2 - Neutral block color
+    3 - green block color
+    4 - red block color
+    5 - selected block color
+    6 - no hint solution block color
+     */
 
     public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };

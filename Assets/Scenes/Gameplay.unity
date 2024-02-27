@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45285781}
   - component: {fileID: 45285782}
+  - component: {fileID: 45285783}
   m_Layer: 0
   m_Name: BackgroundTop
   m_TagString: Untagged
@@ -208,7 +209,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e84c3fd2d961da14f9ad9ebf575cfc4f, type: 3}
-  m_Color: {r: 0.15294118, g: 0.16470589, b: 0.19215687, a: 1}
+  m_Color: {r: 0.18623178, g: 0.2939524, b: 0.8773585, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -218,6 +219,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &45285783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45285780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Light
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.1
+    ColourIndex: 0
+    IsChanged: 0
 --- !u!1 &57670137
 GameObject:
   m_ObjectHideFlags: 0
@@ -10024,6 +10045,101 @@ Transform:
   - {fileID: 2141097520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1569586164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569586166}
+  - component: {fileID: 1569586165}
+  m_Layer: 0
+  m_Name: ColorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1569586165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569586164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbae97fb291dab5419be8ec7717b2360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Persistent: 0
+  ColoursPerPalette: 5
+  OldColoursPerPalette: 5
+  Palettes:
+  - Name: Light
+    Selected: 0
+    Colours:
+    - {r: 0.79013884, g: 0.8024439, b: 0.8679245, a: 1}
+    - {r: 0.17661981, g: 0.623024, b: 0.764151, a: 1}
+    - {r: 0.03804734, g: 0.2986129, b: 0.5377358, a: 1}
+    - {r: 0.19450872, g: 0.29800442, b: 0.8773585, a: 1}
+    - {r: 0.2559185, g: 0.3031161, b: 0.764151, a: 1}
+    - {r: 0.2559185, g: 0.3031161, b: 0.764151, a: 1}
+  - Name: Dark
+    Selected: 1
+    Colours:
+    - {r: 0.1254902, g: 0.14509805, b: 0.19215688, a: 1}
+    - {r: 0.9333334, g: 1, b: 0.9490197, a: 1}
+    - {r: 0.16691881, g: 0.258454, b: 0.2924528, a: 1}
+    - {r: 0.1254902, g: 0.48235297, b: 0.40000004, a: 1}
+    - {r: 0.5058824, g: 0.14509805, b: 0.19215688, a: 1}
+    - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
+  - Name: Half
+    Selected: 0
+    Colours:
+    - {r: 0.4486898, g: 0.43169275, b: 0.8396226, a: 1}
+    - {r: 0.22555602, g: 0.1504984, b: 0.3584906, a: 1}
+    - {r: 0.66909933, g: 0.737629, b: 0.7924528, a: 1}
+    - {r: 0.19668435, g: 0.16571732, b: 0.26415092, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+  - Name: Metallic
+    Selected: 0
+    Colours:
+    - {r: 0.4123836, g: 0.41144538, b: 0.4339623, a: 1}
+    - {r: 0.22555602, g: 0.1504984, b: 0.3584906, a: 1}
+    - {r: 0.19793521, g: 0.25308168, b: 0.3018868, a: 1}
+    - {r: 0.19668435, g: 0.16571732, b: 0.26415092, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+  - Name: Gold
+    Selected: 0
+    Colours:
+    - {r: 0.7264151, g: 0.6108529, b: 0.39404595, a: 1}
+    - {r: 0.22555602, g: 0.1504984, b: 0.3584906, a: 1}
+    - {r: 0.19793521, g: 0.25308168, b: 0.3018868, a: 1}
+    - {r: 0.19668435, g: 0.16571732, b: 0.26415092, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+    - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+  OldPaletteCount: 5
+  SelectedPaletteIdx: 1
+--- !u!4 &1569586166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569586164}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.07461262, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1642531185 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3055509475264382814, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -10934,6 +11050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735692455}
   - component: {fileID: 1735692456}
+  - component: {fileID: 1735692457}
   m_Layer: 0
   m_Name: BackgroundGame
   m_TagString: Untagged
@@ -10998,7 +11115,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e84c3fd2d961da14f9ad9ebf575cfc4f, type: 3}
-  m_Color: {r: 0.15294118, g: 0.16470589, b: 0.19215687, a: 1}
+  m_Color: {r: 0.18623178, g: 0.2939524, b: 0.8773585, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -11008,6 +11125,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1735692457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735692454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dark
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.1
+    ColourIndex: 0
+    IsChanged: 0
 --- !u!1 &1764180681
 GameObject:
   m_ObjectHideFlags: 0
@@ -14002,6 +14139,7 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1716797854}
   - {fileID: 1669322051}
+  - {fileID: 1569586166}
   - {fileID: 1899399282}
   - {fileID: 1556593138}
   - {fileID: 2016961183}

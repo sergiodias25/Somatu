@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using Assets.Scripts.SaveGame;
 using System.Threading.Tasks;
+using CandyCabinets.Components.Colour;
 
 public class GameManager : MonoBehaviour
 {
@@ -247,6 +248,7 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionGroupSum(0, 1, 2));
         _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionGroupSum(3, 4, 5));
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionGroupSum(6, 7, 8));
+        RemoveHints();
         if (CheckResult(false))
         {
             ResetBoard(false, true, false);
@@ -284,6 +286,10 @@ public class GameManager : MonoBehaviour
 
     internal bool CheckResult(bool isActionable)
     {
+        if (!IsGameInProgress())
+        {
+            return false;
+        }
         bool firstRowCompleted = CheckLineOrColumnResult(
             GetNodesSum(2, 5, 8),
             GetSolutionGroupSum(2, 5, 8),
@@ -349,14 +355,26 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(Constants.CorrectSumColor);
+            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
         }
-        _firstRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _secondRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _thirdRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _firstColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _secondColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
+        _firstRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        _secondRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        _thirdRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        _firstColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        _secondColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        _thirdColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.IncrementHelpsAvailable(1);
@@ -400,7 +418,7 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(Constants.IncorrectSumColor);
+            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
@@ -423,11 +441,11 @@ public class GameManager : MonoBehaviour
         {
             if (currentSum == expectedResult)
             {
-                block.GetNode().UpdateColor(Constants.CorrectSumColor);
+                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
             }
             else
             {
-                block.GetNode().UpdateColor(Constants.IncorrectSumColor);
+                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
             }
         }
         else if (
@@ -438,7 +456,7 @@ public class GameManager : MonoBehaviour
             || SelectedDifficulty == Constants.Difficulty.Extreme
         )
         {
-            block.GetNode().UpdateColor(Constants.InProgressBackgroundColor);
+            block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
         }
 
         if (currentSum == expectedResult)
@@ -545,7 +563,9 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i <= hintsLimit - 1; i++)
             {
                 int randomNodeIndex = Random.Range(0, incorrectNodes.Count);
-                incorrectNodes[randomNodeIndex].UpdateColor(Constants.IncorrectSumColor);
+                incorrectNodes[randomNodeIndex].UpdateColor(
+                    ColourManager.Instance.SelectedPalette().Colours[4]
+                );
                 incorrectNodes.RemoveAt(randomNodeIndex);
             }
         }
@@ -555,7 +575,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
-            _allNodes[i].UpdateColor(Constants.UnselectedBlock);
+            _allNodes[i].UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
         }
         _uiManager.ToggleHelpButton(true);
     }
@@ -676,7 +696,7 @@ public class GameManager : MonoBehaviour
 
         _gameCanvas.gameObject.SetActive(true);
         _uiManager.ShowMainMenu();
-        _settingsHandler.LoadData();
+        _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);
@@ -692,6 +712,7 @@ public class GameManager : MonoBehaviour
         );
         _topBackground.transform.position = topCenter;
         _topBackground.gameObject.SetActive(true);
+        ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
     }
 
     private void OnApplicationFocus(bool focusedOn)

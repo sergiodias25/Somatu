@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
-using System.Linq;
 using UnityEngine.EventSystems;
+using CandyCabinets.Components.Colour;
 
 public class Block : MonoBehaviour
 {
@@ -64,13 +64,15 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
-                    nodeClickedOn.UpdateColor(Constants.SelectedBlock);
+                    nodeClickedOn.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[5]);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
+                    selectedBlock._originalNode.UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[2]
+                    );
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
@@ -79,7 +81,9 @@ public class Block : MonoBehaviour
                     {
                         var tempNode = selectedBlock._originalNode;
 
-                        selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
+                        selectedBlock._originalNode.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[2]
+                        );
                         _gameManager.StoreUndoData(tempNode, _originalNode);
                         SwitchNodes(_originalNode, selectedBlock._originalNode);
                         selectedBlock.IsSelected = false;
