@@ -576,6 +576,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
             _allNodes[i].UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
+            _allNodes[i].GetBlockInNode().UpdateTextColor();
         }
         _uiManager.ToggleHelpButton(true);
     }

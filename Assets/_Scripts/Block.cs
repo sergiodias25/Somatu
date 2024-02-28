@@ -43,6 +43,9 @@ public class Block : MonoBehaviour
         }
         _originalNode = node;
         transform.SetParent(node.transform);
+        _text.color = interactible
+            ? ColourManager.Instance.SelectedPalette().Colours[7]
+            : ColourManager.Instance.SelectedPalette().Colours[1];
         return this;
     }
 
@@ -226,5 +229,12 @@ public class Block : MonoBehaviour
         secondNode.SetBlockInNode(tempBlock);
         secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
         secondNode.GetBlockInNode()._originalNode = secondNode;
+    }
+
+    internal void UpdateTextColor()
+    {
+        _text.color = _isInteractible
+            ? ColourManager.Instance.SelectedPalette().Colours[7]
+            : ColourManager.Instance.SelectedPalette().Colours[1];
     }
 }

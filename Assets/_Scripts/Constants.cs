@@ -135,13 +135,16 @@ public class Constants : MonoBehaviour
     }
 
     /* COLORS USED
-    0 - Main square and top background
-    1 - Main text color
-    2 - Neutral block color
-    3 - green block color
-    4 - red block color
-    5 - selected block color
-    6 - no hint solution block color
+    0 - Central and top background
+    1 - Dark text
+    2 - Neutral block
+    3 - green block
+    4 - red block
+    5 - selected block
+    6 - no hint solution block
+    7 - Clear text
+    8 - Buttons
+    9 - Icons
      */
 
     public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };

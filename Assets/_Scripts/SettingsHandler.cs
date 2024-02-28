@@ -71,6 +71,7 @@ public class SettingsHandler : MonoBehaviour
         _gradientBg.UpdateTheme(Constants.ColorPalettes[_newSelectedColorsIndex]);
         ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
         _gameManager.CheckResult(false);
+        _gameManager.RemoveHints();
     }
 
     private int GetNextTheme(int selectedColorsIndex)

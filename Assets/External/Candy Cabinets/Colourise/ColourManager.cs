@@ -57,8 +57,8 @@ namespace CandyCabinets.Components.Colour
         [Tooltip("Number of colours per palette. Minimum 3 and maximum of 10.")]
         [Range(3, 10)]
         [SerializeField]
-        public int ColoursPerPalette = 3;
-        public int OldColoursPerPalette = 3;
+        public int ColoursPerPalette = 10;
+        public int OldColoursPerPalette = 10;
 
         [Tooltip("Palette collection.")]
         public List<Palette> Palettes;

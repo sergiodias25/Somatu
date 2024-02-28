@@ -1,3 +1,4 @@
+using CandyCabinets.Components.Colour;
 using TMPro;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class Timer : MonoBehaviour
     private void Init()
     {
         enabled = true;
-        _timerText.color = Color.white;
+        _timerText.color = ColourManager.Instance.SelectedPalette().Colours[1];
         _timeLimitValue = Constants.ChallengeTimeLimit;
         _isRunning = true;
     }
