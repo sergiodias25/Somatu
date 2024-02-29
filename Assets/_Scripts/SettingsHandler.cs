@@ -66,10 +66,11 @@ public class SettingsHandler : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         int _selectedColorsIndex = _gameManager.SavedGameData.SettingsData.SelectedThemeIndex;
         int _newSelectedColorsIndex = GetNextTheme(_selectedColorsIndex);
+        ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
+        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = _newSelectedColorsIndex;
         _gameManager.SavedGameData.PersistData();
 
         _gradientBg.UpdateTheme(Constants.ColorPalettes[_newSelectedColorsIndex]);
-        ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
         _gameManager.CheckResult(false);
         _gameManager.RemoveHints();
     }
@@ -78,39 +79,25 @@ public class SettingsHandler : MonoBehaviour
     {
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 1)
         {
-            selectedColorsIndex = 0;
-            _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-            _gameManager.SavedGameData.PersistData();
-            return selectedColorsIndex;
+            return 0;
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 2)
         {
             if (_gameManager.SavedGameData.PurchaseData.GoldTheme)
             {
-                selectedColorsIndex += 1;
-                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-                _gameManager.SavedGameData.PersistData();
-                return selectedColorsIndex;
+                return selectedColorsIndex + 1;
             }
-            selectedColorsIndex = -1;
-            return GetNextTheme(selectedColorsIndex);
+            return 0;
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 3)
         {
             if (_gameManager.SavedGameData.PurchaseData.MetallicTheme)
             {
-                selectedColorsIndex += 1;
-                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-                _gameManager.SavedGameData.PersistData();
-                return selectedColorsIndex;
+                return selectedColorsIndex + 1;
             }
-            selectedColorsIndex += 1;
-            return GetNextTheme(selectedColorsIndex);
+            return GetNextTheme(selectedColorsIndex + 1);
         }
-        selectedColorsIndex += 1;
-        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-        _gameManager.SavedGameData.PersistData();
-        return selectedColorsIndex;
+        return selectedColorsIndex + 1;
     }
 
     private void UpdateSoundIcon()

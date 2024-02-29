@@ -37,9 +37,6 @@ public class GameManager : MonoBehaviour
     private GameObject _generatedNodesObject;
 
     [SerializeField]
-    private Canvas _gameCanvas;
-
-    [SerializeField]
     private PlayerStats _playerStats;
 
     private Timer _timer;
@@ -695,7 +692,6 @@ public class GameManager : MonoBehaviour
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
 
-        _gameCanvas.gameObject.SetActive(true);
         _uiManager.ShowMainMenu();
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
@@ -706,24 +702,22 @@ public class GameManager : MonoBehaviour
             (float)(_height + 2.68) / 2 - 0.5f
         );
         _gameBackground.transform.position = boardCenter;
-        _gameBackground.gameObject.SetActive(true);
 
         var topCenter = Camera.main.ScreenToWorldPoint(
             new Vector3(Screen.width / 2, Screen.height - 10, 1)
         );
         _topBackground.transform.position = topCenter;
-        _topBackground.gameObject.SetActive(true);
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
     }
 
-    private void OnApplicationFocus(bool focusedOn)
-    {
-        if (!focusedOn)
+    /*     private void OnApplicationFocus(bool focusedOn)
         {
-            Debug.Log("Save by lost focus");
-            LastResortSaveGame();
-        }
-    }
+            if (!focusedOn)
+            {
+                Debug.Log("Save by lost focus");
+                LastResortSaveGame();
+            }
+        } */
 
     private void OnApplicationPause(bool paused)
     {

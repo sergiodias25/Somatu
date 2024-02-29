@@ -63,7 +63,7 @@ namespace CandyCabinets.Components.Colour
         [Tooltip("Palette collection.")]
         public List<Palette> Palettes;
         public int OldPaletteCount = 0;
-        public int SelectedPaletteIdx = 0;
+        public int SelectedPaletteIdx = -1;
 
         private UnityEvent colourUpdateEvent;
 

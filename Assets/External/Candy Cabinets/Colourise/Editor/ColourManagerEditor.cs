@@ -199,9 +199,8 @@ namespace CandyCabinets.Components.Colour
 
             if (selected.Count <= 0)
             {
-                colourManager.SelectedPaletteIdx = 0;
-                colourManager.Palettes[0].Selected = true;
-                SetColour();
+                colourManager.SelectedPaletteIdx = -1;
+                colourManager.Palettes.FindAll(x => x.Selected = false);
             }
         }
 

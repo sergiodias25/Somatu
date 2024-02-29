@@ -58,6 +58,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _profilePanel;
 
+    [SerializeField]
+    private GameObject _gameCanvas;
+
+    [SerializeField]
+    private GameObject _backgroundsPanel;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -83,9 +89,12 @@ public class UIManager : MonoBehaviour
         ShowObject(_startGameButton.gameObject);
         ToggleContinueButton();
         ShowObject(_challengeButton.gameObject);
-        _shopPanel.SetActive(false);
-        _settingsPanel.SetActive(false);
-        _profilePanel.SetActive(false);
+        HideObject(_shopPanel);
+        HideObject(_settingsPanel);
+        HideObject(_profilePanel);
+        ShowObject(_backgroundsPanel);
+        ShowObject(_gameCanvas);
+        ShowObject(_backgroundsPanel);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge

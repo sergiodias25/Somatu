@@ -22,17 +22,6 @@ namespace CandyCabinets.Components.Colour
                 GameObject.FindObjectsOfType(typeof(ColourManager))
             );
 
-            if (colourManagers.Count <= 0)
-            {
-                Debug.LogError("Please add one Colour Manager.");
-                return;
-            }
-
-            if (colourManagers.Count > 1)
-            {
-                Debug.LogWarning("More than one Colour Manager detected.");
-            }
-
             ColourManager = (ColourManager)colourManagers[0];
             ColourManager.StartListening(ReColour);
 
@@ -47,26 +36,14 @@ namespace CandyCabinets.Components.Colour
                 GameObject.FindObjectsOfType(typeof(ColourManager))
             );
 
-            if (colourManagers.Count <= 0)
-            {
-                Debug.LogError("Please add one Colour Manager.");
-                return;
-            }
-
-            if (colourManagers.Count > 1)
-            {
-                Debug.LogWarning("More than one Colour Manager detected.");
-            }
-
             ColourManager colourManager = (ColourManager)colourManagers[0];
 
-            if (colourManager.Palettes.Count <= 0)
+            Palette palette = colourManager.Palettes.Find(x => x.Selected);
+            if (palette == null)
             {
-                Debug.LogError("Please add a Palette to Colour Manager.");
                 return;
             }
 
-            Palette palette = colourManager.Palettes.Find(x => x.Selected);
             if (Palette != palette.Name)
             {
                 Palette = palette.Name;
@@ -89,10 +66,7 @@ namespace CandyCabinets.Components.Colour
                 {
                     // Give special treatment to SpriteRenderer if running in WebGL
                     // NOTE: We can add other Renderers below if WebGL is having difficulty detecting them..
-                    if (
-                        Application.platform == RuntimePlatform.WebGLPlayer
-                        && t.Name == "SpriteRenderer"
-                    )
+                    if (t.Name == "SpriteRenderer")
                     {
                         SpriteRenderer spriteRenderer = comp.GetComponent<SpriteRenderer>();
                         if (spriteRenderer == null)

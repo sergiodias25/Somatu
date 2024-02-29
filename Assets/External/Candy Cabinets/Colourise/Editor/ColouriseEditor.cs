@@ -65,7 +65,7 @@ namespace CandyCabinets.Components.Colour
         void UpdatePalette(ColourManager colourManager, Colourise colourise)
         {
             Palette selected = colourManager.Palettes.Find(x => x.Selected);
-            if (colourise.Palette != selected.Name)
+            if (selected != null && colourise.Palette != selected.Name)
             {
                 colourise.Palette = selected.Name;
                 EditorGUILayout.LabelField("Palette", colourise.Palette);
