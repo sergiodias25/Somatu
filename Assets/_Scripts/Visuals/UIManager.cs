@@ -64,6 +64,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _backgroundsPanel;
 
+    [SerializeField]
+    private GameObject _topPanel;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -94,7 +97,7 @@ public class UIManager : MonoBehaviour
         HideObject(_profilePanel);
         ShowObject(_backgroundsPanel);
         ShowObject(_gameCanvas);
-        ShowObject(_backgroundsPanel);
+        ShowObject(_topPanel);
 
         _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
             Constants.Difficulty.Challenge
