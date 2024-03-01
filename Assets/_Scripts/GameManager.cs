@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PlayerStats _playerStats;
 
+    [SerializeField]
+    private AdBanner _adBanner;
+
     private Timer _timer;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
@@ -55,7 +58,6 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty SelectedDifficulty;
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
-    private AdBanner _adBanner;
     private SettingsHandler _settingsHandler;
 
     void Start()
@@ -70,7 +72,6 @@ public class GameManager : MonoBehaviour
         SavedGameData = new SaveGame();
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
-        _adBanner = FindObjectOfType<AdBanner>();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
@@ -353,25 +354,8 @@ public class GameManager : MonoBehaviour
         {
             node.GetBlockInNode().DisableInteraction();
             node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+            node.GetBlockInNode().UpdateTextColor();
         }
-        _firstRowResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
-        _secondRowResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
-        _thirdRowResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
-        _firstColumnResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
-        _secondColumnResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
-        _thirdColumnResultBlock
-            .GetNode()
-            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.IncrementHelpsAvailable(1);
@@ -389,10 +373,10 @@ public class GameManager : MonoBehaviour
             _timer.PauseTimer();
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
+            SavedGameData.PersistData();
         }
-        _uiManager.ShowGameplayButtons();
+        _uiManager.ToggleUndoButton(false);
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-        SavedGameData.PersistData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -416,14 +400,17 @@ public class GameManager : MonoBehaviour
         {
             node.GetBlockInNode().DisableInteraction();
             node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
+            node.GetBlockInNode().UpdateTextColor();
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
+        _uiManager.ToggleUndoButton(false);
         _playerStats.CompletedGame(
             SelectedDifficulty,
             _elapsedTime,
             int.Parse(_timesSolvedText.text)
         );
+        SavedGameData.PersistData();
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
@@ -570,12 +557,19 @@ public class GameManager : MonoBehaviour
 
     public void RemoveHints()
     {
+        Color colorToUpdateTo = HasGameEnded()
+            ? ColourManager.Instance.SelectedPalette().Colours[3]
+            : ColourManager.Instance.SelectedPalette().Colours[2];
+
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
-            _allNodes[i].UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
+            _allNodes[i].UpdateColor(colorToUpdateTo);
             _allNodes[i].GetBlockInNode().UpdateTextColor();
         }
-        _uiManager.ToggleHelpButton(true);
+        if (!HasGameEnded())
+        {
+            _uiManager.ToggleHelpButton(true);
+        }
     }
 
     private void DestroyBlock(Block block)

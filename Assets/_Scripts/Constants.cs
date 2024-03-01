@@ -123,11 +123,11 @@ public class Constants : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 4;
-            case Difficulty.Medium:
                 return 3;
-            case Difficulty.Hard:
+            case Difficulty.Medium:
                 return 2;
+            case Difficulty.Hard:
+                return 1;
             case Difficulty.Extreme:
                 return 1;
         }
@@ -147,7 +147,13 @@ public class Constants : MonoBehaviour
     9 - Icons
      */
 
-    public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };
+    public static Color[] LightColors =
+    {
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+    };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
     public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };
     public static Color[] BlackColors = { Color.black, Color.black, Color.black, Color.black };
@@ -155,7 +161,7 @@ public class Constants : MonoBehaviour
 
     public static Color[][] ColorPalettes =
     {
-        BluesColors,
+        LightColors,
         RedsColors,
         BlackColors,
         MetallicColors,
