@@ -10,7 +10,10 @@ public class UIManager : MonoBehaviour
     private Timer _timer;
 
     [SerializeField]
-    private Button _startGameButton;
+    private Button _classicModeButton;
+
+    [SerializeField]
+    private GameObject _mainMenuTitle;
 
     [SerializeField]
     private Button _continueGameButton;
@@ -89,7 +92,8 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        ShowObject(_startGameButton.gameObject);
+        ShowObject(_classicModeButton.gameObject);
+        ShowObject(_mainMenuTitle);
         ToggleContinueButton();
         ShowObject(_challengeButton.gameObject);
         HideObject(_shopPanel);
@@ -157,7 +161,8 @@ public class UIManager : MonoBehaviour
 
     public void HideMainMenu()
     {
-        HideObject(_startGameButton.gameObject);
+        HideObject(_classicModeButton.gameObject);
+        HideObject(_mainMenuTitle);
         HideObject(_continueGameButton.gameObject);
         HideObject(_challengeButton.gameObject);
     }
