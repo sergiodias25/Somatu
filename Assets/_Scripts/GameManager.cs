@@ -697,9 +697,10 @@ public class GameManager : MonoBehaviour
         );
         _gameBackground.transform.position = boardCenter;
 
-        var topCenter = Camera.main.ScreenToWorldPoint(
-            new Vector3(Screen.width / 2, Screen.height - 10, 1)
+        var screenTopCenter = Camera.main.ScreenToWorldPoint(
+            new Vector2(Screen.width / 2, Screen.height)
         );
+        var topCenter = new Vector2(screenTopCenter.x, screenTopCenter.y - 0.5f);
         _topBackground.transform.position = topCenter;
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
     }

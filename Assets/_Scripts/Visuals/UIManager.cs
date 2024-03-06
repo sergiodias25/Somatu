@@ -10,28 +10,10 @@ public class UIManager : MonoBehaviour
     private Timer _timer;
 
     [SerializeField]
-    private Button _classicModeButton;
-
-    [SerializeField]
-    private GameObject _mainMenuTitle;
+    private GameObject _mainMenuPanel;
 
     [SerializeField]
     private Button _continueGameButton;
-
-    [SerializeField]
-    private Button _challengeButton;
-
-    [SerializeField]
-    private Button _easyModeButton;
-
-    [SerializeField]
-    private Button _mediumModeButton;
-
-    [SerializeField]
-    private Button _hardModeButton;
-
-    [SerializeField]
-    private Button _extremeModeButton;
 
     [SerializeField]
     private Button _playAgainButton;
@@ -62,68 +44,48 @@ public class UIManager : MonoBehaviour
     private GameObject _profilePanel;
 
     [SerializeField]
-    private GameObject _gameCanvas;
-
-    [SerializeField]
     private GameObject _backgroundsPanel;
 
     [SerializeField]
     private GameObject _topPanel;
+
+    [SerializeField]
+    private GameObject _gameTitle;
+
+    [SerializeField]
+    private GameObject _classicMenu;
 
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
         _playerStats = FindObjectOfType<PlayerStats>();
-        //ShowMainMenu();
-        HideSubMenus();
+        HideClassicMenu();
         HideObject(_gameplayPanel);
         ToggleContinueButton();
     }
 
-    private void HideSubMenus()
+    private void HideClassicMenu()
     {
-        HideObject(_easyModeButton.gameObject);
-        HideObject(_mediumModeButton.gameObject);
-        HideObject(_hardModeButton.gameObject);
-        HideObject(_extremeModeButton.gameObject);
+        HideObject(_classicMenu);
     }
 
     public void ShowMainMenu()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        ShowObject(_classicModeButton.gameObject);
-        ShowObject(_mainMenuTitle);
-        ToggleContinueButton();
-        ShowObject(_challengeButton.gameObject);
+        ShowObject(_mainMenuPanel);
         HideObject(_shopPanel);
         HideObject(_settingsPanel);
         HideObject(_profilePanel);
         ShowObject(_backgroundsPanel);
-        ShowObject(_gameCanvas);
         ShowObject(_topPanel);
-
-        _challengeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Challenge
-        );
+        HideObject(_classicMenu);
     }
 
-    private void ShowSubMenus()
+    private void ShowClassicMenu()
     {
-        ShowObject(_easyModeButton.gameObject);
-        ShowObject(_mediumModeButton.gameObject);
-        ShowObject(_hardModeButton.gameObject);
-        ShowObject(_extremeModeButton.gameObject);
-
-        _mediumModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Medium
-        );
-        _hardModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Hard
-        );
-        _extremeModeButton.enabled = _gameManager.SavedGameData.IsDifficultyUnlocked(
-            Constants.Difficulty.Extreme
-        );
+        ShowObject(_classicMenu);
+        ToggleContinueButton();
     }
 
     private void HideObject(GameObject gameObject)
@@ -138,13 +100,13 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnStartGame()
     {
-        HideMainMenu();
-        ShowSubMenus();
+        HideObject(_mainMenuPanel);
+        ShowClassicMenu();
     }
 
     public void ClickOnContinueGame()
     {
-        HideMainMenu();
+        HideObject(_mainMenuPanel);
         ShowGameplayButtons();
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
@@ -154,43 +116,35 @@ public class UIManager : MonoBehaviour
 
     public void ClickOnChallenge()
     {
-        HideMainMenu();
+        HideObject(_mainMenuPanel);
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Challenge);
     }
 
-    public void HideMainMenu()
-    {
-        HideObject(_classicModeButton.gameObject);
-        HideObject(_mainMenuTitle);
-        HideObject(_continueGameButton.gameObject);
-        HideObject(_challengeButton.gameObject);
-    }
-
     public void ClickOnEasyMode()
     {
-        HideSubMenus();
+        HideClassicMenu();
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Easy);
     }
 
     public void ClickOnMediumMode()
     {
-        HideSubMenus();
+        HideClassicMenu();
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Medium);
     }
 
     public void ClickOnHardMode()
     {
-        HideSubMenus();
+        HideClassicMenu();
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Hard);
     }
 
     public void ClickOnExtremeMode()
     {
-        HideSubMenus();
+        HideClassicMenu();
         ShowGameplayButtons();
         _gameManager.Init(Constants.Difficulty.Extreme);
     }
@@ -199,6 +153,8 @@ public class UIManager : MonoBehaviour
     {
         ShowObject(_gameNodes);
         ShowObject(_gameplayPanel);
+        ShowObject(_gameTitle);
+        HideObject(_classicMenu);
 
         ToggleUndoButton(
             _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
@@ -243,13 +199,13 @@ public class UIManager : MonoBehaviour
             _gameManager.CheckResult(false);
             _gameManager.ResetBoard(true, false, true);
         }
-        HideSubMenus();
-        ToggleContinueButton();
+        HideClassicMenu();
         HideObject(_gameNodes);
         HideObject(_gameplayPanel);
         HideObject(_shopPanel);
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
+        HideObject(_classicMenu);
         ShowMainMenu();
     }
 
@@ -344,6 +300,7 @@ public class UIManager : MonoBehaviour
         else
         {
             HideObject(_gameplayPanel);
+            HideObject(_gameTitle);
         }
         _gameNodes.SetActive(statusToChangeTo);
     }
@@ -364,8 +321,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            HideMainMenu();
-            HideSubMenus();
+            HideObject(_mainMenuPanel);
+            HideClassicMenu();
             ToggleGameplayElements(false);
             if (_shopPanel.activeSelf)
             {
@@ -399,8 +356,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            HideMainMenu();
-            HideSubMenus();
+            HideObject(_mainMenuPanel);
+            HideClassicMenu();
             ToggleGameplayElements(false);
             if (_shopPanel.activeSelf)
             {
@@ -435,8 +392,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            HideMainMenu();
-            HideSubMenus();
+            HideObject(_mainMenuPanel);
+            HideClassicMenu();
             ToggleGameplayElements(false);
             if (_settingsPanel.activeSelf)
             {
