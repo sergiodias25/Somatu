@@ -1,3 +1,4 @@
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 
 public class Node : MonoBehaviour
@@ -9,10 +10,10 @@ public class Node : MonoBehaviour
 
     internal void Init(int i, int j, Block block, string parentName)
     {
-        _sprite.color = Constants.UnselectedBlock;
         name = string.Concat("Node_", i, "_", j);
         SetBlockInNode(block);
         transform.SetParent(GameObject.Find(parentName).transform);
+        UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
     }
 
     public void SetBlockInNode(Block block)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Assets.SimpleLocalization.Scripts;
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,11 +38,11 @@ public class SettingsHandler : MonoBehaviour
 
     void Awake() { }
 
-    public void LoadData()
+    public void LoadData(GameManager gameManager)
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _gradientBg = FindObjectOfType<GradientBg>();
-        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager = gameManager;
         _gradientBg.UpdateTheme(
             Constants.ColorPalettes[_gameManager.SavedGameData.SettingsData.SelectedThemeIndex]
         );
@@ -64,46 +65,39 @@ public class SettingsHandler : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         int _selectedColorsIndex = _gameManager.SavedGameData.SettingsData.SelectedThemeIndex;
-        _gradientBg.UpdateTheme(GetNextTheme(_selectedColorsIndex));
+        int _newSelectedColorsIndex = GetNextTheme(_selectedColorsIndex);
+        ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
+        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = _newSelectedColorsIndex;
+        _gameManager.SavedGameData.PersistData();
+
+        _gradientBg.UpdateTheme(Constants.ColorPalettes[_newSelectedColorsIndex]);
+        _gameManager.CheckResult(false);
+        _gameManager.RemoveHints();
     }
 
-    private Color[] GetNextTheme(int selectedColorsIndex)
+    private int GetNextTheme(int selectedColorsIndex)
     {
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 1)
         {
-            selectedColorsIndex = 0;
-            _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-            _gameManager.SavedGameData.PersistData();
-            return Constants.ColorPalettes[selectedColorsIndex];
+            return 0;
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 2)
         {
             if (_gameManager.SavedGameData.PurchaseData.GoldTheme)
             {
-                selectedColorsIndex += 1;
-                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-                _gameManager.SavedGameData.PersistData();
-                return Constants.ColorPalettes[selectedColorsIndex];
+                return selectedColorsIndex + 1;
             }
-            selectedColorsIndex = -1;
-            return GetNextTheme(selectedColorsIndex);
+            return 0;
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 3)
         {
             if (_gameManager.SavedGameData.PurchaseData.MetallicTheme)
             {
-                selectedColorsIndex += 1;
-                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-                _gameManager.SavedGameData.PersistData();
-                return Constants.ColorPalettes[selectedColorsIndex];
+                return selectedColorsIndex + 1;
             }
-            selectedColorsIndex += 1;
-            return GetNextTheme(selectedColorsIndex);
+            return GetNextTheme(selectedColorsIndex + 1);
         }
-        selectedColorsIndex += 1;
-        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedColorsIndex;
-        _gameManager.SavedGameData.PersistData();
-        return Constants.ColorPalettes[selectedColorsIndex];
+        return selectedColorsIndex + 1;
     }
 
     private void UpdateSoundIcon()

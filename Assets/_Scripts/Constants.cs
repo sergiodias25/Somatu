@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 
 public class Constants : MonoBehaviour
@@ -122,29 +123,37 @@ public class Constants : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 4;
-            case Difficulty.Medium:
                 return 3;
-            case Difficulty.Hard:
+            case Difficulty.Medium:
                 return 2;
+            case Difficulty.Hard:
+                return 1;
             case Difficulty.Extreme:
                 return 1;
         }
         return -1;
     }
 
-    // COLORS USED
-    public static Color CorrectSumColor = new Color32(52, 235, 122, 255);
-    public static Color IncorrectSumColor = new Color32(244, 113, 116, 255);
-    public static Color SuccessBackgroundColor = new Color32(16, 173, 18, 255);
-    public static Color InProgressBackgroundColor = new Color32(245, 245, 159, 255);
-    public static Color NextLevelButtonEnabled = new Color32(144, 136, 130, 255);
-    public static Color NextLevelButtonDisabled = new Color32(144, 136, 130, 0);
-    public static Color TextColor = Color.white;
-    public static Color SelectedBlock = Color.yellow;
-    public static Color UnselectedBlock = Color.gray;
+    /* COLORS USED
+    0 - Central and top background
+    1 - Dark text
+    2 - Neutral block
+    3 - green block
+    4 - red block
+    5 - selected block
+    6 - no hint solution block
+    7 - Clear text
+    8 - Buttons
+    9 - Icons
+     */
 
-    public static Color[] BluesColors = { Color.blue, Color.blue, Color.cyan, Color.white };
+    public static Color[] LightColors =
+    {
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+    };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
     public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };
     public static Color[] BlackColors = { Color.black, Color.black, Color.black, Color.black };
@@ -152,7 +161,7 @@ public class Constants : MonoBehaviour
 
     public static Color[][] ColorPalettes =
     {
-        BluesColors,
+        LightColors,
         RedsColors,
         BlackColors,
         MetallicColors,

@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using Assets.Scripts.SaveGame;
 using System.Threading.Tasks;
+using CandyCabinets.Components.Colour;
+using Assets.Scripts.CustomAnimation;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,10 +38,10 @@ public class GameManager : MonoBehaviour
     private GameObject _generatedNodesObject;
 
     [SerializeField]
-    private Canvas _gameCanvas;
+    private PlayerStats _playerStats;
 
     [SerializeField]
-    private PlayerStats _playerStats;
+    private AdBanner _adBanner;
 
     private Timer _timer;
     private UIManager _uiManager;
@@ -57,7 +59,6 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty SelectedDifficulty;
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
-    private AdBanner _adBanner;
     private SettingsHandler _settingsHandler;
 
     void Start()
@@ -72,7 +73,6 @@ public class GameManager : MonoBehaviour
         SavedGameData = new SaveGame();
         _audioManager = FindObjectOfType<AudioManager>();
         _timer = FindObjectOfType<Timer>();
-        _adBanner = FindObjectOfType<AdBanner>();
     }
 
     public void Init(Constants.Difficulty selectedDifficulty)
@@ -202,12 +202,6 @@ public class GameManager : MonoBehaviour
     public void GenerateGrid(List<int> numbers, bool loadGame)
     {
         int _countTracker = 0;
-
-        var aboveBoard = new Vector2(0, 0); /*
-        _gamePanel.GetComponent<RectTransform>().localPosition = aboveBoard;
-        _gamePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(_width + 1.2f, 1);
-        _gamePanel.gameObject.SetActive(true);*/
-
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
@@ -247,6 +241,7 @@ public class GameManager : MonoBehaviour
         _firstColumnResultBlock = GenerateResultBlock(0, 0, GetSolutionGroupSum(0, 1, 2));
         _secondColumnResultBlock = GenerateResultBlock(1, 0, GetSolutionGroupSum(3, 4, 5));
         _thirdColumnResultBlock = GenerateResultBlock(2, 0, GetSolutionGroupSum(6, 7, 8));
+        RemoveHints();
         if (CheckResult(false))
         {
             ResetBoard(false, true, false);
@@ -284,6 +279,10 @@ public class GameManager : MonoBehaviour
 
     internal bool CheckResult(bool isActionable)
     {
+        if (!IsGameInProgress())
+        {
+            return false;
+        }
         bool firstRowCompleted = CheckLineOrColumnResult(
             GetNodesSum(2, 5, 8),
             GetSolutionGroupSum(2, 5, 8),
@@ -326,9 +325,39 @@ public class GameManager : MonoBehaviour
         {
             if (isActionable)
             {
+                Block[] blocksToAnimate = new[]
+                {
+                    _firstRowResultBlock,
+                    _secondRowResultBlock,
+                    _thirdRowResultBlock,
+                    _firstColumnResultBlock,
+                    _secondColumnResultBlock,
+                    _thirdColumnResultBlock,
+                    _allNodes[0].GetBlockInNode(),
+                    _allNodes[1].GetBlockInNode(),
+                    _allNodes[2].GetBlockInNode(),
+                    _allNodes[3].GetBlockInNode(),
+                    _allNodes[4].GetBlockInNode(),
+                    _allNodes[5].GetBlockInNode(),
+                    _allNodes[6].GetBlockInNode(),
+                    _allNodes[7].GetBlockInNode(),
+                    _allNodes[8].GetBlockInNode(),
+                };
+                CustomAnimation.AnimatePuzzleSolved(blocksToAnimate);
                 DoEndGameActions();
             }
             return true;
+        }
+        else
+        {
+            AnimateSolutionBlocks(
+                firstRowCompleted,
+                secondRowCompleted,
+                thirdRowCompleted,
+                firstColumnCompleted,
+                secondColumnCompleted,
+                thirdColumnCompleted
+            );
         }
         if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
@@ -340,8 +369,52 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        //SavedGameData.PersistData();
         return false;
+    }
+
+    private async void AnimateSolutionBlocks(
+        bool firstRowCompleted,
+        bool secondRowCompleted,
+        bool thirdRowCompleted,
+        bool firstColumnCompleted,
+        bool secondColumnCompleted,
+        bool thirdColumnCompleted
+    )
+    {
+        if (
+            SelectedDifficulty < Constants.Difficulty.Extreme
+            || (
+                SelectedDifficulty == Constants.Difficulty.Challenge
+                && ActualDifficulty != Constants.Difficulty.Extreme
+            )
+        )
+        {
+            await CustomAnimation.WaitForAnimation("MoveNumberBack");
+            if (firstRowCompleted)
+            {
+                _firstRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (secondRowCompleted)
+            {
+                _secondRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (thirdRowCompleted)
+            {
+                _thirdRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (firstColumnCompleted)
+            {
+                _firstColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            if (secondColumnCompleted)
+            {
+                _secondColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            if (thirdColumnCompleted)
+            {
+                _thirdColumnResultBlock.AnimatePartialSumCorrect();
+            }
+        }
     }
 
     private void DoEndGameActions()
@@ -349,14 +422,9 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(Constants.CorrectSumColor);
+            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+            node.GetBlockInNode().UpdateTextColor();
         }
-        _firstRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _secondRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _thirdRowResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _firstColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _secondColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
-        _thirdColumnResultBlock.GetNode().UpdateColor(Constants.CorrectSumColor);
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.IncrementHelpsAvailable(1);
@@ -374,10 +442,10 @@ public class GameManager : MonoBehaviour
             _timer.PauseTimer();
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
+            SavedGameData.PersistData();
         }
-        _uiManager.ShowGameplayButtons();
+        _uiManager.ToggleUndoButton(false);
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-        SavedGameData.PersistData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -400,15 +468,18 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(Constants.IncorrectSumColor);
+            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
+            node.GetBlockInNode().UpdateTextColor();
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHelpButton(false);
+        _uiManager.ToggleUndoButton(false);
         _playerStats.CompletedGame(
             SelectedDifficulty,
             _elapsedTime,
             int.Parse(_timesSolvedText.text)
         );
+        SavedGameData.PersistData();
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
@@ -423,11 +494,11 @@ public class GameManager : MonoBehaviour
         {
             if (currentSum == expectedResult)
             {
-                block.GetNode().UpdateColor(Constants.CorrectSumColor);
+                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
             }
             else
             {
-                block.GetNode().UpdateColor(Constants.IncorrectSumColor);
+                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
             }
         }
         else if (
@@ -438,7 +509,7 @@ public class GameManager : MonoBehaviour
             || SelectedDifficulty == Constants.Difficulty.Extreme
         )
         {
-            block.GetNode().UpdateColor(Constants.InProgressBackgroundColor);
+            block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
         }
 
         if (currentSum == expectedResult)
@@ -545,7 +616,9 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i <= hintsLimit - 1; i++)
             {
                 int randomNodeIndex = Random.Range(0, incorrectNodes.Count);
-                incorrectNodes[randomNodeIndex].UpdateColor(Constants.IncorrectSumColor);
+                incorrectNodes[randomNodeIndex].UpdateColor(
+                    ColourManager.Instance.SelectedPalette().Colours[4]
+                );
                 incorrectNodes.RemoveAt(randomNodeIndex);
             }
         }
@@ -553,11 +626,19 @@ public class GameManager : MonoBehaviour
 
     public void RemoveHints()
     {
+        Color colorToUpdateTo = HasGameEnded()
+            ? ColourManager.Instance.SelectedPalette().Colours[3]
+            : ColourManager.Instance.SelectedPalette().Colours[2];
+
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
-            _allNodes[i].UpdateColor(Constants.UnselectedBlock);
+            _allNodes[i].UpdateColor(colorToUpdateTo);
+            _allNodes[i].GetBlockInNode().UpdateTextColor();
         }
-        _uiManager.ToggleHelpButton(true);
+        if (!HasGameEnded())
+        {
+            _uiManager.ToggleHelpButton(true);
+        }
     }
 
     private void DestroyBlock(Block block)
@@ -674,9 +755,8 @@ public class GameManager : MonoBehaviour
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
 
-        _gameCanvas.gameObject.SetActive(true);
         _uiManager.ShowMainMenu();
-        _settingsHandler.LoadData();
+        _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);
@@ -685,23 +765,23 @@ public class GameManager : MonoBehaviour
             (float)(_height + 2.68) / 2 - 0.5f
         );
         _gameBackground.transform.position = boardCenter;
-        _gameBackground.gameObject.SetActive(true);
 
-        var topCenter = Camera.main.ScreenToWorldPoint(
-            new Vector3(Screen.width / 2, Screen.height - 10, 1)
+        var screenTopCenter = Camera.main.ScreenToWorldPoint(
+            new Vector2(Screen.width / 2, Screen.height)
         );
+        var topCenter = new Vector2(screenTopCenter.x, screenTopCenter.y - 0.5f);
         _topBackground.transform.position = topCenter;
-        _topBackground.gameObject.SetActive(true);
+        ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
     }
 
-    private void OnApplicationFocus(bool focusedOn)
-    {
-        if (!focusedOn)
+    /*     private void OnApplicationFocus(bool focusedOn)
         {
-            Debug.Log("Save by lost focus");
-            LastResortSaveGame();
-        }
-    }
+            if (!focusedOn)
+            {
+                Debug.Log("Save by lost focus");
+                LastResortSaveGame();
+            }
+        } */
 
     private void OnApplicationPause(bool paused)
     {
@@ -736,7 +816,10 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SavedGameData.ClearInProgressSavedGame();
+                if (SavedGameData != null)
+                {
+                    SavedGameData.ClearInProgressSavedGame();
+                }
             }
         }
         SavedGameData.PersistData();

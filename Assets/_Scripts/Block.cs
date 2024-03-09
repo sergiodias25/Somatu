@@ -1,7 +1,9 @@
 using UnityEngine;
 using TMPro;
-using System.Linq;
 using UnityEngine.EventSystems;
+using CandyCabinets.Components.Colour;
+using Assets.Scripts.CustomAnimation;
+using DG.Tweening;
 
 public class Block : MonoBehaviour
 {
@@ -43,6 +45,9 @@ public class Block : MonoBehaviour
         }
         _originalNode = node;
         transform.SetParent(node.transform);
+        _text.color = interactible
+            ? ColourManager.Instance.SelectedPalette().Colours[7]
+            : ColourManager.Instance.SelectedPalette().Colours[1];
         return this;
     }
 
@@ -55,6 +60,7 @@ public class Block : MonoBehaviour
             {
                 UpdateOffsetPosition();
                 _originalNode = GetNodeTouched();
+                CustomAnimation.NumberClicked(transform);
             }
             else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
             {
@@ -64,13 +70,15 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
-                    nodeClickedOn.UpdateColor(Constants.SelectedBlock);
+                    nodeClickedOn.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[5]);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
+                    selectedBlock._originalNode.UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[2]
+                    );
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
@@ -79,7 +87,9 @@ public class Block : MonoBehaviour
                     {
                         var tempNode = selectedBlock._originalNode;
 
-                        selectedBlock._originalNode.UpdateColor(Constants.UnselectedBlock);
+                        selectedBlock._originalNode.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[2]
+                        );
                         _gameManager.StoreUndoData(tempNode, _originalNode);
                         SwitchNodes(_originalNode, selectedBlock._originalNode);
                         selectedBlock.IsSelected = false;
@@ -152,19 +162,23 @@ public class Block : MonoBehaviour
                 else
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-                    gameObject.transform.position = _originalNode.transform.position;
+                    CustomAnimation.NumberDropped(
+                        gameObject.transform,
+                        _originalNode.transform.position
+                    );
                 }
             }
             else
             {
-                gameObject.transform.position = _originalNode.transform.position;
+                CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
                 _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
+
             UpdateOffsetPosition();
         }
         else if (GetNodeTouched() == null)
         {
-            gameObject.transform.position = _originalNode.transform.position;
+            CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
         }
     }
 
@@ -213,14 +227,42 @@ public class Block : MonoBehaviour
         Node _tempNode = firstNode;
         var tempBlock = firstNode.GetBlockInNode();
 
-        firstNode.GetBlockInNode().transform.position = secondNode.transform.position;
+        CustomAnimation.NumberDropped(
+            firstNode.GetBlockInNode().transform,
+            secondNode.GetBlockInNode().transform.position
+        );
         firstNode.SetBlockInNode(secondNode.GetBlockInNode());
         firstNode.GetBlockInNode().transform.SetParent(firstNode.transform);
         firstNode.GetBlockInNode()._originalNode = firstNode;
 
-        secondNode.GetBlockInNode().transform.position = _tempNode.transform.position;
+        CustomAnimation.NumberSwitched(
+            secondNode.GetBlockInNode().transform,
+            _tempNode.transform.position
+        );
         secondNode.SetBlockInNode(tempBlock);
         secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
         secondNode.GetBlockInNode()._originalNode = secondNode;
+    }
+
+    internal void UpdateTextColor()
+    {
+        _text.color = _isInteractible
+            ? ColourManager.Instance.SelectedPalette().Colours[7]
+            : ColourManager.Instance.SelectedPalette().Colours[1];
+    }
+
+    public Sequence AnimatePartialSumCorrect()
+    {
+        return CustomAnimation.SumIsCorrect(_text.transform);
+    }
+
+    public Tweener AnimatePuzzleCompleted()
+    {
+        return CustomAnimation.ShakeAnimation(_text.transform);
+    }
+
+    public void AnimateIncorrectSolution()
+    {
+        CustomAnimation.SumIsIncorrect(_text.transform);
     }
 }
