@@ -1,8 +1,9 @@
-using System;
 using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.CustomAnimation;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -55,6 +56,24 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _classicMenu;
 
+    [SerializeField]
+    private GameObject _classicModeButton;
+
+    [SerializeField]
+    private GameObject _easyModeButton;
+
+    [SerializeField]
+    private GameObject _mediumModeButton;
+
+    [SerializeField]
+    private GameObject _hardModeButton;
+
+    [SerializeField]
+    private GameObject _extremeModeButton;
+
+    [SerializeField]
+    private GameObject _challengeModeButton;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -82,10 +101,17 @@ public class UIManager : MonoBehaviour
         HideObject(_classicMenu);
     }
 
-    private void ShowClassicMenu()
+    public void ShowClassicMenu()
     {
-        ShowObject(_classicMenu);
-        ToggleContinueButton();
+        var buttonAnimation = CustomAnimation.ButtonClicked(_classicModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideObject(_mainMenuPanel);
+            ShowObject(_classicMenu);
+            ToggleContinueButton();
+        });
+
+        buttonAnimation.Play();
     }
 
     private void HideObject(GameObject gameObject)
@@ -98,55 +124,85 @@ public class UIManager : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void ClickOnStartGame()
-    {
-        HideObject(_mainMenuPanel);
-        ShowClassicMenu();
-    }
-
     public void ClickOnContinueGame()
     {
-        HideObject(_mainMenuPanel);
-        ShowGameplayButtons();
-        _gameManager.Init(
-            (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
-            true
-        );
+        var buttonAnimation = CustomAnimation.ButtonClicked(_continueGameButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideObject(_mainMenuPanel);
+            ShowGameplayButtons();
+            _gameManager.Init(
+                (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
+                true
+            );
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ClickOnChallenge()
     {
-        HideObject(_mainMenuPanel);
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Challenge);
+        var buttonAnimation = CustomAnimation.ButtonClicked(_challengeModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideObject(_mainMenuPanel);
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Challenge);
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ClickOnEasyMode()
     {
-        HideClassicMenu();
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Easy);
+        var buttonAnimation = CustomAnimation.ButtonClicked(_easyModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideClassicMenu();
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Easy);
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ClickOnMediumMode()
     {
-        HideClassicMenu();
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Medium);
+        var buttonAnimation = CustomAnimation.ButtonClicked(_mediumModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideClassicMenu();
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Medium);
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ClickOnHardMode()
     {
-        HideClassicMenu();
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Hard);
+        var buttonAnimation = CustomAnimation.ButtonClicked(_hardModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideClassicMenu();
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Hard);
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ClickOnExtremeMode()
     {
-        HideClassicMenu();
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Extreme);
+        var buttonAnimation = CustomAnimation.ButtonClicked(_extremeModeButton.transform);
+        buttonAnimation.AppendCallback(() =>
+        {
+            HideClassicMenu();
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Extreme);
+        });
+
+        buttonAnimation.Play();
     }
 
     public void ShowGameplayButtons()
@@ -163,33 +219,39 @@ public class UIManager : MonoBehaviour
 
     public void PlayAgainClick()
     {
-        if (_playAgainButton.enabled)
+        var buttonAnimation = CustomAnimation.ButtonClicked(_playAgainButton.transform);
+        buttonAnimation.AppendCallback(() =>
         {
-            _gameManager.ResetBoard(false, true, true);
-            _gameManager.GenerateGrid(
-                GameManager.GenerateNumbersForLevel(
-                    Constants.GetNumbers(_gameManager.ActualDifficulty),
-                    Constants.GetRepeatedNumbersCount(
-                        _gameManager.ActualDifficulty,
-                        _gameManager.SavedGameData.IsHalfwayThroughCurrentDifficulty(
-                            _gameManager.ActualDifficulty
+            if (_playAgainButton.enabled)
+            {
+                _gameManager.ResetBoard(false, true, true);
+                _gameManager.GenerateGrid(
+                    GameManager.GenerateNumbersForLevel(
+                        Constants.GetNumbers(_gameManager.ActualDifficulty),
+                        Constants.GetRepeatedNumbersCount(
+                            _gameManager.ActualDifficulty,
+                            _gameManager.SavedGameData.IsHalfwayThroughCurrentDifficulty(
+                                _gameManager.ActualDifficulty
+                            )
                         )
-                    )
-                ),
-                false
-            );
-            _playerStats.StartedGame(_gameManager.SelectedDifficulty);
+                    ),
+                    false
+                );
+                _playerStats.StartedGame(_gameManager.SelectedDifficulty);
 
-            if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
-            {
-                _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge);
-                _gameManager.ResetTimesSolved();
+                if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
+                {
+                    _timer.Init(_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge);
+                    _gameManager.ResetTimesSolved();
+                }
+                else
+                {
+                    _timer.RestartTimer();
+                }
             }
-            else
-            {
-                _timer.RestartTimer();
-            }
-        }
+        });
+
+        buttonAnimation.Play();
     }
 
     public void HomeClick()
@@ -211,24 +273,36 @@ public class UIManager : MonoBehaviour
 
     public void HelpClick()
     {
-        if (_helpButton.enabled)
+        var buttonAnimation = CustomAnimation.ButtonClicked(_helpButton.transform);
+        buttonAnimation.AppendCallback(() =>
         {
-            _gameManager.ShowHints();
-            _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
-            ToggleHelpButton(false);
-        }
+            if (_helpButton.enabled)
+            {
+                _gameManager.ShowHints();
+                _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
+                ToggleHelpButton(false);
+            }
+        });
+
+        buttonAnimation.Play();
     }
 
     public void UndoClick()
     {
-        if (_undoButton.enabled)
+        var buttonAnimation = CustomAnimation.ButtonClicked(_undoButton.transform);
+        buttonAnimation.AppendCallback(() =>
         {
-            _gameManager.UndoLastMove();
-            FindObjectOfType<GameManager>().RemoveHints();
-        }
-        ToggleUndoButton(
-            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
-        );
+            if (_undoButton.enabled)
+            {
+                _gameManager.UndoLastMove();
+                FindObjectOfType<GameManager>().RemoveHints();
+            }
+            ToggleUndoButton(
+                _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+            );
+        });
+
+        buttonAnimation.Play();
     }
 
     private void ToggleContinueButton()

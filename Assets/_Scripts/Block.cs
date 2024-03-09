@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using CandyCabinets.Components.Colour;
+using Assets.Scripts.CustomAnimation;
+using DG.Tweening;
 
 public class Block : MonoBehaviour
 {
@@ -58,6 +60,7 @@ public class Block : MonoBehaviour
             {
                 UpdateOffsetPosition();
                 _originalNode = GetNodeTouched();
+                CustomAnimation.NumberClicked(transform);
             }
             else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
             {
@@ -159,19 +162,23 @@ public class Block : MonoBehaviour
                 else
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-                    gameObject.transform.position = _originalNode.transform.position;
+                    CustomAnimation.NumberDropped(
+                        gameObject.transform,
+                        _originalNode.transform.position
+                    );
                 }
             }
             else
             {
-                gameObject.transform.position = _originalNode.transform.position;
+                CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
                 _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
+
             UpdateOffsetPosition();
         }
         else if (GetNodeTouched() == null)
         {
-            gameObject.transform.position = _originalNode.transform.position;
+            CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
         }
     }
 
@@ -220,12 +227,18 @@ public class Block : MonoBehaviour
         Node _tempNode = firstNode;
         var tempBlock = firstNode.GetBlockInNode();
 
-        firstNode.GetBlockInNode().transform.position = secondNode.transform.position;
+        CustomAnimation.NumberDropped(
+            firstNode.GetBlockInNode().transform,
+            secondNode.GetBlockInNode().transform.position
+        );
         firstNode.SetBlockInNode(secondNode.GetBlockInNode());
         firstNode.GetBlockInNode().transform.SetParent(firstNode.transform);
         firstNode.GetBlockInNode()._originalNode = firstNode;
 
-        secondNode.GetBlockInNode().transform.position = _tempNode.transform.position;
+        CustomAnimation.NumberSwitched(
+            secondNode.GetBlockInNode().transform,
+            _tempNode.transform.position
+        );
         secondNode.SetBlockInNode(tempBlock);
         secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
         secondNode.GetBlockInNode()._originalNode = secondNode;
@@ -236,5 +249,20 @@ public class Block : MonoBehaviour
         _text.color = _isInteractible
             ? ColourManager.Instance.SelectedPalette().Colours[7]
             : ColourManager.Instance.SelectedPalette().Colours[1];
+    }
+
+    public Sequence AnimatePartialSumCorrect()
+    {
+        return CustomAnimation.SumIsCorrect(_text.transform);
+    }
+
+    public Tweener AnimatePuzzleCompleted()
+    {
+        return CustomAnimation.ShakeAnimation(_text.transform);
+    }
+
+    public void AnimateIncorrectSolution()
+    {
+        CustomAnimation.SumIsIncorrect(_text.transform);
     }
 }

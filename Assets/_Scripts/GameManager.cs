@@ -5,6 +5,7 @@ using UnityEngine;
 using Assets.Scripts.SaveGame;
 using System.Threading.Tasks;
 using CandyCabinets.Components.Colour;
+using Assets.Scripts.CustomAnimation;
 
 public class GameManager : MonoBehaviour
 {
@@ -201,12 +202,6 @@ public class GameManager : MonoBehaviour
     public void GenerateGrid(List<int> numbers, bool loadGame)
     {
         int _countTracker = 0;
-
-        var aboveBoard = new Vector2(0, 0); /*
-        _gamePanel.GetComponent<RectTransform>().localPosition = aboveBoard;
-        _gamePanel.GetComponent<RectTransform>().sizeDelta = new Vector2(_width + 1.2f, 1);
-        _gamePanel.gameObject.SetActive(true);*/
-
         for (int i = 0; i < _width; i++)
         {
             for (int j = 1; j < _height + 1; j++)
@@ -330,9 +325,39 @@ public class GameManager : MonoBehaviour
         {
             if (isActionable)
             {
+                Block[] blocksToAnimate = new[]
+                {
+                    _firstRowResultBlock,
+                    _secondRowResultBlock,
+                    _thirdRowResultBlock,
+                    _firstColumnResultBlock,
+                    _secondColumnResultBlock,
+                    _thirdColumnResultBlock,
+                    _allNodes[0].GetBlockInNode(),
+                    _allNodes[1].GetBlockInNode(),
+                    _allNodes[2].GetBlockInNode(),
+                    _allNodes[3].GetBlockInNode(),
+                    _allNodes[4].GetBlockInNode(),
+                    _allNodes[5].GetBlockInNode(),
+                    _allNodes[6].GetBlockInNode(),
+                    _allNodes[7].GetBlockInNode(),
+                    _allNodes[8].GetBlockInNode(),
+                };
+                CustomAnimation.AnimatePuzzleSolved(blocksToAnimate);
                 DoEndGameActions();
             }
             return true;
+        }
+        else
+        {
+            AnimateSolutionBlocks(
+                firstRowCompleted,
+                secondRowCompleted,
+                thirdRowCompleted,
+                firstColumnCompleted,
+                secondColumnCompleted,
+                thirdColumnCompleted
+            );
         }
         if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
@@ -344,8 +369,52 @@ public class GameManager : MonoBehaviour
             );
         }
 
-        //SavedGameData.PersistData();
         return false;
+    }
+
+    private async void AnimateSolutionBlocks(
+        bool firstRowCompleted,
+        bool secondRowCompleted,
+        bool thirdRowCompleted,
+        bool firstColumnCompleted,
+        bool secondColumnCompleted,
+        bool thirdColumnCompleted
+    )
+    {
+        if (
+            SelectedDifficulty < Constants.Difficulty.Extreme
+            || (
+                SelectedDifficulty == Constants.Difficulty.Challenge
+                && ActualDifficulty != Constants.Difficulty.Extreme
+            )
+        )
+        {
+            await CustomAnimation.WaitForAnimation("MoveNumberBack");
+            if (firstRowCompleted)
+            {
+                _firstRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (secondRowCompleted)
+            {
+                _secondRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (thirdRowCompleted)
+            {
+                _thirdRowResultBlock.AnimatePartialSumCorrect();
+            }
+            if (firstColumnCompleted)
+            {
+                _firstColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            if (secondColumnCompleted)
+            {
+                _secondColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            if (thirdColumnCompleted)
+            {
+                _thirdColumnResultBlock.AnimatePartialSumCorrect();
+            }
+        }
     }
 
     private void DoEndGameActions()
@@ -747,7 +816,10 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SavedGameData.ClearInProgressSavedGame();
+                if (SavedGameData != null)
+                {
+                    SavedGameData.ClearInProgressSavedGame();
+                }
             }
         }
         SavedGameData.PersistData();
