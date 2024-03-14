@@ -165,7 +165,8 @@ namespace Assets.Scripts.SaveGame
 
         public bool IsHalfwayThroughCurrentDifficulty(Constants.Difficulty difficulty)
         {
-            if (
+            return false;
+            /* if (
                 (difficulty < UnlockedDifficulty)
                 || (
                     TimesBeatenCurrentDifficulty
@@ -175,7 +176,7 @@ namespace Assets.Scripts.SaveGame
             {
                 return true;
             }
-            return false;
+            return false; */
         }
 
         public void UnlockAllLevels()

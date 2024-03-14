@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -61,12 +62,14 @@ namespace Assets.Scripts.CustomAnimation
 
         public static Sequence SumIsCorrect(Transform transform)
         {
-            return transform.DOJump(
-                transform.position,
-                SUM_CORRECT_ANIMATION_JUMP_FORCE,
-                1,
-                SUM_CORRECT_ANIMATION_DURATION
-            )
+            return transform
+                .DOJump(
+                    transform.position,
+                    SUM_CORRECT_ANIMATION_JUMP_FORCE,
+                    1,
+                    SUM_CORRECT_ANIMATION_DURATION
+                )
+                .SetId("NumberJump");
             //.Join(SumIsIncorrect(transform))
             ;
         }
@@ -134,8 +137,56 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Join(blocks[8].AnimatePuzzleCompleted());
             sequence.Join(blocks[11].AnimatePuzzleCompleted());
             sequence.Join(blocks[14].AnimatePuzzleCompleted());
-            sequence.AppendInterval(1f);
+            sequence.AppendInterval(0.5f);
             sequence.SetLoops(-1);
+            sequence.SetId("NumberJump");
+
+            sequence.Play();
+        }
+
+        internal static void AnimateEndGameButtonSwitch(
+            Transform inGamePanelTransform,
+            Transform endGamePanelTransform
+        )
+        {
+            Vector3 originalPosition = inGamePanelTransform.position;
+            var sequence = DOTween.Sequence();
+            sequence
+                .Append(inGamePanelTransform.DOMoveY(inGamePanelTransform.position.y - 0.1f, 0.5f))
+                .Join(inGamePanelTransform.DOScale(0.01f, 0.5f))
+                .Join(inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.3f))
+                .Join(endGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.4f).From())
+                .Join(
+                    endGamePanelTransform
+                        .DOMoveY(endGamePanelTransform.position.y - 0.1f, 0.5f)
+                        .From()
+                )
+                .Join(endGamePanelTransform.DOScale(0.1f, 0.5f).From());
+            sequence.SetId("EndGameButtonSwitch");
+            sequence
+                .Play()
+                .OnComplete(() =>
+                {
+                    inGamePanelTransform.gameObject.SetActive(false);
+                    inGamePanelTransform.DOScale(1f, 0f);
+                    inGamePanelTransform.position = originalPosition;
+                    inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(1f, 0f);
+                });
+        }
+
+        internal static void AnimateStartGameButtons(Transform inGamePanelTransform)
+        {
+            var sequence = DOTween.Sequence();
+            sequence
+                .Append(inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.4f).From())
+                .Join(
+                    inGamePanelTransform
+                        .DOMoveY(inGamePanelTransform.position.y - 0.1f, 0.5f)
+                        .From()
+                )
+                .Join(inGamePanelTransform.DOScale(0.1f, 0.5f).From());
+            sequence.SetId("AnimateStartGameButtons");
+            inGamePanelTransform.gameObject.SetActive(true);
             sequence.Play();
         }
     }

@@ -42,6 +42,8 @@ public class Block : MonoBehaviour
         if (!interactible)
         {
             _text.color = new Color32(0, 0, 0, 255);
+            _text.fontSize = 5.5f;
+            _text.ForceMeshUpdate();
         }
         _originalNode = node;
         transform.SetParent(node.transform);
@@ -53,18 +55,19 @@ public class Block : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GetNodeTouched() != null && _isInteractible)
+        Node nodeTouched = GetNodeTouched();
+        if (nodeTouched != null && _isInteractible)
         {
             FindObjectOfType<GameManager>().RemoveHints();
             if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
             {
                 UpdateOffsetPosition();
-                _originalNode = GetNodeTouched();
+                _originalNode = nodeTouched;
                 CustomAnimation.NumberClicked(transform);
             }
             else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
             {
-                Node nodeClickedOn = GetNodeTouched();
+                Node nodeClickedOn = nodeTouched;
                 Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
                 if (selectedBlock == null)
                 {
@@ -141,13 +144,14 @@ public class Block : MonoBehaviour
 
     private void OnMouseUp()
     {
+        Node nodeTouched = GetNodeTouched();
         if (
-            GetNodeTouched() != null
+            nodeTouched != null
             && _isInteractible
             && Constants.SelectedControlMethod == Constants.ControlMethod.Drag
         )
         {
-            Node nodeWhereBlockIsDropped = GetNodeTouched();
+            Node nodeWhereBlockIsDropped = nodeTouched;
             if (nodeWhereBlockIsDropped != null)
             {
                 UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
@@ -176,7 +180,7 @@ public class Block : MonoBehaviour
 
             UpdateOffsetPosition();
         }
-        else if (GetNodeTouched() == null)
+        else if (nodeTouched == null)
         {
             CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
         }
@@ -256,9 +260,9 @@ public class Block : MonoBehaviour
         return CustomAnimation.SumIsCorrect(_text.transform);
     }
 
-    public Tweener AnimatePuzzleCompleted()
+    public Sequence AnimatePuzzleCompleted()
     {
-        return CustomAnimation.ShakeAnimation(_text.transform);
+        return CustomAnimation.SumIsCorrect(_text.transform);
     }
 
     public void AnimateIncorrectSolution()

@@ -29,7 +29,13 @@ public class UIManager : MonoBehaviour
     private Button _undoButton;
 
     [SerializeField]
-    private GameObject _gameplayPanel;
+    private GameObject _gameplayStatsPanel;
+
+    [SerializeField]
+    private GameObject _gameplayInGamePanel;
+
+    [SerializeField]
+    private GameObject _gameplayEndGamePanel;
     private PlayerStats _playerStats;
 
     [SerializeField]
@@ -80,7 +86,9 @@ public class UIManager : MonoBehaviour
         _timer = FindObjectOfType<Timer>();
         _playerStats = FindObjectOfType<PlayerStats>();
         HideClassicMenu();
-        HideObject(_gameplayPanel);
+        HideObject(_gameplayStatsPanel);
+        HideObject(_gameplayInGamePanel);
+        HideObject(_gameplayEndGamePanel);
         ToggleContinueButton();
     }
 
@@ -208,7 +216,10 @@ public class UIManager : MonoBehaviour
     public void ShowGameplayButtons()
     {
         ShowObject(_gameNodes);
-        ShowObject(_gameplayPanel);
+        ShowObject(_gameplayStatsPanel);
+        //ShowObject(_gameplayInGamePanel);
+        CustomAnimation.AnimateStartGameButtons(_gameplayInGamePanel.transform);
+        HideObject(_gameplayEndGamePanel);
         ShowObject(_gameTitle);
         HideObject(_classicMenu);
 
@@ -238,6 +249,7 @@ public class UIManager : MonoBehaviour
                     false
                 );
                 _playerStats.StartedGame(_gameManager.SelectedDifficulty);
+                ShowGameplayButtons();
 
                 if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
                 {
@@ -263,7 +275,9 @@ public class UIManager : MonoBehaviour
         }
         HideClassicMenu();
         HideObject(_gameNodes);
-        HideObject(_gameplayPanel);
+        HideObject(_gameplayStatsPanel);
+        HideObject(_gameplayInGamePanel);
+        HideObject(_gameplayEndGamePanel);
         HideObject(_shopPanel);
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
@@ -365,15 +379,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public async void ShowEndOfGameButton()
+    {
+        ShowObject(_gameplayEndGamePanel);
+        CustomAnimation.AnimateEndGameButtonSwitch(
+            _gameplayInGamePanel.transform,
+            _gameplayEndGamePanel.transform
+        );
+        await CustomAnimation.WaitForAnimation("EndGameButtonSwitch");
+        HideObject(_gameplayInGamePanel);
+    }
+
     public void ToggleGameplayElements(bool statusToChangeTo)
     {
         if (statusToChangeTo)
         {
-            ShowObject(_gameplayPanel);
+            ShowObject(_gameplayStatsPanel);
+            ShowObject(_gameplayInGamePanel);
+            HideObject(_gameplayEndGamePanel);
+            ShowObject(_gameTitle);
         }
         else
         {
-            HideObject(_gameplayPanel);
+            HideObject(_gameplayStatsPanel);
+            HideObject(_gameplayInGamePanel);
+            HideObject(_gameplayEndGamePanel);
             HideObject(_gameTitle);
         }
         _gameNodes.SetActive(statusToChangeTo);

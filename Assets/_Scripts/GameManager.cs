@@ -6,6 +6,7 @@ using Assets.Scripts.SaveGame;
 using System.Threading.Tasks;
 using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,9 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _topBackground;
 
-    /*[SerializeField]
-    private GameObject _gamePanel;
-*/
     [SerializeField]
     private TextMeshProUGUI _timesSolvedText;
 
@@ -431,6 +429,7 @@ public class GameManager : MonoBehaviour
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
+        _uiManager.ShowEndOfGameButton();
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
@@ -444,7 +443,6 @@ public class GameManager : MonoBehaviour
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
         }
-        _uiManager.ToggleUndoButton(false);
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
@@ -535,6 +533,7 @@ public class GameManager : MonoBehaviour
         bool resetChallengeActualDifficulty
     )
     {
+        DOTween.Kill("NumberJump");
         for (int i = 0; i < _allNodes.Count; i++)
         {
             DestroyBlock(_allNodes[i].GetBlockInNode());
@@ -755,11 +754,11 @@ public class GameManager : MonoBehaviour
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
 
-        _uiManager.ShowMainMenu();
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
         _audioManager.PlayMusic();
         loadingCanvas.gameObject.SetActive(false);
+        _uiManager.ShowMainMenu();
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
             (float)(_height + 2.68) / 2 - 0.5f
