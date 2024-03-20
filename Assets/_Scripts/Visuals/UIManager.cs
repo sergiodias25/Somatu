@@ -80,6 +80,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _challengeModeButton;
 
+    [SerializeField]
+    private GameObject _difficultyPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI _difficultyPanelText;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -159,9 +165,23 @@ public class UIManager : MonoBehaviour
         var buttonAnimation = CustomAnimation.ButtonClicked(_challengeModeButton.transform);
         buttonAnimation.AppendCallback(() =>
         {
-            HideObject(_mainMenuPanel);
-            ShowGameplayButtons();
-            _gameManager.Init(Constants.Difficulty.Challenge);
+            if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
+            {
+                HideObject(_mainMenuPanel);
+                ShowGameplayButtons();
+                _gameManager.Init(Constants.Difficulty.Challenge);
+            }
+            else
+            {
+                ShowDifficultyPopup(
+                    Constants.Difficulty.Challenge - 1,
+                    LocalizationManager.Localize("mode-challenge"),
+                    LocalizationManager.Localize("mode-extreme"),
+                    Constants.GetNumberOfSolvesToUnlockNextDifficulty(
+                        Constants.Difficulty.Challenge - 1
+                    )
+                );
+            }
         });
 
         buttonAnimation.Play();
@@ -185,12 +205,53 @@ public class UIManager : MonoBehaviour
         var buttonAnimation = CustomAnimation.ButtonClicked(_mediumModeButton.transform);
         buttonAnimation.AppendCallback(() =>
         {
-            HideClassicMenu();
-            ShowGameplayButtons();
-            _gameManager.Init(Constants.Difficulty.Medium);
+            if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Medium))
+            {
+                HideClassicMenu();
+                ShowGameplayButtons();
+                _gameManager.Init(Constants.Difficulty.Medium);
+            }
+            else
+            {
+                ShowDifficultyPopup(
+                    Constants.Difficulty.Medium - 1,
+                    LocalizationManager.Localize("mode-medium"),
+                    LocalizationManager.Localize("mode-easy"),
+                    Constants.GetNumberOfSolvesToUnlockNextDifficulty(
+                        Constants.Difficulty.Medium - 1
+                    )
+                );
+            }
         });
 
         buttonAnimation.Play();
+    }
+
+    private void ShowDifficultyPopup(
+        Constants.Difficulty originalDiff,
+        string targetDifficulty,
+        string previousDifficulty,
+        int numberOfSolvesNeeded
+    )
+    {
+        int finalSolvesNeededText = numberOfSolvesNeeded;
+        string popuTextKey = "popup-difficulty-plural";
+        if (
+            originalDiff == _gameManager.SavedGameData.UnlockedDifficulty.Value
+            && _gameManager.SavedGameData.TimesBeatenCurrentDifficulty > 0
+        )
+        {
+            finalSolvesNeededText =
+                numberOfSolvesNeeded - _gameManager.SavedGameData.TimesBeatenCurrentDifficulty;
+            popuTextKey = "popup-difficulty-singular";
+        }
+        _difficultyPanelText.text = LocalizationManager.Localize(
+            popuTextKey,
+            targetDifficulty,
+            previousDifficulty,
+            finalSolvesNeededText
+        );
+        ShowObject(_difficultyPanel);
     }
 
     public void ClickOnHardMode()
@@ -198,9 +259,21 @@ public class UIManager : MonoBehaviour
         var buttonAnimation = CustomAnimation.ButtonClicked(_hardModeButton.transform);
         buttonAnimation.AppendCallback(() =>
         {
-            HideClassicMenu();
-            ShowGameplayButtons();
-            _gameManager.Init(Constants.Difficulty.Hard);
+            if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Hard))
+            {
+                HideClassicMenu();
+                ShowGameplayButtons();
+                _gameManager.Init(Constants.Difficulty.Hard);
+            }
+            else
+            {
+                ShowDifficultyPopup(
+                    Constants.Difficulty.Hard - 1,
+                    LocalizationManager.Localize("mode-hard"),
+                    LocalizationManager.Localize("mode-medium"),
+                    Constants.GetNumberOfSolvesToUnlockNextDifficulty(Constants.Difficulty.Hard - 1)
+                );
+            }
         });
 
         buttonAnimation.Play();
@@ -211,9 +284,23 @@ public class UIManager : MonoBehaviour
         var buttonAnimation = CustomAnimation.ButtonClicked(_extremeModeButton.transform);
         buttonAnimation.AppendCallback(() =>
         {
-            HideClassicMenu();
-            ShowGameplayButtons();
-            _gameManager.Init(Constants.Difficulty.Extreme);
+            if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Extreme))
+            {
+                HideClassicMenu();
+                ShowGameplayButtons();
+                _gameManager.Init(Constants.Difficulty.Extreme);
+            }
+            else
+            {
+                ShowDifficultyPopup(
+                    Constants.Difficulty.Extreme - 1,
+                    LocalizationManager.Localize("mode-extreme"),
+                    LocalizationManager.Localize("mode-hard"),
+                    Constants.GetNumberOfSolvesToUnlockNextDifficulty(
+                        Constants.Difficulty.Extreme - 1
+                    )
+                );
+            }
         });
 
         buttonAnimation.Play();

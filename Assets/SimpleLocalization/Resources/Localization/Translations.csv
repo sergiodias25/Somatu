@@ -33,8 +33,8 @@ btn-home,Home,Início,Inicio,始める,시작
 btn-profile,Profile,Perfil,Perfil,プロフィール,프로필
 menu-main,Somatu,Somatu,Somatu,ソマトゥ,소 마투
 menu-classic,Classic,Clássico,Clásico,クラシック,권위 있는
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
+popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, complete el modo {1} {2} veces.",モード{0}のロックを解除するには、モード{1} {2}を完了します。,모드 {0}을 잠금 해제하려면 모드 {1} {2} 시간을 완성하십시오.
+popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",モード{0}のロックを解除するには、モード{1} {2}時間を完了します。,모드 {0}을 잠금 해제하려면 모드 {1} {2} 시간을 완성하십시오.
 ,,,,#VALUE!,#VALUE!
 ,,,,#VALUE!,#VALUE!
 ,,,,#VALUE!,#VALUE!

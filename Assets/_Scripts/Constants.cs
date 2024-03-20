@@ -88,7 +88,7 @@ public class Constants : MonoBehaviour
         return NumbersForExtremeMode;
     }
 
-    public static int GetNumberOfSolvesToUnlockNextDifficulty(Difficulty difficulty)
+    public static int GetNumberOfSolvesToUnlockNextDifficulty(Difficulty? difficulty)
     {
         switch (difficulty)
         {
