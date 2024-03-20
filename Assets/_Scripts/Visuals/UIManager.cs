@@ -100,11 +100,13 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        ShowObject(_backgroundsPanel);
         ShowObject(_mainMenuPanel);
+        CustomAnimation.ButtonLoad(_classicModeButton.transform);
+        CustomAnimation.ButtonLoad(_challengeModeButton.transform);
         HideObject(_shopPanel);
         HideObject(_settingsPanel);
         HideObject(_profilePanel);
-        ShowObject(_backgroundsPanel);
         ShowObject(_topPanel);
         HideObject(_classicMenu);
     }
@@ -116,6 +118,10 @@ public class UIManager : MonoBehaviour
         {
             HideObject(_mainMenuPanel);
             ShowObject(_classicMenu);
+            CustomAnimation.ButtonLoad(_easyModeButton.transform);
+            CustomAnimation.ButtonLoad(_mediumModeButton.transform);
+            CustomAnimation.ButtonLoad(_hardModeButton.transform);
+            CustomAnimation.ButtonLoad(_extremeModeButton.transform);
             ToggleContinueButton();
         });
 
@@ -217,8 +223,11 @@ public class UIManager : MonoBehaviour
     {
         ShowObject(_gameNodes);
         ShowObject(_gameplayStatsPanel);
-        //ShowObject(_gameplayInGamePanel);
-        CustomAnimation.AnimateStartGameButtons(_gameplayInGamePanel.transform);
+        ShowObject(_gameplayInGamePanel);
+        CustomAnimation.AnimateStartGameButtons(
+            _gameplayInGamePanel.transform,
+            _gameplayEndGamePanel.transform
+        );
         HideObject(_gameplayEndGamePanel);
         ShowObject(_gameTitle);
         HideObject(_classicMenu);
@@ -322,6 +331,10 @@ public class UIManager : MonoBehaviour
     private void ToggleContinueButton()
     {
         _continueGameButton.gameObject.SetActive(_gameManager.SavedGameExists());
+        if (_gameManager.SavedGameExists())
+        {
+            CustomAnimation.ButtonLoad(_continueGameButton.transform);
+        }
     }
 
     internal void ToggleUndoButton(bool enabled)
@@ -382,7 +395,7 @@ public class UIManager : MonoBehaviour
     public async void ShowEndOfGameButton()
     {
         ShowObject(_gameplayEndGamePanel);
-        CustomAnimation.AnimateEndGameButtonSwitch(
+        CustomAnimation.GameCompletedButtonSwitch(
             _gameplayInGamePanel.transform,
             _gameplayEndGamePanel.transform
         );

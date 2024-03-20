@@ -160,8 +160,8 @@ public class Block : MonoBehaviour
                 {
                     _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
                     SwitchNodes(_originalNode, nodeWhereBlockIsDropped);
-                    FindObjectOfType<GameManager>().CheckResult(true);
                     _audioManager.PlaySFX(_audioManager.DropBlock);
+                    FindObjectOfType<GameManager>().CheckResult(true);
                 }
                 else
                 {

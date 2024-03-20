@@ -69,6 +69,7 @@ namespace Assets.Scripts.CustomAnimation
                     1,
                     SUM_CORRECT_ANIMATION_DURATION
                 )
+                .SetDelay(RandomizeDelayValue(0.33))
                 .SetId("NumberJump");
             //.Join(SumIsIncorrect(transform))
             ;
@@ -144,50 +145,77 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Play();
         }
 
-        internal static void AnimateEndGameButtonSwitch(
+        internal static void GameCompletedButtonSwitch(
             Transform inGamePanelTransform,
             Transform endGamePanelTransform
         )
         {
-            Vector3 originalPosition = inGamePanelTransform.position;
-            var sequence = DOTween.Sequence();
-            sequence
-                .Append(inGamePanelTransform.DOMoveY(inGamePanelTransform.position.y - 0.1f, 0.5f))
-                .Join(inGamePanelTransform.DOScale(0.01f, 0.5f))
-                .Join(inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.3f))
-                .Join(endGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.4f).From())
-                .Join(
-                    endGamePanelTransform
-                        .DOMoveY(endGamePanelTransform.position.y - 0.1f, 0.5f)
-                        .From()
-                )
-                .Join(endGamePanelTransform.DOScale(0.1f, 0.5f).From());
-            sequence.SetId("EndGameButtonSwitch");
-            sequence
-                .Play()
+            ButtonUnload(inGamePanelTransform)
                 .OnComplete(() =>
                 {
                     inGamePanelTransform.gameObject.SetActive(false);
                     inGamePanelTransform.DOScale(1f, 0f);
-                    inGamePanelTransform.position = originalPosition;
-                    inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(1f, 0f);
                 });
+            ;
+            ButtonLoad(endGamePanelTransform);
         }
 
-        internal static void AnimateStartGameButtons(Transform inGamePanelTransform)
+        internal static void AnimateStartGameButtons(
+            Transform inGamePanelTransform,
+            Transform endGamePanelTransform
+        )
         {
-            var sequence = DOTween.Sequence();
-            sequence
-                .Append(inGamePanelTransform.GetComponent<CanvasGroup>().DOFade(0.1f, 0.4f).From())
-                .Join(
-                    inGamePanelTransform
-                        .DOMoveY(inGamePanelTransform.position.y - 0.1f, 0.5f)
-                        .From()
-                )
-                .Join(inGamePanelTransform.DOScale(0.1f, 0.5f).From());
-            sequence.SetId("AnimateStartGameButtons");
-            inGamePanelTransform.gameObject.SetActive(true);
-            sequence.Play();
+            if (endGamePanelTransform.gameObject.activeSelf)
+            {
+                ButtonUnload(endGamePanelTransform)
+                    .OnComplete(() =>
+                    {
+                        endGamePanelTransform.gameObject.SetActive(false);
+                        endGamePanelTransform.DOScale(1f, 0f);
+                    });
+                ;
+            }
+            ButtonLoad(inGamePanelTransform);
+        }
+
+        internal static void ButtonLoad(Transform transform)
+        {
+            transform
+                .DOScale(0.85f, .5f)
+                .From()
+                .SetEase(Ease.OutBounce)
+                .SetDelay(RandomizeDelayValue(0.1));
+            ;
+        }
+
+        internal static DG.Tweening.Core.TweenerCore<
+            Vector3,
+            Vector3,
+            DG.Tweening.Plugins.Options.VectorOptions
+        > ButtonUnload(Transform transform)
+        {
+            return transform
+                .DOScale(0.01f, 0.5f)
+                .SetEase(Ease.InBounce)
+                .SetDelay(RandomizeDelayValue(0.1));
+            ;
+        }
+
+        internal static void NodeLoad(Transform transform)
+        {
+            transform
+                .DOScale(0.8f, 1f)
+                .From()
+                .SetEase(Ease.OutBounce)
+                .SetDelay(RandomizeDelayValue(0.2));
+            ;
+            AudioManager audioManager = UnityEngine.Object.FindObjectOfType<AudioManager>();
+            audioManager.PlaySFX(audioManager.NodeLoaded);
+        }
+
+        static float RandomizeDelayValue(double delay)
+        {
+            return (float)(UnityEngine.Random.value * delay);
         }
     }
 }

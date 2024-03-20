@@ -11,12 +11,17 @@ public class AudioManager : MonoBehaviour
     public AudioClip DropBlockUndo;
     public AudioClip PuzzleSolved;
     public AudioClip MainMusicTheme;
+    public AudioClip NodeLoaded;
 
     public void PlaySFX(AudioClip audioClip)
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
+            if (_sfxSource.isPlaying)
+            {
+                _sfxSource.Stop();
+            }
             _sfxSource.PlayOneShot(audioClip);
         }
         if (gameManager.SavedGameData.SettingsData.VibrationEnabled)

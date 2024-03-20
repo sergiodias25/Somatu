@@ -2756,6 +2756,7 @@ MonoBehaviour:
   DropBlockUndo: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   PuzzleSolved: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
   MainMusicTheme: {fileID: 8300000, guid: 4f2efa96c81490a4b9934d6452d3b3aa, type: 3}
+  NodeLoaded: {fileID: 8300000, guid: b91838e7cae1efd4fa0f278cf7bc2014, type: 3}
 --- !u!4 &279916186
 Transform:
   m_ObjectHideFlags: 0
@@ -12747,7 +12748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1556593138
 Transform:
   m_ObjectHideFlags: 0

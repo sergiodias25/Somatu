@@ -757,8 +757,7 @@ public class GameManager : MonoBehaviour
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
         _audioManager.PlayMusic();
-        loadingCanvas.gameObject.SetActive(false);
-        _uiManager.ShowMainMenu();
+        ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
             (float)(_height + 2.68) / 2 - 0.5f
@@ -770,7 +769,8 @@ public class GameManager : MonoBehaviour
         );
         var topCenter = new Vector2(screenTopCenter.x, screenTopCenter.y - 0.5f);
         _topBackground.transform.position = topCenter;
-        ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
+        _uiManager.ShowMainMenu();
+        loadingCanvas.gameObject.SetActive(false);
     }
 
     /*     private void OnApplicationFocus(bool focusedOn)

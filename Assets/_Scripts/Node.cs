@@ -1,3 +1,4 @@
+using Assets.Scripts.CustomAnimation;
 using CandyCabinets.Components.Colour;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class Node : MonoBehaviour
         SetBlockInNode(block);
         transform.SetParent(GameObject.Find(parentName).transform);
         UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        CustomAnimation.NodeLoad(transform);
     }
 
     public void SetBlockInNode(Block block)
