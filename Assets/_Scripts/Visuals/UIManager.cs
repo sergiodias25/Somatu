@@ -308,6 +308,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameplayButtons()
     {
+        ToggleUndoButton(
+            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+        );
         ShowObject(_gameNodes);
         ShowObject(_gameplayStatsPanel);
         ShowObject(_gameplayInGamePanel);
@@ -318,10 +321,6 @@ public class UIManager : MonoBehaviour
         HideObject(_gameplayEndGamePanel);
         ShowObject(_gameTitle);
         HideObject(_classicMenu);
-
-        ToggleUndoButton(
-            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
-        );
     }
 
     public void PlayAgainClick()
@@ -399,20 +398,20 @@ public class UIManager : MonoBehaviour
 
     public void UndoClick()
     {
-        var buttonAnimation = CustomAnimation.ButtonClicked(_undoButton.transform);
-        buttonAnimation.AppendCallback(() =>
+        if (_undoButton.enabled)
         {
-            if (_undoButton.enabled)
+            var buttonAnimation = CustomAnimation.ButtonClicked(_undoButton.transform);
+            buttonAnimation.AppendCallback(() =>
             {
                 _gameManager.UndoLastMove();
                 FindObjectOfType<GameManager>().RemoveHints();
-            }
-            ToggleUndoButton(
-                _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
-            );
-        });
+                ToggleUndoButton(
+                    _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+                );
+            });
 
-        buttonAnimation.Play();
+            buttonAnimation.Play();
+        }
     }
 
     private void ToggleContinueButton()
@@ -426,6 +425,26 @@ public class UIManager : MonoBehaviour
 
     internal void ToggleUndoButton(bool enabled)
     {
+        Color originalColor = _undoButton.GetComponent<Image>().color;
+        if (enabled && _undoButton.GetComponent<Image>().color.a != 1)
+        {
+            _undoButton.GetComponent<Image>().color = new Color(
+                originalColor.r,
+                originalColor.g,
+                originalColor.b,
+                1
+            );
+        }
+        else if (!enabled && _undoButton.GetComponent<Image>().color.a != 0.5f)
+        {
+            _undoButton.GetComponent<Image>().color = new Color(
+                originalColor.r,
+                originalColor.g,
+                originalColor.b,
+                0.5f
+            );
+        }
+
         _undoButton.enabled = enabled;
     }
 
