@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace Assets.Scripts.CustomAnimation
         private static float PUZZLE_COMPLETED_ANIMATION_DURATION = 0.5f;
         private static int WAIT_FOR_ANIMATION_TO_FINISH_DELAY = 200;
 
-        public static Sequence ButtonClicked(Transform target)
+        public static async Task ButtonClicked(Transform target)
         {
             var sequence = DOTween.Sequence();
             sequence.Append(target.DOScale(BUTTON_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
@@ -37,8 +36,9 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Append(
                 target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
             );
+            sequence.SetId("ButtonClick" + target.name).Play();
 
-            return sequence;
+            await WaitForAnimation("ButtonClick" + target.name);
         }
 
         public static void NumberClicked(Transform transform)

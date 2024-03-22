@@ -66,8 +66,6 @@ public class Constants : MonoBehaviour
         DoubleClick
     }
 
-    public static ControlMethod SelectedControlMethod = ControlMethod.Drag;
-
     // 1 second does not count
     public static double ChallengeTimeLimit = 15.0f;
     public static double ChallengePuzzleSolvedBonus = 3.0f;

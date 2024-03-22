@@ -10,37 +10,38 @@ mode-hard,Hard,Difícil,Duro,難しい,어려운
 mode-extreme,Extreme,Extremo,Extremo,過激,극심한
 mode-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
 game-time,Time,Tempo,Tiempo,時間,시간
-game-solved,Solved,Resolvido,Resuelto,ソートアウト,정리하다
-stats-games-played,Games Played,Jogos jogados,Juegos jugados,ゲームが再生されました,게임이 재생되었습니다
-stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,完了したゲーム,완성 된 게임
+game-solved,Solved,Resolvido,Resuelto,整理しました,정리하다
+stats-games-played,Games Played,Jogos jogados,Juegos jugados,プレイしたゲーム,플레이한 게임
+stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,完成したゲーム,완료된 게임
 stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간
-stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,より速い時間,더 빠른 시간
-stats-hints-used,Hints Used,Dicas usadas,Sugerencias utilizadas,使用済みのヒント,사용 된 팁
-stats-average-solves,Average Solves,Média resolve,Resueltos promedio,平均的な解決,평균 해결
-stats-most-solves,Most Solves,A maioria resolve,La mayoría resueltos,ほとんどが解決します,대부분의 해결
-stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,長い時間,더 긴 시간
+stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,最速タイム,가장 빠른 시간
+stats-hints-used,Hints Used,Dicas usadas,Consejos utilizados,使用したヒント,사용된 팁
+stats-average-solves,Average Solves,Média de soluções,Resoluciones promedio,平均的なソリューション,평균 솔루션
+stats-most-solves,Most Solves,A maioria das soluções,La mayoría resuelve,ほとんどのソリューション,대부분의 솔루션
+stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간
 btn-hint,Hint,Dica,Pista,ヒント,팁
 btn-shop,Shop,Loja,Tienda,店,가게
-btn-shop-hints5,5 Hints,5 dicas,5 pistas,5つのヒント,5 팁
-btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Pistas ilimitadas,無制限のヒント,무제한 팁
-btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除します,모든 레벨을 잠금 해제하십시오
-btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除します,광고를 제거하십시오
-btn-shop-metallictheme,Metallic Theme,Tema metálico,Tema metálico,金属,금속
-btn-shop-goldtheme,Gold Theme,Tema de ouro,Tema de oro,金,금
-btn-undo,Undo,Reverter,Deshacer,逆に,반전
+btn-shop-hints5,5 Hints,5 dicas,5 consejos,5つのヒント,5가지 팁
+btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,無制限のヒント,무제한 팁
+btn-shop-unlocklevels,Unlock All Levels,Desbloquear todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제
+btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除する,광고 제거
+btn-shop-metallictheme,Metallic Theme,Tema Metálico,Tema metálico,メタリックテーマ,메탈릭 테마
+btn-shop-goldtheme,Gold Theme,Tema Ouro,Tema de oro,ゴールドテーマ,골드 테마
+btn-undo,Undo,Reverter,Deshacer,逆にするには,반전하려면
 btn-settings,Settings,Definições,Definiciones,定義,정의
 btn-home,Home,Início,Inicio,始める,시작
 btn-profile,Profile,Perfil,Perfil,プロフィール,프로필
-menu-main,Somatu,Somatu,Somatu,ソマトゥ,소 마투
+menu-main,Somatu,Somatu,Somatu,ソマツ,소마투
 menu-classic,Classic,Clássico,Clásico,クラシック,권위 있는
-popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, complete el modo {1} {2} veces.",モード{0}のロックを解除するには、モード{1} {2}を完了します。,모드 {0}을 잠금 해제하려면 모드 {1} {2} 시간을 완성하십시오.
-popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",モード{0}のロックを解除するには、モード{1} {2}時間を完了します。,모드 {0}을 잠금 해제하려면 모드 {1} {2} 시간을 완성하십시오.
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
+popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, completa el modo {1} {2} veces.",{0} モードのロックを解除するには、{1} モードを {2} 回完了します。,{0} 모드를 잠금 해제하려면 {1} 모드를 {2}번 완료하세요.
+popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",{0} モードのロックを解除するには、{1} モードを {2} 時間完了してください。,{0} 모드를 잠금 해제하려면 {1} 모드 {2} 시간을 완료하세요.
+settings-music,Music,Música,Música,音楽,음악
+settings-sound,Sound,Som,Sonido,音,소리
+settings-vibration,Vibrate,Vibração,Vibración,振動,진동
+settings-control-drag,Drag,Arrastar,Arrastrar,引っ張る,견인
+settings-control-click,Tap,Tocar,Tocar,触る,만지다
+settings-theme,Theme,Tema,Tema,テーマ,주제
+settings-support,Support,Suporte,Soporte,サポート,지원하다
 ,,,,#VALUE!,#VALUE!
 ,,,,#VALUE!,#VALUE!
 ,,,,#VALUE!,#VALUE!

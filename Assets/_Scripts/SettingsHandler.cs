@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Assets.Scripts.CustomAnimation;
 using Assets.SimpleLocalization.Scripts;
 using CandyCabinets.Components.Colour;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,11 +34,42 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Sprite _vibrateOffSprite;
+
+    [SerializeField]
+    private Image _controlButtonImage;
+
+    [SerializeField]
+    private Sprite _controlDragSprite;
+
+    [SerializeField]
+    private Sprite _controlClickSprite;
+
+    [SerializeField]
+    private TextMeshProUGUI _controlLabel;
+
+    [SerializeField]
+    private Button _languageButton;
+
+    [SerializeField]
+    private Button _themeButton;
+
+    [SerializeField]
+    private Button _controlButton;
+
+    [SerializeField]
+    private Button _vibrationButton;
+
+    [SerializeField]
+    private Button _musicButton;
+
+    [SerializeField]
+    private Button _soundButton;
+
+    [SerializeField]
+    private Button _supportButton;
     private AudioManager _audioManager;
     private GameManager _gameManager;
     private GradientBg _gradientBg;
-
-    void Awake() { }
 
     public void LoadData(GameManager gameManager)
     {
@@ -47,23 +80,15 @@ public class SettingsHandler : MonoBehaviour
             Constants.ColorPalettes[_gameManager.SavedGameData.SettingsData.SelectedThemeIndex]
         );
 
-        if (_soundButtonImage != null)
-        {
-            UpdateSoundIcon();
-        }
-        if (_musicButtonImage != null)
-        {
-            UpdateMusicIcon();
-        }
-        if (_vibrateButtonImage != null)
-        {
-            UpdateVibrateIcon();
-        }
+        UpdateSoundIcon();
+        UpdateMusicIcon();
+        UpdateVibrateIcon();
+        UpdateControlIcon();
     }
 
-    public void ChangeTheme()
+    public async void ChangeTheme()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        await CustomAnimation.ButtonClicked(_themeButton.transform);
         int _selectedColorsIndex = _gameManager.SavedGameData.SettingsData.SelectedThemeIndex;
         int _newSelectedColorsIndex = GetNextTheme(_selectedColorsIndex);
         ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
@@ -102,53 +127,77 @@ public class SettingsHandler : MonoBehaviour
 
     private void UpdateSoundIcon()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            gameManager.SavedGameData.SettingsData.SoundEnabled,
+            _gameManager.SavedGameData.SettingsData.SoundEnabled,
             _soundButtonImage,
             _soundOnSprite,
             _soundOffSprite
         );
     }
 
-    public void ChangeSound()
+    public async void ChangeSound()
     {
+        await CustomAnimation.ButtonClicked(_soundButton.transform);
         _audioManager.ToggleSFX();
         UpdateSoundIcon();
     }
 
     private void UpdateMusicIcon()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            gameManager.SavedGameData.SettingsData.MusicEnabled,
+            _gameManager.SavedGameData.SettingsData.MusicEnabled,
             _musicButtonImage,
             _musicOnSprite,
             _musicOffSprite
         );
     }
 
-    public void ChangeMusic()
+    public async void ChangeMusic()
     {
+        await CustomAnimation.ButtonClicked(_musicButton.transform);
         _audioManager.ToggleMusic();
         UpdateMusicIcon();
     }
 
     private void UpdateVibrateIcon()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         UpdateSetting(
-            gameManager.SavedGameData.SettingsData.VibrationEnabled,
+            _gameManager.SavedGameData.SettingsData.VibrationEnabled,
             _vibrateButtonImage,
             _vibrateOnSprite,
             _vibrateOffSprite
         );
     }
 
-    public void ChangeVibration()
+    public async void ChangeVibration()
     {
+        await CustomAnimation.ButtonClicked(_vibrationButton.transform);
         _audioManager.ToggleVibration();
         UpdateVibrateIcon();
+    }
+
+    private void UpdateControlIcon()
+    {
+        UpdateSetting(
+            _gameManager.SavedGameData.SettingsData.ControlMethodDrag,
+            _controlButtonImage,
+            _controlDragSprite,
+            _controlClickSprite
+        );
+        _controlLabel.text = _gameManager.SavedGameData.SettingsData.ControlMethodDrag
+            ? LocalizationManager.Localize("settings-control-drag")
+            : LocalizationManager.Localize("settings-control-click");
+    }
+
+    public async void ChangeControl()
+    {
+        await CustomAnimation.ButtonClicked(_controlButton.transform);
+        _gameManager.SavedGameData.SettingsData.ControlMethodDrag = !_gameManager
+            .SavedGameData
+            .SettingsData
+            .ControlMethodDrag;
+
+        UpdateControlIcon();
     }
 
     private void UpdateSetting(
@@ -168,8 +217,9 @@ public class SettingsHandler : MonoBehaviour
         }
     }
 
-    public void ChangeLanguage()
+    public async void ChangeLanguage()
     {
+        await CustomAnimation.ButtonClicked(_languageButton.transform);
         List<string> languagesAvailable = new List<string>
         {
             "English",
@@ -182,11 +232,25 @@ public class SettingsHandler : MonoBehaviour
         int nextIndex = currentIndex == languagesAvailable.Count - 1 ? 0 : currentIndex + 1;
         LocalizationManager.Language = languagesAvailable[nextIndex];
 
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
-        gameManager.SavedGameData.PersistData();
+        _controlLabel.text = _gameManager.SavedGameData.SettingsData.ControlMethodDrag
+            ? LocalizationManager.Localize("settings-control-drag")
+            : LocalizationManager.Localize("settings-control-click");
+
+        _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
+        _gameManager.SavedGameData.PersistData();
         UpdateLanguageIcon();
     }
 
     private void UpdateLanguageIcon() { }
+
+    internal void LoadSettingsButtons()
+    {
+        CustomAnimation.ButtonLoad(_languageButton.transform);
+        CustomAnimation.ButtonLoad(_themeButton.transform);
+        CustomAnimation.ButtonLoad(_controlButton.transform);
+        CustomAnimation.ButtonLoad(_vibrationButton.transform);
+        CustomAnimation.ButtonLoad(_musicButton.transform);
+        CustomAnimation.ButtonLoad(_soundButton.transform);
+        CustomAnimation.ButtonLoad(_supportButton.transform);
+    }
 }

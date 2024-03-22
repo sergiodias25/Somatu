@@ -59,13 +59,13 @@ public class Block : MonoBehaviour
         if (nodeTouched != null && _isInteractible)
         {
             FindObjectOfType<GameManager>().RemoveHints();
-            if (Constants.SelectedControlMethod == Constants.ControlMethod.Drag)
+            if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
             {
                 UpdateOffsetPosition();
                 _originalNode = nodeTouched;
                 CustomAnimation.NumberClicked(transform);
             }
-            else if (Constants.SelectedControlMethod == Constants.ControlMethod.DoubleClick)
+            else
             {
                 Node nodeClickedOn = nodeTouched;
                 Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
@@ -96,10 +96,10 @@ public class Block : MonoBehaviour
                         _gameManager.StoreUndoData(tempNode, _originalNode);
                         SwitchNodes(_originalNode, selectedBlock._originalNode);
                         selectedBlock.IsSelected = false;
+                        _audioManager.PlaySFX(_audioManager.DropBlock);
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
-                        _audioManager.PlaySFX(_audioManager.DropBlock);
                     }
                 }
             }
@@ -117,7 +117,7 @@ public class Block : MonoBehaviour
         if (
             nodeWhereBlockIsHovering != null
             && _isInteractible
-            && Constants.SelectedControlMethod == Constants.ControlMethod.Drag
+            && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
         )
         {
             transform.position = GetWorldMousePosition() + mousePositionOffset;
@@ -148,7 +148,7 @@ public class Block : MonoBehaviour
         if (
             nodeTouched != null
             && _isInteractible
-            && Constants.SelectedControlMethod == Constants.ControlMethod.Drag
+            && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
         )
         {
             Node nodeWhereBlockIsDropped = nodeTouched;

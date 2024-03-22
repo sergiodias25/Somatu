@@ -19,9 +19,14 @@ public class ShowLockImageInButton : MonoBehaviour
     private Image image;
     private GameManager _gameManager;
 
-    void Start()
+    private void OnEnable()
     {
         _gameManager = FindObjectOfType<GameManager>();
+        ValidateLockDisplay();
+    }
+
+    private void ValidateLockDisplay()
+    {
         if (value != DifficultyValue.Unlocked)
         {
             switch (value)
@@ -34,13 +39,17 @@ public class ShowLockImageInButton : MonoBehaviour
                     )
                     {
                         image.enabled = true;
+                        break;
                     }
+                    image.enabled = false;
                     break;
                 case DifficultyValue.Hard:
                     if (!_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Hard))
                     {
                         image.enabled = true;
+                        break;
                     }
+                    image.enabled = false;
                     break;
                 case DifficultyValue.Extreme:
                     if (
@@ -50,7 +59,9 @@ public class ShowLockImageInButton : MonoBehaviour
                     )
                     {
                         image.enabled = true;
+                        break;
                     }
+                    image.enabled = false;
                     break;
                 case DifficultyValue.Challenge:
                     if (
@@ -60,7 +71,9 @@ public class ShowLockImageInButton : MonoBehaviour
                     )
                     {
                         image.enabled = true;
+                        break;
                     }
+                    image.enabled = false;
                     break;
                 default:
                     break;
