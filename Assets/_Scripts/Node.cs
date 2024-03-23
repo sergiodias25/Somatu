@@ -14,7 +14,7 @@ public class Node : MonoBehaviour
         name = string.Concat("Node_", i, "_", j);
         SetBlockInNode(block);
         transform.SetParent(GameObject.Find(parentName).transform);
-        UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+        UpdateColor(ColourManager.Instance.SelectedPalette().Colours[8]);
         CustomAnimation.NodeLoad(transform);
     }
 

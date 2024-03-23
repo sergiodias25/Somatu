@@ -4907,8 +4907,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 161.94, y: -45}
-  m_SizeDelta: {x: 176.12, y: 90}
+  m_AnchoredPosition: {x: 156.93, y: -45}
+  m_SizeDelta: {x: 186.14, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &454614086
 MonoBehaviour:
@@ -4962,7 +4962,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 25
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -4993,7 +4993,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.083869934, y: 0, z: 34.4178, w: 0}
+  m_margin: {x: -0.08387758, y: 0, z: 0.038608562, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5312,10 +5312,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.00006142259
-    width: 1
-    height: 0.99987715
+    x: 0.03124997
+    y: 0
+    width: 0.93750006
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -14191,15 +14191,15 @@ MonoBehaviour:
   - Name: Light
     Selected: 0
     Colours:
-    - {r: 0.8862745, g: 0.827451, b: 0.6313726, a: 1}
-    - {r: 0, g: 0, b: 0, a: 1}
-    - {r: 0.9098039, g: 0.88235295, b: 0.7882353, a: 1}
-    - {r: 0.6156863, g: 0.79607844, b: 0.6313726, a: 1}
-    - {r: 0.92941177, g: 0.65882355, b: 0.627451, a: 1}
+    - {r: 0.24313726, g: 0.45490196, b: 0.5921569, a: 1}
+    - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
+    - {r: 0.7529412, g: 0.8862745, b: 0.99215686, a: 1}
+    - {r: 0.4627451, g: 0.7411765, b: 0.5058824, a: 1}
+    - {r: 0.7411765, g: 0.46666667, b: 0.46666667, a: 1}
     - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
     - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
-    - {r: 0.654902, g: 0.41960785, b: 0.03529412, a: 1}
-    - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
+    - {r: 0.0627451, g: 0.18039216, b: 0.24313726, a: 1}
+    - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
     - {r: 0.9098039, g: 0.88235295, b: 0.7882353, a: 1}
   - Name: Dark
     Selected: 0
@@ -18650,8 +18650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 161.90001, y: -45}
-  m_SizeDelta: {x: 176.2, y: 90}
+  m_AnchoredPosition: {x: 156.48, y: -45}
+  m_SizeDelta: {x: 187.04, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2072664027
 MonoBehaviour:
@@ -18705,7 +18705,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
-  m_fontSizeMax: 25
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -18736,7 +18736,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -1.1151047, y: 0, z: 31.231915, w: 0}
+  m_margin: {x: -1.1151047, y: 0, z: 23.10408, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

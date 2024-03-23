@@ -48,7 +48,7 @@ public class Block : MonoBehaviour
         _originalNode = node;
         transform.SetParent(node.transform);
         _text.color = interactible
-            ? ColourManager.Instance.SelectedPalette().Colours[7]
+            ? ColourManager.Instance.SelectedPalette().Colours[8]
             : ColourManager.Instance.SelectedPalette().Colours[1];
         return this;
     }

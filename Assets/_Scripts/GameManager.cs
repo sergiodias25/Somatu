@@ -627,7 +627,7 @@ public class GameManager : MonoBehaviour
     {
         Color colorToUpdateTo = HasGameEnded()
             ? ColourManager.Instance.SelectedPalette().Colours[3]
-            : ColourManager.Instance.SelectedPalette().Colours[2];
+            : ColourManager.Instance.SelectedPalette().Colours[8];
 
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {

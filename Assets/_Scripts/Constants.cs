@@ -147,10 +147,10 @@ public class Constants : MonoBehaviour
 
     public static Color[] LightColors =
     {
-        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
-        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
-        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
-        new Color32(0xE8, 0xE1, 0xC9, 0xFF),
+        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
+        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
+        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
+        new Color32(0x6A, 0xBA, 0xFA, 0xFF)
     };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
     public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };
