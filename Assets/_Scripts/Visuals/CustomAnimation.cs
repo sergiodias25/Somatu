@@ -60,19 +60,21 @@ namespace Assets.Scripts.CustomAnimation
             transform.DOMove(destination, NUMBER_DROPPED_MOVE_TIME).SetId("MoveNumberBack");
         }
 
-        public static Sequence SumIsCorrect(Transform transform)
+        public static Sequence SumIsCorrect(Transform transform, string name)
         {
-            return transform
-                .DOJump(
-                    transform.position,
-                    SUM_CORRECT_ANIMATION_JUMP_FORCE,
-                    1,
-                    SUM_CORRECT_ANIMATION_DURATION
-                )
-                .SetDelay(RandomizeDelayValue(0.33))
-                .SetId("NumberJump");
-            //.Join(SumIsIncorrect(transform))
-            ;
+            if (DOTween.TotalTweensById("NumberJump" + name) == 0)
+            {
+                return transform
+                    .DOJump(
+                        transform.position,
+                        SUM_CORRECT_ANIMATION_JUMP_FORCE,
+                        1,
+                        SUM_CORRECT_ANIMATION_DURATION
+                    )
+                    .SetDelay(RandomizeDelayValue(0.33))
+                    .SetId("NumberJump" + name);
+            }
+            return null;
         }
 
         public static Tweener ShakeAnimation(Transform transform)

@@ -257,12 +257,12 @@ public class Block : MonoBehaviour
 
     public Sequence AnimatePartialSumCorrect()
     {
-        return CustomAnimation.SumIsCorrect(_text.transform);
+        return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
     }
 
     public Sequence AnimatePuzzleCompleted()
     {
-        return CustomAnimation.SumIsCorrect(_text.transform);
+        return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
     }
 
     public void AnimateIncorrectSolution()
