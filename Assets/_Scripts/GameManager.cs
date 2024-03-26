@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 1; j < _height + 1; j++)
             {
-                Node node = Instantiate(_nodePrefab, new Vector2(i, j), Quaternion.identity);
+                Node node = Node.Init(_nodePrefab, i, j, "GeneratedNodes");
                 int generatedNumber;
                 if (loadGame && SavedGameData.GameInProgressData.GameNumbers.Count > 0)
                 {
@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
                     GenerateSolutionNumber(numbers);
                 }
                 Block generatedBLock = SpawnBlock(node, generatedNumber, true);
-                node.Init(i, j, generatedBLock, "GeneratedNodes");
+                node.SetBlockInNode(generatedBLock);
                 _allNodes.Add(node);
                 _countTracker += 1;
             }
@@ -251,9 +251,9 @@ public class GameManager : MonoBehaviour
 
     private Block GenerateResultBlock(int x, int y, int numberValue)
     {
-        var node = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity);
+        Node node = Node.Init(_nodePrefab, x, y, "SolutionNodes");
         Block generatedBLock = SpawnBlock(node, numberValue, false);
-        node.Init(x, y, generatedBLock, "SolutionNodes");
+        node.SetBlockInNode(generatedBLock);
         return generatedBLock;
     }
 
@@ -760,7 +760,7 @@ public class GameManager : MonoBehaviour
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
-            (float)(_height + 2.68) / 2 - 0.5f
+            (float)(_height + 2.68) / 2 - 1.02f
         );
         _gameBackground.transform.position = boardCenter;
 

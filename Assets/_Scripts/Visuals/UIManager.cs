@@ -109,7 +109,6 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        ShowObject(_backgroundsPanel);
         ShowObject(_mainMenuPanel);
         CustomAnimation.ButtonLoad(_classicModeButton.transform);
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
@@ -273,6 +272,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameplayButtons()
     {
+        ShowObject(_backgroundsPanel);
         ShowObject(_gameNodes);
         ShowObject(_gameplayStatsPanel);
         ShowObject(_gameplayInGamePanel);

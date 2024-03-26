@@ -9,13 +9,30 @@ public class Node : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
 
-    internal void Init(int i, int j, Block block, string parentName)
+    internal static Node Init(Node nodePrefab, int i, int j, string parentName)
     {
-        name = string.Concat("Node_", i, "_", j);
-        SetBlockInNode(block);
-        transform.SetParent(GameObject.Find(parentName).transform);
-        UpdateColor(ColourManager.Instance.SelectedPalette().Colours[8]);
-        CustomAnimation.NodeLoad(transform);
+        Node node = Instantiate(
+            nodePrefab,
+            new Vector2(GetAdjustedPosition(i), GetAdjustedPosition(j)),
+            Quaternion.identity
+        );
+        node.name = string.Concat("Node_", i, "_", j);
+        node.transform.SetParent(GameObject.Find(parentName).transform);
+        node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[8]);
+        CustomAnimation.NodeLoad(node.transform);
+        return node;
+    }
+
+    private static float GetAdjustedPosition(float value)
+    {
+        return value switch
+        {
+            0 => value + 0.15f,
+            1 => value + 0.05f,
+            2 => value - 0.05f,
+            3 => value - 0.15f,
+            _ => value,
+        };
     }
 
     public void SetBlockInNode(Block block)
