@@ -673,14 +673,6 @@ public class GameManager : MonoBehaviour
             && SavedGameData.GameInProgressData.GameNumbers.Count == 9;
     }
 
-    public void ResetAllBlocksOpacity()
-    {
-        for (int i = 0; i < _allNodes.Count; i++)
-        {
-            Block.UpdateOpacity(_allNodes[i].GetBlockInNode(), 1f);
-        }
-    }
-
     public void StoreUndoData(Node firstNode, Node secondNode)
     {
         SavedGameData.GameInProgressData.UndoData.StoreMoveToUndo(firstNode.name, secondNode.name);
@@ -691,7 +683,7 @@ public class GameManager : MonoBehaviour
     {
         if (SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo())
         {
-            Block.SwitchNodes(
+            Block.SwitchBlocksUndo(
                 GameObject
                     .Find(
                         SavedGameData.GameInProgressData.UndoData.FirstNodes[

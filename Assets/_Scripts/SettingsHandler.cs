@@ -196,6 +196,10 @@ public class SettingsHandler : MonoBehaviour
             .SavedGameData
             .SettingsData
             .ControlMethodDrag;
+        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
+        {
+            _gameManager.ResetSelectedBlock();
+        }
 
         UpdateControlIcon();
     }

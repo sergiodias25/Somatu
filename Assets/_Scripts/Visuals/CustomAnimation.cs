@@ -24,6 +24,7 @@ namespace Assets.Scripts.CustomAnimation
 
         public static async Task ButtonClicked(Transform target)
         {
+            target.gameObject.GetComponent<Button>().enabled = false;
             var sequence = DOTween.Sequence();
             sequence.Append(target.DOScale(BUTTON_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
             sequence.Append(
@@ -39,6 +40,7 @@ namespace Assets.Scripts.CustomAnimation
             sequence.SetId("ButtonClick" + target.name).Play();
 
             await WaitForAnimation("ButtonClick" + target.name);
+            target.gameObject.GetComponent<Button>().enabled = true;
         }
 
         public static void NumberClicked(Transform transform)
@@ -62,11 +64,16 @@ namespace Assets.Scripts.CustomAnimation
 
         public static Sequence SumIsCorrect(Transform transform, string name)
         {
+            return SumIsCorrect(transform, transform.position, name);
+        }
+
+        public static Sequence SumIsCorrect(Transform transform, Vector3 position, string name)
+        {
             if (DOTween.TotalTweensById("NumberJump" + name) == 0)
             {
                 return transform
                     .DOJump(
-                        transform.position,
+                        position,
                         SUM_CORRECT_ANIMATION_JUMP_FORCE,
                         1,
                         SUM_CORRECT_ANIMATION_DURATION

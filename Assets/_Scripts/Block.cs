@@ -20,7 +20,6 @@ public class Block : MonoBehaviour
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
-    private Node _lastHoveredNode;
 
     private void Awake()
     {
@@ -55,19 +54,17 @@ public class Block : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Node nodeTouched = GetNodeTouched();
-        if (nodeTouched != null && _isInteractible)
+        Node nodeClickedOn = GetNodeTouched();
+        if (nodeClickedOn != null && _isInteractible)
         {
             FindObjectOfType<GameManager>().RemoveHints();
             if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
             {
                 UpdateOffsetPosition();
-                _originalNode = nodeTouched;
                 CustomAnimation.NumberClicked(transform);
             }
             else
             {
-                Node nodeClickedOn = nodeTouched;
                 Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
                 if (selectedBlock == null)
                 {
@@ -80,7 +77,7 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     selectedBlock._originalNode.UpdateColor(
-                        ColourManager.Instance.SelectedPalette().Colours[2]
+                        ColourManager.Instance.SelectedPalette().Colours[1]
                     );
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
@@ -88,14 +85,11 @@ public class Block : MonoBehaviour
                 {
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
-                        var tempNode = selectedBlock._originalNode;
-
                         selectedBlock._originalNode.UpdateColor(
-                            ColourManager.Instance.SelectedPalette().Colours[2]
+                            ColourManager.Instance.SelectedPalette().Colours[1]
                         );
-                        _gameManager.StoreUndoData(tempNode, _originalNode);
-                        SwitchNodes(_originalNode, selectedBlock._originalNode);
-                        selectedBlock.IsSelected = false;
+                        _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
+                        SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
                         _audioManager.PlaySFX(_audioManager.DropBlock);
 
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
@@ -113,76 +107,41 @@ public class Block : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Node nodeWhereBlockIsHovering = GetNodeTouched();
-        if (
-            nodeWhereBlockIsHovering != null
-            && _isInteractible
-            && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
-        )
+        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
         {
-            transform.position = GetWorldMousePosition() + mousePositionOffset;
-            if (
-                nodeWhereBlockIsHovering != null
-                && nodeWhereBlockIsHovering.name != _originalNode.name
-            )
+            Node nodeWhereBlockIsHovering = GetNodeTouched();
+            if (nodeWhereBlockIsHovering != null && _isInteractible)
             {
-                _gameManager.ResetAllBlocksOpacity();
-                UpdateOpacity(nodeWhereBlockIsHovering.GetBlockInNode(), 0.2f);
-                _lastHoveredNode = nodeWhereBlockIsHovering;
+                transform.position = GetWorldMousePosition() + mousePositionOffset;
+
+                if (_originalNode != nodeWhereBlockIsHovering)
+                {
+                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsHovering);
+                    SwitchBlocks(nodeWhereBlockIsHovering);
+                    _originalNode = nodeWhereBlockIsHovering;
+                }
             }
-        }
-        else if (nodeWhereBlockIsHovering == null && _lastHoveredNode != null)
-        {
-            UpdateOpacity(_lastHoveredNode.GetBlockInNode(), 1f);
-            _lastHoveredNode = null;
-        }
-        else if (_lastHoveredNode != null)
-        {
-            UpdateOpacity(_lastHoveredNode.GetBlockInNode(), 1f);
         }
     }
 
     private void OnMouseUp()
     {
-        Node nodeTouched = GetNodeTouched();
-        if (
-            nodeTouched != null
-            && _isInteractible
-            && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
-        )
+        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
         {
-            Node nodeWhereBlockIsDropped = nodeTouched;
-            if (nodeWhereBlockIsDropped != null)
+            Node nodeWhereBlockIsDropped = GetNodeTouched();
+            if (nodeWhereBlockIsDropped != null && _isInteractible)
             {
-                UpdateOpacity(nodeWhereBlockIsDropped.GetBlockInNode(), 1f);
+                SwitchNodes(_originalNode.GetBlockInNode(), nodeWhereBlockIsDropped);
+                _audioManager.PlaySFX(_audioManager.DropBlock);
+                FindObjectOfType<GameManager>().CheckResult(true);
 
-                if (nodeWhereBlockIsDropped != _originalNode)
-                {
-                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
-                    SwitchNodes(_originalNode, nodeWhereBlockIsDropped);
-                    _audioManager.PlaySFX(_audioManager.DropBlock);
-                    FindObjectOfType<GameManager>().CheckResult(true);
-                }
-                else
-                {
-                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
-                    CustomAnimation.NumberDropped(
-                        gameObject.transform,
-                        _originalNode.transform.position
-                    );
-                }
+                UpdateOffsetPosition();
             }
-            else
+            else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {
                 CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
                 _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             }
-
-            UpdateOffsetPosition();
-        }
-        else if (nodeTouched == null)
-        {
-            CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
         }
     }
 
@@ -221,31 +180,52 @@ public class Block : MonoBehaviour
         return _isInteractible;
     }
 
-    public static void UpdateOpacity(Block block, float value)
+    public static void SwitchNodes(Block blockMoved, Node landingNode)
     {
-        block._text.alpha = value;
+        CustomAnimation.NumberDropped(blockMoved.transform, landingNode.transform.position);
     }
 
-    public static void SwitchNodes(Node firstNode, Node secondNode)
+    public async void SwitchBlocks(Node hoveredNode)
     {
-        Node _tempNode = firstNode;
-        var tempBlock = firstNode.GetBlockInNode();
+        Node tempNode = hoveredNode;
 
-        CustomAnimation.NumberDropped(
-            firstNode.GetBlockInNode().transform,
-            secondNode.GetBlockInNode().transform.position
+        hoveredNode.GetBlockInNode().transform.SetParent(_originalNode.transform);
+        hoveredNode.GetBlockInNode()._originalNode = _originalNode;
+        _originalNode.SetBlockInNode(hoveredNode.GetBlockInNode());
+        CustomAnimation.NumberSwitched(
+            hoveredNode.GetBlockInNode().transform,
+            _originalNode.transform.position
         );
-        firstNode.SetBlockInNode(secondNode.GetBlockInNode());
-        firstNode.GetBlockInNode().transform.SetParent(firstNode.transform);
-        firstNode.GetBlockInNode()._originalNode = firstNode;
 
+        transform.SetParent(tempNode.transform);
+        _originalNode = tempNode;
+        hoveredNode.SetBlockInNode(this);
+
+        await CustomAnimation.WaitForAnimation("MoveNumberBack");
+    }
+
+    public static async void SwitchBlocksUndo(Node secondNode, Node firstNode)
+    {
+        CustomAnimation.NumberSwitched(
+            firstNode.GetBlockInNode().transform,
+            secondNode.transform.position
+        );
         CustomAnimation.NumberSwitched(
             secondNode.GetBlockInNode().transform,
-            _tempNode.transform.position
+            firstNode.transform.position
         );
+
+        secondNode.GetBlockInNode().transform.SetParent(firstNode.transform);
+        secondNode.GetBlockInNode()._originalNode = firstNode;
+
+        firstNode.GetBlockInNode().transform.SetParent(secondNode.transform);
+        firstNode.GetBlockInNode()._originalNode = secondNode;
+        Block tempBlock = firstNode.GetBlockInNode();
+
+        firstNode.SetBlockInNode(secondNode.GetBlockInNode());
         secondNode.SetBlockInNode(tempBlock);
-        secondNode.GetBlockInNode().transform.SetParent(secondNode.transform);
-        secondNode.GetBlockInNode()._originalNode = secondNode;
+
+        await CustomAnimation.WaitForAnimation("MoveNumberBack");
     }
 
     internal void UpdateTextColor()
@@ -262,7 +242,11 @@ public class Block : MonoBehaviour
 
     public Sequence AnimatePuzzleCompleted()
     {
-        return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
+        return CustomAnimation.SumIsCorrect(
+            _text.transform,
+            GetNode().transform.position,
+            GetNode().name
+        );
     }
 
     public void AnimateIncorrectSolution()
