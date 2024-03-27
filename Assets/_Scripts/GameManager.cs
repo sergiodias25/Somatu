@@ -420,7 +420,9 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+            node.UpdateColor(
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+            );
             node.GetBlockInNode().UpdateTextColor();
         }
 
@@ -466,7 +468,7 @@ public class GameManager : MonoBehaviour
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().DisableInteraction();
-            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
+            node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]);
             node.GetBlockInNode().UpdateTextColor();
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
@@ -492,11 +494,19 @@ public class GameManager : MonoBehaviour
         {
             if (currentSum == expectedResult)
             {
-                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[3]);
+                block
+                    .GetNode()
+                    .UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+                    );
             }
             else
             {
-                block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[4]);
+                block
+                    .GetNode()
+                    .UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
+                    );
             }
         }
         else if (
@@ -507,7 +517,11 @@ public class GameManager : MonoBehaviour
             || SelectedDifficulty == Constants.Difficulty.Extreme
         )
         {
-            block.GetNode().UpdateColor(ColourManager.Instance.SelectedPalette().Colours[2]);
+            block
+                .GetNode()
+                .UpdateColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
+                );
         }
 
         if (currentSum == expectedResult)
@@ -616,7 +630,7 @@ public class GameManager : MonoBehaviour
             {
                 int randomNodeIndex = Random.Range(0, incorrectNodes.Count);
                 incorrectNodes[randomNodeIndex].UpdateColor(
-                    ColourManager.Instance.SelectedPalette().Colours[4]
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
                 );
                 incorrectNodes.RemoveAt(randomNodeIndex);
             }
@@ -626,8 +640,8 @@ public class GameManager : MonoBehaviour
     public void RemoveHints()
     {
         Color colorToUpdateTo = HasGameEnded()
-            ? ColourManager.Instance.SelectedPalette().Colours[3]
-            : ColourManager.Instance.SelectedPalette().Colours[8];
+            ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+            : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL];
 
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {

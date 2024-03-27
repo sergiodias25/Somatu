@@ -11,9 +11,6 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro _text;
-
-    [SerializeField]
-    private SpriteRenderer _sprite;
     private GameManager _gameManager;
     private AudioManager _audioManager;
     private Vector3 mousePositionOffset;
@@ -47,8 +44,8 @@ public class Block : MonoBehaviour
         _originalNode = node;
         transform.SetParent(node.transform);
         _text.color = interactible
-            ? ColourManager.Instance.SelectedPalette().Colours[8]
-            : ColourManager.Instance.SelectedPalette().Colours[1];
+            ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
+            : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
         return this;
     }
 
@@ -70,14 +67,20 @@ public class Block : MonoBehaviour
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     IsSelected = true;
-                    nodeClickedOn.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[5]);
+                    nodeClickedOn.UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[
+                            Constants.COLOR_SELECTED_NODE
+                        ]
+                    );
                     _audioManager.PlaySFX(_audioManager.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
                     FindObjectOfType<GameManager>().ResetSelectedBlock();
                     selectedBlock._originalNode.UpdateColor(
-                        ColourManager.Instance.SelectedPalette().Colours[1]
+                        ColourManager.Instance.SelectedPalette().Colours[
+                            Constants.COLOR_NODE_NEUTRAL
+                        ]
                     );
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
@@ -86,7 +89,9 @@ public class Block : MonoBehaviour
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
                         selectedBlock._originalNode.UpdateColor(
-                            ColourManager.Instance.SelectedPalette().Colours[1]
+                            ColourManager.Instance.SelectedPalette().Colours[
+                                Constants.COLOR_NODE_NEUTRAL
+                            ]
                         );
                         _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
                         SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
@@ -231,8 +236,8 @@ public class Block : MonoBehaviour
     internal void UpdateTextColor()
     {
         _text.color = _isInteractible
-            ? ColourManager.Instance.SelectedPalette().Colours[7]
-            : ColourManager.Instance.SelectedPalette().Colours[1];
+            ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
+            : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
     }
 
     public Sequence AnimatePartialSumCorrect()

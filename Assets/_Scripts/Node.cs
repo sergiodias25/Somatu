@@ -18,7 +18,9 @@ public class Node : MonoBehaviour
         );
         node.name = string.Concat("Node_", i, "_", j);
         node.transform.SetParent(GameObject.Find(parentName).transform);
-        node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[8]);
+        node.UpdateColor(
+            ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
+        );
         CustomAnimation.NodeLoad(node.transform);
         return node;
     }

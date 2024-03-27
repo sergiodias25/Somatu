@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using CandyCabinets.Components.Colour;
 using UnityEngine;
 
-public class Constants : MonoBehaviour
+public static class Constants
 {
     // BOARD NUMBER COMBINATIONS
     public static List<int> NumbersForEasyMode = new List<int> { 1, 2, 3 };
@@ -144,6 +142,18 @@ public class Constants : MonoBehaviour
     8 - Buttons
     9 - Icons
      */
+
+    // COLORS
+    public static int COLOR_BACKGROUND = 0;
+    public static int COLOR_LIGHT_TEXT = 1;
+    public static int COLOR_BUTTON = 2;
+    public static int COLOR_GREEN = 3;
+    public static int COLOR_RED = 4;
+    public static int COLOR_SELECTED_NODE = 5;
+    public static int COLOR_SOLUTION_NODE_NO_HINT = 6;
+    public static int COLOR_DARK_TEXT = 7;
+    public static int COLOR_NODE_NEUTRAL = 8;
+    public static int COLOR_ICON = 9;
 
     public static Color[] LightColors =
     {
