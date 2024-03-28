@@ -87,6 +87,12 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _difficultyPanelText;
 
     [SerializeField]
+    private GameObject _unlockPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI _unlockPanelText;
+
+    [SerializeField]
     private Button _closeSettingsButton;
 
     void Start()
@@ -230,6 +236,17 @@ public class UIManager : MonoBehaviour
         ShowObject(_difficultyPanel);
     }
 
+    public void ShowUnlockPopup(Constants.Difficulty newDifficulty)
+    {
+        string popuTextKey = "popup-unlock-difficulty";
+
+        _unlockPanelText.text = LocalizationManager.Localize(
+            popuTextKey,
+            LocalizationManager.Localize("mode-" + newDifficulty.ToString().ToLower())
+        );
+        ShowObject(_unlockPanel);
+    }
+
     public async void ClickOnHardMode()
     {
         await CustomAnimation.ButtonClicked(_hardModeButton.transform);
@@ -319,6 +336,15 @@ public class UIManager : MonoBehaviour
                 _timer.RestartTimer();
             }
         }
+    }
+
+    public void ChangeModeClick()
+    {
+        _gameManager.ResetBoard(false, true, true);
+        _gameManager.Init((Constants.Difficulty)_gameManager.SavedGameData.UnlockedDifficulty);
+
+        _playerStats.StartedGame(_gameManager.SelectedDifficulty);
+        ShowGameplayButtons();
     }
 
     public void HomeClick()

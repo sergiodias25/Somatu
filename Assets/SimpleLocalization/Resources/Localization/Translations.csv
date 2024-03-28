@@ -23,7 +23,7 @@ btn-hint,Hint,Dica,Pista,ヒント,팁
 btn-shop,Shop,Loja,Tienda,店,가게
 btn-shop-hints5,5 Hints,5 dicas,5 consejos,5つのヒント,5가지 팁
 btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,無制限のヒント,무제한 팁
-btn-shop-unlocklevels,Unlock All Levels,Desbloquear todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제
+btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제
 btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除する,광고 제거
 btn-shop-metallictheme,Metallic Theme,Tema Metálico,Tema metálico,メタリックテーマ,메탈릭 테마
 btn-shop-goldtheme,Gold Theme,Tema Ouro,Tema de oro,ゴールドテーマ,골드 테마
@@ -42,10 +42,10 @@ settings-control-drag,Drag,Arrastar,Arrastrar,引っ張る,견인
 settings-control-click,Tap,Tocar,Tocar,触る,만지다
 settings-theme,Theme,Tema,Tema,テーマ,주제
 settings-support,Support,Suporte,Soporte,サポート,지원하다
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,#VALUE!
-,,,,#VALUE!,
+popup-unlock-difficulty,{0} mode unlocked.\nChange to the new mode?,Modo {0} desbloqueado.<br>Mudar para o novo modo?,Modo {0} desbloqueado.<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました。<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다.<br>새 모드로 전환하시겠습니까?
+btn-yes,Yes,Sim,Sí,はい,예
+btn-no,No,Não,No,いいえ,아니요
+,,,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!

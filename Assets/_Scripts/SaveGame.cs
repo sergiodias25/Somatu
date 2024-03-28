@@ -161,6 +161,9 @@ namespace Assets.Scripts.SaveGame
             {
                 UnlockedDifficulty++;
                 TimesBeatenCurrentDifficulty = 0;
+                UnityEngine.Object
+                    .FindObjectOfType<UIManager>()
+                    .ShowUnlockPopup((Constants.Difficulty)UnlockedDifficulty);
             }
         }
 

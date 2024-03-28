@@ -218,13 +218,13 @@ namespace Assets.Scripts.CustomAnimation
                 .SetEase(Ease.OutBounce)
                 .SetDelay(RandomizeDelayValue(0.2));
             ;
-            AudioManager audioManager = UnityEngine.Object.FindObjectOfType<AudioManager>();
+            AudioManager audioManager = Object.FindObjectOfType<AudioManager>();
             audioManager.PlaySFX(audioManager.NodeLoaded);
         }
 
         static float RandomizeDelayValue(double delay)
         {
-            return (float)(UnityEngine.Random.value * delay);
+            return (float)(Random.value * delay);
         }
     }
 }
