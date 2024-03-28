@@ -1,6 +1,6 @@
 Key,English,Portuguese,Spanish,Japanese,Korean
 ,en,pt,es,ja,ko
-btn-language,English,Português,Español,,
+btn-language,English,Português,Español,日本語,한국인
 btn-play,Classic,Clássico,Clásico,クラシック,권위 있는
 btn-continue,Continue,Continuar,Continuar,続く,계속하다
 btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
@@ -42,10 +42,10 @@ settings-control-drag,Drag,Arrastar,Arrastrar,引っ張る,견인
 settings-control-click,Tap,Tocar,Tocar,触る,만지다
 settings-theme,Theme,Tema,Tema,テーマ,주제
 settings-support,Support,Suporte,Soporte,サポート,지원하다
-popup-unlock-difficulty,{0} mode unlocked.\nChange to the new mode?,Modo {0} desbloqueado.<br>Mudar para o novo modo?,Modo {0} desbloqueado.<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました。<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다.<br>새 모드로 전환하시겠습니까?
+popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました!<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다!<br>새 모드로 전환하시겠습니까?
 btn-yes,Yes,Sim,Sí,はい,예
 btn-no,No,Não,No,いいえ,아니요
-,,,#VALUE!,#VALUE!,#VALUE!
+btn-replay,Play Again,Jogar de Novo,Juega de nuevo,再びプレー,다시 플레이
 ,,,#VALUE!,#VALUE!,#VALUE!
 ,,,#VALUE!,#VALUE!,#VALUE!
 ,,,#VALUE!,#VALUE!,#VALUE!
