@@ -225,6 +225,9 @@ public class UIManager : MonoBehaviour
         {
             finalSolvesNeededText =
                 numberOfSolvesNeeded - _gameManager.SavedGameData.TimesBeatenCurrentDifficulty;
+        }
+        if (finalSolvesNeededText == 1)
+        {
             popuTextKey = "popup-difficulty-singular";
         }
         _difficultyPanelText.text = LocalizationManager.Localize(
