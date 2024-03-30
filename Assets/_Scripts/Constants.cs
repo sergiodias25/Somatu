@@ -155,12 +155,18 @@ public static class Constants
     public static int COLOR_NODE_NEUTRAL = 8;
     public static int COLOR_ICON = 9;
 
+    /*
+        1st - bottom left
+        2nd - bottom right
+        3rd - top right
+        4th - top left
+    */
     public static Color[] LightColors =
     {
-        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
-        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
-        new Color32(0x6A, 0xBA, 0xFA, 0xFF),
-        new Color32(0x6A, 0xBA, 0xFA, 0xFF)
+        new Color32(0xA7, 0xE7, 0xF2, 0xFF),
+        new Color32(0xBD, 0xED, 0xF5, 0xFF),
+        new Color32(0x92, 0xE2, 0xEF, 0xFF),
+        new Color32(0x7C, 0xDC, 0xEB, 0xFF)
     };
     public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
     public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };

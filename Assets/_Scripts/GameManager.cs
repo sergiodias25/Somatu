@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer _gameBackground;
 
     [SerializeField]
-    private SpriteRenderer _topBackground;
-
-    [SerializeField]
     private TextMeshProUGUI _timesSolvedText;
 
     [SerializeField]
@@ -84,9 +81,8 @@ public class GameManager : MonoBehaviour
         SelectedDifficulty = selectedDifficulty;
         ActualDifficulty = GetActualDifficulty();
         _timesSolvedText.text = "0";
-        _modeSelected.text = LocalizationManager.Localize(
-            "mode-" + SelectedDifficulty.ToString().ToLower()
-        );
+        UpdateModeTranslation();
+        LocalizationManager.OnLocalizationChanged += () => UpdateModeTranslation();
 
         if (!loadGame)
         {
@@ -107,6 +103,13 @@ public class GameManager : MonoBehaviour
         _timer.Init(
             SelectedDifficulty == Constants.Difficulty.Challenge,
             SavedGameData != null ? SavedGameData.GameInProgressData.TimerValue : 0d
+        );
+    }
+
+    private void UpdateModeTranslation()
+    {
+        _modeSelected.text = LocalizationManager.Localize(
+            "mode-" + SelectedDifficulty.ToString().ToLower()
         );
     }
 
@@ -227,9 +230,7 @@ public class GameManager : MonoBehaviour
         if (loadGame && SavedGameData.GameInProgressData.GameNumbers.Count > 0)
         {
             SelectedDifficulty = (Constants.Difficulty)SavedGameData.GameInProgressData.Difficulty;
-            _modeSelected.text = LocalizationManager.Localize(
-                "mode-" + SelectedDifficulty.ToString().ToLower()
-            );
+            UpdateModeTranslation();
             _timer.SetTimerValue(SavedGameData.GameInProgressData.TimerValue);
         }
 
@@ -431,7 +432,6 @@ public class GameManager : MonoBehaviour
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHelpButton(false);
-        _uiManager.ShowEndOfGameButton();
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
@@ -444,6 +444,7 @@ public class GameManager : MonoBehaviour
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
+            _uiManager.ShowEndOfGameButton();
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
 
@@ -520,7 +521,7 @@ public class GameManager : MonoBehaviour
             block
                 .GetNode()
                 .UpdateColor(
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_BUTTON]
                 );
         }
 
@@ -770,11 +771,6 @@ public class GameManager : MonoBehaviour
         );
         _gameBackground.transform.position = boardCenter;
 
-        var screenTopCenter = Camera.main.ScreenToWorldPoint(
-            new Vector2(Screen.width / 2, Screen.height)
-        );
-        var topCenter = new Vector2(screenTopCenter.x, screenTopCenter.y - 0.5f);
-        _topBackground.transform.position = topCenter;
         _uiManager.ShowMainMenu();
         loadingCanvas.gameObject.SetActive(false);
     }

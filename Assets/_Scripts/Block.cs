@@ -125,6 +125,7 @@ public class Block : MonoBehaviour
         {
             Node nodeWhereBlockIsHovering = GetNodeTouched();
             transform.position = MoveOffsetPosition();
+            CustomAnimation.NumberClicked(transform);
 
             if (nodeWhereBlockIsHovering != null && _originalNode != nodeWhereBlockIsHovering)
             {
@@ -142,16 +143,21 @@ public class Block : MonoBehaviour
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null && _isInteractible)
             {
-                SwitchNodes(_originalNode.GetBlockInNode(), nodeWhereBlockIsDropped);
-                _audioManager.PlaySFX(_audioManager.DropBlock);
-                FindObjectOfType<GameManager>().CheckResult(true);
-
                 UpdateOffsetPosition();
+                SwitchNodes(_originalNode.GetBlockInNode(), nodeWhereBlockIsDropped);
+                if (!FindObjectOfType<GameManager>().CheckResult(true))
+                {
+                    _audioManager.PlaySFX(_audioManager.DropBlock);
+                }
             }
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {
+                UpdateOffsetPosition();
                 CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
-                _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                if (!FindObjectOfType<GameManager>().CheckResult(true))
+                {
+                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                }
             }
         }
     }
@@ -248,7 +254,9 @@ public class Block : MonoBehaviour
 
     public Sequence AnimatePartialSumCorrect()
     {
-        return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
+        if (_text.transform != null)
+            return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
+        return null;
     }
 
     public Sequence AnimatePuzzleCompleted()

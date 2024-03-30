@@ -84,6 +84,8 @@ public class SettingsHandler : MonoBehaviour
         UpdateMusicIcon();
         UpdateVibrateIcon();
         UpdateControlIcon();
+        UpdateControlTranslation();
+        LocalizationManager.OnLocalizationChanged += () => UpdateControlTranslation();
     }
 
     public async void ChangeTheme()
@@ -184,6 +186,11 @@ public class SettingsHandler : MonoBehaviour
             _controlDragSprite,
             _controlClickSprite
         );
+        UpdateControlTranslation();
+    }
+
+    private void UpdateControlTranslation()
+    {
         _controlLabel.text = _gameManager.SavedGameData.SettingsData.ControlMethodDrag
             ? LocalizationManager.Localize("settings-control-drag")
             : LocalizationManager.Localize("settings-control-click");
@@ -235,10 +242,6 @@ public class SettingsHandler : MonoBehaviour
         int currentIndex = languagesAvailable.IndexOf(LocalizationManager.Language);
         int nextIndex = currentIndex == languagesAvailable.Count - 1 ? 0 : currentIndex + 1;
         LocalizationManager.Language = languagesAvailable[nextIndex];
-
-        _controlLabel.text = _gameManager.SavedGameData.SettingsData.ControlMethodDrag
-            ? LocalizationManager.Localize("settings-control-drag")
-            : LocalizationManager.Localize("settings-control-click");
 
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();

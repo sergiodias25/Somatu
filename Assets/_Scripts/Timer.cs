@@ -41,7 +41,7 @@ public class Timer : MonoBehaviour
     {
         enabled = true;
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
-            Constants.COLOR_LIGHT_TEXT
+            Constants.COLOR_DARK_TEXT
         ];
         _timeLimitValue = Constants.ChallengeTimeLimit;
         _isRunning = true;
@@ -77,7 +77,7 @@ public class Timer : MonoBehaviour
     {
         _currentTime = 0.0f;
         UpdateTimerText();
-        _timerText.color = Color.red;
+        _timerText.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
         enabled = false;
         _isRunning = false;
         _gameManager.PuzzleFailed(_elapsedTime);

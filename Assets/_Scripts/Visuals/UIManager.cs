@@ -343,14 +343,14 @@ public class UIManager : MonoBehaviour
 
     public void ChangeModeClick()
     {
-        _gameManager.ResetBoard(false, true, true);
+        _gameManager.ResetBoard(true, true, true);
         _gameManager.Init((Constants.Difficulty)_gameManager.SavedGameData.UnlockedDifficulty);
 
         _playerStats.StartedGame(_gameManager.SelectedDifficulty);
         ShowGameplayButtons();
     }
 
-    public void HomeClick()
+    public void ClickOnHome()
     {
         if (_gameManager.IsGameInProgress())
         {
@@ -366,6 +366,7 @@ public class UIManager : MonoBehaviour
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
         HideObject(_classicMenu);
+        HideObject(_backgroundsPanel);
         ShowMainMenu();
     }
 
@@ -496,6 +497,7 @@ public class UIManager : MonoBehaviour
         if (statusToChangeTo)
         {
             ShowObject(_gameplayStatsPanel);
+            ShowObject(_backgroundsPanel);
             if (_gameManager.HasGameEnded())
             {
                 HideObject(_gameplayInGamePanel);
@@ -510,6 +512,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            HideObject(_backgroundsPanel);
             HideObject(_gameplayStatsPanel);
             HideObject(_gameplayInGamePanel);
             HideObject(_gameplayEndGamePanel);
