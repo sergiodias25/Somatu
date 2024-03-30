@@ -107,24 +107,30 @@ public class Block : MonoBehaviour
 
     private void UpdateOffsetPosition()
     {
-        mousePositionOffset = _originalNode.transform.position - GetWorldMousePosition();
+        var cenas = _originalNode.transform.position - GetWorldMousePosition();
+        cenas.z = 0;
+        mousePositionOffset = cenas;
+    }
+
+    private Vector3 MoveOffsetPosition()
+    {
+        Vector3 position = GetWorldMousePosition() + mousePositionOffset;
+        position.z = 0;
+        return position;
     }
 
     private void OnMouseDrag()
     {
-        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
+        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag && _isInteractible)
         {
             Node nodeWhereBlockIsHovering = GetNodeTouched();
-            if (nodeWhereBlockIsHovering != null && _isInteractible)
-            {
-                transform.position = GetWorldMousePosition() + mousePositionOffset;
+            transform.position = MoveOffsetPosition();
 
-                if (_originalNode != nodeWhereBlockIsHovering)
-                {
-                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsHovering);
-                    SwitchBlocks(nodeWhereBlockIsHovering);
-                    _originalNode = nodeWhereBlockIsHovering;
-                }
+            if (nodeWhereBlockIsHovering != null && _originalNode != nodeWhereBlockIsHovering)
+            {
+                _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsHovering);
+                SwitchBlocks(nodeWhereBlockIsHovering);
+                _originalNode = nodeWhereBlockIsHovering;
             }
         }
     }
