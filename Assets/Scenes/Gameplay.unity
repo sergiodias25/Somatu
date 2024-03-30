@@ -10294,6 +10294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 903802618}
   - component: {fileID: 903802617}
+  - component: {fileID: 903802619}
   m_Layer: 0
   m_Name: Clouds_2
   m_TagString: Untagged
@@ -10368,6 +10369,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &903802619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903802616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.10
+    ColourIndex: 9
+    IsChanged: 1
 --- !u!1 &916261208
 GameObject:
   m_ObjectHideFlags: 0
@@ -14593,6 +14614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1410020221}
   - component: {fileID: 1410020220}
+  - component: {fileID: 1410020222}
   m_Layer: 0
   m_Name: Clouds_0
   m_TagString: Untagged
@@ -14667,6 +14689,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1410020222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410020219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.10
+    ColourIndex: 9
+    IsChanged: 1
 --- !u!114 &1415480358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173809450469176428, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -15441,6 +15483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1523489157}
   - component: {fileID: 1523489156}
+  - component: {fileID: 1523489158}
   m_Layer: 0
   m_Name: Clouds_3
   m_TagString: Untagged
@@ -15515,6 +15558,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1523489158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523489155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.10
+    ColourIndex: 9
+    IsChanged: 1
 --- !u!1 &1526460081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3735896641979278100, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -15959,7 +16022,7 @@ MonoBehaviour:
   ColoursPerPalette: 10
   OldColoursPerPalette: 10
   Palettes:
-  - Name: Light
+  - Name: Day
     Selected: 0
     Colours:
     - {r: 0.24313726, g: 0.45490196, b: 0.5921569, a: 0.84313726}
@@ -15971,34 +16034,21 @@ MonoBehaviour:
     - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
     - {r: 0.0627451, g: 0.18039216, b: 0.24313726, a: 1}
     - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
-    - {r: 0.9098039, g: 0.88235295, b: 0.7882353, a: 1}
-  - Name: Dark
+    - {r: 0.827451, g: 0.9607843, b: 1, a: 1}
+  - Name: Night
     Selected: 0
     Colours:
-    - {r: 0.1254902, g: 0.14509805, b: 0.19215688, a: 1}
-    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.3647059, g: 0.41568628, b: 0.45490196, a: 1}
+    - {r: 1, g: 0.79607844, b: 0.38431373, a: 1}
     - {r: 0.16691881, g: 0.258454, b: 0.2924528, a: 1}
     - {r: 0.1254902, g: 0.48235297, b: 0.40000004, a: 1}
-    - {r: 0.5058824, g: 0.14509805, b: 0.19215688, a: 1}
+    - {r: 0.5803922, g: 0.2784314, b: 0.2784314, a: 1}
     - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
     - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
-    - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
-    - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
-    - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
-  - Name: Half
-    Selected: 0
-    Colours:
-    - {r: 0.4486898, g: 0.43169275, b: 0.8396226, a: 1}
-    - {r: 0.008630468, g: 0.008143486, b: 0.009433985, a: 1}
-    - {r: 0.3215112, g: 0.58494294, b: 0.8018868, a: 1}
-    - {r: 0.49638486, g: 0.8867924, b: 0.47267708, a: 1}
-    - {r: 1, g: 0.5137255, b: 0.4235677, a: 1}
-    - {r: 0.8765164, g: 0.8962264, b: 0.40161088, a: 1}
-    - {r: 0.8765164, g: 0.8962264, b: 0.40161088, a: 1}
-    - {r: 0.83728373, g: 0.8396226, b: 0.7802154, a: 1}
-    - {r: 0.8765164, g: 0.8962264, b: 0.40161088, a: 1}
-    - {r: 0.8765164, g: 0.8962264, b: 0.40161088, a: 1}
-  - Name: Metallic
+    - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
+    - {r: 0.5764706, g: 0.627451, b: 0.7058824, a: 1}
+    - {r: 0, g: 0.37254903, b: 0.3803922, a: 1}
+  - Name: Sunrise
     Selected: 0
     Colours:
     - {r: 0.4123836, g: 0.41144538, b: 0.4339623, a: 1}
@@ -16011,7 +16061,7 @@ MonoBehaviour:
     - {r: 0.6541474, g: 0.8361972, b: 0.9433962, a: 1}
     - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
     - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
-  - Name: Gold
+  - Name: Sunset
     Selected: 0
     Colours:
     - {r: 0.7264151, g: 0.6108529, b: 0.39404595, a: 1}
@@ -16037,7 +16087,7 @@ MonoBehaviour:
     - {r: 1, g: 1, b: 1, a: 1}
     - {r: 1, g: 1, b: 1, a: 1}
     - {r: 1, g: 1, b: 1, a: 1}
-  OldPaletteCount: 6
+  OldPaletteCount: 5
   SelectedPaletteIdx: -1
 --- !u!4 &1569586166
 Transform:
@@ -18702,6 +18752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922875096}
   - component: {fileID: 1922875095}
+  - component: {fileID: 1922875097}
   m_Layer: 0
   m_Name: Clouds_1
   m_TagString: Untagged
@@ -18776,6 +18827,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922875097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922875094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: SpriteRenderer.Color
+    FullName: UnityEngine.SpriteRenderer
+    BaseName: SpriteRenderer
+    PaletteColour: Colour.10
+    ColourIndex: 9
+    IsChanged: 1
 --- !u!1 &1937531442
 GameObject:
   m_ObjectHideFlags: 0

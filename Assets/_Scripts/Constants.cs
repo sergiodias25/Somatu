@@ -153,7 +153,7 @@ public static class Constants
     public static int COLOR_SOLUTION_NODE_NO_HINT = 6;
     public static int COLOR_DARK_TEXT = 7;
     public static int COLOR_NODE_NEUTRAL = 8;
-    public static int COLOR_ICON = 9;
+    public static int COLOR_CLOUD = 9;
 
     /*
         1st - bottom left
@@ -161,24 +161,28 @@ public static class Constants
         3rd - top right
         4th - top left
     */
-    public static Color[] LightColors =
+    public static Color[] DayPalette =
     {
         new Color32(0xA7, 0xE7, 0xF2, 0xFF),
         new Color32(0xBD, 0xED, 0xF5, 0xFF),
         new Color32(0x92, 0xE2, 0xEF, 0xFF),
         new Color32(0x7C, 0xDC, 0xEB, 0xFF)
     };
-    public static Color[] RedsColors = { Color.magenta, Color.magenta, Color.red, Color.white };
-    public static Color[] MetallicColors = { Color.gray, Color.gray, Color.white, Color.white };
-    public static Color[] BlackColors = { Color.black, Color.black, Color.black, Color.black };
-    public static Color[] GoldColors = { Color.yellow, Color.yellow, Color.white, Color.black };
+    public static Color[] NightPalette =
+    {
+        new Color32(0x00, 0x1D, 0x5C, 0xFF),
+        new Color32(0x00, 0x1D, 0x5C, 0xFF),
+        new Color32(0x00, 0x1D, 0x5C, 0xFF),
+        new Color32(0x00, 0x1D, 0x5C, 0xFF),
+    };
+    public static Color[] SunrisePalette = { Color.gray, Color.gray, Color.white, Color.white };
+    public static Color[] SunsetPalette = { Color.yellow, Color.yellow, Color.white, Color.black };
 
     public static Color[][] ColorPalettes =
     {
-        LightColors,
-        RedsColors,
-        BlackColors,
-        MetallicColors,
-        GoldColors
+        DayPalette,
+        NightPalette,
+        SunrisePalette,
+        SunsetPalette
     };
 }

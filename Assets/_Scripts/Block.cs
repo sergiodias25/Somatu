@@ -37,8 +37,8 @@ public class Block : MonoBehaviour
         gameObject.name = string.Concat("Block_", value.ToString());
         if (!interactible)
         {
-            _text.color = new Color32(0, 0, 0, 255);
-            _text.fontSize = 5.5f;
+            _text.fontSize = 4.5f;
+            _text.enableAutoSizing = false;
             _text.ForceMeshUpdate();
         }
         _originalNode = node;
