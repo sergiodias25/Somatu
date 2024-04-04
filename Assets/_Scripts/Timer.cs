@@ -128,4 +128,11 @@ public class Timer : MonoBehaviour
         int seconds = timeInSecondsInt - (minutes * 60); //Get seconds for display alongside minutes
         return minutes.ToString("D2") + ":" + seconds.ToString("D2"); //Create the string representation, where both seconds and minutes are at minimum 2 digits}
     }
+
+    public void UpdateTextColor()
+    {
+        _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
+            Constants.COLOR_DARK_TEXT
+        ];
+    }
 }

@@ -3,11 +3,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
-using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
     private GameManager _gameManager;
+    private TopBarManager _topBarManager;
     private Timer _timer;
 
     [SerializeField]
@@ -100,6 +100,7 @@ public class UIManager : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
         _playerStats = FindObjectOfType<PlayerStats>();
+        _topBarManager = FindObjectOfType<TopBarManager>();
         HideClassicMenu();
         HideObject(_gameplayStatsPanel);
         HideObject(_gameplayInGamePanel);
@@ -123,6 +124,7 @@ public class UIManager : MonoBehaviour
         HideObject(_profilePanel);
         ShowObject(_topPanel);
         HideObject(_classicMenu);
+        _topBarManager.SelectHomeButton();
     }
 
     public async void ShowClassicMenu()
@@ -135,6 +137,7 @@ public class UIManager : MonoBehaviour
         CustomAnimation.ButtonLoad(_hardModeButton.transform);
         CustomAnimation.ButtonLoad(_extremeModeButton.transform);
         ToggleContinueButton();
+        _topBarManager.DeselectAll();
     }
 
     private void HideObject(GameObject gameObject)
@@ -163,6 +166,7 @@ public class UIManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_challengeModeButton.transform);
         if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
         {
+            _topBarManager.DeselectHomeButton();
             HideObject(_mainMenuPanel);
             ShowGameplayButtons();
             _gameManager.Init(Constants.Difficulty.Challenge);
@@ -292,6 +296,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameplayButtons()
     {
+        _topBarManager.DeselectAll();
         ShowObject(_backgroundsPanel);
         ShowObject(_gameNodes);
         ShowObject(_gameplayStatsPanel);
@@ -368,6 +373,7 @@ public class UIManager : MonoBehaviour
         HideObject(_classicMenu);
         HideObject(_backgroundsPanel);
         ShowMainMenu();
+        _topBarManager.SelectHomeButton();
     }
 
     public async void HelpClick()
@@ -472,6 +478,7 @@ public class UIManager : MonoBehaviour
     public void RestoreGameplayPanel()
     {
         ToggleGameplayElements(true);
+        _topBarManager.DeselectAll();
         if (_gameManager.IsGameInProgress() && !_gameManager.HasGameEnded())
         {
             _timer.UnpauseTimer();
@@ -525,6 +532,7 @@ public class UIManager : MonoBehaviour
     {
         if (_settingsPanel.activeSelf)
         {
+            _topBarManager.DeselectSettingsButton();
             await CustomAnimation.ButtonClicked(_closeSettingsButton.transform);
             HideObject(_settingsPanel);
             if (_gameManager.IsGameInProgress())
@@ -538,6 +546,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            _topBarManager.SelectSettingsButton();
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);
@@ -562,6 +571,7 @@ public class UIManager : MonoBehaviour
     {
         if (_profilePanel.activeSelf)
         {
+            _topBarManager.DeselectProfileButton();
             HideObject(_profilePanel);
             if (_gameManager.IsGameInProgress())
             {
@@ -574,6 +584,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            _topBarManager.SelectProfileButton();
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);
@@ -598,6 +609,7 @@ public class UIManager : MonoBehaviour
     {
         if (_shopPanel.activeSelf)
         {
+            _topBarManager.DeselectShopButton();
             HideObject(_shopPanel);
             if (_gameManager.IsGameInProgress())
             {
@@ -610,6 +622,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            _topBarManager.SelectShopButton();
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);

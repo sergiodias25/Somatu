@@ -100,6 +100,13 @@ public class SettingsHandler : MonoBehaviour
         _gradientBg.UpdateTheme(Constants.ColorPalettes[_newSelectedColorsIndex]);
         _gameManager.CheckResult(false);
         _gameManager.RemoveHints();
+
+        FindObjectOfType<TopBarManager>().SelectSettingsButton();
+        Timer timer = FindObjectOfType<Timer>();
+        if (timer != null)
+        {
+            timer.UpdateTextColor();
+        }
     }
 
     private int GetNextTheme(int selectedColorsIndex)
