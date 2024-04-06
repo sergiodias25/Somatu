@@ -84,6 +84,16 @@ namespace CandyCabinets.Components.Colour
                     }
                 }
             });
+
+            if (gameObject.name == "UndoButton")
+            {
+                FindObjectOfType<UIManager>().ToggleUndoButton();
+            }
+
+            if (gameObject.name == "HintButton")
+            {
+                FindObjectOfType<UIManager>().ToggleHelpButton();
+            }
         }
 
         public List<Component> ScanForComponents()

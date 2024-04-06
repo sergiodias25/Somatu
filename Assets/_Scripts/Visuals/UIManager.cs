@@ -409,6 +409,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ToggleUndoButton()
+    {
+        ToggleUndoButton(
+            _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
+        );
+    }
+
     internal void ToggleUndoButton(bool enabled)
     {
         Color originalColor = _undoButton.GetComponent<Image>().color;
@@ -434,6 +441,11 @@ public class UIManager : MonoBehaviour
         _undoButton.enabled = enabled;
     }
 
+    public void ToggleHelpButton()
+    {
+        ToggleHelpButton(_gameManager.SavedGameData.HelpsAvailable > 0);
+    }
+
     internal void ToggleHelpButton(bool enabled)
     {
         _helpButton.enabled =
@@ -443,6 +455,33 @@ public class UIManager : MonoBehaviour
                 _gameManager.SavedGameData.HelpsAvailable != 0
                 || _gameManager.SavedGameData.PurchaseData.UnlimitedHelps
             );
+
+        Color originalColor = _helpButton.GetComponent<Image>().color;
+        if (
+            _gameManager.SavedGameData.HelpsAvailable > 0
+            && _helpButton.GetComponent<Image>().color.a != 1
+        )
+        {
+            _helpButton.GetComponent<Image>().color = new Color(
+                originalColor.r,
+                originalColor.g,
+                originalColor.b,
+                1
+            );
+        }
+        else if (
+            _gameManager.SavedGameData.HelpsAvailable <= 0
+            && _helpButton.GetComponent<Image>().color.a != 0.5f
+        )
+        {
+            _helpButton.GetComponent<Image>().color = new Color(
+                originalColor.r,
+                originalColor.g,
+                originalColor.b,
+                0.5f
+            );
+        }
+
         UpdateHelpButtonText();
     }
 
