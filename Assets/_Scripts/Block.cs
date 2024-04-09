@@ -17,6 +17,7 @@ public class Block : MonoBehaviour
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
+    float dragTime = 0f;
 
     private void Awake()
     {
@@ -57,7 +58,6 @@ public class Block : MonoBehaviour
             FindObjectOfType<GameManager>().RemoveHints();
             if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
             {
-                UpdateOffsetPosition();
                 CustomAnimation.NumberClicked(transform);
             }
             else
@@ -105,18 +105,11 @@ public class Block : MonoBehaviour
         }
     }
 
-    private void UpdateOffsetPosition()
-    {
-        var cenas = _originalNode.transform.position - GetWorldMousePosition();
-        cenas.z = 0;
-        mousePositionOffset = cenas;
-    }
-
     private Vector3 MoveOffsetPosition()
     {
-        Vector3 position = GetWorldMousePosition() + mousePositionOffset;
-        position.z = 0;
-        return position;
+        Vector3 originalPosition = GetWorldMousePosition();
+        originalPosition.z = 0;
+        return originalPosition;
     }
 
     private void OnMouseDrag()
@@ -124,14 +117,28 @@ public class Block : MonoBehaviour
         if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag && _isInteractible)
         {
             Node nodeWhereBlockIsHovering = GetNodeTouched();
+            _text.DOFade(0.66f, .25f);
             transform.position = MoveOffsetPosition();
             CustomAnimation.NumberClicked(transform);
-
             if (nodeWhereBlockIsHovering != null && _originalNode != nodeWhereBlockIsHovering)
+            {
+                dragTime += Time.deltaTime;
+            }
+            else
+            {
+                dragTime = 0f;
+            }
+
+            if (
+                nodeWhereBlockIsHovering != null
+                && _originalNode != nodeWhereBlockIsHovering
+                && dragTime > 1f
+            )
             {
                 _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsHovering);
                 SwitchBlocks(nodeWhereBlockIsHovering);
                 _originalNode = nodeWhereBlockIsHovering;
+                dragTime = 0f;
             }
         }
     }
@@ -143,8 +150,16 @@ public class Block : MonoBehaviour
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null && _isInteractible)
             {
-                UpdateOffsetPosition();
-                SwitchNodes(_originalNode.GetBlockInNode(), nodeWhereBlockIsDropped);
+                CustomAnimation.NumberDropped(
+                    _originalNode.GetBlockInNode().transform,
+                    nodeWhereBlockIsDropped.transform.position
+                );
+                if (_originalNode != nodeWhereBlockIsDropped)
+                {
+                    _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
+                    SwitchBlocks(nodeWhereBlockIsDropped);
+                    _originalNode = nodeWhereBlockIsDropped;
+                }
                 if (!FindObjectOfType<GameManager>().CheckResult(true))
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlock);
@@ -152,13 +167,13 @@ public class Block : MonoBehaviour
             }
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {
-                UpdateOffsetPosition();
                 CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
                 if (!FindObjectOfType<GameManager>().CheckResult(true))
                 {
                     _audioManager.PlaySFX(_audioManager.DropBlockUndo);
                 }
             }
+            _text.DOFade(1f, .25f);
         }
     }
 
@@ -195,11 +210,6 @@ public class Block : MonoBehaviour
     public bool IsInteractable()
     {
         return _isInteractible;
-    }
-
-    public static void SwitchNodes(Block blockMoved, Node landingNode)
-    {
-        CustomAnimation.NumberDropped(blockMoved.transform, landingNode.transform.position);
     }
 
     public async void SwitchBlocks(Node hoveredNode)
