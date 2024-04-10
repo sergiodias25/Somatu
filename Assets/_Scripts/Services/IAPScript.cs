@@ -9,14 +9,14 @@ public class IAPScript : MonoBehaviour
     private const string HINTS_UNLIMITED = "HINTS_UNLIMITED";
     private const string UNLOCK_LEVELS = "UNLOCK_LEVELS";
     private const string REMOVE_ADS = "REMOVE_ADS";
-    private const string METALLIC_THEME = "METALLIC_THEME";
-    private const string GOLD_THEME = "GOLD_THEME";
+    private const string SUNRISE_THEME = "SUNRISE_THEME";
+    private const string SUNSET_THEME = "SUNSET_THEME";
     public Button Button5Hints;
     public Button ButtonUnlimitedHints;
     public Button ButtonUnlockLevels;
     public Button ButtonRemoveAds;
-    public Button ButtonMetallicTheme;
-    public Button ButtonGoldTheme;
+    public Button ButtonSunriseTheme;
+    public Button ButtonSunsetTheme;
     private GameManager _gameManager;
     private AdBanner _adBanner;
     private UIManager _uiManager;
@@ -52,12 +52,12 @@ public class IAPScript : MonoBehaviour
                 _gameManager.SavedGameData.PersistData();
                 _adBanner.HideBannerAd();
                 break;
-            case METALLIC_THEME:
-                _gameManager.SavedGameData.EnableMetallicTheme();
+            case SUNRISE_THEME:
+                _gameManager.SavedGameData.EnableSunriseTheme();
                 _gameManager.SavedGameData.PersistData();
                 break;
-            case GOLD_THEME:
-                _gameManager.SavedGameData.EnableGoldTheme();
+            case SUNSET_THEME:
+                _gameManager.SavedGameData.EnableSunsetTheme();
                 _gameManager.SavedGameData.PersistData();
                 break;
             default:
@@ -84,13 +84,13 @@ public class IAPScript : MonoBehaviour
         {
             ButtonRemoveAds.interactable = false;
         }
-        if (_gameManager.SavedGameData.PurchaseData.MetallicTheme)
+        if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
         {
-            ButtonMetallicTheme.interactable = false;
+            ButtonSunriseTheme.interactable = false;
         }
-        if (_gameManager.SavedGameData.PurchaseData.GoldTheme)
+        if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
         {
-            ButtonGoldTheme.interactable = false;
+            ButtonSunsetTheme.interactable = false;
         }
     }
 

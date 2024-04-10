@@ -117,7 +117,7 @@ public class SettingsHandler : MonoBehaviour
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 2)
         {
-            if (_gameManager.SavedGameData.PurchaseData.GoldTheme)
+            if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
             {
                 return selectedColorsIndex + 1;
             }
@@ -125,7 +125,7 @@ public class SettingsHandler : MonoBehaviour
         }
         if (selectedColorsIndex == Constants.ColorPalettes.Length - 3)
         {
-            if (_gameManager.SavedGameData.PurchaseData.MetallicTheme)
+            if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
             {
                 return selectedColorsIndex + 1;
             }

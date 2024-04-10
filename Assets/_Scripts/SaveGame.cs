@@ -24,8 +24,8 @@ namespace Assets.Scripts.SaveGame
         {
             public bool UnlimitedHelps = false;
             public bool RemovedAds = false;
-            public bool MetallicTheme = false;
-            public bool GoldTheme = false;
+            public bool SunriseTheme = false;
+            public bool SunsetTheme = false;
         }
 
         public class Settings
@@ -273,14 +273,14 @@ namespace Assets.Scripts.SaveGame
             PurchaseData.RemovedAds = true;
         }
 
-        public void EnableMetallicTheme()
+        public void EnableSunriseTheme()
         {
-            PurchaseData.MetallicTheme = true;
+            PurchaseData.SunriseTheme = true;
         }
 
-        public void EnableGoldTheme()
+        public void EnableSunsetTheme()
         {
-            PurchaseData.GoldTheme = true;
+            PurchaseData.SunsetTheme = true;
             UpdateSaveGameTimeStamp();
         }
 
