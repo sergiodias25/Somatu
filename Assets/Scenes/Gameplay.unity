@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 177777606}
   - component: {fileID: 177777607}
   m_Layer: 5
-  m_Name: IAPButtonMetallicTheme
+  m_Name: IAPButtonSunriseTheme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: METALLIC_THEME
+  productId: SUNRISE_THEME
   buttonType: 0
   consumePurchase: 1
   onTransactionsRestored:
@@ -2172,7 +2172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273f2bf6664147b7bd18552005e4c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCount: 6
+  referenceCount: 8
 --- !u!4 &248011497
 Transform:
   m_ObjectHideFlags: 3
@@ -3126,7 +3126,7 @@ GameObject:
   - component: {fileID: 320826060}
   - component: {fileID: 320826061}
   m_Layer: 5
-  m_Name: IAPButtonGoldTheme
+  m_Name: IAPButtonSunsetTheme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3159,7 +3159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: GOLD_THEME
+  productId: SUNSET_THEME
   buttonType: 0
   consumePurchase: 1
   onTransactionsRestored:
