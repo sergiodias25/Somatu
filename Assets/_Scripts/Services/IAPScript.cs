@@ -1,3 +1,4 @@
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
@@ -26,6 +27,11 @@ public class IAPScript : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         _adBanner = FindObjectOfType<AdBanner>();
         _uiManager = FindObjectOfType<UIManager>();
+        LoadIAPStatus();
+    }
+
+    private void OnEnable()
+    {
         LoadIAPStatus();
     }
 
@@ -64,6 +70,7 @@ public class IAPScript : MonoBehaviour
                 Debug.LogError("Unknown bought");
                 break;
         }
+        LoadIAPStatus();
     }
 
     public void LoadIAPStatus()
@@ -71,27 +78,40 @@ public class IAPScript : MonoBehaviour
         if (_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
         {
             Button5Hints.interactable = false;
+            FadeButton(Button5Hints);
         }
         if (_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
         {
             ButtonUnlimitedHints.interactable = false;
+            FadeButton(ButtonUnlimitedHints);
         }
         if (_gameManager.SavedGameData.UnlockedDifficulty == Constants.Difficulty.Challenge)
         {
             ButtonUnlockLevels.interactable = false;
+            FadeButton(ButtonUnlockLevels);
         }
         if (_gameManager.SavedGameData.PurchaseData.RemovedAds)
         {
             ButtonRemoveAds.interactable = false;
+            FadeButton(ButtonRemoveAds);
         }
         if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
         {
             ButtonSunriseTheme.interactable = false;
+            FadeButton(ButtonSunriseTheme);
         }
         if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
         {
             ButtonSunsetTheme.interactable = false;
+            FadeButton(ButtonSunsetTheme);
         }
+    }
+
+    private void FadeButton(Button button)
+    {
+        button.GetComponent<Image>().color = ColourManager.Instance.SelectedPalette().Colours[
+            Constants.COLOR_GREEN
+        ];
     }
 
     public void OnPurchaseFailed(

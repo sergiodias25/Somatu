@@ -94,6 +94,22 @@ namespace CandyCabinets.Components.Colour
             {
                 FindObjectOfType<UIManager>().ToggleHelpButton();
             }
+
+            if (
+                gameObject.name == "ButtonHintsUnlimited"
+                || gameObject.name == "ButtonHints5"
+                || gameObject.name == "ButtonUnlockLevels"
+                || gameObject.name == "ButtonRemoveAds"
+                || gameObject.name == "ButtonSunriseTheme"
+                || gameObject.name == "ButtonSunsetTheme"
+            )
+            {
+                var iapScript = FindObjectOfType<IAPScript>();
+                if (iapScript != null)
+                {
+                    iapScript.LoadIAPStatus();
+                }
+            }
         }
 
         public List<Component> ScanForComponents()
