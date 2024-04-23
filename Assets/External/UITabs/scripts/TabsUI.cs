@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using CandyCabinets.Components.Colour;
 
 //------- Created by  : Hamza Herbou
 //------- Email       : hamza95herbou@gmail.com
@@ -82,15 +83,18 @@ namespace EasyUI.Tabs
 
                 tabContent[i] = parentContent.GetChild(i).gameObject;
                 tabContent[i].SetActive(false);
+                tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                    Constants.COLOR_BUTTON
+                ];
             }
 
             previous = current = 0;
 
-            tabColorActive = tabBtns[0].uiImage.color;
-            tabColorInactive = tabBtns[1].uiImage.color;
-
             tabBtns[0].uiButton.interactable = false;
             tabContent[0].SetActive(true);
+            tabBtns[0].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                Constants.COLOR_BACKGROUND
+            ];
         }
 
         public void OnTabButtonClicked(int tabIndex)
@@ -106,8 +110,12 @@ namespace EasyUI.Tabs
                 tabContent[previous].SetActive(false);
                 tabContent[current].SetActive(true);
 
-                tabBtns[previous].uiImage.color = tabColorInactive;
-                tabBtns[current].uiImage.color = tabColorActive;
+                tabBtns[previous].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                    Constants.COLOR_BUTTON
+                ];
+                tabBtns[current].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                    Constants.COLOR_BACKGROUND
+                ];
 
                 tabBtns[previous].uiButton.interactable = true;
                 tabBtns[current].uiButton.interactable = false;

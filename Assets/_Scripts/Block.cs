@@ -145,7 +145,10 @@ public class Block : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
+        if (
+            !_gameManager.HasGameEnded()
+            && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
+        )
         {
             Node nodeWhereBlockIsDropped = GetNodeTouched();
             if (nodeWhereBlockIsDropped != null && _isInteractible)
