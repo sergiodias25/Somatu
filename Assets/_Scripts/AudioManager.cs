@@ -12,10 +12,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip PuzzleSolved;
     public AudioClip MainMusicTheme;
     public AudioClip NodeLoaded;
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     public void PlaySFX(AudioClip audioClip)
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
             if (_sfxSource.isPlaying)
@@ -32,7 +37,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager.SavedGameData.SettingsData.MusicEnabled)
         {
             _musicSource.loop = true;
@@ -43,7 +47,6 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleSFX()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.SavedGameData.SettingsData.SoundEnabled = !gameManager
             .SavedGameData
             .SettingsData
@@ -54,7 +57,6 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleMusic()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.SavedGameData.SettingsData.MusicEnabled = !gameManager
             .SavedGameData
             .SettingsData
@@ -81,7 +83,6 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleVibration()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.SavedGameData.SettingsData.VibrationEnabled = !gameManager
             .SavedGameData
             .SettingsData
@@ -91,11 +92,9 @@ public class AudioManager : MonoBehaviour
 
     public void Vibrate()
     {
-#if !UNITY_EDITOR
-        if (_vibrationEnabled)
+        if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
             Handheld.Vibrate();
         }
-#endif
     }
 }
