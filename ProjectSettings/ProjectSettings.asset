@@ -154,8 +154,8 @@ PlayerSettings:
   targetPixelDensity: 30
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
-  androidSupportedAspectRatio: 2
-  androidMaxAspectRatio: 2.1
+  androidSupportedAspectRatio: 1
+  androidMaxAspectRatio: 2.2
   applicationIdentifier:
     Android: com.DefaultCompany.GridSum
     Lumin: com.DefaultCompany.com.unity.template.mobile2D
@@ -384,7 +384,9 @@ PlayerSettings:
       m_SubKind: App Store
   - m_BuildTarget: Android
     m_Icons:
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: f7b7b033e2be2164ba8ef6f7bd2027dc, type: 3}
+      - {fileID: 2800000, guid: f7b7b033e2be2164ba8ef6f7bd2027dc, type: 3}
       m_Width: 432
       m_Height: 432
       m_Kind: 2
@@ -414,7 +416,8 @@ PlayerSettings:
       m_Height: 81
       m_Kind: 2
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: f7b7b033e2be2164ba8ef6f7bd2027dc, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 1
@@ -444,7 +447,8 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: f7b7b033e2be2164ba8ef6f7bd2027dc, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 0
