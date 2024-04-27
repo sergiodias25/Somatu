@@ -1401,8 +1401,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284783801
-  m_fontColor: {r: 0.7264151, g: 0.6108529, b: 0.39404595, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &152725947
@@ -3844,7 +3844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 0
 --- !u!1 &394009133
 GameObject:
@@ -4429,7 +4429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1001 &415332597
 PrefabInstance:
@@ -4979,7 +4979,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454491110}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 4
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
@@ -5283,7 +5283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1 &501626677
 GameObject:
@@ -5555,9 +5555,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07219255
+    y: 0
     width: 1
-    height: 0.8556149
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -11554,7 +11554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1 &954204873
 GameObject:
@@ -15880,7 +15880,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!114 &1415480358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173809450469176428, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -17567,7 +17567,7 @@ MonoBehaviour:
     - {r: 0.4627451, g: 0.7411765, b: 0.5058824, a: 1}
     - {r: 0.7411765, g: 0.46666667, b: 0.46666667, a: 1}
     - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
-    - {r: 0.8959974, g: 0.9056604, b: 0.5767177, a: 1}
+    - {r: 0.13725491, g: 0.30588236, b: 0.42352942, a: 1}
     - {r: 0.0627451, g: 0.18039216, b: 0.24313726, a: 1}
     - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
     - {r: 0.827451, g: 0.9607843, b: 1, a: 1}
@@ -17580,7 +17580,7 @@ MonoBehaviour:
     - {r: 0.1254902, g: 0.48235297, b: 0.40000004, a: 1}
     - {r: 0.5803922, g: 0.2784314, b: 0.2784314, a: 1}
     - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
-    - {r: 1, g: 0.7960785, b: 0.38431376, a: 1}
+    - {r: 0, g: 0.37254903, b: 0.38039216, a: 1}
     - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
     - {r: 0.078431375, g: 0.19215687, b: 0.19215687, a: 1}
     - {r: 0, g: 0.37254903, b: 0.3803922, a: 1}
@@ -18041,6 +18041,7 @@ MonoBehaviour:
   _generatedNodesObject: {fileID: 1993008454}
   _playerStats: {fileID: 1899399281}
   _adBanner: {fileID: 1671143902}
+  _backgroundCamera: {fileID: 454491112}
   SelectedDifficulty: 0
   ActualDifficulty: 0
 --- !u!114 &1669322053
@@ -20965,7 +20966,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!1 &1937531442
 GameObject:
   m_ObjectHideFlags: 0

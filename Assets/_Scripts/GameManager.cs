@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private AdBanner _adBanner;
 
+    [SerializeField]
+    private Camera _backgroundCamera;
+
     private Timer _timer;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
@@ -521,7 +524,9 @@ public class GameManager : MonoBehaviour
             block
                 .GetNode()
                 .UpdateColor(
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_BUTTON]
+                    ColourManager.Instance.SelectedPalette().Colours[
+                        Constants.COLOR_SOLUTION_NODE_NO_HINT
+                    ]
                 );
         }
 
@@ -772,6 +777,7 @@ public class GameManager : MonoBehaviour
         _gameBackground.transform.position = boardCenter;
 
         _uiManager.ShowMainMenu();
+        _backgroundCamera.enabled = true;
         loadingCanvas.gameObject.SetActive(false);
     }
 
