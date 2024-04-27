@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class Block : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class Block : MonoBehaviour
     private TextMeshPro _text;
     private GameManager _gameManager;
     private AudioManager _audioManager;
-    private Vector3 mousePositionOffset;
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
@@ -50,12 +50,11 @@ public class Block : MonoBehaviour
         return this;
     }
 
-    private void OnMouseDown()
+    private async void OnMouseDown()
     {
         Node nodeClickedOn = GetNodeTouched();
         if (nodeClickedOn != null && _isInteractible)
         {
-            FindObjectOfType<GameManager>().RemoveHints();
             if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
             {
                 CustomAnimation.NumberClicked(transform);
@@ -88,20 +87,31 @@ public class Block : MonoBehaviour
                 {
                     if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
                     {
+                        nodeClickedOn.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[
+                                Constants.COLOR_SELECTED_NODE
+                            ]
+                        );
+                        _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
+                        await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
+                        _audioManager.PlaySFX(_audioManager.DropBlock);
+
                         selectedBlock._originalNode.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
                                 Constants.COLOR_NODE_NEUTRAL
                             ]
                         );
-                        _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
-                        SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
-                        _audioManager.PlaySFX(_audioManager.DropBlock);
-
+                        nodeClickedOn.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[
+                                Constants.COLOR_NODE_NEUTRAL
+                            ]
+                        );
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
                         FindObjectOfType<GameManager>().CheckResult(true);
                     }
                 }
             }
+            FindObjectOfType<GameManager>().RemoveHints();
         }
     }
 
@@ -234,7 +244,7 @@ public class Block : MonoBehaviour
         await CustomAnimation.WaitForAnimation("MoveNumberBack");
     }
 
-    public static async void SwitchBlocksUndo(Node secondNode, Node firstNode)
+    public static async Task<bool> SwitchBlocksUndo(Node secondNode, Node firstNode)
     {
         CustomAnimation.NumberSwitched(
             firstNode.GetBlockInNode().transform,
@@ -256,6 +266,7 @@ public class Block : MonoBehaviour
         secondNode.SetBlockInNode(tempBlock);
 
         await CustomAnimation.WaitForAnimation("MoveNumberBack");
+        return true;
     }
 
     internal void UpdateTextColor()

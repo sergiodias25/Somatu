@@ -35,7 +35,7 @@ namespace Assets.Scripts.SaveGame
             public bool VibrationEnabled = false;
             public int SelectedThemeIndex = 0;
             public string LanguageSelected = "English";
-            public bool ControlMethodDrag = true;
+            public bool ControlMethodDrag = false;
         }
 
         public class GameInProgress
@@ -169,8 +169,7 @@ namespace Assets.Scripts.SaveGame
 
         public bool IsHalfwayThroughCurrentDifficulty(Constants.Difficulty difficulty)
         {
-            return false;
-            /* if (
+            if (
                 (difficulty < UnlockedDifficulty)
                 || (
                     TimesBeatenCurrentDifficulty
@@ -180,7 +179,7 @@ namespace Assets.Scripts.SaveGame
             {
                 return true;
             }
-            return false; */
+            return false;
         }
 
         public void UnlockAllLevels()

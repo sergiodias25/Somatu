@@ -604,20 +604,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowHints()
     {
-        /*
-        for (int i = 0; i < _solutionNumbers.Count; i++)
-        {
-            if (_solutionNumbers[i] == _allNodes[i].GetBlockInNode().Value)
-            {
-                _allNodes[i].UpdateColor(Constants.CorrectSumColor);
-            }
-            else
-            {
-                _allNodes[i].UpdateColor(Constants.IncorrectSumColor);
-            }
-        }
-        */
-
+        ResetSelectedBlock();
         List<Node> incorrectNodes = new List<Node>();
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
@@ -651,7 +638,13 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
-            _allNodes[i].UpdateColor(colorToUpdateTo);
+            Color colorToUpdateToExtraValidation =
+                !HasGameEnded() && _allNodes[i].GetBlockInNode().IsSelected
+                    ? ColourManager.Instance.SelectedPalette().Colours[
+                        Constants.COLOR_SELECTED_NODE
+                    ]
+                    : colorToUpdateTo;
+            _allNodes[i].UpdateColor(colorToUpdateToExtraValidation);
             _allNodes[i].GetBlockInNode().UpdateTextColor();
         }
         if (!HasGameEnded())
@@ -703,7 +696,7 @@ public class GameManager : MonoBehaviour
     {
         if (SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo())
         {
-            Block.SwitchBlocksUndo(
+            _ = Block.SwitchBlocksUndo(
                 GameObject
                     .Find(
                         SavedGameData.GameInProgressData.UndoData.FirstNodes[
