@@ -77,7 +77,9 @@ public class SettingsHandler : MonoBehaviour
         _gradientBg = FindObjectOfType<GradientBg>();
         _gameManager = gameManager;
         _gradientBg.UpdateTheme(
-            Constants.ColorPalettes[_gameManager.SavedGameData.SettingsData.SelectedThemeIndex]
+            Constants.GetSelectedPaletteColors(
+                _gameManager.SavedGameData.SettingsData.SelectedThemeIndex
+            )
         );
 
         UpdateSoundIcon();
@@ -97,7 +99,7 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = _newSelectedColorsIndex;
         _gameManager.SavedGameData.PersistData();
 
-        _gradientBg.UpdateTheme(Constants.ColorPalettes[_newSelectedColorsIndex]);
+        _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(_newSelectedColorsIndex));
         _gameManager.CheckResult(false);
         _gameManager.RemoveHints();
 
@@ -111,11 +113,11 @@ public class SettingsHandler : MonoBehaviour
 
     private int GetNextTheme(int selectedColorsIndex)
     {
-        if (selectedColorsIndex == Constants.ColorPalettes.Length - 1)
+        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 2)
         {
             return 0;
         }
-        if (selectedColorsIndex == Constants.ColorPalettes.Length - 2)
+        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 3)
         {
             if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
             {
@@ -123,7 +125,7 @@ public class SettingsHandler : MonoBehaviour
             }
             return 0;
         }
-        if (selectedColorsIndex == Constants.ColorPalettes.Length - 3)
+        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 4)
         {
             if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
             {

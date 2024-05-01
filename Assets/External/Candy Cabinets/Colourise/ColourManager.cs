@@ -54,11 +54,11 @@ namespace CandyCabinets.Components.Colour
         public bool Persistent = false;
 
         // If you want to add more colours to the palette, just increase this value.
-        [Tooltip("Number of colours per palette. Minimum 3 and maximum of 10.")]
-        [Range(3, 10)]
+        [Tooltip("Number of colours per palette. Minimum 3 and maximum of 12.")]
+        [Range(3, 12)]
         [SerializeField]
-        public int ColoursPerPalette = 10;
-        public int OldColoursPerPalette = 10;
+        public int ColoursPerPalette = 12;
+        public int OldColoursPerPalette = 12;
 
         [Tooltip("Palette collection.")]
         public List<Palette> Palettes;

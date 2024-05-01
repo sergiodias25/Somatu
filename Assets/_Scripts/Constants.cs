@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CandyCabinets.Components.Colour;
 using UnityEngine;
 
 public static class Constants
@@ -140,11 +141,12 @@ public static class Constants
     6 - no hint solution block
     7 - Clear text
     8 - Buttons
-    9 - Icons
+    9 - Clouds
+    10 - Background
      */
 
     // COLORS
-    public static int COLOR_BACKGROUND = 0;
+    public static int COLOR_SQUARE = 0;
     public static int COLOR_LIGHT_TEXT = 1;
     public static int COLOR_BUTTON = 2;
     public static int COLOR_GREEN = 3;
@@ -154,6 +156,8 @@ public static class Constants
     public static int COLOR_DARK_TEXT = 7;
     public static int COLOR_NODE_NEUTRAL = 8;
     public static int COLOR_CLOUD = 9;
+    public static int COLOR_BACKGROUND = 10;
+    public static int COLOR_EXTRA = 11;
 
     /*
         1st - bottom left
@@ -161,28 +165,17 @@ public static class Constants
         3rd - top right
         4th - top left
     */
-    public static Color[] DayPalette =
+    public static Color[] GetSelectedPaletteColors(int selectedPaletteIndex)
     {
-        new Color32(0xA7, 0xE7, 0xF2, 0xFF),
-        new Color32(0xBD, 0xED, 0xF5, 0xFF),
-        new Color32(0x92, 0xE2, 0xEF, 0xFF),
-        new Color32(0x7C, 0xDC, 0xEB, 0xFF)
-    };
-    public static Color[] NightPalette =
-    {
-        new Color32(0x00, 0x1D, 0x5C, 0xFF),
-        new Color32(0x00, 0x1D, 0x5C, 0xFF),
-        new Color32(0x00, 0x1D, 0x5C, 0xFF),
-        new Color32(0x00, 0x1D, 0x5C, 0xFF),
-    };
-    public static Color[] SunrisePalette = { Color.gray, Color.gray, Color.white, Color.white };
-    public static Color[] SunsetPalette = { Color.yellow, Color.yellow, Color.white, Color.black };
+        Palette selectedPalette = ColourManager.Instance.Palettes[selectedPaletteIndex];
+        Color[] paletteColors =
+        {
+            selectedPalette.Colours[COLOR_BACKGROUND],
+            selectedPalette.Colours[COLOR_CLOUD],
+            selectedPalette.Colours[COLOR_BACKGROUND],
+            selectedPalette.Colours[COLOR_BACKGROUND]
+        };
 
-    public static Color[][] ColorPalettes =
-    {
-        DayPalette,
-        NightPalette,
-        SunrisePalette,
-        SunsetPalette
-    };
+        return paletteColors;
+    }
 }
