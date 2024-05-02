@@ -134,13 +134,13 @@ public static class Constants
     /* COLORS USED
     0 - Central and top background
     1 - Dark text
-    2 - Neutral block
+    2 - Buttons
     3 - green block
     4 - red block
     5 - selected block
     6 - no hint solution block
     7 - Clear text
-    8 - Buttons
+    8 - Neutral block
     9 - Clouds
     10 - Background
      */
@@ -157,7 +157,7 @@ public static class Constants
     public static int COLOR_NODE_NEUTRAL = 8;
     public static int COLOR_CLOUD = 9;
     public static int COLOR_BACKGROUND = 10;
-    public static int COLOR_EXTRA = 11;
+    public static int COLOR_BACKGROUND_GRADIENT = 11;
 
     /*
         1st - bottom left
@@ -171,7 +171,7 @@ public static class Constants
         Color[] paletteColors =
         {
             selectedPalette.Colours[COLOR_BACKGROUND],
-            selectedPalette.Colours[COLOR_CLOUD],
+            selectedPalette.Colours[COLOR_BACKGROUND_GRADIENT],
             selectedPalette.Colours[COLOR_BACKGROUND],
             selectedPalette.Colours[COLOR_BACKGROUND]
         };

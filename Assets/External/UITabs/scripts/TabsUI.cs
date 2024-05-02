@@ -93,7 +93,7 @@ namespace EasyUI.Tabs
             tabBtns[0].uiButton.interactable = false;
             tabContent[0].SetActive(true);
             tabBtns[0].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                Constants.COLOR_BACKGROUND
+                Constants.COLOR_SQUARE
             ];
         }
 
@@ -114,7 +114,7 @@ namespace EasyUI.Tabs
                     Constants.COLOR_BUTTON
                 ];
                 tabBtns[current].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                    Constants.COLOR_BACKGROUND
+                    Constants.COLOR_SQUARE
                 ];
 
                 tabBtns[previous].uiButton.interactable = true;

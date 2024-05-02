@@ -231,8 +231,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &57670137
 GameObject:
@@ -451,8 +451,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &79990792
 GameObject:
@@ -2272,7 +2272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273f2bf6664147b7bd18552005e4c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCount: 9
+  referenceCount: 10
 --- !u!4 &248011497
 Transform:
   m_ObjectHideFlags: 3
@@ -2543,8 +2543,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &264863649
 GameObject:
@@ -3373,8 +3373,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.1
+    ColourIndex: 0
     IsChanged: 0
 --- !u!114 &327863382
 MonoBehaviour:
@@ -5135,7 +5135,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
   m_fontSizeMax: 30
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5555,9 +5555,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00024986267
     width: 1
-    height: 1
+    height: 0.9995003
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -6442,8 +6442,8 @@ MonoBehaviour:
   - Name: SpriteRenderer.Color
     FullName: UnityEngine.SpriteRenderer
     BaseName: SpriteRenderer
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!212 &663874943
 SpriteRenderer:
@@ -6707,8 +6707,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.2
-    ColourIndex: 1
+    PaletteColour: Colour.1
+    ColourIndex: 0
     IsChanged: 0
 --- !u!114 &666928145
 MonoBehaviour:
@@ -7954,6 +7954,10 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: bf058eb6d202bcf4ca68d869ccb10f24, type: 2}
+    - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontColor.b
       value: 1
@@ -9652,6 +9656,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bf058eb6d202bcf4ca68d869ccb10f24, type: 2}
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -11194,6 +11202,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2064623119}
+    - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2064623123}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 580213622}
@@ -12853,8 +12864,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &1157152555
 GameObject:
@@ -14423,8 +14434,8 @@ MonoBehaviour:
   - Name: SpriteRenderer.Color
     FullName: UnityEngine.SpriteRenderer
     BaseName: SpriteRenderer
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!212 &1239781317
 SpriteRenderer:
@@ -14718,7 +14729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.27369857, g: 0.2830189, b: 0.04672481, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14760,8 +14771,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.3
-    ColourIndex: 2
+    PaletteColour: Colour.9
+    ColourIndex: 8
     IsChanged: 0
 --- !u!1 &1299107292
 GameObject:
@@ -15094,6 +15105,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1422482489}
+    - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1422482493}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 946124818}
@@ -16001,6 +16015,27 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!114 &1422482493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422482486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1428770549
 GameObject:
   m_ObjectHideFlags: 0
@@ -16418,7 +16453,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 30
+  m_fontSizeMax: 35
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -16480,8 +16515,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &1493806731 stripped
 GameObject:
@@ -16944,6 +16979,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1845257651}
+    - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1845257655}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1493806736}
@@ -17645,18 +17683,18 @@ MonoBehaviour:
   - Name: Day
     Selected: 0
     Colours:
-    - {r: 0.24313726, g: 0.45490196, b: 0.5921569, a: 1}
-    - {r: 0.8862745, g: 0.9490196, b: 0.99607843, a: 1}
+    - {r: 0.007843138, g: 0.24313726, b: 0.49019608, a: 1}
+    - {r: 1, g: 1, b: 1, a: 1}
     - {r: 0.7529412, g: 0.8862745, b: 0.99215686, a: 1}
-    - {r: 0.4627451, g: 0.7411765, b: 0.5058824, a: 1}
-    - {r: 0.7411765, g: 0.46666667, b: 0.46666667, a: 1}
-    - {r: 0.21960784, g: 0.58431375, b: 0.9137255, a: 1}
+    - {r: 0.3019608, g: 0.6666667, b: 0.34117648, a: 1}
+    - {r: 0.8588236, g: 0.3529412, b: 0.3529412, a: 1}
+    - {r: 0.9607843, g: 0.94509804, b: 0.39215687, a: 1}
     - {r: 0.13725491, g: 0.30588236, b: 0.42352942, a: 1}
+    - {r: 0.007843138, g: 0.24313726, b: 0.49019608, a: 1}
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.827451, g: 0.98039216, b: 1, a: 1}
     - {r: 0.015686275, g: 0.3882353, b: 0.7921569, a: 1}
-    - {r: 0.6901961, g: 0.8392157, b: 0.9607843, a: 1}
-    - {r: 0.9198113, g: 0.9817753, b: 1, a: 1}
-    - {r: 0.015686275, g: 0.3882353, b: 0.7921569, a: 1}
-    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.4179868, g: 0.7160964, b: 0.9528302, a: 1}
   - Name: Night
     Selected: 0
     Colours:
@@ -18246,8 +18284,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &1701889925
 GameObject:
@@ -18776,7 +18814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18818,8 +18856,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.3
-    ColourIndex: 2
+    PaletteColour: Colour.9
+    ColourIndex: 8
     IsChanged: 0
 --- !u!1001 &1730163399
 PrefabInstance:
@@ -19722,8 +19760,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &1799377022
 GameObject:
@@ -19989,7 +20027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9098039, g: 0.88235295, b: 0.7882353, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20031,8 +20069,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.3
-    ColourIndex: 2
+    PaletteColour: Colour.9
+    ColourIndex: 8
     IsChanged: 0
 --- !u!1 &1832827772
 GameObject:
@@ -20228,6 +20266,27 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!114 &1845257655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845257648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!114 &1854439832 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114552148500586218, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -21990,6 +22049,12 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!114 &2017074114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22030,6 +22095,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2017074118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017074108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &2018106645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22233,6 +22313,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2018106650}
+    - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2018106654}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2052793552}
@@ -22265,6 +22348,27 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!114 &2018106654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755197099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2025290805
 GameObject:
   m_ObjectHideFlags: 0
@@ -22529,6 +22633,27 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!114 &2064623123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237603868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2072426479
 GameObject:
   m_ObjectHideFlags: 0
@@ -22748,7 +22873,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 8
   m_fontSizeMax: 30
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -23602,8 +23727,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.1
+    ColourIndex: 0
     IsChanged: 0
 --- !u!114 &2141097524
 MonoBehaviour:
@@ -23926,15 +24051,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e84c3fd2d961da14f9ad9ebf575cfc4f, type: 3}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.b
-      value: 0.04672481
+      value: 0.9811321
       objectReference: {fileID: 0}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.g
-      value: 0.2830189
+      value: 0.9811321
       objectReference: {fileID: 0}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.r
-      value: 0.27369857
+      value: 0.9811321
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
@@ -24033,6 +24158,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017074114}
+    - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017074118}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 749583371}

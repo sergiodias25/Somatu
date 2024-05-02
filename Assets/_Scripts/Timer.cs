@@ -41,7 +41,7 @@ public class Timer : MonoBehaviour
     {
         enabled = true;
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
-            Constants.COLOR_DARK_TEXT
+            Constants.COLOR_LIGHT_TEXT
         ];
         _timeLimitValue = Constants.ChallengeTimeLimit;
         _isRunning = true;
