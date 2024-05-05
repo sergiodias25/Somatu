@@ -3218,8 +3218,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &320826059
 GameObject:
@@ -5555,9 +5555,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.00024986267
+    y: 0.00032263994
     width: 1
-    height: 0.9995003
+    height: 0.9993547
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -10083,8 +10083,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &836437375
 GameObject:
@@ -14312,8 +14312,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!114 &1230975981
 MonoBehaviour:
