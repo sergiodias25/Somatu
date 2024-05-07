@@ -1,51 +1,48 @@
-Key,English,Portuguese,Spanish,Japanese,Korean
-,en,pt,es,ja,ko
-btn-language,English,Português,Español,日本語,한국인
-btn-play,Classic,Clássico,Clásico,クラシック,권위 있는
-btn-continue,Continue,Continuar,Continuar,続く,계속하다
-btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
-mode-easy,Easy,Fácil,Fácil,簡単,쉬운
-mode-medium,Moderate,Médio,Moderado,平均,평균
-mode-hard,Hard,Difícil,Duro,難しい,어려운
-mode-extreme,Extreme,Extremo,Extremo,過激,극심한
-mode-challenge,Challenge,Desafio,Desafío,チャレンジ,도전
-game-time,Time,Tempo,Tiempo,時間,시간
-game-solved,Solved,Resolvido,Resuelto,整理しました,정리하다
-stats-games-played,Games Played,Jogos jogados,Juegos jugados,プレイしたゲーム,플레이한 게임
-stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,完成したゲーム,완료된 게임
-stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간
-stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,最速タイム,가장 빠른 시간
-stats-hints-used,Hints Used,Dicas usadas,Consejos utilizados,使用したヒント,사용된 팁
-stats-average-solves,Average Solves,Média de soluções,Resoluciones promedio,平均的なソリューション,평균 솔루션
-stats-most-solves,Most Solves,A maioria das soluções,La mayoría resuelve,ほとんどのソリューション,대부분의 솔루션
-stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간
-btn-hint,Hint,Dica,Pista,ヒント,팁
-btn-shop,Shop,Loja,Tienda,店,가게
-btn-shop-hints5,5 Hints,5 dicas,5 consejos,5つのヒント,5가지 팁
-btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,無制限のヒント,무제한 팁
-btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제
-btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除する,광고 제거
-btn-shop-sunrisetheme,Sunrise Theme,Tema do nascer do sol,Tema del amanecer,サンライズのテーマ,일출 테마
-btn-shop-sunsettheme,Sunset Theme,Tema do pôr do sol,Tema del atardecer,夕日のテーマ,일몰 테마
-btn-undo,Undo,Reverter,Deshacer,逆にするには,반전하려면
-btn-settings,Settings,Definições,Definiciones,定義,정의
-btn-home,Home,Início,Inicio,始める,시작
-btn-profile,Profile,Perfil,Perfil,プロフィール,프로필
-menu-main,Somatu,Somatu,Somatu,ソマツ,소마투
-menu-classic,Classic,Clássico,Clásico,クラシック,권위 있는
-popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, completa el modo {1} {2} veces.",{0} モードのロックを解除するには、{1} モードを {2} 回完了します。,{0} 모드를 잠금 해제하려면 {1} 모드를 {2}번 완료하세요.
-popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",{0} モードのロックを解除するには、{1} モードを {2} 時間完了してください。,{0} 모드를 잠금 해제하려면 {1} 모드 {2} 시간을 완료하세요.
-settings-music,Music,Música,Música,音楽,음악
-settings-sound,Sound,Som,Sonido,音,소리
-settings-vibration,Vibrate,Vibração,Vibración,振動,진동
-settings-control-drag,Drag,Arrastar,Arrastrar,引っ張る,견인
-settings-control-click,Tap,Tocar,Tocar,触る,만지다
-settings-theme,Theme,Tema,Tema,テーマ,주제
-settings-support,Support,Suporte,Soporte,サポート,지원하다
-popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました!<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다!<br>새 모드로 전환하시겠습니까?
-btn-yes,Yes,Sim,Sí,はい,예
-btn-no,No,Não,No,いいえ,아니요
-btn-replay,Play Again,Jogar de Novo,Juega de nuevo,再びプレー,다시 플레이
-,,,#VALUE!,#VALUE!,#VALUE!
-,,,#VALUE!,#VALUE!,#VALUE!
-,,,#VALUE!,#VALUE!,#VALUE!
+Key,English,Portuguese,Spanish,Japanese,Korean,Burmese,Chinese,Tamil,Thai
+,en,pt,es,ja,ko,my,zh,ta,th
+btn-language,English,Português,Español,日本語,한국인,မြန်မာ,中国人,தமிழ்,ภาษาไทย
+btn-play,Classic,Clássico,Clásico,クラシック,권위 있는,ဂန္ထဝင်,经典的,செந்தரம்,คลาสสิค
+btn-continue,Continue,Continuar,Continuar,続く,계속하다,ဆက်လက်,继续,தொடரவும்,ดำเนินการต่อ
+btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전,စိန်ခေါ်မှု,挑战,சவால்,ท้าทาย
+mode-easy,Easy,Fácil,Fácil,簡単,쉬운,လွယ်ပါတယ်။,简单的,சுலபம்,ง่าย
+mode-medium,Moderate,Médio,Moderado,平均,평균,ပျမ်းမျှ,平均的,சராசரி,เฉลี่ย
+mode-hard,Hard,Difícil,Duro,難しい,어려운,ခက်တယ်။,难的,கடினமானது,ยาก
+mode-extreme,Extreme,Extremo,Extremo,過激,극심한,အလွန်အကျူး,极端,தீவிர,สุดขีด
+mode-challenge,Challenge,Desafio,Desafío,チャレンジ,도전,စိန်ခေါ်မှု,挑战,சவால்,ท้าทาย
+game-time,Time,Tempo,Tiempo,時間,시간,အချိန်,时间,நேரம்,เวลา
+game-solved,Solved,Resolvido,Resuelto,整理しました,정리하다,ခွဲခြားထားသည်။,挑出来,வரிசைப்படுத்தப்பட்டது,จัดเรียงออก
+stats-games-played,Games Played,Jogos jogados,Juegos jugados,プレイしたゲーム,플레이한 게임,ဂိမ်းများ ကစားခဲ့သည်။,玩过的游戏,விளையாடிய விளையாட்டுகள்,เกมส์ที่เล่น
+stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,完成したゲーム,완료된 게임,ပြီးသွားသောဂိမ်းများ,已完成的游戏,முடிந்த விளையாட்டுகள்,เกมที่เสร็จสมบูรณ์
+stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간,ပျမ်းမျှအချိန်,平均时间,சராசரி நேரம்,เวลาเฉลี่ย
+stats-fastest-time,Fastest Time,Tempo mais rápido,El tiempo mas rapido,最速タイム,가장 빠른 시간,အမြန်ဆုံးအချိန်,最快时间,வேகமான நேரம்,เวลาที่เร็วที่สุด
+stats-hints-used,Hints Used,Dicas usadas,Consejos utilizados,使用したヒント,사용된 팁,အကြံပြုချက်များကို အသုံးပြုခဲ့သည်။,使用的提示,குறிப்புகள் பயன்படுத்தப்பட்டன,เคล็ดลับที่ใช้
+stats-average-solves,Average Solves,Média de soluções,Resoluciones promedio,平均的なソリューション,평균 솔루션,ပျမ်းမျှအဖြေများ,平均解决方案,சராசரி தீர்வுகள்,โซลูชั่นโดยเฉลี่ย
+stats-most-solves,Most Solves,A maioria das soluções,La mayoría resuelve,ほとんどのソリューション,대부분의 솔루션,ဖြေရှင်းချက်အများစု,大多数解决方案,பெரும்பாலான தீர்வுகள்,โซลูชั่นส่วนใหญ่
+stats-longest-time,Longest time,Tempo mais longo,El tiempo mas largo,最長の時間,긴 시간,အချိန်အကြာဆုံး,最长的时间,மிக நீண்ட நேரம்,เวลาที่ยาวที่สุด
+btn-hint,Hint,Dica,Pista,ヒント,팁,ထိပ်ဖျား,提示,உதவிக்குறிப்பு,เคล็ดลับ
+btn-shop,Shop,Loja,Tienda,店,가게,စတိုးဆိုင်,店铺,ஸ்டோர்,เก็บ
+btn-shop-hints5,5 Hints,5 dicas,5 consejos,5つのヒント,5가지 팁,အကြံပြုချက် ၅,5 条建议,5 குறிப்புகள்,5 เคล็ดลับ
+btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,無制限のヒント,무제한 팁,အကန့်အသတ်မရှိ အကြံပြုချက်များ,无限提示,வரம்பற்ற குறிப்புகள்,เคล็ดลับไม่ จำกัด
+btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제,အဆင့်အားလုံးကိုသော့ဖွင့်ပါ။,解锁所有级别,அனைத்து நிலைகளையும் திறக்கவும்,ปลดล็อคทุกระดับ
+btn-shop-removeads,Remove Ads,Remover propagandas,Quitar anuncios,広告を削除する,광고 제거,ကြော်ငြာများကိုဖယ်ရှားပါ။,删除广告,விளம்பரங்களை அகற்று,ลบโฆษณา
+btn-shop-sunrisetheme,Sunrise Theme,Tema do nascer do sol,Tema del amanecer,サンライズのテーマ,일출 테마,Sunrise အပြင်အဆင်,日出主题,சூரிய உதயம் தீம்,ธีมพระอาทิตย์ขึ้น
+btn-shop-sunsettheme,Sunset Theme,Tema do pôr do sol,Tema del atardecer,夕焼けのテーマ,일몰 테마,နေဝင်ချိန် အပြင်အဆင်,日落主题,சூரிய அஸ்தமன தீம்,ธีมพระอาทิตย์ตก
+btn-undo,Undo,Reverter,Deshacer,逆にするには,반전하려면,ပြောင်းပြန်,扭转,பின்னோக்கி செலுத்துதல்,เพื่อย้อนกลับ
+btn-settings,Settings,Definições,Definiciones,定義,정의,အဓိပ္ပါယ်ဖွင့်ဆိုချက်,定义,வரையறைகள்,คำจำกัดความ
+btn-home,Home,Início,Inicio,始める,시작,စတင်ပါ။,开始,தொடங்கு,เริ่ม
+btn-profile,Profile,Perfil,Perfil,プロフィール,프로필,ကိုယ်ရေးအကျဉ်း,轮廓,சுயவிவரம்,ประวัติโดยย่อ
+menu-main,Somatu,Somatu,Somatu,ソマツ,소마투,ဆိုမာတူး,索马图,சோமது,โซมาตู
+menu-classic,Classic,Clássico,Clásico,クラシック,권위 있는,ဂန္ထဝင်,经典的,செந்தரம்,คลาสสิค
+popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, completa el modo {1} {2} veces.",{0} モードのロックを解除するには、{1} モードを {2} 回完了します。,{0} 모드를 잠금 해제하려면 {1} 모드를 {2}번 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် ပြီးအောင်လုပ်ပါ။,要解锁 {0} 模式，请完成 {1} 模式 {2} 次。,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
+popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",{0} モードのロックを解除するには、{1} モードを {2} 時間完了してください。,{0} 모드를 잠금 해제하려면 {1} 모드 {2} 시간을 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် အပြီးသတ်ပါ။,要解锁 {0} 模式，请完成 {1} 模式 {2} 次。,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
+settings-music,Music,Música,Música,音楽,음악,ဂီတ,音乐,இசை,ดนตรี
+settings-sound,Sound,Som,Sonido,音,소리,အသံ,声音,ஒலி,เสียง
+settings-vibration,Vibrate,Vibração,Vibración,振動,진동,တုန်ခါမှု,振动,அதிர்வு,การสั่นสะเทือน
+settings-control-drag,Drag,Arrastar,Arrastrar,引っ張る,견인,ဆွဲယူပါ။,拖,இழுக்கவும்,ลาก
+settings-control-click,Tap,Tocar,Tocar,触る,만지다,ထိပါ။,触碰,தொடவும்,สัมผัส
+settings-theme,Theme,Tema,Tema,テーマ,주제,အပြင်အဆင်,主题,தீம்,ธีม
+settings-support,Support,Suporte,Soporte,サポート,지원하다,အထောက်အပံ့,支持,ஆதரவு,สนับสนุน
+popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました!<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다!<br>새 모드로 전환하시겠습니까?,မုဒ် {0} ကို လော့ခ်ဖွင့်ထားသည်။<br>မုဒ်အသစ်သို့ ပြောင်းမလား။,模式 {0} 已解锁！<br>切换到新模式？,பயன்முறை {0} திறக்கப்பட்டது!<br>புதிய பயன்முறைக்கு மாறவா?,ปลดล็อคโหมด {0} แล้ว!<br>เปลี่ยนเป็นโหมดใหม่หรือไม่
+btn-yes,Yes,Sim,Sí,はい,예,ဟုတ်ကဲ့,是的,ஆம்,ใช่
+btn-no,No,Não,No,いいえ,아니요,မရှိ,不,இல்லை,เลขที่
+btn-replay,Play Again,Jogar de Novo,Juega de nuevo,再びプレー,다시 플레이,ထပ်မံ။ ကစားပါ,再玩一次,மீண்டும் ஆடு,เล่นอีกครั้ง

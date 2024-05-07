@@ -2839,7 +2839,13 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_GlyphPairAdjustmentRecords: []
   fallbackFontAssets: []
-  m_FallbackFontAssetTable: []
+  m_FallbackFontAssetTable:
+  - {fileID: 11400000, guid: 5a2303455860e664c801a2df37846032, type: 2}
+  - {fileID: 11400000, guid: 28b7a590b60cdf44fb9d9c1f18f977ba, type: 2}
+  - {fileID: 11400000, guid: 0102a276bb09c3a40886a45a30494221, type: 2}
+  - {fileID: 11400000, guid: 7be6f72f7b3bf394b9f84282df53537e, type: 2}
+  - {fileID: 11400000, guid: 1c1fab6cfa085d242bff350f912827ec, type: 2}
+  - {fileID: 11400000, guid: 24a8c18608a726d479bc24dedbca8f28, type: 2}
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 057ed3bd851b5a1498f84f57488f1c4f

@@ -243,10 +243,14 @@ public class SettingsHandler : MonoBehaviour
         List<string> languagesAvailable = new List<string>
         {
             "English",
-            "Portuguese",
-            "Spanish",
+            "Tamil",
+            "Thai",
+            "Burmese",
+            "Chinese",
             "Japanese",
-            "Korean"
+            "Korean",
+            "Spanish",
+            "Portuguese"
         };
         int currentIndex = languagesAvailable.IndexOf(LocalizationManager.Language);
         int nextIndex = currentIndex == languagesAvailable.Count - 1 ? 0 : currentIndex + 1;
