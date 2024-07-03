@@ -34,18 +34,9 @@ public class LoginController : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            //Debug.Log("Sign in anonymously succeeded!");
         }
-        catch (AuthenticationException ex)
+        catch (Exception ex)
         {
-            // Compare error code to AuthenticationErrorCodes
-            // Notify the player with the proper error message
-            Debug.LogException(ex);
-        }
-        catch (RequestFailedException ex)
-        {
-            // Compare error code to CommonErrorCodes
-            // Notify the player with the proper error message
             Debug.LogException(ex);
         }
     }
@@ -69,6 +60,9 @@ public class LoginController : MonoBehaviour
         AuthenticationService.Instance.SignInFailed += (err) =>
         {
             Debug.LogError(err);
+            GameManager _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.StartGame(_loadingCanvas);
+            _slider.value = 0.99f;
         };
 
         AuthenticationService.Instance.SignedOut += () =>
