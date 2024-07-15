@@ -90,9 +90,9 @@ public static class Constants
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 6;
+                return 2;
             case Difficulty.Medium:
-                return 4;
+                return 2;
             case Difficulty.Hard:
                 return 2;
             case Difficulty.Extreme:

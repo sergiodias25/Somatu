@@ -95,6 +95,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button _closeSettingsButton;
 
+    [SerializeField]
+    private GameObject _quitPanel;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -106,6 +109,39 @@ public class UIManager : MonoBehaviour
         HideObject(_gameplayInGamePanel);
         HideObject(_gameplayEndGamePanel);
         ToggleContinueButton();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Debug.Log("press");
+            if (_settingsPanel.activeSelf)
+            {
+                ToggleSettingsPanel();
+            }
+            else if (_shopPanel.activeSelf)
+            {
+                ToggleShopPanel();
+            }
+            else if (_profilePanel.activeSelf)
+            {
+                ToggleProfilePanel();
+            }
+            else if (_gameManager.IsGameInProgress())
+            {
+                ClickOnHome();
+            }
+            else if (_classicMenu.activeSelf)
+            {
+                // TODO: add challenge menu to if clause when it is implemented
+                ClickOnHome();
+            }
+            else
+            {
+                ShowObject(_quitPanel);
+            }
+        }
     }
 
     private void HideClassicMenu()
@@ -679,5 +715,21 @@ public class UIManager : MonoBehaviour
             }
             ShowObject(_shopPanel);
         }
+    }
+
+    public void QuitApplicationClick()
+    {
+        if (_gameManager.IsGameInProgress())
+        {
+            _gameManager.ResetBoard(true, false, true);
+        }
+
+#if UNITY_EDITOR
+        // Application.Quit() does not work in the editor so
+        // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
