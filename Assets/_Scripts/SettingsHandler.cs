@@ -259,6 +259,7 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
         UpdateLanguageIcon();
+        FindObjectOfType<UIManager>().UpdateHelpButtonText();
     }
 
     private void UpdateLanguageIcon() { }

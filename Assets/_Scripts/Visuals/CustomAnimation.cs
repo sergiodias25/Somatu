@@ -131,7 +131,6 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Append(blocks[3].AnimatePartialSumCorrect());
             sequence.Join(blocks[4].AnimatePuzzleCompleted());
             sequence.Join(blocks[5].AnimatePuzzleCompleted());
-            sequence.Join(blocks[5].AnimatePuzzleCompleted());
             sequence.AppendInterval(0.01f);
             sequence.Join(blocks[2].AnimatePuzzleCompleted());
             sequence.Join(blocks[6].AnimatePuzzleCompleted());

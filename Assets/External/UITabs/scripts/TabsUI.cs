@@ -53,6 +53,11 @@ namespace EasyUI.Tabs
             GetTabBtns();
         }
 
+        private void OnEnable()
+        {
+            UpdateTabColors();
+        }
+
         private void GetTabBtns()
         {
             parentBtns = transform.GetChild(0);
@@ -95,6 +100,28 @@ namespace EasyUI.Tabs
             tabBtns[0].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
                 Constants.COLOR_SQUARE
             ];
+        }
+
+        public void UpdateTabColors()
+        {
+            parentBtns = transform.GetChild(0);
+            tabBtnsNum = parentBtns.childCount;
+
+            tabBtns = new TabButtonUI[tabBtnsNum];
+            for (int i = 0; i < tabBtnsNum; i++)
+            {
+                tabBtns[i] = parentBtns.GetChild(i).GetComponent<TabButtonUI>();
+                if (i != current)
+                {
+                    tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                        Constants.COLOR_BUTTON
+                    ];
+                }
+                else
+                    tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
+                        Constants.COLOR_SQUARE
+                    ];
+            }
         }
 
         public void OnTabButtonClicked(int tabIndex)

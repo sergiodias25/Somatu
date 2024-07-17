@@ -647,6 +647,16 @@ public class GameManager : MonoBehaviour
             _allNodes[i].UpdateColor(colorToUpdateToExtraValidation);
             _allNodes[i].GetBlockInNode().UpdateTextColor();
         }
+        if (IsGameInProgress())
+        {
+            _firstRowResultBlock.UpdateTextColor();
+            _secondRowResultBlock.UpdateTextColor();
+            _thirdRowResultBlock.UpdateTextColor();
+            _firstColumnResultBlock.UpdateTextColor();
+            _secondColumnResultBlock.UpdateTextColor();
+            _thirdColumnResultBlock.UpdateTextColor();
+        }
+
         if (!HasGameEnded())
         {
             _uiManager.ToggleHelpButton(true);

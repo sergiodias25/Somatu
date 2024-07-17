@@ -132,7 +132,7 @@ public class Timer : MonoBehaviour
     public void UpdateTextColor()
     {
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
-            Constants.COLOR_DARK_TEXT
+            Constants.COLOR_LIGHT_TEXT
         ];
     }
 }

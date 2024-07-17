@@ -427,9 +427,9 @@ public class UIManager : MonoBehaviour
     {
         if (_undoButton.enabled)
         {
-            await CustomAnimation.ButtonClicked(_undoButton.transform);
             _gameManager.UndoLastMove();
             FindObjectOfType<GameManager>().RemoveHints();
+            await CustomAnimation.ButtonClicked(_undoButton.transform);
             ToggleUndoButton(
                 _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
             );
