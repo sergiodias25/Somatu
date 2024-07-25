@@ -501,7 +501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79990793}
   m_Layer: 5
-  m_Name: Container
+  m_Name: ProfileContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6342,7 +6342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632445602}
   m_Layer: 5
-  m_Name: Container
+  m_Name: HomeContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6900,7 +6900,7 @@ GameObject:
   - component: {fileID: 666928145}
   - component: {fileID: 666928144}
   m_Layer: 5
-  m_Name: Title
+  m_Name: MainTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6920,10 +6920,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2137205808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 351.685, y: -92.04001}
-  m_SizeDelta: {x: 700, y: 184.08}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -48.315002, y: 350.96}
+  m_SizeDelta: {x: 400, y: 184.08002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &666928144
 MonoBehaviour:
@@ -18072,7 +18072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543929588}
   m_Layer: 5
-  m_Name: Container
+  m_Name: SettingsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19345,7 +19345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703054952}
   m_Layer: 5
-  m_Name: Container
+  m_Name: ShopContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
