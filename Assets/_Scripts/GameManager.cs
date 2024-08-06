@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
             ResetBoard(false, true, false);
             GenerateGrid(numbers, false);
         }
-        _uiManager.ToggleHelpButton(true);
+        _uiManager.ToggleHintButton(true);
         LogSolution();
     }
 
@@ -431,10 +431,10 @@ public class GameManager : MonoBehaviour
         }
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
-        SavedGameData.IncrementHelpsAvailable(1);
+        SavedGameData.IncrementHintsAvailable(1);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
         _uiManager.ToggleUndoButton(false);
-        _uiManager.ToggleHelpButton(false);
+        _uiManager.ToggleHintButton(false);
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
@@ -476,7 +476,7 @@ public class GameManager : MonoBehaviour
             node.GetBlockInNode().UpdateTextColor();
         }
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
-        _uiManager.ToggleHelpButton(false);
+        _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _playerStats.CompletedGame(
             SelectedDifficulty,
@@ -602,32 +602,38 @@ public class GameManager : MonoBehaviour
         _timesSolvedText.text = "0";
     }
 
-    public void ShowHints()
+    public bool UseHint()
     {
         ResetSelectedBlock();
-        List<Node> incorrectNodes = new List<Node>();
+        List<Node> correctNodes = new List<Node>();
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
-            if (_solutionNumbers[i] != _allNodes[i].GetBlockInNode().Value)
+            if (
+                _solutionNumbers[i] == _allNodes[i].GetBlockInNode().Value
+                && _allNodes[i].GetBlockInNode().IsInteractable()
+            )
             {
-                incorrectNodes.Add(_allNodes[i]);
+                correctNodes.Add(_allNodes[i]);
             }
         }
-        if (incorrectNodes.Count > 0)
+        if (correctNodes.Count > 0)
         {
             int hintsLimit = Mathf.Min(
-                incorrectNodes.Count,
+                correctNodes.Count,
                 Constants.GetNumberOfHintsDisplayed(ActualDifficulty)
             );
             for (int i = 0; i <= hintsLimit - 1; i++)
             {
-                int randomNodeIndex = Random.Range(0, incorrectNodes.Count);
-                incorrectNodes[randomNodeIndex].UpdateColor(
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
+                int randomNodeIndex = Random.Range(0, correctNodes.Count);
+                correctNodes[randomNodeIndex].UpdateColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
                 );
-                incorrectNodes.RemoveAt(randomNodeIndex);
+                correctNodes[randomNodeIndex].GetBlockInNode().DisableInteraction();
+                correctNodes.RemoveAt(randomNodeIndex);
             }
+            return true;
         }
+        return false;
     }
 
     public void RemoveHints()
@@ -644,8 +650,11 @@ public class GameManager : MonoBehaviour
                         Constants.COLOR_SELECTED_NODE
                     ]
                     : colorToUpdateTo;
-            _allNodes[i].UpdateColor(colorToUpdateToExtraValidation);
-            _allNodes[i].GetBlockInNode().UpdateTextColor();
+            if (_allNodes[i].GetBlockInNode().IsInteractable())
+            {
+                _allNodes[i].UpdateColor(colorToUpdateToExtraValidation);
+                _allNodes[i].GetBlockInNode().UpdateTextColor();
+            }
         }
         if (IsGameInProgress())
         {
@@ -659,7 +668,7 @@ public class GameManager : MonoBehaviour
 
         if (!HasGameEnded())
         {
-            _uiManager.ToggleHelpButton(true);
+            _uiManager.ToggleHintButton(true);
         }
     }
 
@@ -741,8 +750,48 @@ public class GameManager : MonoBehaviour
     {
         if (
             _generatedNodesObject.transform.childCount == 0
-            || !_generatedNodesObject.transform
+            && !_generatedNodesObject.transform
                 .GetChild(0)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(1)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(2)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(3)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(4)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(5)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(6)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(7)
+                .gameObject.GetComponent<Node>()
+                .GetBlockInNode()
+                .IsInteractable()
+            && !_generatedNodesObject.transform
+                .GetChild(8)
                 .gameObject.GetComponent<Node>()
                 .GetBlockInNode()
                 .IsInteractable()

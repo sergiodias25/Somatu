@@ -5764,10 +5764,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.00024986267
-    width: 1
-    height: 0.9995003
+    x: 0.027563214
+    y: 0
+    width: 0.9448736
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -14510,8 +14510,8 @@ MonoBehaviour:
   _mainMenuPanel: {fileID: 2137205807}
   _continueGameButton: {fileID: 1097855867}
   _playAgainButton: {fileID: 1724741423}
-  _helpButton: {fileID: 1264756787}
-  _helpButtonText: {fileID: 2072664027}
+  _hintButton: {fileID: 1264756787}
+  _hintButtonText: {fileID: 2072664027}
   _undoButton: {fileID: 1804349051}
   _gameplayStatsPanel: {fileID: 2143445563}
   _gameplayInGamePanel: {fileID: 412357600}
@@ -15433,7 +15433,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1214299484}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HelpClick
+        m_MethodName: HintClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

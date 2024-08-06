@@ -92,7 +92,7 @@ namespace CandyCabinets.Components.Colour
 
             if (gameObject.name == "HintButton")
             {
-                FindObjectOfType<UIManager>().ToggleHelpButton();
+                FindObjectOfType<UIManager>().ToggleHintButton();
             }
 
             if (

@@ -20,10 +20,10 @@ public class UIManager : MonoBehaviour
     private Button _playAgainButton;
 
     [SerializeField]
-    private Button _helpButton;
+    private Button _hintButton;
 
     [SerializeField]
-    private TextMeshProUGUI _helpButtonText;
+    private TextMeshProUGUI _hintButtonText;
 
     [SerializeField]
     private Button _undoButton;
@@ -412,15 +412,18 @@ public class UIManager : MonoBehaviour
         _topBarManager.SelectHomeButton();
     }
 
-    public async void HelpClick()
+    public async void HintClick()
     {
-        await CustomAnimation.ButtonClicked(_helpButton.transform);
-        if (_helpButton.enabled)
+        await CustomAnimation.ButtonClicked(_hintButton.transform);
+        if (_hintButton.enabled)
         {
-            _gameManager.ShowHints();
-            _playerStats.UsedHelp(_gameManager.SelectedDifficulty);
-            ToggleHelpButton(false);
+            if (_gameManager.UseHint())
+            {
+                _playerStats.UsedHint(_gameManager.SelectedDifficulty);
+                UpdateHintButtonText();
+            }
         }
+        ToggleHintButton();
     }
 
     public async void UndoClick()
@@ -477,28 +480,34 @@ public class UIManager : MonoBehaviour
         _undoButton.enabled = enabled;
     }
 
-    public void ToggleHelpButton()
+    public void ToggleHintButton()
     {
-        ToggleHelpButton(_gameManager.SavedGameData.HelpsAvailable > 0);
+        ToggleHintButton(
+            _gameManager.SavedGameData.HintsAvailable > 0
+                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
+        );
     }
 
-    internal void ToggleHelpButton(bool enabled)
+    internal void ToggleHintButton(bool enabled)
     {
-        _helpButton.enabled =
+        _hintButton.enabled =
             enabled
             && !_gameManager.HasGameEnded()
             && (
-                _gameManager.SavedGameData.HelpsAvailable != 0
-                || _gameManager.SavedGameData.PurchaseData.UnlimitedHelps
+                _gameManager.SavedGameData.HintsAvailable >= 0
+                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
             );
 
-        Color originalColor = _helpButton.GetComponent<Image>().color;
+        Color originalColor = _hintButton.GetComponent<Image>().color;
         if (
-            _gameManager.SavedGameData.HelpsAvailable > 0
-            && _helpButton.GetComponent<Image>().color.a != 1
+            (
+                _gameManager.SavedGameData.HintsAvailable > 0
+                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
+            )
+            && _hintButton.GetComponent<Image>().color.a != 1
         )
         {
-            _helpButton.GetComponent<Image>().color = new Color(
+            _hintButton.GetComponent<Image>().color = new Color(
                 originalColor.r,
                 originalColor.g,
                 originalColor.b,
@@ -506,11 +515,14 @@ public class UIManager : MonoBehaviour
             );
         }
         else if (
-            _gameManager.SavedGameData.HelpsAvailable <= 0
-            && _helpButton.GetComponent<Image>().color.a != 0.5f
+            (
+                _gameManager.SavedGameData.HintsAvailable <= 0
+                && !_gameManager.SavedGameData.PurchaseData.UnlimitedHints
+            )
+            && _hintButton.GetComponent<Image>().color.a != 0.5f
         )
         {
-            _helpButton.GetComponent<Image>().color = new Color(
+            _hintButton.GetComponent<Image>().color = new Color(
                 originalColor.r,
                 originalColor.g,
                 originalColor.b,
@@ -518,20 +530,20 @@ public class UIManager : MonoBehaviour
             );
         }
 
-        UpdateHelpButtonText();
+        UpdateHintButtonText();
     }
 
-    public void UpdateHelpButtonText()
+    public void UpdateHintButtonText()
     {
         string translationText = LocalizationManager.Localize("btn-hint");
-        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
+        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints)
         {
-            _helpButtonText.text =
-                translationText + ": " + _gameManager.SavedGameData.HelpsAvailable.ToString();
+            _hintButtonText.text =
+                translationText + ": " + _gameManager.SavedGameData.HintsAvailable.ToString();
         }
         else
         {
-            _helpButtonText.text = translationText;
+            _hintButtonText.text = translationText;
         }
     }
 

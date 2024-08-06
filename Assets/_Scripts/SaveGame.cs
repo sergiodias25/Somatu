@@ -10,7 +10,7 @@ namespace Assets.Scripts.SaveGame
         public double TimeStamp;
         public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Easy;
         public int TimesBeatenCurrentDifficulty = 0;
-        public int HelpsAvailable = 0;
+        public int HintsAvailable = 0;
         public GameInProgress GameInProgressData;
         public Purchases PurchaseData;
         public Settings SettingsData;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.SaveGame
 
         public class Purchases
         {
-            public bool UnlimitedHelps = false;
+            public bool UnlimitedHints = false;
             public bool RemovedAds = false;
             public bool SunriseTheme = false;
             public bool SunsetTheme = false;
@@ -109,7 +109,7 @@ namespace Assets.Scripts.SaveGame
             public double TimeAverage;
             public int SolveCountBest;
             public double SolveCountAverage;
-            public int HelpsUsed;
+            public int HintsUsed;
 
             public ModeStats()
             {
@@ -119,7 +119,7 @@ namespace Assets.Scripts.SaveGame
                 TimeAverage = 0;
                 SolveCountBest = 0;
                 SolveCountAverage = 0.0;
-                HelpsUsed = 0;
+                HintsUsed = 0;
             }
         }
 
@@ -251,20 +251,20 @@ namespace Assets.Scripts.SaveGame
             mode.SolveCountBest = newBest;
         }
 
-        public void IncrementHelpsUsed(ModeStats mode)
+        public void IncrementHintsUsed(ModeStats mode)
         {
-            mode.HelpsUsed++;
-            HelpsAvailable--;
+            mode.HintsUsed++;
+            HintsAvailable--;
         }
 
-        public void IncrementHelpsAvailable(int numberOfHelpsToAdd)
+        public void IncrementHintsAvailable(int numberOfHintsToAdd)
         {
-            HelpsAvailable += numberOfHelpsToAdd;
+            HintsAvailable += numberOfHintsToAdd;
         }
 
-        public void GrantUnlimitedHelps()
+        public void GrantUnlimitedHints()
         {
-            PurchaseData.UnlimitedHelps = true;
+            PurchaseData.UnlimitedHints = true;
         }
 
         public void RemoveAds()

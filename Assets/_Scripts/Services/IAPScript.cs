@@ -40,14 +40,14 @@ public class IAPScript : MonoBehaviour
         switch (product.definition.id)
         {
             case HINTS_5:
-                _gameManager.SavedGameData.IncrementHelpsAvailable(5);
+                _gameManager.SavedGameData.IncrementHintsAvailable(5);
                 _gameManager.SavedGameData.PersistData();
-                _uiManager.UpdateHelpButtonText();
+                _uiManager.UpdateHintButtonText();
                 break;
             case HINTS_UNLIMITED:
-                _gameManager.SavedGameData.GrantUnlimitedHelps();
+                _gameManager.SavedGameData.GrantUnlimitedHints();
                 _gameManager.SavedGameData.PersistData();
-                _uiManager.UpdateHelpButtonText();
+                _uiManager.UpdateHintButtonText();
                 break;
             case UNLOCK_LEVELS:
                 _gameManager.SavedGameData.UnlockAllLevels();
@@ -75,12 +75,12 @@ public class IAPScript : MonoBehaviour
 
     public void LoadIAPStatus()
     {
-        if (_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
+        if (_gameManager.SavedGameData.PurchaseData.UnlimitedHints)
         {
             Button5Hints.interactable = false;
             FadeButton(Button5Hints);
         }
-        if (_gameManager.SavedGameData.PurchaseData.UnlimitedHelps)
+        if (_gameManager.SavedGameData.PurchaseData.UnlimitedHints)
         {
             ButtonUnlimitedHints.interactable = false;
             FadeButton(ButtonUnlimitedHints);
