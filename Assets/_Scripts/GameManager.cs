@@ -430,6 +430,31 @@ public class GameManager : MonoBehaviour
             node.GetBlockInNode().UpdateTextColor();
         }
 
+        _firstRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _firstRowResultBlock.UpdateTextColor();
+        _secondRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _secondRowResultBlock.UpdateTextColor();
+        _thirdRowResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _thirdRowResultBlock.UpdateTextColor();
+        _firstColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _firstColumnResultBlock.UpdateTextColor();
+        _secondColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _secondColumnResultBlock.UpdateTextColor();
+        _thirdColumnResultBlock
+            .GetNode()
+            .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
+        _thirdColumnResultBlock.UpdateTextColor();
+
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.IncrementHintsAvailable(1);
         _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();

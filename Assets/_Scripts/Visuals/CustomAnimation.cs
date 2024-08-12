@@ -212,7 +212,7 @@ namespace Assets.Scripts.CustomAnimation
         internal static void NodeLoad(Transform transform)
         {
             transform
-                .DOScale(0.8f, 1f)
+                .DOScale(1f, 1f)
                 .From()
                 .SetEase(Ease.OutBounce)
                 .SetDelay(RandomizeDelayValue(0.2));
