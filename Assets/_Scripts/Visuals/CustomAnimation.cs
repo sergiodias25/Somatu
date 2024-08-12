@@ -106,7 +106,7 @@ namespace Assets.Scripts.CustomAnimation
             return true;
         }
 
-        public static Sequence SumIsIncorrect(Transform transform)
+        public static async Task SumIsIncorrect(Transform transform)
         {
             var sequence = DOTween.Sequence();
             sequence.Append(
@@ -118,9 +118,9 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Append(
                 transform.DOMoveX(transform.position.x, SUM_CORRECT_ANIMATION_DURATION / 3)
             );
+            sequence.SetId("SumIsIncorrect" + transform.name).Play();
 
-            return sequence;
-            //return null;
+            await WaitForAnimation("SumIsIncorrect" + transform.name);
         }
 
         public static async void AnimatePuzzleSolved(Block[] blocks)

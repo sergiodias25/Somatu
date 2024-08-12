@@ -631,7 +631,30 @@ public class GameManager : MonoBehaviour
                 correctNodes[randomNodeIndex].GetBlockInNode().DisableInteraction();
                 correctNodes.RemoveAt(randomNodeIndex);
             }
+            _audioManager.PlaySFX(_audioManager.DropBlock);
             return true;
+        }
+        else
+        {
+            for (int i = 0; i < _solutionNumbers.Count; i++)
+            {
+                if (
+                    _solutionNumbers[i] != _allNodes[i].GetBlockInNode().Value
+                    && _allNodes[i].GetBlockInNode().IsInteractable()
+                )
+                {
+                    _allNodes[i].UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
+                    );
+                    _ = _allNodes[i].GetBlockInNode().AnimateIncorrectSolution();
+                    /*_allNodes[i].UpdateColor(
+                        ColourManager.Instance.SelectedPalette().Colours[
+                            Constants.COLOR_NODE_NEUTRAL
+                        ]
+                    );*/
+                }
+            }
+            _audioManager.PlaySFX(_audioManager.DropBlockUndo);
         }
         return false;
     }

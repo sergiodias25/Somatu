@@ -292,8 +292,8 @@ public class Block : MonoBehaviour
         );
     }
 
-    public void AnimateIncorrectSolution()
+    public async Task AnimateIncorrectSolution()
     {
-        CustomAnimation.SumIsIncorrect(_text.transform);
+        await CustomAnimation.SumIsIncorrect(_text.transform);
     }
 }
