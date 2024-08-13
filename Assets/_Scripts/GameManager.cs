@@ -503,6 +503,7 @@ public class GameManager : MonoBehaviour
         _audioManager.PlaySFX(_audioManager.PuzzleSolved);
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
+        _uiManager.ShowEndOfGameButton();
         _playerStats.CompletedGame(
             SelectedDifficulty,
             _elapsedTime,
@@ -690,10 +691,11 @@ public class GameManager : MonoBehaviour
             ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
             : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL];
 
+        bool hasGameEnded = HasGameEnded();
         for (int i = 0; i < _solutionNumbers.Count; i++)
         {
             Color colorToUpdateToExtraValidation =
-                !HasGameEnded() && _allNodes[i].GetBlockInNode().IsSelected
+                !hasGameEnded && _allNodes[i].GetBlockInNode().IsSelected
                     ? ColourManager.Instance.SelectedPalette().Colours[
                         Constants.COLOR_SELECTED_NODE
                     ]
@@ -814,58 +816,14 @@ public class GameManager : MonoBehaviour
 
     public bool HasGameEnded()
     {
-        if (
-            _generatedNodesObject.transform.childCount == 0
-            && !_generatedNodesObject.transform
-                .GetChild(0)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(1)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(2)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(3)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(4)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(5)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(6)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(7)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-            && !_generatedNodesObject.transform
-                .GetChild(8)
-                .gameObject.GetComponent<Node>()
-                .GetBlockInNode()
-                .IsInteractable()
-        )
+        foreach (Transform node in _generatedNodesObject.transform)
         {
-            return true;
+            if (node.gameObject.GetComponent<Node>().GetBlockInNode().IsInteractable())
+            {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     public async void StartGame(Canvas loadingCanvas)
