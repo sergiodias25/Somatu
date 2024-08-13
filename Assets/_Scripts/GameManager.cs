@@ -423,7 +423,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var node in _allNodes)
         {
-            node.GetBlockInNode().DisableInteraction();
+            node.GetBlockInNode().ChangeInteraction(false);
             node.UpdateColor(
                 ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
             );
@@ -496,7 +496,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var node in _allNodes)
         {
-            node.GetBlockInNode().DisableInteraction();
+            node.GetBlockInNode().ChangeInteraction(false);
             node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]);
             node.GetBlockInNode().UpdateTextColor();
         }
@@ -653,7 +653,7 @@ public class GameManager : MonoBehaviour
                 correctNodes[randomNodeIndex].UpdateColor(
                     ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
                 );
-                correctNodes[randomNodeIndex].GetBlockInNode().DisableInteraction();
+                correctNodes[randomNodeIndex].GetBlockInNode().ChangeInteraction(false);
                 correctNodes.RemoveAt(randomNodeIndex);
             }
             _audioManager.PlaySFX(_audioManager.DropBlock);
@@ -779,6 +779,24 @@ public class GameManager : MonoBehaviour
                     )
                     .GetComponent<Node>()
             );
+            GameObject
+                .Find(
+                    SavedGameData.GameInProgressData.UndoData.FirstNodes[
+                        SavedGameData.GameInProgressData.UndoData.FirstNodes.Count - 1
+                    ]
+                )
+                .GetComponent<Node>()
+                .GetBlockInNode()
+                .ChangeInteraction(true);
+            GameObject
+                .Find(
+                    SavedGameData.GameInProgressData.UndoData.SecondNodes[
+                        SavedGameData.GameInProgressData.UndoData.SecondNodes.Count - 1
+                    ]
+                )
+                .GetComponent<Node>()
+                .GetBlockInNode()
+                .ChangeInteraction(true);
             _audioManager.PlaySFX(_audioManager.DropBlockUndo);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);

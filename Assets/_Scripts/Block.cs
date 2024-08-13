@@ -215,9 +215,9 @@ public class Block : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public void DisableInteraction()
+    public void ChangeInteraction(bool newStatus)
     {
-        _isInteractible = false;
+        _isInteractible = newStatus;
     }
 
     public bool IsInteractable()
