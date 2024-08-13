@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using CandyCabinets.Components.Colour;
+using TMPro;
 
 //------- Created by  : Hamza Herbou
 //------- Email       : hamza95herbou@gmail.com
@@ -91,6 +92,8 @@ namespace EasyUI.Tabs
                 tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
                     Constants.COLOR_BUTTON
                 ];
+                tabBtns[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT];
             }
 
             previous = current = 0;
@@ -100,6 +103,8 @@ namespace EasyUI.Tabs
             tabBtns[0].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
                 Constants.COLOR_SQUARE
             ];
+            tabBtns[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
         }
 
         public void UpdateTabColors()
@@ -140,9 +145,13 @@ namespace EasyUI.Tabs
                 tabBtns[previous].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
                     Constants.COLOR_BUTTON
                 ];
+                tabBtns[previous].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT];
                 tabBtns[current].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
                     Constants.COLOR_SQUARE
                 ];
+                tabBtns[current].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
 
                 tabBtns[previous].uiButton.interactable = true;
                 tabBtns[current].uiButton.interactable = false;
