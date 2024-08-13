@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -55,10 +54,10 @@ namespace CandyCabinets.Components.Colour
 
         // If you want to add more colours to the palette, just increase this value.
         [Tooltip("Number of colours per palette. Minimum 3 and maximum of 12.")]
-        [Range(3, 12)]
+        [Range(3, 13)]
         [SerializeField]
-        public int ColoursPerPalette = 12;
-        public int OldColoursPerPalette = 12;
+        public int ColoursPerPalette = 13;
+        public int OldColoursPerPalette = 13;
 
         [Tooltip("Palette collection.")]
         public List<Palette> Palettes;
