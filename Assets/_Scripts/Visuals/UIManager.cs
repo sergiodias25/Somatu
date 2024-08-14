@@ -49,6 +49,12 @@ public class UIManager : MonoBehaviour
     private GameObject _settingsPanel;
 
     [SerializeField]
+    private GameObject _supportPanel;
+
+    [SerializeField]
+    private Button _deleteDataButton;
+
+    [SerializeField]
     private GameObject _profilePanel;
 
     [SerializeField]
@@ -94,9 +100,6 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _unlockPanelText;
 
     [SerializeField]
-    private Button _closeSettingsButton;
-
-    [SerializeField]
     private GameObject _quitPanel;
 
     void Start()
@@ -116,10 +119,13 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Debug.Log("press");
             if (_settingsPanel.activeSelf)
             {
                 ToggleSettingsPanel();
+            }
+            if (_supportPanel.activeSelf)
+            {
+                ToggleSupportPanel();
             }
             else if (_shopPanel.activeSelf)
             {
@@ -158,6 +164,7 @@ public class UIManager : MonoBehaviour
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
         HideObject(_shopPanel);
         HideObject(_settingsPanel);
+        HideObject(_supportPanel);
         HideObject(_profilePanel);
         ShowObject(_topPanel);
         HideObject(_classicMenu);
@@ -407,6 +414,7 @@ public class UIManager : MonoBehaviour
         HideObject(_shopPanel);
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
+        HideObject(_supportPanel);
         HideObject(_classicMenu);
         HideObject(_backgroundsPanel);
         ShowMainMenu();
@@ -551,16 +559,17 @@ public class UIManager : MonoBehaviour
     public async void DeleteSaves()
     {
         _gameManager.SavedGameData = new Assets.Scripts.SaveGame.SaveGame();
-        ISaveClient _client = new CloudSaveClient();
+        /*ISaveClient _client = new CloudSaveClient();
         await SaveService.DeleteData(
             _client,
             Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
-        );
+        );*/
         ISaveClient _client2 = new PlayerPrefClient();
         await SaveService.DeleteData(
             _client2,
             Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
         );
+        await CustomAnimation.ButtonClicked(_deleteDataButton.transform);
     }
 
     public void RestoreGameplayPanel()
@@ -645,12 +654,54 @@ public class UIManager : MonoBehaviour
             {
                 HideObject(_profilePanel);
             }
+            if (_supportPanel.activeSelf)
+            {
+                HideObject(_supportPanel);
+            }
             if (_gameManager.IsGameInProgress())
             {
                 _timer.PauseTimer();
             }
             ShowObject(_settingsPanel);
             FindObjectOfType<SettingsHandler>().LoadSettingsButtons();
+        }
+    }
+
+    public void ToggleSupportPanel()
+    {
+        if (_supportPanel.activeSelf)
+        {
+            _topBarManager.DeselectSettingsButton();
+            HideObject(_supportPanel);
+            if (_gameManager.IsGameInProgress())
+            {
+                RestoreGameplayPanel();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
+        }
+        else
+        { /*
+            _topBarManager.SelectSettingsButton();
+            HideObject(_mainMenuPanel);
+            HideClassicMenu();
+            ToggleGameplayElements(false);
+            if (_shopPanel.activeSelf)
+            {
+                HideObject(_shopPanel);
+            }
+            if (_profilePanel.activeSelf)
+            {
+                HideObject(_profilePanel);
+            }
+            if (_gameManager.IsGameInProgress())
+            {
+                _timer.PauseTimer();
+            }
+            ShowObject(_settingsPanel);
+            FindObjectOfType<SettingsHandler>().LoadSettingsButtons();*/
         }
     }
 
@@ -682,6 +733,10 @@ public class UIManager : MonoBehaviour
             if (_settingsPanel.activeSelf)
             {
                 HideObject(_settingsPanel);
+            }
+            if (_supportPanel.activeSelf)
+            {
+                HideObject(_supportPanel);
             }
             if (_gameManager.IsGameInProgress())
             {
@@ -716,6 +771,10 @@ public class UIManager : MonoBehaviour
             if (_settingsPanel.activeSelf)
             {
                 HideObject(_settingsPanel);
+            }
+            if (_supportPanel.activeSelf)
+            {
+                HideObject(_supportPanel);
             }
             if (_profilePanel.activeSelf)
             {
