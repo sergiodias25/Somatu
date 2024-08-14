@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
     [SerializeField]
     private TextMeshPro _text;
     private GameManager _gameManager;
-    private AudioManager _audioManager;
+    private UIManager _uiManager;
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
@@ -22,7 +22,7 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        _audioManager = FindObjectOfType<AudioManager>();
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     public Node GetNode()
@@ -71,7 +71,7 @@ public class Block : MonoBehaviour
                             Constants.COLOR_SELECTED_NODE
                         ]
                     );
-                    _audioManager.PlaySFX(_audioManager.DropBlock);
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
@@ -81,7 +81,7 @@ public class Block : MonoBehaviour
                             Constants.COLOR_NODE_NEUTRAL
                         ]
                     );
-                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
@@ -94,7 +94,7 @@ public class Block : MonoBehaviour
                         );
                         _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
                         await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
-                        _audioManager.PlaySFX(_audioManager.DropBlock);
+                        _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
 
                         selectedBlock._originalNode.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
@@ -175,7 +175,7 @@ public class Block : MonoBehaviour
                 }
                 if (!FindObjectOfType<GameManager>().CheckResult(true))
                 {
-                    _audioManager.PlaySFX(_audioManager.DropBlock);
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
                 }
             }
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
@@ -183,7 +183,7 @@ public class Block : MonoBehaviour
                 CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
                 if (!FindObjectOfType<GameManager>().CheckResult(true))
                 {
-                    _audioManager.PlaySFX(_audioManager.DropBlockUndo);
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
                 }
             }
             _text.DOFade(1f, .25f);
@@ -278,18 +278,26 @@ public class Block : MonoBehaviour
 
     public Sequence AnimatePartialSumCorrect()
     {
-        if (_text.transform != null)
+        if (_text != null && _text.transform != null)
+        {
             return CustomAnimation.SumIsCorrect(_text.transform, GetNode().name);
-        return null;
+        }
+        return DOTween.Sequence();
+        ;
     }
 
     public Sequence AnimatePuzzleCompleted()
     {
-        return CustomAnimation.SumIsCorrect(
-            _text.transform,
-            GetNode().transform.position,
-            GetNode().name
-        );
+        if (_text != null && _text.transform != null)
+        {
+            return CustomAnimation.SumIsCorrect(
+                _text.transform,
+                GetNode().transform.position,
+                GetNode().name
+            );
+        }
+        return DOTween.Sequence();
+        ;
     }
 
     public async Task AnimateIncorrectSolution()

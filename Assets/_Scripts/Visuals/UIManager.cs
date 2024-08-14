@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
+using GridSum.Assets._Scripts.Visuals;
 
 public class UIManager : MonoBehaviour
 {
@@ -615,12 +616,11 @@ public class UIManager : MonoBehaviour
         _gameNodes.SetActive(statusToChangeTo);
     }
 
-    public async void ToggleSettingsPanel()
+    public void ToggleSettingsPanel()
     {
         if (_settingsPanel.activeSelf)
         {
             _topBarManager.DeselectSettingsButton();
-            await CustomAnimation.ButtonClicked(_closeSettingsButton.transform);
             HideObject(_settingsPanel);
             if (_gameManager.IsGameInProgress())
             {
@@ -743,5 +743,15 @@ public class UIManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void InteractionPerformed(Constants.AudioClip audioClip)
+    {
+        FindObjectOfType<Clouds>().MoveClouds();
+        if (audioClip != Constants.AudioClip.NoClip)
+        {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.PlaySFX(audioManager.GetAudioClip(audioClip));
+        }
     }
 }

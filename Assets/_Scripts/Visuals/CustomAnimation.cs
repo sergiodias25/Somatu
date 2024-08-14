@@ -41,6 +41,9 @@ namespace Assets.Scripts.CustomAnimation
 
             await WaitForAnimation("ButtonClick" + target.name);
             target.gameObject.GetComponent<Button>().enabled = true;
+            Object
+                .FindObjectOfType<UIManager>()
+                .InteractionPerformed(Constants.AudioClip.DropBlock);
         }
 
         public static void NumberClicked(Transform transform)
@@ -217,8 +220,9 @@ namespace Assets.Scripts.CustomAnimation
                 .SetEase(Ease.OutBounce)
                 .SetDelay(RandomizeDelayValue(0.2));
             ;
-            AudioManager audioManager = Object.FindObjectOfType<AudioManager>();
-            audioManager.PlaySFX(audioManager.NodeLoaded);
+            Object
+                .FindObjectOfType<UIManager>()
+                .InteractionPerformed(Constants.AudioClip.NodeLoaded);
         }
 
         static float RandomizeDelayValue(double delay)

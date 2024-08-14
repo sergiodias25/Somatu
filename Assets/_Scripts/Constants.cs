@@ -158,6 +158,7 @@ public static class Constants
     public static int COLOR_CLOUD = 9;
     public static int COLOR_BACKGROUND = 10;
     public static int COLOR_BACKGROUND_GRADIENT = 11;
+    public static int COLOR_TITLE = 12;
 
     /*
         1st - bottom left
@@ -178,4 +179,13 @@ public static class Constants
 
         return paletteColors;
     }
+
+    public enum AudioClip
+    {
+        DropBlock,
+        DropBlockUndo,
+        PuzzleSolved,
+        NodeLoaded,
+        NoClip
+    };
 }

@@ -97,4 +97,26 @@ public class AudioManager : MonoBehaviour
             Handheld.Vibrate();
         }
     }
+
+    public AudioClip GetAudioClip(Constants.AudioClip clip)
+    {
+        if (clip == Constants.AudioClip.DropBlock)
+        {
+            return DropBlock;
+        }
+        else if (clip == Constants.AudioClip.DropBlockUndo)
+        {
+            return DropBlockUndo;
+        }
+        else if (clip == Constants.AudioClip.NodeLoaded)
+        {
+            return NodeLoaded;
+        }
+        else if (clip == Constants.AudioClip.PuzzleSolved)
+        {
+            return PuzzleSolved;
+        }
+        else
+            return null;
+    }
 }
