@@ -450,8 +450,9 @@ public class UIManager : MonoBehaviour
 
     private void ToggleContinueButton()
     {
-        _continueGameButton.gameObject.SetActive(_gameManager.SavedGameExists());
-        if (_gameManager.SavedGameExists())
+        bool savedGameExists = _gameManager.SavedGameExists();
+        _continueGameButton.gameObject.SetActive(savedGameExists);
+        if (savedGameExists)
         {
             CustomAnimation.ButtonLoad(_continueGameButton.transform);
         }
@@ -569,7 +570,10 @@ public class UIManager : MonoBehaviour
             _client2,
             Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
         );
+        FindObjectOfType<GameManager>().ResetSavedGameData();
+        _gameManager = FindObjectOfType<GameManager>();
         await CustomAnimation.ButtonClicked(_deleteDataButton.transform);
+        QuitApplicationClick();
     }
 
     public void RestoreGameplayPanel()

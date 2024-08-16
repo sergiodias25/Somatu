@@ -594,7 +594,6 @@ public class GameManager : MonoBehaviour
         DestroyBlock(_firstColumnResultBlock);
         DestroyBlock(_secondColumnResultBlock);
         DestroyBlock(_thirdColumnResultBlock);
-        _generatedNodesObject.transform.DetachChildren();
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
@@ -905,6 +904,12 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        SavedGameData.PersistData();
+    }
+
+    internal void ResetSavedGameData()
+    {
+        SavedGameData = new SaveGame();
         SavedGameData.PersistData();
     }
 }
