@@ -153,7 +153,7 @@ namespace Assets.Scripts.SaveGame
         public void UnlockNextLevel(Constants.Difficulty difficulty)
         {
             if (
-                difficulty != Constants.Difficulty.Challenge
+                difficulty < Constants.Difficulty.Extreme
                 && difficulty >= UnlockedDifficulty
                 && TimesBeatenCurrentDifficulty
                     >= Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty)
@@ -167,13 +167,21 @@ namespace Assets.Scripts.SaveGame
             }
         }
 
-        public bool IsHalfwayThroughCurrentDifficulty(Constants.Difficulty difficulty)
+        public bool IsHalfwayThroughCurrentDifficulty(
+            Constants.Difficulty calculatedDifficulty,
+            Constants.Difficulty selectedDifficulty,
+            int TimesBeatenDifficulty
+        )
         {
+            int valueToUse =
+                selectedDifficulty == Constants.Difficulty.Challenge
+                    ? TimesBeatenDifficulty
+                    : TimesBeatenCurrentDifficulty;
             if (
-                (difficulty < UnlockedDifficulty)
+                (selectedDifficulty < UnlockedDifficulty)
                 || (
-                    TimesBeatenCurrentDifficulty
-                    >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty) / 2)
+                    valueToUse
+                    >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(calculatedDifficulty) / 2)
                 )
             )
             {

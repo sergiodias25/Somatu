@@ -208,13 +208,13 @@ public class UIManager : MonoBehaviour
     public async void ClickOnChallenge()
     {
         await CustomAnimation.ButtonClicked(_challengeModeButton.transform);
-        if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
-        {
-            _topBarManager.DeselectHomeButton();
-            HideObject(_mainMenuPanel);
-            ShowGameplayButtons();
-            _gameManager.Init(Constants.Difficulty.Challenge);
-        }
+        /*if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
+        {*/
+        _topBarManager.DeselectHomeButton();
+        HideObject(_mainMenuPanel);
+        ShowGameplayButtons();
+        _gameManager.Init(Constants.Difficulty.Challenge);
+        /*}
         else
         {
             ShowDifficultyPopup(
@@ -225,7 +225,7 @@ public class UIManager : MonoBehaviour
                     Constants.Difficulty.Challenge - 1
                 )
             );
-        }
+        }*/
     }
 
     public async void ClickOnEasyMode()
@@ -369,7 +369,9 @@ public class UIManager : MonoBehaviour
                     Constants.GetRepeatedNumbersCount(
                         _gameManager.ActualDifficulty,
                         _gameManager.SavedGameData.IsHalfwayThroughCurrentDifficulty(
-                            _gameManager.ActualDifficulty
+                            _gameManager.ActualDifficulty,
+                            _gameManager.SelectedDifficulty,
+                            0
                         )
                     )
                 ),

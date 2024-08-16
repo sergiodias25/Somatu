@@ -98,7 +98,11 @@ public class GameManager : MonoBehaviour
                 Constants.GetNumbers(ActualDifficulty),
                 Constants.GetRepeatedNumbersCount(
                     ActualDifficulty,
-                    SavedGameData.IsHalfwayThroughCurrentDifficulty(ActualDifficulty)
+                    SavedGameData.IsHalfwayThroughCurrentDifficulty(
+                        ActualDifficulty,
+                        SelectedDifficulty,
+                        int.Parse(_timesSolvedText.text)
+                    )
                 )
             ),
             loadGame
@@ -484,7 +488,11 @@ public class GameManager : MonoBehaviour
                     Constants.GetNumbers(ActualDifficulty),
                     Constants.GetRepeatedNumbersCount(
                         ActualDifficulty,
-                        SavedGameData.IsHalfwayThroughCurrentDifficulty(ActualDifficulty)
+                        SavedGameData.IsHalfwayThroughCurrentDifficulty(
+                            ActualDifficulty,
+                            SelectedDifficulty,
+                            int.Parse(_timesSolvedText.text)
+                        )
                     )
                 ),
                 false
@@ -594,6 +602,7 @@ public class GameManager : MonoBehaviour
         DestroyBlock(_firstColumnResultBlock);
         DestroyBlock(_secondColumnResultBlock);
         DestroyBlock(_thirdColumnResultBlock);
+        _generatedNodesObject.transform.DetachChildren();
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();

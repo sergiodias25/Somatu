@@ -90,13 +90,11 @@ public static class Constants
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 2;
+                return 4;
             case Difficulty.Medium:
-                return 2;
+                return 4;
             case Difficulty.Hard:
                 return 2;
-            case Difficulty.Extreme:
-                return 1;
         }
         return -1;
     }
@@ -106,11 +104,11 @@ public static class Constants
         switch (difficulty)
         {
             case Difficulty.Easy:
-                return 2;
-            case Difficulty.Medium:
                 return 4;
+            case Difficulty.Medium:
+                return 8;
             case Difficulty.Hard:
-                return 6;
+                return 10;
         }
         return -1;
     }
