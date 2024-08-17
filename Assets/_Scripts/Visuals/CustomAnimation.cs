@@ -215,14 +215,17 @@ namespace Assets.Scripts.CustomAnimation
         internal static void NodeLoad(Transform transform)
         {
             transform
-                .DOScale(1f, 1f)
+                .GetComponent<SpriteRenderer>()
+                .transform.DOScale(.001f, .75f)
                 .From()
                 .SetEase(Ease.OutBounce)
-                .SetDelay(RandomizeDelayValue(0.2));
-            ;
-            Object
-                .FindObjectOfType<UIManager>()
-                .InteractionPerformed(Constants.AudioClip.NodeLoaded);
+                .OnStart(() =>
+                {
+                    Object
+                        .FindObjectOfType<UIManager>()
+                        .InteractionPerformed(Constants.AudioClip.NodeLoaded);
+                })
+                .SetDelay(RandomizeDelayValue(0.75));
         }
 
         static float RandomizeDelayValue(double delay)

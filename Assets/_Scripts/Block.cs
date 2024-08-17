@@ -43,7 +43,7 @@ public class Block : MonoBehaviour
             _text.ForceMeshUpdate();
         }
         _originalNode = node;
-        transform.SetParent(node.transform);
+        transform.SetParent(node.transform, false);
         _text.color = interactible
             ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
             : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];

@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
 
     Block SpawnBlock(Node node, int value, bool interactible)
     {
-        var block = Instantiate(_blockPrefab, node.transform.position, Quaternion.identity);
+        var block = Instantiate(_blockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         return block.Init(value, interactible, node);
     }
 

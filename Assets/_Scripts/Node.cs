@@ -17,7 +17,7 @@ public class Node : MonoBehaviour
             Quaternion.identity
         );
         node.name = string.Concat("Node_", i, "_", j);
-        node.transform.SetParent(GameObject.Find(parentName).transform);
+        node.transform.SetParent(GameObject.Find(parentName).transform, true);
         node.UpdateColor(
             ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
         );
