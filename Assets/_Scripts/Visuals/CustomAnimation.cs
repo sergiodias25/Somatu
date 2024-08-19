@@ -38,12 +38,12 @@ namespace Assets.Scripts.CustomAnimation
                 target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
             );
             sequence.SetId("ButtonClick" + target.name).Play();
-
-            await WaitForAnimation("ButtonClick" + target.name);
-            target.gameObject.GetComponent<Button>().enabled = true;
             Object
                 .FindObjectOfType<UIManager>()
                 .InteractionPerformed(Constants.AudioClip.DropBlock);
+
+            await WaitForAnimation("ButtonClick" + target.name);
+            target.gameObject.GetComponent<Button>().enabled = true;
         }
 
         public static void NumberClicked(Transform transform)
@@ -223,7 +223,7 @@ namespace Assets.Scripts.CustomAnimation
                 {
                     Object
                         .FindObjectOfType<UIManager>()
-                        .InteractionPerformed(Constants.AudioClip.NodeLoaded);
+                        .InteractionPerformed(Constants.AudioClip.NodeLoaded, false);
                 })
                 .SetDelay(RandomizeDelayValue(0.75));
         }

@@ -131,16 +131,18 @@ public static class Constants
 
     /* COLORS USED
     0 - Central and top background
-    1 - Dark text
+    1 - Text 1
     2 - Buttons
     3 - green block
     4 - red block
     5 - selected block
     6 - no hint solution block
-    7 - Clear text
+    7 - Text 2
     8 - Neutral block
     9 - Clouds
     10 - Background
+    11 - Background gradient
+    10 - Title
      */
 
     // COLORS

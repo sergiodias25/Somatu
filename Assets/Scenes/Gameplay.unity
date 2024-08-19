@@ -11181,7 +11181,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!1 &916261208
 GameObject:
   m_ObjectHideFlags: 0
@@ -16503,7 +16503,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!114 &1415480358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173809450469176428, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -17104,7 +17104,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c15c81aa82045f04d8bb3a35e9878fff, type: 2}
-  m_sharedMaterial: {fileID: 8311910087866534304, guid: c15c81aa82045f04d8bb3a35e9878fff, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: fd77f4a1a112e1841bc7b52d1876fa6f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17806,7 +17806,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!1 &1526460081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3735896641979278100, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -18383,7 +18383,7 @@ MonoBehaviour:
     Selected: 0
     Colours:
     - {r: 0.054901965, g: 0.054901965, b: 0.09411766, a: 1}
-    - {r: 0.89019614, g: 0.80392164, b: 0.7019608, a: 1}
+    - {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 1}
     - {r: 0.6784314, g: 0.7254902, b: 0.77647066, a: 1}
     - {r: 0.023529414, g: 0.3803922, b: 0.0627451, a: 1}
     - {r: 0.50980395, g: 0.078431375, b: 0.078431375, a: 1}
@@ -18394,7 +18394,7 @@ MonoBehaviour:
     - {r: 0.1137255, g: 0.20392159, b: 0.2627451, a: 1}
     - {r: 0.06666667, g: 0.121568635, b: 0.15686275, a: 1}
     - {r: 0.023529414, g: 0.023529414, b: 0.027450982, a: 1}
-    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.8901961, g: 0.8039216, b: 0.702, a: 1}
   - Name: Sunrise
     Selected: 0
     Colours:
@@ -20658,7 +20658,7 @@ MonoBehaviour:
   m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c15c81aa82045f04d8bb3a35e9878fff, type: 2}
-  m_sharedMaterial: {fileID: 8311910087866534304, guid: c15c81aa82045f04d8bb3a35e9878fff, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: fd77f4a1a112e1841bc7b52d1876fa6f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22430,7 +22430,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 0
+    IsChanged: 1
 --- !u!1 &1937531442
 GameObject:
   m_ObjectHideFlags: 0
