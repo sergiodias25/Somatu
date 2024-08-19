@@ -662,6 +662,10 @@ public class GameManager : MonoBehaviour
                 correctNodes[randomNodeIndex].UpdateColor(
                     ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
                 );
+                CustomAnimation.SumIsCorrect(
+                    correctNodes[randomNodeIndex].transform,
+                    correctNodes[randomNodeIndex].name
+                );
                 correctNodes[randomNodeIndex].GetBlockInNode().ChangeInteraction(false);
                 correctNodes.RemoveAt(randomNodeIndex);
             }

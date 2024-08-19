@@ -9,8 +9,8 @@ namespace Assets.Scripts.CustomAnimation
     {
         private static float BUTTON_SHRINK_ON_CLICK = 0.9f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK = 1f;
-        private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.12f;
-        private static float BUTTON_SHRINK_REVERSE_ON_CLICK_TIME = 0.06f;
+        private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.1f;
+        private static float BUTTON_SHRINK_REVERSE_ON_CLICK_TIME = 0.05f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY = 0.6f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY_TIME = BUTTON_SHRINK_ON_CLICK_TIME;
         private static float NUMBER_CLICKED_SIZE = 2.25f;
@@ -231,6 +231,18 @@ namespace Assets.Scripts.CustomAnimation
         static float RandomizeDelayValue(double delay)
         {
             return (float)(Random.value * delay);
+        }
+
+        public static async Task NodeClicked(Transform target)
+        {
+            target.gameObject.GetComponent<BoxCollider>().enabled = false;
+            var sequence = DOTween.Sequence();
+            sequence.Append(target.DOScale(0.65f, BUTTON_SHRINK_ON_CLICK_TIME));
+            sequence.Append(target.DOScale(0.85f, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME));
+            sequence.SetId("NodeClick" + target.name).Play();
+
+            await WaitForAnimation("NodeClick" + target.name);
+            target.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

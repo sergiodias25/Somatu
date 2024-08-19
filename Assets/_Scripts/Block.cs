@@ -72,6 +72,7 @@ public class Block : MonoBehaviour
                         ]
                     );
                     _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
+                    await CustomAnimation.NodeClicked(nodeClickedOn.transform);
                 }
                 else if (selectedBlock._originalNode.name == _originalNode.name)
                 {
@@ -82,6 +83,7 @@ public class Block : MonoBehaviour
                         ]
                     );
                     _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                    await CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
@@ -93,6 +95,8 @@ public class Block : MonoBehaviour
                             ]
                         );
                         _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
+                        _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
+                        _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
                         await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
                         _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
 
@@ -142,7 +146,7 @@ public class Block : MonoBehaviour
             if (
                 nodeWhereBlockIsHovering != null
                 && _originalNode != nodeWhereBlockIsHovering
-                && dragTime > 1f
+                && dragTime > .8f
             )
             {
                 _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsHovering);
@@ -291,7 +295,7 @@ public class Block : MonoBehaviour
         if (_text != null && _text.transform != null)
         {
             return CustomAnimation.SumIsCorrect(
-                _text.transform,
+                GetNode().transform,
                 GetNode().transform.position,
                 GetNode().name
             );

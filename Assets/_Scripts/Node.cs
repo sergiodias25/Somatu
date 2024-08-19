@@ -1,5 +1,6 @@
 using Assets.Scripts.CustomAnimation;
 using CandyCabinets.Components.Colour;
+using DG.Tweening;
 using UnityEngine;
 
 public class Node : MonoBehaviour
@@ -49,6 +50,6 @@ public class Node : MonoBehaviour
 
     public void UpdateColor(Color newColor)
     {
-        _sprite.color = newColor;
+        _sprite.DOColor(newColor, 0.1f);
     }
 }

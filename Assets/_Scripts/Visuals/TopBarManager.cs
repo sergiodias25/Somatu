@@ -45,62 +45,62 @@ public class TopBarManager : MonoBehaviour
 
     public async void SelectHomeButton()
     {
-        await CustomAnimation.ButtonClicked(_homeButton.transform);
         MakeActive(_homeButton);
         MakeInactive(_shopButton);
         MakeInactive(_settingsButton);
         MakeInactive(_profileButton);
+        await CustomAnimation.ButtonClicked(_homeButton.transform);
     }
 
     public async void SelectShopButton()
     {
-        await CustomAnimation.ButtonClicked(_shopButton.transform);
         MakeInactive(_homeButton);
         MakeActive(_shopButton);
         MakeInactive(_settingsButton);
         MakeInactive(_profileButton);
+        await CustomAnimation.ButtonClicked(_shopButton.transform);
     }
 
     public async void SelectSettingsButton()
     {
-        await CustomAnimation.ButtonClicked(_settingsButton.transform);
         MakeInactive(_homeButton);
         MakeInactive(_shopButton);
         MakeActive(_settingsButton);
         MakeInactive(_profileButton);
+        await CustomAnimation.ButtonClicked(_settingsButton.transform);
     }
 
     public async void SelectProfileButton()
     {
-        await CustomAnimation.ButtonClicked(_profileButton.transform);
         MakeInactive(_homeButton);
         MakeInactive(_shopButton);
         MakeInactive(_settingsButton);
         MakeActive(_profileButton);
+        await CustomAnimation.ButtonClicked(_profileButton.transform);
     }
 
     public async void DeselectHomeButton()
     {
-        await CustomAnimation.ButtonClicked(_homeButton.transform);
         MakeInactive(_homeButton);
+        await CustomAnimation.ButtonClicked(_homeButton.transform);
     }
 
     public async void DeselectShopButton()
     {
-        await CustomAnimation.ButtonClicked(_shopButton.transform);
         MakeInactive(_shopButton);
+        await CustomAnimation.ButtonClicked(_shopButton.transform);
     }
 
     public async void DeselectSettingsButton()
     {
-        await CustomAnimation.ButtonClicked(_settingsButton.transform);
         MakeInactive(_settingsButton);
+        await CustomAnimation.ButtonClicked(_settingsButton.transform);
     }
 
     public async void DeselectProfileButton()
     {
-        await CustomAnimation.ButtonClicked(_profileButton.transform);
         MakeInactive(_profileButton);
+        await CustomAnimation.ButtonClicked(_profileButton.transform);
     }
 
     public void DeselectAll()
