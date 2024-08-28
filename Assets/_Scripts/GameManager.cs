@@ -865,6 +865,7 @@ public class GameManager : MonoBehaviour
         _gameBackground.transform.position = boardCenter;
 
         _uiManager.ShowMainMenu();
+        FindObjectOfType<ColorHelper>().ApplyUpdates();
         _backgroundCamera.enabled = true;
         loadingCanvas.gameObject.SetActive(false);
     }

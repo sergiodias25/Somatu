@@ -104,11 +104,7 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.RemoveHints();
 
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
-        Timer timer = FindObjectOfType<Timer>();
-        if (timer != null)
-        {
-            timer.UpdateTextColor();
-        }
+        FindObjectOfType<ColorHelper>().ApplyUpdates();
     }
 
     private int GetNextTheme(int selectedColorsIndex)

@@ -2322,7 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273f2bf6664147b7bd18552005e4c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCount: 10
+  referenceCount: 11
 --- !u!4 &248011497
 Transform:
   m_ObjectHideFlags: 3
@@ -5757,9 +5757,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07219255
+    y: 0.00024986267
     width: 1
-    height: 0.8556149
+    height: 0.9995003
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -18340,6 +18340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569586166}
   - component: {fileID: 1569586165}
+  - component: {fileID: 1569586167}
   m_Layer: 0
   m_Name: ColorManager
   m_TagString: Untagged
@@ -18460,6 +18461,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1907222083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1569586167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569586164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12f26d3588e5a444a1387742ca7a98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleMaterial: {fileID: 2100000, guid: fd77f4a1a112e1841bc7b52d1876fa6f, type: 2}
 --- !u!1 &1592721439
 GameObject:
   m_ObjectHideFlags: 0
