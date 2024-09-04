@@ -66,6 +66,9 @@ public class SettingsHandler : MonoBehaviour
     private Button _soundButton;
 
     [SerializeField]
+    private GameObject _languagePopup;
+
+    [SerializeField]
     private Button _supportButton;
     private AudioManager _audioManager;
     private GameManager _gameManager;
@@ -233,32 +236,26 @@ public class SettingsHandler : MonoBehaviour
         }
     }
 
-    public async void ChangeLanguage()
+    public async void ShowLanguagePopup()
     {
         await CustomAnimation.ButtonClicked(_languageButton.transform);
-        List<string> languagesAvailable = new List<string>
-        {
-            "English",
-            "Tamil",
-            "Thai",
-            "Burmese",
-            "Chinese",
-            "Japanese",
-            "Korean",
-            "Spanish",
-            "Portuguese"
-        };
-        int currentIndex = languagesAvailable.IndexOf(LocalizationManager.Language);
-        int nextIndex = currentIndex == languagesAvailable.Count - 1 ? 0 : currentIndex + 1;
-        LocalizationManager.Language = languagesAvailable[nextIndex];
+        _languagePopup.SetActive(true);
+    }
+
+    public void ChangeLanguage(string language)
+    {
+        LocalizationManager.Language = language;
 
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
-        UpdateLanguageIcon();
         FindObjectOfType<UIManager>().UpdateHintButtonText();
     }
 
-    private void UpdateLanguageIcon() { }
+    public async void CloseLanguagePopup(Button buttonClicked)
+    {
+        await CustomAnimation.ButtonClicked(buttonClicked.transform);
+        _languagePopup.SetActive(false);
+    }
 
     internal void LoadSettingsButtons()
     {

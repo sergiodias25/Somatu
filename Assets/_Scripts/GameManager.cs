@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera _backgroundCamera;
 
+    [SerializeField]
+    private GameObject _languagePopup;
+
     private Timer _timer;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
@@ -845,6 +848,11 @@ public class GameManager : MonoBehaviour
         SavedGameData = load.Result;
 
         LocalizationManager.Read();
+        if (!SavedGameData.SettingsData.LanguageChangedOnce)
+        {
+            _languagePopup.SetActive(true);
+            SavedGameData.SettingsData.LanguageChangedOnce = true;
+        }
         LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
         if (!SavedGameData.PurchaseData.RemovedAds)
         {

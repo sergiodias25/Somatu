@@ -1,50 +1,51 @@
-Key,English,Portuguese,Spanish,Japanese,Korean,Burmese,Chinese,Tamil,Thai
-,en,pt,es,ja,ko,my,zh,ta,th
-btn-language,English,Português,Español,日本語,한국인,မြန်မာ,中国人,தமிழ்,ภาษาไทย
-btn-play,Classic,Clássico,Clásico,クラシック,권위 있는,ဂန္ထဝင်,经典的,கிளாசிக்,คลาสสิค
-btn-continue,Continue,Continuar,Continuar,続く,계속하다,ဆက်ရန်,继续,தொடரவும்,ดำเนินการต่อ
-btn-challenge,Challenge,Desafio,Desafío,チャレンジ,도전,စိန်ခေါ်မှု,挑战,சவால்,ท้าทาย
-mode-easy,Easy,Fácil,Fácil,簡単,쉬운,လွယ်ပါတယ်။,简单的,எளிதானது,ง่าย
-mode-medium,Moderate,Médio,Moderado,平均,평균,ပျမ်းမျှ,平均的,சராசரி,เฉลี่ย
-mode-hard,Hard,Difícil,Duro,難しい,어려운,ခက်တယ်။,难的,கடினமானது,ยาก
-mode-extreme,Extreme,Extremo,Extremo,過激,극심한,အလွန်အကျူး,极端,தீவிர,สุดขีด
-mode-challenge,Challenge,Desafio,Desafío,チャレンジ,도전,စိန်ခေါ်မှု,挑战,சவால்,ท้าทาย
-game-time,Time,Tempo,Tiempo,時間,시간,အချိန်,时间,நேரம்,เวลา
-game-solved,Solved,Resolvido,Resuelto,解決済み,해결됨,ဖြေရှင်းရတယ်။,已解决,தீர்க்கப்பட்டது,แก้ไขแล้ว
-stats-games-played,Games Played,Jogos disputados,Juegos jugados,プレイしたゲーム,플레이한 게임,ဂိမ်းများ ကစားခဲ့သည်။,玩过的游戏,விளையாடிய விளையாட்டுகள்,เกมส์ที่เล่น
-stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,完成したゲーム,완료된 게임,ပြီးသွားသောဂိမ်းများ,已完成的游戏,முடிந்த விளையாட்டுகள்,เกมที่เสร็จสมบูรณ์
-stats-average-time,Average Time,Tempo médio,Tiempo promedio,平均時間,평균 시간,ပျမ်းမျှအချိန်,平均时间,சராசரி நேரம்,เวลาเฉลี่ย
-stats-fastest-time,Fastest Time,Tempo mais rápido,Tiempo más rápido,最速タイム,가장 빠른 시간,အမြန်ဆုံးအချိန်,最快时间,வேகமான நேரம்,เวลาที่เร็วที่สุด
-stats-hints-used,Hints Used,Dicas usadas,Consejos utilizados,使用したヒント,사용된 팁,အကြံပြုချက်များကို အသုံးပြုခဲ့သည်။,使用的提示,குறிப்புகள் பயன்படுத்தப்பட்டன,เคล็ดลับที่ใช้
-stats-average-solves,Average Solves,Média de soluções,Resoluciones promedio,平均的なソリューション,평균 솔루션,ပျမ်းမျှအဖြေများ,平均解决方案,சராசரி தீர்வுகள்,โซลูชั่นโดยเฉลี่ย
-stats-most-solves,Most Solves,A maioria das soluções,La mayoría resuelve,ほとんどのソリューション,대부분의 솔루션,ဖြေရှင်းချက်အများစု,大多数解决方案,பெரும்பாலான தீர்வுகள்,โซลูชั่นส่วนใหญ่
-stats-longest-time,Longest time,Maior tempo,mayor tiempo,より長い時間,더 긴 시간,အချိန်ပိုကြာတယ်။,时间较长,அதிக நேரம்,เวลาอีกต่อไป
-btn-hint,Hint,Dica,Pista,ヒント,팁,ထိပ်ဖျား,提示,உதவிக்குறிப்பு,เคล็ดลับ
-btn-shop,Shop,Loja,Tienda,店,가게,စတိုးဆိုင်,店铺,ஸ்டோர்,เก็บ
-btn-shop-hints5,5 Hints,5 dicas,5 consejos,5つのヒント,5가지 팁,အကြံပြုချက် ၅,5 条建议,5 குறிப்புகள்,5 เคล็ดลับ
-btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,無制限のヒント,무제한 팁,အကန့်အသတ်မရှိ အကြံပြုချက်များ,无限提示,வரம்பற்ற குறிப்புகள்,เคล็ดลับไม่ จำกัด
-btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,すべてのレベルのロックを解除する,모든 레벨 잠금 해제,အဆင့်အားလုံးကိုသော့ဖွင့်ပါ။,解锁所有级别,அனைத்து நிலைகளையும் திறக்கவும்,ปลดล็อคทุกระดับ
-btn-shop-removeads,Remove Ads,Remover anúncios,Eliminar anuncios,広告を削除する,광고 제거,ကြော်ငြာများကို ဖယ်ရှားပါ။,删除广告,விளம்பரங்களை அகற்று,ลบโฆษณา
-btn-shop-sunrisetheme,Sunrise Theme,Tema do nascer do sol,Tema del amanecer,サンライズのテーマ,일출 테마,Sunrise အပြင်အဆင်,日出主题,சூரிய உதயம் தீம்,ธีมพระอาทิตย์ขึ้น
-btn-shop-sunsettheme,Sunset Theme,Tema do pôr do sol,Tema del atardecer,夕焼けのテーマ,일몰 테마,နေဝင်ချိန် အပြင်အဆင်,日落主题,சூரிய அஸ்தமன தீம்,ธีมพระอาทิตย์ตก
-btn-undo,Undo,Reverter,Deshacer,逆行する,뒤집다,ပြောင်းပြန်,撤销,தலைகீழ்,ย้อนกลับ
-btn-settings,Settings,Definições,Definiciones,定義,정의,အဓိပ္ပါယ်ဖွင့်ဆိုချက်,定义,வரையறைகள்,คำจำกัดความ
-btn-home,Home,Início,Inicio,始める,시작,စတင်ပါ။,开始,தொடங்கு,เริ่ม
-btn-profile,Profile,Perfil,Perfil,プロフィール,윤곽,ကိုယ်ရေးအကျဉ်း,轮廓,சுயவிவரம்,ประวัติโดยย่อ
-menu-main,Somatu,Somatu,Somatu,ソマツ,소마투,ဆိုမာတူး,索马图,சோமது,โซมาตู
-menu-classic,Classic,Clássico,Clásico,クラシック,권위 있는,ဂန္ထဝင်,经典的,கிளாசிக்,คลาสสิค
-popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, completa el modo {1} {2} veces.",{0} モードのロックを解除するには、{1} モードを {2} 回完了します。,{0} 모드를 잠금 해제하려면 {1} 모드를 {2}번 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် ပြီးအောင်လုပ်ပါ။,要解锁 {0} 模式，请完成 {1} 模式 {2} 次。,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
-popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.",{0} モードのロックを解除するには、{1} モードの {2} 時間を完了してください。,{0} 모드를 잠금 해제하려면 {1} 모드 {2} 시간을 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် အပြီးသတ်ပါ။,要解锁 {0} 模式，请完成 {1} 模式 {2} 次。,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
-settings-music,Music,Música,Música,音楽,음악,ဂီတ,音乐,இசை,ดนตรี
-settings-sound,Sound,Som,Sonido,音,소리,အသံ,声音,ஒலி,เสียง
-settings-vibration,Vibrate,Vibração,Vibración,振動,진동,တုန်ခါမှု,振动,அதிர்வு,การสั่นสะเทือน
-settings-control-drag,Drag,Arrastar,Arrastrar,ドラッグ,견인,ဆွဲယူပါ။,拖,இழுக்கவும்,ลาก
-settings-control-click,Tap,Tocar,Jugar,遊ぶ,놀다,ကစားပါ။,玩,விளையாடு,เล่น
-settings-theme,Theme,Tema,Tema,テーマ,주제,အပြင်အဆင်,主题,தீம்,ธีม
-settings-support,Support,Suporte,Apoyo,サポート,지원하다,အထောက်အပံ့,支持,ஆதரவு,สนับสนุน
-popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,モード {0} のロックが解除されました!<br>新しいモードに切り替えますか?,모드 {0}이(가) 잠금 해제되었습니다!<br>새 모드로 전환하시겠습니까?,မုဒ် {0} ကို လော့ခ်ဖွင့်ထားသည်။<br>မုဒ်အသစ်သို့ ပြောင်းမလား။,模式 {0} 已解锁！<br>切换到新模式？,பயன்முறை {0} திறக்கப்பட்டது!<br>புதிய பயன்முறைக்கு மாறவா?,ปลดล็อคโหมด {0} แล้ว!<br>เปลี่ยนเป็นโหมดใหม่หรือไม่
-btn-yes,Yes,Sim,Sí,はい,예,ဟုတ်ကဲ့,是的,ஆம்,ใช่
-btn-no,No,Não,No,いいえ,아니요,မရှိ,不,இல்லை,เลขที่
-btn-replay,Play Again,Jogar de Novo,Jugar de nuevo,もう一度プレイする,다시 플레이,ထပ်ကစားပါ။,再玩一次,மீண்டும் விளையாடு,เล่นอีกครั้ง
-popup-close-app,Close application?,Fechar aplicação?,¿Cerrar la aplicación?,アプリケーションを閉じますか?,애플리케이션을 닫으시겠습니까?,အပလီကေးရှင်းကို ပိတ်မလား။,关闭应用程序？,பயன்பாட்டை மூடவா?,ปิดแอปพลิเคชันใช่ไหม
-btn-delete-data,Delete Data,Apagar Dados,Borrar datos,データの消去,데이터 지우기,ဒေတာကို ဖျက်ပါ။,删除数据,தரவை அழிக்கவும்,ลบข้อมูล
+Key,English,Portuguese,Spanish,French,Italian,German,Russian,Chinese,Japanese,Hindi,Korean,Burmese,Tamil,Thai
+,en,pt,es,fr,it,de,ru,zh,ja,hi,ko,my,ta,th
+btn-language-name,English,Português,Español,Français,Italiano,Deutsch,Pусский,中文,日本語,हिन्दी,한국인,မြန်မာ,தமிழ்,ภาษาไทย
+btn-language,Language,Idioma,Idioma,Langue,Lingua,Sprache,Язык,经典模式,言語,भाषा,언어,ဘာသာစကား,மொழி,ภาษา
+btn-play,Classic,Clássico,Clásico,Classique,Classico,Klassiker,Классический,经典模式,クラシック,क्लासिक,권위 있는,ဂန္ထဝင်,கிளாசிக்,คลาสสิค
+btn-continue,Continue,Continuar,Continuar,Continuer,Continuare,Weitermachen,Продолжать,继续,続く,जारी रखना,계속하다,ဆက်ရန်,தொடரவும்,ดำเนินการต่อ
+btn-challenge,Challenge,Desafio,Desafío,Défi,Sfida,Herausforderung,Испытание,挑战,チャレンジ,चुनौती,도전,စိန်ခေါ်မှု,சவால்,ท้าทาย
+mode-easy,Easy,Fácil,Fácil,Facile,Facile,Einfach,Легкий,简单,簡単,आसान,쉬운,လွယ်ပါတယ်။,எளிதானது,ง่าย
+mode-medium,Moderate,Médio,Moderado,Moyenne,Media,Durchschnitt,Средний,中等,平均,औसत,평균,ပျမ်းမျှ,சராசரி,เฉลี่ย
+mode-hard,Hard,Difícil,Duro,Difficile,Difficile,Schwierig,Трудный,困难,難しい,कठिन,어려운,ခက်တယ်။,கடினமானது,ยาก
+mode-extreme,Extreme,Extremo,Extremo,Extrême,Estremo,Extrem,Экстрим,极端,過激,चरम,극심한,အလွန်အကျူး,தீவிர,สุดขีด
+mode-challenge,Challenge,Desafio,Desafío,Défi,Sfida,Herausforderung,Испытание,挑战,チャレンジ,चुनौती,도전,စိန်ခေါ်မှု,சவால்,ท้าทาย
+game-time,Time,Tempo,Tiempo,Temps,Tempo,Zeit,Время,计时,時間,समय,시간,အချိန်,நேரம்,เวลา
+game-solved,Solved,Resolvido,Resuelto,Résolu,Risolto,Gelöst,Решено,已解,解決済み,हल किया,해결됨,ဖြေရှင်းရတယ်။,தீர்க்கப்பட்டது,แก้ไขแล้ว
+stats-games-played,Games Played,Jogos disputados,Juegos jugados,Jeux joués,Partite giocate,Gespielte Spiele,Сыграно игр,玩过的游戏,プレイしたゲーム,खेल खेले गए,플레이한 게임,ဂိမ်းများ ကစားခဲ့သည်။,விளையாடிய விளையாட்டுகள்,เกมส์ที่เล่น
+stats-games-finished,Games Completed,Jogos concluídos,Juegos completados,Jeux terminés,Giochi completati,Abgeschlossene Spiele,Завершенные игры,已完成的游戏,完成したゲーム,पूरा खेल,완료된 게임,ပြီးသွားသောဂိမ်းများ,முடிந்த விளையாட்டுகள்,เกมที่เสร็จสมบูรณ์
+stats-average-time,Average Time,Tempo médio,Tiempo promedio,Temps moyen,Tempo medio,Durchschnittliche Zeit,Среднее время,平均解谜时间,平均時間,औसत समय,평균 시간,ပျမ်းမျှအချိန်,சராசரி நேரம்,เวลาเฉลี่ย
+stats-fastest-time,Fastest Time,Tempo mais rápido,Tiempo más rápido,Temps le plus rapide,Tempo più veloce,Schnellste Zeit,Самое быстрое время,最快解谜时间,最速タイム,सबसे तेज़ समय,가장 빠른 시간,အမြန်ဆုံးအချိန်,வேகமான நேரம்,เวลาที่เร็วที่สุด
+stats-hints-used,Hints Used,Dicas usadas,Consejos utilizados,Conseils utilisés,Suggerimenti utilizzati,Verwendete Tipps,Использованные советы,使用的提示,使用した暗示,युक्तियों का प्रयोग किया गया,사용된 팁,အကြံပြုချက်များကို အသုံးပြုခဲ့သည်။,குறிப்புகள் பயன்படுத்தப்பட்டன,เคล็ดลับที่ใช้
+stats-average-solves,Average Solves,Média de soluções,Resoluciones promedio,Resoluciones promedio,Soluzioni medie,Durchschnittliche Lösungen,Средние решения,平均解决方案,平均解決ゲーム数,औसत समाधान,평균 솔루션,ပျမ်းမျှအဖြေများ,சராசரி தீர்வுகள்,โซลูชั่นโดยเฉลี่ย
+stats-most-solves,Most Solves,A maioria das soluções,La mayoría resuelve,La plupart des solutions,La maggior parte delle soluzioni,Die meisten Lösungen,Большинство решений,结案记录次数,最も多くのゲームを解決,अधिकांश समाधान,대부분의 솔루션,ဖြေရှင်းချက်အများစု,பெரும்பாலான தீர்வுகள்,โซลูชั่นส่วนใหญ่
+stats-longest-time,Longest time,Maior tempo,mayor tiempo,Temps plus long,Tempo più lungo,Längere Zeit,Более длительное время,计时最长记录,最長時間完走ゲーム,अधिक समय,더 긴 시간,အချိန်ပိုကြာတယ်။,அதிக நேரம்,เวลาอีกต่อไป
+btn-hint,Hint,Dica,Pista,Conseil,Mancia,Tipp,Кончик,提示,暗示,बख्शीश,팁,ထိပ်ဖျား,உதவிக்குறிப்பு,เคล็ดลับ
+btn-shop,Shop,Loja,Tienda,Magasin,Negozio,Speichern,Магазин,店,店,इकट्ठा करना,가게,စတိုးဆိုင်,ஸ்டோர்,เก็บ
+btn-shop-hints5,5 Hints,5 dicas,5 consejos,5 conseils,5 consigli,5 Tipps,5 советов,5 条提示,5 暗示,5 टिप्स,5가지 팁,အကြံပြုချက် ၅,5 குறிப்புகள்,5 เคล็ดลับ
+btn-shop-hintsunlimited,Unlimited Hints,Dicas ilimitadas,Consejos ilimitados,Pourboires illimités,Suggerimenti illimitati,Unbegrenzte Trinkgelder,Неограниченные советы,无限提示,無制限の暗示,असीमित टिप्स,무제한 팁,အကန့်အသတ်မရှိ အကြံပြုချက်များ,வரம்பற்ற குறிப்புகள்,เคล็ดลับไม่ จำกัด
+btn-shop-unlocklevels,Unlock All Levels,Desbloqueie todos os níveis,Desbloquear todos los niveles,Débloquez tous les niveaux,Sblocca tutti i livelli,Schalte alle Level frei,Разблокировать все уровни,解开全级别,全てのレベル解除する,सभी स्तरों को अनलॉक करें,모든 레벨 잠금 해제,အဆင့်အားလုံးကိုသော့ဖွင့်ပါ။,அனைத்து நிலைகளையும் திறக்கவும்,ปลดล็อคทุกระดับ
+btn-shop-removeads,Remove Ads,Remover anúncios,Eliminar anuncios,Supprimer les publicités,Rimuovi gli annunci,Werbung entfernen,Удалить рекламу,删除广告,広告を削除する,विज्ञापन हटाएँ,광고 제거,ကြော်ငြာများကို ဖယ်ရှားပါ။,விளம்பரங்களை அகற்று,ลบโฆษณา
+btn-shop-sunrisetheme,Sunrise Theme,Tema do nascer do sol,Tema del amanecer,Thème du lever du soleil,Tema dell'alba,Sonnenaufgang-Thema,Тема восхода солнца,日出模式,日の出のテーマ,सूर्योदय थीम,일출 테마,Sunrise အပြင်အဆင်,சூரிய உதயம் தீம்,ธีมพระอาทิตย์ขึ้น
+btn-shop-sunsettheme,Sunset Theme,Tema do pôr do sol,Tema del atardecer,Thème coucher de soleil,Tema del tramonto,Sonnenuntergang-Thema,Тема заката,日落模式,夕焼けのテーマ,सूर्यास्त थीम,일몰 테마,နေဝင်ချိန် အပြင်အဆင်,சூரிய அஸ்தமன தீம்,ธีมพระอาทิตย์ตก
+btn-undo,Undo,Reverter,Deshacer,Inverse,Inversione,Umkehren,Обеспечить регресс,复原,逆行する,रिवर्स,뒤집다,ပြောင်းပြန်,தலைகீழ்,ย้อนกลับ
+btn-settings,Settings,Definições,Definiciones,Définitions,Definizioni,Definitionen,Определения,设置,設定,परिभाषाएं,정의,အဓိပ္ပါယ်ဖွင့်ဆိုချက်,வரையறைகள்,คำจำกัดความ
+btn-home,Home,Início,Inicio,Commencer,Inizio,Start,Начинать,主页,始める,शुरू,시작,စတင်ပါ။,தொடங்கு,เริ่ม
+btn-profile,Profile,Perfil,Perfil,Profil,Profilo,Profil,Профиль,账号,プロフィール,प्रोफ़ाइल,윤곽,ကိုယ်ရေးအကျဉ်း,சுயவிவரம்,ประวัติโดยย่อ
+menu-main,Somatu,Somatu,Somatu,Somatu,Somatu,Somatu,Сомату,索马图,ソマツ,सोमातु,소마투,ဆိုမာတူး,சோமது,โซมาตู
+menu-classic,Classic,Clássico,Clásico,Classique,Classico,Klassiker,Классический,经典模式,クラシック,क्लासिक,권위 있는,ဂန္ထဝင်,கிளாசிக்,คลาสสิค
+popup-difficulty-plural,"To unlock {0} mode, beat {1} mode {2} times.","Para desbloquear o modo {0}, complete o modo {1} {2} vezes.","Para desbloquear el modo {0}, completa el modo {1} {2} veces.","Pour déverrouiller le mode {0}, terminez le mode {1} {2} fois.","Per sbloccare la modalità {0}, completa la modalità {1} {2} volte.","Um den {0}-Modus freizuschalten, schließen Sie den {1}-Modus {2} Mal ab.","Чтобы разблокировать режим {0}, завершите режим {1} {2} раз.",要解开 {0} 模式，请完成 {1} 模式 {2} 次。,{0} モードのロックを解除するには、{1} モードを {2} 回完了します。,"{0} मोड को अनलॉक करने के लिए, {1} मोड को {2} बार पूरा करें।",{0} 모드를 잠금 해제하려면 {1} 모드를 {2}번 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် ပြီးအောင်လုပ်ပါ။,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
+popup-difficulty-singular,"To unlock {0} mode, beat {1} mode {2} time.","Para desbloquear o modo {0}, complete o modo {1} {2} vez.","Para desbloquear el modo {0}, complete el modo {1} {2} vez.","Pour déverrouiller le mode {0}, terminez le temps du mode {1} {2}.","Per sbloccare la modalità {0}, completa la modalità {1} {2} tempo.","Um den {0}-Modus freizuschalten, schließen Sie den {1}-Modus {2} Mal ab.","Чтобы разблокировать режим {0}, завершите режим {1} {2}.",要解开 {0} 模式，请完成 {1} 模式 {2} 次。,{0} モードのロックを解除するには、{1} モードの {2} 時間を完了してください。,"{0} मोड अनलॉक करने के लिए, {1} मोड {2} समय पूरा करें।",{0} 모드를 잠금 해제하려면 {1} 모드 {2} 시간을 완료하세요.,{0} မုဒ်ကို လော့ခ်ဖွင့်ရန်၊ {1} မုဒ် {2} ကြိမ် အပြီးသတ်ပါ။,"{0} பயன்முறையைத் திறக்க, {1} பயன்முறையை {2} முறை முடிக்கவும்.",หากต้องการปลดล็อคโหมด {0} ให้สำเร็จโหมด {1} {2} ครั้ง
+settings-music,Music,Música,Música,Musique,Musica,Musik,Музыка,音乐,音楽,संगीत,음악,ဂီတ,இசை,ดนตรี
+settings-sound,Sound,Som,Sonido,Son,Suono,Klang,Звук,声音,音,आवाज़,소리,အသံ,ஒலி,เสียง
+settings-vibration,Vibrate,Vibração,Vibración,Vibration,Vibrazione,Vibration,Вибрация,振动,振動,कंपन,진동,တုန်ခါမှု,அதிர்வு,การสั่นสะเทือน
+settings-control-drag,Drag,Arrastar,Arrastrar,Traîner,Lagna,Ziehen,Тащить,拖,ドラッグ,खींचना,견인,ဆွဲယူပါ။,இழுக்கவும்,ลาก
+settings-control-click,Tap,Tocar,Jugar,Jouer,Giocare,Spielen,Играть,点,タップ,खेल,놀다,ကစားပါ။,விளையாடு,เล่น
+settings-theme,Theme,Tema,Tema,Thème,Tema,Thema,Тема,主题,テーマ,विषय,주제,အပြင်အဆင်,தீம்,ธีม
+settings-support,Support,Suporte,Apoyo,Soutien,Supporto,Unterstützung,Поддерживать,帮助,サポート,सहायता,지원하다,အထောက်အပံ့,ஆதரவு,สนับสนุน
+popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,Mode {0} débloqué !<br>Passer au nouveau mode ?,Modalità {0} sbloccata!<br>Passare alla nuova modalità?,Modus {0} freigeschaltet!<br>In neuen Modus wechseln?,Режим {0} разблокирован!<br>Перейти в новый режим?,模式 {0} 已解锁！<br>切换到新模式？,モード {0} のロックが解除されました!<br>新しいモードに切り替えますか?,मोड {0} अनलॉक हो गया!<br>नए मोड पर स्विच करें?,모드 {0}이(가) 잠금 해제되었습니다!<br>새 모드로 전환하시겠습니까?,မုဒ် {0} ကို လော့ခ်ဖွင့်ထားသည်။<br>မုဒ်အသစ်သို့ ပြောင်းမလား။,பயன்முறை {0} திறக்கப்பட்டது!<br>புதிய பயன்முறைக்கு மாறவா?,ปลดล็อคโหมด {0} แล้ว!<br>เปลี่ยนเป็นโหมดใหม่หรือไม่
+btn-yes,Yes,Sim,Sí,Oui,SÌ,Ja,Да,是的,はい,हाँ,예,ဟုတ်ကဲ့,ஆம்,ใช่
+btn-no,No,Não,No,Non,NO,NEIN,Нет,不,いいえ,नहीं,아니요,မရှိ,இல்லை,เลขที่
+btn-replay,Play Again,Jogar de Novo,Jugar de nuevo,Rejouer,Gioca di nuovo,Spielen Sie noch einmal,Играть снова,重试,もう一度遊ぶ,फिर से चालू करें,다시 플레이,ထပ်ကစားပါ။,மீண்டும் விளையாடு,เล่นอีกครั้ง
+popup-close-app,Close application?,Fechar aplicação?,¿Cerrar la aplicación?,Fermer l'application ?,Chiudere l'applicazione?,Bewerbung schließen?,Закрыть приложение?,确定关闭？,アプリを閉じますか?,एप्लिकेशन बंद करो?,애플리케이션을 닫으시겠습니까?,အပလီကေးရှင်းကို ပိတ်မလား။,பயன்பாட்டை மூடவா?,ปิดแอปพลิเคชันใช่ไหม
+btn-delete-data,Delete Data,Apagar Dados,Borrar datos,Effacer les données,Cancella dati,Daten löschen,Стереть данные,删除数据,データの消去,डेटा मिटाएँ,데이터 지우기,ဒေတာကို ဖျက်ပါ။,தரவை அழிக்கவும்,ลบข้อมูล
