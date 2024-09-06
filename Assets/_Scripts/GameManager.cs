@@ -851,7 +851,6 @@ public class GameManager : MonoBehaviour
         if (!SavedGameData.SettingsData.LanguageChangedOnce)
         {
             _languagePopup.SetActive(true);
-            SavedGameData.SettingsData.LanguageChangedOnce = true;
         }
         LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
         if (!SavedGameData.PurchaseData.RemovedAds)

@@ -245,7 +245,10 @@ public class SettingsHandler : MonoBehaviour
     public void ChangeLanguage(string language)
     {
         LocalizationManager.Language = language;
-
+        if (!_gameManager.SavedGameData.SettingsData.LanguageChangedOnce)
+        {
+            _gameManager.SavedGameData.SettingsData.LanguageChangedOnce = true;
+        }
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
         FindObjectOfType<UIManager>().UpdateHintButtonText();

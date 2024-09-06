@@ -88,19 +88,22 @@ public class UIManager : MonoBehaviour
     private GameObject _challengeModeButton;
 
     [SerializeField]
-    private GameObject _difficultyPanel;
+    private GameObject _difficultyLockedPopup;
 
     [SerializeField]
     private TextMeshProUGUI _difficultyPanelText;
 
     [SerializeField]
-    private GameObject _unlockPanel;
+    private GameObject _unlockLevelPopup;
 
     [SerializeField]
     private TextMeshProUGUI _unlockPanelText;
 
     [SerializeField]
-    private GameObject _quitPanel;
+    private GameObject _quitGamePopup;
+
+    [SerializeField]
+    private GameObject _languagePopup;
 
     void Start()
     {
@@ -119,11 +122,34 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (_settingsPanel.activeSelf)
+            if (_languagePopup.activeSelf)
+            {
+                if (_gameManager.SavedGameData.SettingsData.LanguageChangedOnce)
+                {
+                    HideObject(_languagePopup);
+                }
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_quitGamePopup.activeSelf)
+            {
+                HideObject(_quitGamePopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_unlockLevelPopup.activeSelf)
+            {
+                HideObject(_unlockLevelPopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_difficultyLockedPopup.activeSelf)
+            {
+                HideObject(_difficultyLockedPopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_settingsPanel.activeSelf)
             {
                 ToggleSettingsPanel();
             }
-            if (_supportPanel.activeSelf)
+            else if (_supportPanel.activeSelf)
             {
                 ToggleSupportPanel();
             }
@@ -146,7 +172,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                ShowObject(_quitPanel);
+                ShowObject(_quitGamePopup);
             }
         }
     }
@@ -284,7 +310,7 @@ public class UIManager : MonoBehaviour
             previousDifficulty,
             finalSolvesNeededText
         );
-        ShowObject(_difficultyPanel);
+        ShowObject(_difficultyLockedPopup);
     }
 
     public void ShowUnlockPopup(Constants.Difficulty newDifficulty)
@@ -295,7 +321,7 @@ public class UIManager : MonoBehaviour
             popuTextKey,
             LocalizationManager.Localize("mode-" + newDifficulty.ToString().ToLower())
         );
-        ShowObject(_unlockPanel);
+        ShowObject(_unlockLevelPopup);
     }
 
     public async void ClickOnHardMode()

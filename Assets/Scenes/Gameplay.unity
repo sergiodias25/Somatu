@@ -16345,11 +16345,12 @@ MonoBehaviour:
   _hardModeButton: {fileID: 1422482486}
   _extremeModeButton: {fileID: 755197099}
   _challengeModeButton: {fileID: 419227398}
-  _difficultyPanel: {fileID: 401100904}
+  _difficultyLockedPopup: {fileID: 401100904}
   _difficultyPanelText: {fileID: 836437379}
-  _unlockPanel: {fileID: 1667012212}
+  _unlockLevelPopup: {fileID: 1667012212}
   _unlockPanelText: {fileID: 764925077}
-  _quitPanel: {fileID: 58428101}
+  _quitGamePopup: {fileID: 58428101}
+  _languagePopup: {fileID: 254790883}
 --- !u!1001 &1215716892
 PrefabInstance:
   m_ObjectHideFlags: 0
