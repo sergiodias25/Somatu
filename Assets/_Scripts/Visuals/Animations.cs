@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class Animations : MonoBehaviour
 {
-    public async void ButtonClicked(Button button)
+    public void ButtonClicked(Button button)
     {
-        await CustomAnimation.ButtonClicked(button.transform);
+        _ = CustomAnimation.ButtonClicked(button.transform);
     }
 }
