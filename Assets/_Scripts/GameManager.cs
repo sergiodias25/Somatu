@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer _gameBackground;
 
     [SerializeField]
-    private TextMeshProUGUI _timesSolvedText;
-
-    [SerializeField]
     private TextMeshProUGUI _modeSelected;
 
     [SerializeField]
@@ -61,6 +58,7 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
     private SettingsHandler _settingsHandler;
+    private int _timesSolvedText;
 
     void Start()
     {
@@ -86,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         SelectedDifficulty = selectedDifficulty;
         ActualDifficulty = GetActualDifficulty();
-        _timesSolvedText.text = "0";
+        _timesSolvedText = 0;
         UpdateModeTranslation();
         LocalizationManager.OnLocalizationChanged += () => UpdateModeTranslation();
 
@@ -104,7 +102,7 @@ public class GameManager : MonoBehaviour
                     SavedGameData.IsHalfwayThroughCurrentDifficulty(
                         ActualDifficulty,
                         SelectedDifficulty,
-                        int.Parse(_timesSolvedText.text)
+                        _timesSolvedText
                     )
                 )
             ),
@@ -129,7 +127,7 @@ public class GameManager : MonoBehaviour
         {
             return SelectedDifficulty;
         }
-        int _timesBeaten = int.Parse(_timesSolvedText.text);
+        int _timesBeaten = _timesSolvedText;
         if (
             _timesBeaten
             < Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Easy)
@@ -464,7 +462,7 @@ public class GameManager : MonoBehaviour
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         SavedGameData.IncrementHintsAvailable(1);
-        _timesSolvedText.text = (int.Parse(_timesSolvedText.text) + 1).ToString();
+        _timesSolvedText = _timesSolvedText + 1;
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHintButton(false);
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
@@ -494,7 +492,7 @@ public class GameManager : MonoBehaviour
                         SavedGameData.IsHalfwayThroughCurrentDifficulty(
                             ActualDifficulty,
                             SelectedDifficulty,
-                            int.Parse(_timesSolvedText.text)
+                            _timesSolvedText
                         )
                     )
                 ),
@@ -515,11 +513,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
-        _playerStats.CompletedGame(
-            SelectedDifficulty,
-            _elapsedTime,
-            int.Parse(_timesSolvedText.text)
-        );
+        _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.PersistData();
     }
 
@@ -622,13 +616,13 @@ public class GameManager : MonoBehaviour
         if (isExit)
         {
             _timer.StopTimer();
-            _timesSolvedText.text = "0";
+            _timesSolvedText = 0;
         }
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             if (resetChallengeActualDifficulty)
             {
-                _timesSolvedText.text = "0";
+                _timesSolvedText = 0;
             }
             ActualDifficulty = GetActualDifficulty();
         }
@@ -636,7 +630,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetTimesSolved()
     {
-        _timesSolvedText.text = "0";
+        _timesSolvedText = 0;
     }
 
     public bool UseHint()
