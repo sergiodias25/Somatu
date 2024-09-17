@@ -479,7 +479,7 @@ public class GameManager : MonoBehaviour
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
         }
-        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved, false);
+        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved);
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -509,7 +509,7 @@ public class GameManager : MonoBehaviour
             node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]);
             node.GetBlockInNode().UpdateTextColor();
         }
-        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved, false);
+        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved);
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
@@ -666,7 +666,7 @@ public class GameManager : MonoBehaviour
                 correctNodes[randomNodeIndex].GetBlockInNode().ChangeInteraction(false);
                 correctNodes.RemoveAt(randomNodeIndex);
             }
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock, false);
+            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
             return true;
         }
         else
@@ -689,7 +689,7 @@ public class GameManager : MonoBehaviour
                     );*/
                 }
             }
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo, false);
+            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
         }
         return false;
     }
@@ -808,7 +808,7 @@ public class GameManager : MonoBehaviour
                 .GetComponent<Node>()
                 .GetBlockInNode()
                 .ChangeInteraction(true);
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo, false);
+            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);
         }

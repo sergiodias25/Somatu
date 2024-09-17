@@ -223,7 +223,7 @@ namespace Assets.Scripts.CustomAnimation
                 {
                     Object
                         .FindObjectOfType<UIManager>()
-                        .InteractionPerformed(Constants.AudioClip.NodeLoaded, false);
+                        .InteractionPerformed(Constants.AudioClip.NodeLoaded);
                 })
                 .SetDelay(RandomizeDelayValue(0.75));
         }

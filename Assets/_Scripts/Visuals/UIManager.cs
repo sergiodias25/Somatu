@@ -836,21 +836,12 @@ public class UIManager : MonoBehaviour
 #endif
     }
 
-    public void InteractionPerformed(Constants.AudioClip audioClip, bool moveClouds)
+    public void InteractionPerformed(Constants.AudioClip audioClip)
     {
-        if (moveClouds)
-        {
-            FindObjectOfType<Clouds>().MoveClouds();
-        }
         if (audioClip != Constants.AudioClip.NoClip)
         {
             AudioManager audioManager = FindObjectOfType<AudioManager>();
             audioManager.PlaySFX(audioManager.GetAudioClip(audioClip));
         }
-    }
-
-    public void InteractionPerformed(Constants.AudioClip audioClip)
-    {
-        InteractionPerformed(audioClip, true);
     }
 }
