@@ -2,13 +2,14 @@ using Assets.Scripts.CustomAnimation;
 using CandyCabinets.Components.Colour;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Node : MonoBehaviour
 {
     private Block _blockInNode;
 
     [SerializeField]
-    private SpriteRenderer _sprite;
+    private Image _sprite;
 
     internal static Node Init(Node nodePrefab, int i, int j, string parentName)
     {
@@ -19,10 +20,15 @@ public class Node : MonoBehaviour
         );
         node.name = string.Concat("Node_", i, "_", j);
         node.transform.SetParent(GameObject.Find(parentName).transform, true);
+        node.transform.localScale = new Vector3(14, 14, 14);
         node.UpdateColor(
             ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
         );
         CustomAnimation.NodeLoad(node.transform);
+        if (parentName == "SolutionNodes")
+        {
+            node._sprite.GetComponent<Shadow>().enabled = false;
+        }
         return node;
     }
 

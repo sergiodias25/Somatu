@@ -38,9 +38,7 @@ public class Block : MonoBehaviour
         gameObject.name = string.Concat("Block_", value.ToString());
         if (!interactible)
         {
-            _text.fontSize = 4.5f;
-            _text.enableAutoSizing = false;
-            _text.ForceMeshUpdate();
+            _text.fontSizeMax = 60f;
         }
         _originalNode = node;
         transform.SetParent(node.transform, false);
@@ -58,6 +56,8 @@ public class Block : MonoBehaviour
             if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
             {
                 CustomAnimation.NumberClicked(transform);
+                _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
             }
             else
             {
@@ -97,8 +97,8 @@ public class Block : MonoBehaviour
                         _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
                         _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
                         _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
-                        await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
                         _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
+                        await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
 
                         selectedBlock._originalNode.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
@@ -116,6 +116,14 @@ public class Block : MonoBehaviour
                 }
             }
             FindObjectOfType<GameManager>().RemoveHints();
+        }
+        else if (
+            nodeClickedOn != null
+            && !_isInteractible
+            && !_gameManager.SavedGameData.SettingsData.ControlMethodDrag
+        )
+        {
+            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
         }
     }
 
@@ -173,14 +181,18 @@ public class Block : MonoBehaviour
                 );
                 if (_originalNode != nodeWhereBlockIsDropped)
                 {
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
                     _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
                     SwitchBlocks(nodeWhereBlockIsDropped);
                     _originalNode = nodeWhereBlockIsDropped;
+                    _ = CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
                 }
-                if (!FindObjectOfType<GameManager>().CheckResult(true))
+                else
                 {
-                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
+                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                    _ = CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
                 }
+                FindObjectOfType<GameManager>().CheckResult(true);
             }
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {
@@ -194,22 +206,17 @@ public class Block : MonoBehaviour
         }
     }
 
-    private static Node GetNodeTouched()
+    private Node GetNodeTouched()
     {
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
+        Physics.Raycast(camRay.origin, camRay.direction, out RaycastHit hitInfo);
         if (
-            Physics.Raycast(camRay.origin, camRay.direction, out hitInfo)
+            hitInfo.collider != null
             && hitInfo.collider.GetComponent<Node>() != null
+            && hitInfo.collider.GetComponent<Node>().GetBlockInNode()._isInteractible
         )
         {
-            if (
-                hitInfo.collider.GetComponent<Node>().GetBlockInNode()._isInteractible
-                && !EventSystem.current.IsPointerOverGameObject()
-            )
-            {
-                return hitInfo.collider.GetComponent<Node>();
-            }
+            return hitInfo.collider.GetComponent<Node>();
         }
         return null;
     }

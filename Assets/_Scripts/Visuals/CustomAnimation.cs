@@ -9,6 +9,8 @@ namespace Assets.Scripts.CustomAnimation
     {
         private static float BUTTON_SHRINK_ON_CLICK = 0.9f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK = 1f;
+        private static float NODE_SHRINK_ON_CLICK = 10f;
+        private static float NODE_SHRINK_REVERSE_ON_CLICK = 14f;
         private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.1f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK_TIME = 0.05f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY = 0.6f;
@@ -215,7 +217,7 @@ namespace Assets.Scripts.CustomAnimation
         internal static void NodeLoad(Transform transform)
         {
             transform
-                .GetComponent<SpriteRenderer>()
+                .GetComponent<Image>()
                 .transform.DOScale(.001f, .75f)
                 .From()
                 .SetEase(Ease.OutBounce)
@@ -237,8 +239,10 @@ namespace Assets.Scripts.CustomAnimation
         {
             target.gameObject.GetComponent<BoxCollider>().enabled = false;
             var sequence = DOTween.Sequence();
-            sequence.Append(target.DOScale(0.65f, BUTTON_SHRINK_ON_CLICK_TIME));
-            sequence.Append(target.DOScale(0.85f, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME));
+            sequence.Append(target.DOScale(NODE_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
+            sequence.Append(
+                target.DOScale(NODE_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
+            );
             sequence.SetId("NodeClick" + target.name).Play();
 
             await WaitForAnimation("NodeClick" + target.name);
