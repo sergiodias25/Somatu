@@ -66,8 +66,9 @@ public static class Constants
     }
 
     // 1 second does not count
-    public static double ChallengeTimeLimit = 15.0f;
-    public static double ChallengePuzzleSolvedBonus = 5.0f;
+    public static double ChallengeTimeLimit = 60.0f;
+    public static double ChallengeAnimatedTimeThreshold = 15f;
+    public static double ChallengePuzzleSolvedBonus = 15.0f;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {
@@ -186,6 +187,7 @@ public static class Constants
         DropBlockUndo,
         PuzzleSolved,
         NodeLoaded,
-        NoClip
+        NoClip,
+        TimerTicking
     };
 }

@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip PuzzleSolved;
     public AudioClip MainMusicTheme;
     public AudioClip NodeLoaded;
+    public AudioClip TimerTicking;
     private GameManager gameManager;
 
     private void Start()
@@ -21,17 +22,30 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip audioClip)
     {
+        PlaySFX(audioClip, 1f);
+    }
+
+    public void PlaySFX(AudioClip audioClip, float customVolumeModifierValue)
+    {
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
-            if (_sfxSource.isPlaying)
+            /*if (_sfxSource.isPlaying)
             {
                 _sfxSource.Stop();
-            }
-            _sfxSource.PlayOneShot(audioClip);
+            }*/
+            _sfxSource.PlayOneShot(audioClip, customVolumeModifierValue);
         }
         if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
             Vibrate();
+        }
+    }
+
+    public void StopSFX()
+    {
+        if (gameManager.SavedGameData.SettingsData.SoundEnabled)
+        {
+            _sfxSource.Stop();
         }
     }
 
@@ -115,6 +129,10 @@ public class AudioManager : MonoBehaviour
         else if (clip == Constants.AudioClip.PuzzleSolved)
         {
             return PuzzleSolved;
+        }
+        else if (clip == Constants.AudioClip.TimerTicking)
+        {
+            return TimerTicking;
         }
         else
             return null;

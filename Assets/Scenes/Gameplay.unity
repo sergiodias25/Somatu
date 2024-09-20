@@ -2835,7 +2835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273f2bf6664147b7bd18552005e4c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCount: 18
+  referenceCount: 19
 --- !u!4 &248011497
 Transform:
   m_ObjectHideFlags: 3
@@ -3695,6 +3695,7 @@ MonoBehaviour:
   PuzzleSolved: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
   MainMusicTheme: {fileID: 8300000, guid: 8b8ab71ffffc24e5582de0192d9dcee8, type: 3}
   NodeLoaded: {fileID: 8300000, guid: b91838e7cae1efd4fa0f278cf7bc2014, type: 3}
+  TimerTicking: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
 --- !u!4 &279916186
 Transform:
   m_ObjectHideFlags: 0
@@ -6874,9 +6875,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.07219255
     width: 1
-    height: 1
+    height: 0.8556149
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -22238,6 +22239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timerText: {fileID: 268485683}
+  _clockIcon: {fileID: 1239781319}
 --- !u!1 &1671143899
 GameObject:
   m_ObjectHideFlags: 0

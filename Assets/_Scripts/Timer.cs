@@ -1,21 +1,27 @@
 using CandyCabinets.Components.Colour;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
     GameManager _gameManager;
 
-    [Header("Component")]
+    [Header("Components")]
     [SerializeField]
     private TextMeshProUGUI _timerText;
 
-    [Header("Settings")]
+    [SerializeField]
+    private Image _clockIcon;
+
+    [Header("Values")]
     private double _currentTime;
     private double _elapsedTime;
     private bool _isCountdown;
     private bool _isRunning;
     private double _timeLimitValue;
+    private bool _isAnimating = false;
 
     private void Awake()
     {
@@ -27,6 +33,10 @@ public class Timer : MonoBehaviour
     {
         Init();
         _isCountdown = isChallenge;
+        if (_isCountdown && _isAnimating)
+        {
+            _isAnimating = false;
+        }
         _currentTime = isChallenge ? _timeLimitValue : timerValue;
     }
 
@@ -41,6 +51,9 @@ public class Timer : MonoBehaviour
     {
         enabled = true;
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
+            Constants.COLOR_LIGHT_TEXT
+        ];
+        _clockIcon.color = ColourManager.Instance.SelectedPalette().Colours[
             Constants.COLOR_LIGHT_TEXT
         ];
         _timeLimitValue = Constants.ChallengeTimeLimit;
@@ -70,14 +83,108 @@ public class Timer : MonoBehaviour
                 HandleTimerExpired();
             }
             UpdateTimerText();
+
+            if (
+                !_isAnimating
+                && _isCountdown
+                && _isRunning
+                && _currentTime < Constants.ChallengeAnimatedTimeThreshold
+            )
+            {
+                _isAnimating = true;
+                AnimateTimerRunningOut();
+            }
+            if (
+                _isAnimating
+                && _isCountdown
+                && _isRunning
+                && _currentTime > Constants.ChallengeAnimatedTimeThreshold
+            )
+            {
+                StopAnimatingTimerRunningOut();
+            }
+        }
+    }
+
+    private void AnimateTimerRunningOut()
+    {
+        AnimateTimerColor();
+        AnimateTimerScale();
+    }
+
+    private void StopAnimatingTimerRunningOut()
+    {
+        _isAnimating = false;
+        FindObjectOfType<AudioManager>().StopSFX();
+        DOTween.Kill("AnimateTimer");
+        DOTween.Kill("AnimateTimerColor");
+        _timerText.rectTransform.localScale = Vector3.one;
+        _timerText
+            .DOColor(
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                0.5f
+            )
+            .SetUpdate(true);
+    }
+
+    private void AnimateTimerScale()
+    {
+        if (_isAnimating && _isCountdown && _isRunning)
+        {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.PlaySFX(audioManager.GetAudioClip(Constants.AudioClip.TimerTicking), 0.1f);
+            _timerText.rectTransform
+                .DOScale(Vector3.one, .5f)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    _timerText.rectTransform
+                        .DOScale(new Vector3(.92f, .92f, .92f), .5f)
+                        .SetUpdate(true)
+                        .OnComplete(() =>
+                        {
+                            AnimateTimerScale();
+                        });
+                })
+                .SetId("AnimateTimer");
+        }
+    }
+
+    private void AnimateTimerColor()
+    {
+        if (_isAnimating && _isCountdown && _isRunning)
+        {
+            _timerText
+                .DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                    0.5f
+                )
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    _timerText
+                        .DOColor(
+                            ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED],
+                            0.5f
+                        )
+                        .SetUpdate(true)
+                        .OnComplete(() =>
+                        {
+                            AnimateTimerColor();
+                        });
+                })
+                .SetId("AnimateTimerColor");
         }
     }
 
     private void HandleTimerExpired()
     {
         _currentTime = 0.0f;
+        StopAnimatingTimerRunningOut();
         UpdateTimerText();
+        _timerText.rectTransform.localScale = Vector3.one;
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
+        _clockIcon.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
         enabled = false;
         _isRunning = false;
         _gameManager.PuzzleFailed(_elapsedTime);
@@ -108,6 +215,11 @@ public class Timer : MonoBehaviour
     {
         enabled = false;
         _isRunning = false;
+        if (_isAnimating && _isCountdown)
+        {
+            FindObjectOfType<AudioManager>().StopSFX();
+            _isAnimating = false;
+        }
     }
 
     public void UnpauseTimer()
@@ -132,6 +244,9 @@ public class Timer : MonoBehaviour
     public void UpdateTextColor()
     {
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
+            Constants.COLOR_LIGHT_TEXT
+        ];
+        _clockIcon.color = ColourManager.Instance.SelectedPalette().Colours[
             Constants.COLOR_LIGHT_TEXT
         ];
     }
