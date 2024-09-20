@@ -27,7 +27,7 @@ public class TopBarManager : MonoBehaviour
             .Colours[Constants.COLOR_BUTTON];
         button.transform.GetChild(0).GetComponent<Image>().color = ColourManager.Instance
             .SelectedPalette()
-            .Colours[Constants.COLOR_BUTTON];
+            .Colours[Constants.COLOR_SELECTED_NODE];
     }
 
     private void MakeInactive(Button button)
