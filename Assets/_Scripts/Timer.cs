@@ -119,25 +119,23 @@ public class Timer : MonoBehaviour
         DOTween.Kill("AnimateTimer");
         DOTween.Kill("AnimateTimerColor");
         _timerText.rectTransform.localScale = Vector3.one;
-        _timerText
-            .DOColor(
-                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
-                0.5f
-            )
-            .SetUpdate(true);
+        _timerText.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
     }
 
     private void AnimateTimerScale()
     {
         if (_isAnimating && _isCountdown && _isRunning)
         {
-            AudioManager audioManager = FindObjectOfType<AudioManager>();
-            audioManager.PlaySFX(audioManager.GetAudioClip(Constants.AudioClip.TimerTicking), 0.1f);
             _timerText.rectTransform
                 .DOScale(Vector3.one, .5f)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {
+                    AudioManager audioManager = FindObjectOfType<AudioManager>();
+                    audioManager.PlaySFX(
+                        audioManager.GetAudioClip(Constants.AudioClip.TimerTicking),
+                        0.1f
+                    );
                     _timerText.rectTransform
                         .DOScale(new Vector3(.92f, .92f, .92f), .5f)
                         .SetUpdate(true)
