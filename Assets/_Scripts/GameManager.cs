@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _languagePopup;
 
+    [SerializeField]
+    private GameObject _challengeFinishedPopup;
+
+    [SerializeField]
+    private TextMeshProUGUI _challengeFinishedPopupText;
+
     private Timer _timer;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
@@ -515,6 +521,12 @@ public class GameManager : MonoBehaviour
         _uiManager.ShowEndOfGameButton();
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.PersistData();
+        _challengeFinishedPopupText.text = LocalizationManager.Localize(
+            "popup-challenge-finished",
+            _timesSolvedText + 1,
+            Timer.FormatTimeForText(_elapsedTime)
+        );
+        _challengeFinishedPopup.SetActive(true);
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)

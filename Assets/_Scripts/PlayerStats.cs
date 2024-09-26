@@ -208,8 +208,10 @@ public class PlayerStats : MonoBehaviour
         _easyGamesPlayedText.text = _gameManager.SavedGameData.EasyStats.GamesPlayed.ToString();
         _easyGamesCompletedText.text =
             _gameManager.SavedGameData.EasyStats.GamesCompleted.ToString();
-        _easyTimeFastestText.text = Timer.FormatTime(_gameManager.SavedGameData.EasyStats.TimeBest);
-        _easyTimeAverageText.text = Timer.FormatTime(
+        _easyTimeFastestText.text = Timer.FormatTimeForText(
+            _gameManager.SavedGameData.EasyStats.TimeBest
+        );
+        _easyTimeAverageText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.EasyStats.TimeAverage
         );
         _easyHelpsUsedText.text = _gameManager.SavedGameData.EasyStats.HintsUsed.ToString();
@@ -217,10 +219,10 @@ public class PlayerStats : MonoBehaviour
         _mediumGamesPlayedText.text = _gameManager.SavedGameData.MediumStats.GamesPlayed.ToString();
         _mediumGamesCompletedText.text =
             _gameManager.SavedGameData.MediumStats.GamesCompleted.ToString();
-        _mediumTimeFastestText.text = Timer.FormatTime(
+        _mediumTimeFastestText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.MediumStats.TimeBest
         );
-        _mediumTimeAverageText.text = Timer.FormatTime(
+        _mediumTimeAverageText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.MediumStats.TimeAverage
         );
         _mediumHelpsUsedText.text = _gameManager.SavedGameData.MediumStats.HintsUsed.ToString();
@@ -228,8 +230,10 @@ public class PlayerStats : MonoBehaviour
         _hardGamesPlayedText.text = _gameManager.SavedGameData.HardStats.GamesPlayed.ToString();
         _hardGamesCompletedText.text =
             _gameManager.SavedGameData.HardStats.GamesCompleted.ToString();
-        _hardTimeFastestText.text = Timer.FormatTime(_gameManager.SavedGameData.HardStats.TimeBest);
-        _hardTimeAverageText.text = Timer.FormatTime(
+        _hardTimeFastestText.text = Timer.FormatTimeForText(
+            _gameManager.SavedGameData.HardStats.TimeBest
+        );
+        _hardTimeAverageText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.HardStats.TimeAverage
         );
         _hardHelpsUsedText.text = _gameManager.SavedGameData.HardStats.HintsUsed.ToString();
@@ -238,27 +242,28 @@ public class PlayerStats : MonoBehaviour
             _gameManager.SavedGameData.ExtremeStats.GamesPlayed.ToString();
         _extremeGamesCompletedText.text =
             _gameManager.SavedGameData.ExtremeStats.GamesCompleted.ToString();
-        _extremeTimeFastestText.text = Timer.FormatTime(
+        _extremeTimeFastestText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.ExtremeStats.TimeBest
         );
-        _extremeTimeAverageText.text = Timer.FormatTime(
+        _extremeTimeAverageText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.ExtremeStats.TimeAverage
         );
         _extremeHelpsUsedText.text = _gameManager.SavedGameData.ExtremeStats.HintsUsed.ToString();
 
         _challengeGamesPlayedText.text =
             _gameManager.SavedGameData.ChallengeStats.GamesCompleted.ToString();
-        _challengeSolvesMaximumText.text =
-            _gameManager.SavedGameData.ChallengeStats.SolveCountBest.ToString();
+        _challengeSolvesMaximumText.text = (
+            _gameManager.SavedGameData.ChallengeStats.SolveCountBest + 1
+        ).ToString();
         _challengeSolvesAverageText.text = Math.Round(
                 _gameManager.SavedGameData.ChallengeStats.SolveCountAverage,
                 2
             )
             .ToString();
-        _challengeTimeAverageText.text = Timer.FormatTime(
+        _challengeTimeAverageText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.ChallengeStats.TimeAverage
         );
-        _challengeTimeLongestText.text = Timer.FormatTime(
+        _challengeTimeLongestText.text = Timer.FormatTimeForText(
             _gameManager.SavedGameData.ChallengeStats.TimeBest
         );
         _challengeHelpsUsedText.text =

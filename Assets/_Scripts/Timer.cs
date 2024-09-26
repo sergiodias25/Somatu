@@ -239,6 +239,14 @@ public class Timer : MonoBehaviour
         return minutes.ToString("D2") + ":" + seconds.ToString("D2"); //Create the string representation, where both seconds and minutes are at minimum 2 digits}
     }
 
+    public static string FormatTimeForText(double timeValue)
+    {
+        int timeInSecondsInt = (int)timeValue; //We don't care about fractions of a second, so easy to drop them by just converting to an int
+        int minutes = (int)(timeValue / 60); //Get total minutes
+        int seconds = timeInSecondsInt - (minutes * 60); //Get seconds for display alongside minutes
+        return minutes.ToString("D2") + "m:" + seconds.ToString("D2") + "s"; //Create the string representation, where both seconds and minutes are at minimum 2 digits}
+    }
+
     public void UpdateTextColor()
     {
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[
