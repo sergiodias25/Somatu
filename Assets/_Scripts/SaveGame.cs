@@ -10,7 +10,8 @@ namespace Assets.Scripts.SaveGame
         public double TimeStamp;
         public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Easy;
         public int TimesBeatenCurrentDifficulty = 0;
-        public int HintsAvailable = 0;
+        public int HintsAvailableClassic = 0;
+        public int HintsAvailableChallenge = 0;
         public GameInProgress GameInProgressData;
         public Purchases PurchaseData;
         public Settings SettingsData;
@@ -260,15 +261,26 @@ namespace Assets.Scripts.SaveGame
             mode.SolveCountBest = newBest;
         }
 
-        public void IncrementHintsUsed(ModeStats mode)
+        public void IncrementHintsUsedClassic(ModeStats mode)
         {
             mode.HintsUsed++;
-            HintsAvailable--;
+            HintsAvailableClassic--;
         }
 
-        public void IncrementHintsAvailable(int numberOfHintsToAdd)
+        public void IncrementHintsUsedChallenge(ModeStats mode)
         {
-            HintsAvailable += numberOfHintsToAdd;
+            mode.HintsUsed++;
+            HintsAvailableChallenge--;
+        }
+
+        public void IncrementHintsAvailableClassic(int numberOfHintsToAdd)
+        {
+            HintsAvailableClassic += numberOfHintsToAdd;
+        }
+
+        public void IncrementHintsAvailableChallenge(int numberOfHintsToAdd)
+        {
+            HintsAvailableChallenge += numberOfHintsToAdd;
         }
 
         public void GrantUnlimitedHints()

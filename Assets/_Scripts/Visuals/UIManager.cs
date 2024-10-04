@@ -420,7 +420,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangeModeClick()
     {
-        _gameManager.ResetBoard(true, true, true);
+        _gameManager.ResetBoard(true, true, false);
         _gameManager.Init((Constants.Difficulty)_gameManager.SavedGameData.UnlockedDifficulty);
 
         _playerStats.StartedGame(_gameManager.SelectedDifficulty);
@@ -451,9 +451,9 @@ public class UIManager : MonoBehaviour
 
     public async void HintClick()
     {
-        await CustomAnimation.ButtonClicked(_hintButton.transform);
         if (_hintButton.enabled)
         {
+            await CustomAnimation.ButtonClicked(_hintButton.transform);
             if (_gameManager.UseHint())
             {
                 _playerStats.UsedHint(_gameManager.SelectedDifficulty);
@@ -520,30 +520,16 @@ public class UIManager : MonoBehaviour
 
     public void ToggleHintButton()
     {
-        ToggleHintButton(
-            _gameManager.SavedGameData.HintsAvailable > 0
-                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
-        );
+        ToggleHintButton(_gameManager.IsHintAvailable());
     }
 
     internal void ToggleHintButton(bool enabled)
     {
         _hintButton.enabled =
-            enabled
-            && !_gameManager.HasGameEnded()
-            && (
-                _gameManager.SavedGameData.HintsAvailable >= 0
-                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
-            );
+            enabled && !_gameManager.HasGameEnded() && _gameManager.IsHintAvailable();
 
         Color originalColor = _hintButton.GetComponent<Image>().color;
-        if (
-            (
-                _gameManager.SavedGameData.HintsAvailable > 0
-                || _gameManager.SavedGameData.PurchaseData.UnlimitedHints
-            )
-            && _hintButton.GetComponent<Image>().color.a != 1
-        )
+        if (_gameManager.IsHintAvailable() && _hintButton.GetComponent<Image>().color.a != 1)
         {
             _hintButton.GetComponent<Image>().color = new Color(
                 originalColor.r,
@@ -553,11 +539,7 @@ public class UIManager : MonoBehaviour
             );
         }
         else if (
-            (
-                _gameManager.SavedGameData.HintsAvailable <= 0
-                && !_gameManager.SavedGameData.PurchaseData.UnlimitedHints
-            )
-            && _hintButton.GetComponent<Image>().color.a != 0.5f
+            !_gameManager.IsHintAvailable() && _hintButton.GetComponent<Image>().color.a != 0.5f
         )
         {
             _hintButton.GetComponent<Image>().color = new Color(
@@ -573,11 +555,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHintButtonText()
     {
+        int HintsAvailable =
+            _gameManager.SelectedDifficulty == Constants.Difficulty.Challenge
+                ? _gameManager.SavedGameData.HintsAvailableChallenge
+                : _gameManager.SavedGameData.HintsAvailableClassic;
         string translationText = LocalizationManager.Localize("btn-hint");
         if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints)
         {
-            _hintButtonText.text =
-                translationText + ": " + _gameManager.SavedGameData.HintsAvailable.ToString();
+            _hintButtonText.text = translationText + ": " + HintsAvailable.ToString();
         }
         else
         {

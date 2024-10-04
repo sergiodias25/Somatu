@@ -179,23 +179,27 @@ public class PlayerStats : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                _gameManager.SavedGameData.IncrementHintsUsed(_gameManager.SavedGameData.EasyStats);
+                _gameManager.SavedGameData.IncrementHintsUsedClassic(
+                    _gameManager.SavedGameData.EasyStats
+                );
                 break;
             case Difficulty.Medium:
-                _gameManager.SavedGameData.IncrementHintsUsed(
+                _gameManager.SavedGameData.IncrementHintsUsedClassic(
                     _gameManager.SavedGameData.MediumStats
                 );
                 break;
             case Difficulty.Hard:
-                _gameManager.SavedGameData.IncrementHintsUsed(_gameManager.SavedGameData.HardStats);
+                _gameManager.SavedGameData.IncrementHintsUsedClassic(
+                    _gameManager.SavedGameData.HardStats
+                );
                 break;
             case Difficulty.Extreme:
-                _gameManager.SavedGameData.IncrementHintsUsed(
+                _gameManager.SavedGameData.IncrementHintsUsedClassic(
                     _gameManager.SavedGameData.ExtremeStats
                 );
                 break;
             case Difficulty.Challenge:
-                _gameManager.SavedGameData.IncrementHintsUsed(
+                _gameManager.SavedGameData.IncrementHintsUsedChallenge(
                     _gameManager.SavedGameData.ChallengeStats
                 );
                 break;

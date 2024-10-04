@@ -40,7 +40,7 @@ public class IAPScript : MonoBehaviour
         switch (product.definition.id)
         {
             case HINTS_5:
-                _gameManager.SavedGameData.IncrementHintsAvailable(5);
+                _gameManager.SavedGameData.IncrementHintsAvailableClassic(5);
                 _gameManager.SavedGameData.PersistData();
                 _uiManager.UpdateHintButtonText();
                 break;

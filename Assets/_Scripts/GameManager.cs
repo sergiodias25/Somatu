@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     public void Init(Constants.Difficulty selectedDifficulty)
     {
         Init(selectedDifficulty, false);
+        SavedGameData.HintsAvailableChallenge = 0;
         _playerStats.StartedGame(SelectedDifficulty);
     }
 
@@ -467,7 +468,6 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.UpdateTextColor();
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
-        SavedGameData.IncrementHintsAvailable(1);
         _timesSolvedText = _timesSolvedText + 1;
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHintButton(false);
@@ -475,10 +475,12 @@ public class GameManager : MonoBehaviour
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
+            SavedGameData.IncrementHintsAvailableChallenge(1);
             _timer.AddPuzzleSolvedBonus();
         }
         else
         {
+            SavedGameData.IncrementHintsAvailableClassic(1);
             _timer.PauseTimer();
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
@@ -520,6 +522,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
+        SavedGameData.HintsAvailableChallenge = 0;
         SavedGameData.PersistData();
         _challengeFinishedPopupText.text = LocalizationManager.Localize(
             "popup-challenge-finished",
@@ -635,6 +638,7 @@ public class GameManager : MonoBehaviour
             if (resetChallengeActualDifficulty)
             {
                 _timesSolvedText = 0;
+                SavedGameData.HintsAvailableChallenge = 0;
             }
             ActualDifficulty = GetActualDifficulty();
         }
@@ -643,6 +647,18 @@ public class GameManager : MonoBehaviour
     public void ResetTimesSolved()
     {
         _timesSolvedText = 0;
+    }
+
+    public bool IsHintAvailable()
+    {
+        return (
+                (
+                    SelectedDifficulty != Constants.Difficulty.Challenge
+                    && SavedGameData.HintsAvailableClassic > 0
+                ) || SavedGameData.PurchaseData.UnlimitedHints
+            )
+            || SelectedDifficulty == Constants.Difficulty.Challenge
+                && SavedGameData.HintsAvailableChallenge > 0;
     }
 
     public bool UseHint()
