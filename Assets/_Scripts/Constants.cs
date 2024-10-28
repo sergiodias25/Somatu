@@ -143,7 +143,7 @@ public static class Constants
     9 - Clouds
     10 - Background
     11 - Background gradient
-    10 - Title
+    12 - Title
      */
 
     // COLORS
