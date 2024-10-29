@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public Constants.Difficulty ActualDifficulty;
     public SaveGame SavedGameData;
     private SettingsHandler _settingsHandler;
-    private int _timesSolvedText;
+    public int _timesSolvedText;
 
     void Start()
     {

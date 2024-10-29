@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     [Header("Values")]
     private double _currentTime;
     private double _elapsedTime;
+    public double LastElapsedTime;
     private bool _isCountdown;
     private bool _isRunning;
     private double _timeLimitValue;
@@ -186,6 +187,7 @@ public class Timer : MonoBehaviour
         enabled = false;
         _isRunning = false;
         _gameManager.PuzzleFailed(_elapsedTime);
+        LastElapsedTime = _elapsedTime;
         _elapsedTime = 0.0f;
     }
 
