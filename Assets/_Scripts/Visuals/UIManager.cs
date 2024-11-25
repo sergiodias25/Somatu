@@ -105,6 +105,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _languagePopup;
 
+    [SerializeField]
+    private GameObject _challengeFinishedPopup;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -160,6 +163,11 @@ public class UIManager : MonoBehaviour
             else if (_profilePanel.activeSelf)
             {
                 ToggleProfilePanel();
+            }
+            else if (_challengeFinishedPopup.activeSelf)
+            {
+                HideObject(_challengeFinishedPopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_gameManager.IsGameInProgress())
             {

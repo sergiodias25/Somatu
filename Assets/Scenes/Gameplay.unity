@@ -17998,6 +17998,7 @@ MonoBehaviour:
   _unlockPanelText: {fileID: 764925077}
   _quitGamePopup: {fileID: 58428101}
   _languagePopup: {fileID: 254790883}
+  _challengeFinishedPopup: {fileID: 260913951}
 --- !u!1001 &1215716892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24083,6 +24084,7 @@ MonoBehaviour:
   _challengeFinishedPopupText: {fileID: 1714766194}
   SelectedDifficulty: 0
   ActualDifficulty: 0
+  _timesSolvedText: 0
 --- !u!114 &1669322053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24097,6 +24099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerText: {fileID: 268485683}
   _clockIcon: {fileID: 1239781319}
+  LastElapsedTime: 0
 --- !u!1 &1671143899
 GameObject:
   m_ObjectHideFlags: 0

@@ -364,14 +364,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            AnimateSolutionBlocks(
-                firstRowCompleted,
-                secondRowCompleted,
-                thirdRowCompleted,
-                firstColumnCompleted,
-                secondColumnCompleted,
-                thirdColumnCompleted
-            );
+            if (isActionable)
+            {
+                AnimateSolutionBlocks(
+                    firstRowCompleted,
+                    secondRowCompleted,
+                    thirdRowCompleted,
+                    firstColumnCompleted,
+                    secondColumnCompleted,
+                    thirdColumnCompleted
+                );
+            }
         }
         if (SelectedDifficulty != Constants.Difficulty.Challenge)
         {
@@ -608,12 +611,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(_allNodes[i].gameObject);
         }
+
         DestroyBlock(_firstRowResultBlock);
         DestroyBlock(_secondRowResultBlock);
         DestroyBlock(_thirdRowResultBlock);
         DestroyBlock(_firstColumnResultBlock);
         DestroyBlock(_secondColumnResultBlock);
         DestroyBlock(_thirdColumnResultBlock);
+        Destroy(_firstRowResultBlock.GetNode());
+        Destroy(_secondRowResultBlock.GetNode());
+        Destroy(_thirdRowResultBlock.GetNode());
+        Destroy(_firstColumnResultBlock.GetNode());
+        Destroy(_secondColumnResultBlock.GetNode());
+        Destroy(_thirdColumnResultBlock.GetNode());
         _generatedNodesObject.transform.DetachChildren();
         _allNodes = new List<Node>();
         _indexesUsedForStartingPosition = new();
@@ -761,8 +771,8 @@ public class GameManager : MonoBehaviour
 
     private void DestroyBlock(Block block)
     {
-        Destroy(block.gameObject);
         Destroy(block.GetNode().gameObject);
+        Destroy(block.gameObject);
     }
 
     public Block GetSelectedBlock()

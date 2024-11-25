@@ -315,4 +315,10 @@ public class Block : MonoBehaviour
     {
         await CustomAnimation.SumIsIncorrect(_text.transform);
     }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(this);
+        DOTween.Kill(transform);
+    }
 }

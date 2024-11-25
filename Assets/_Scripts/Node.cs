@@ -58,4 +58,12 @@ public class Node : MonoBehaviour
     {
         _sprite.DOColor(newColor, 0.1f);
     }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(this);
+        DOTween.Kill(transform);
+        DOTween.Kill(_sprite);
+        DOTween.Kill(_sprite.transform);
+    }
 }
