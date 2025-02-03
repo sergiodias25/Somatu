@@ -87,11 +87,22 @@ public class Block : MonoBehaviour
                 }
                 else if (selectedBlock._originalNode.name != _originalNode.name)
                 {
-                    if (nodeClickedOn != null && nodeClickedOn.name != selectedBlock.GetNode().name)
+                    if (_originalNode != null && _originalNode.name != selectedBlock.GetNode().name)
                     {
-                        nodeClickedOn.UpdateColor(
+                        _originalNode.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
                                 Constants.COLOR_SELECTED_NODE
+                            ]
+                        );
+
+                        selectedBlock._originalNode.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[
+                                Constants.COLOR_NODE_NEUTRAL
+                            ]
+                        );
+                        _originalNode.UpdateColor(
+                            ColourManager.Instance.SelectedPalette().Colours[
+                                Constants.COLOR_NODE_NEUTRAL
                             ]
                         );
                         _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
@@ -100,18 +111,11 @@ public class Block : MonoBehaviour
                         _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
                         await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
 
-                        selectedBlock._originalNode.UpdateColor(
-                            ColourManager.Instance.SelectedPalette().Colours[
-                                Constants.COLOR_NODE_NEUTRAL
-                            ]
-                        );
-                        nodeClickedOn.UpdateColor(
-                            ColourManager.Instance.SelectedPalette().Colours[
-                                Constants.COLOR_NODE_NEUTRAL
-                            ]
-                        );
                         FindObjectOfType<GameManager>().ResetSelectedBlock();
-                        FindObjectOfType<GameManager>().CheckResult(true);
+                        if (!FindObjectOfType<GameManager>().CheckResult(true))
+                        {
+                            _gameManager.ShowOnboardingClassicUndo();
+                        }
                     }
                 }
             }
@@ -192,7 +196,10 @@ public class Block : MonoBehaviour
                     _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
                     _ = CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
                 }
-                FindObjectOfType<GameManager>().CheckResult(true);
+                if (!FindObjectOfType<GameManager>().CheckResult(true))
+                {
+                    _gameManager.ShowOnboardingClassicUndo();
+                }
             }
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {

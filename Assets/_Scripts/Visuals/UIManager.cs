@@ -108,6 +108,18 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _challengeFinishedPopup;
 
+    [SerializeField]
+    private GameObject _onboardingWelcome;
+
+    [SerializeField]
+    private GameObject _onboardingClassicExplanation;
+
+    [SerializeField]
+    private GameObject _onboardingClassicHint;
+
+    [SerializeField]
+    private GameObject _onboardingClassicUndo;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -131,6 +143,26 @@ public class UIManager : MonoBehaviour
                 {
                     HideObject(_languagePopup);
                 }
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_onboardingWelcome.activeSelf)
+            {
+                HideObject(_onboardingWelcome);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_onboardingClassicExplanation.activeSelf)
+            {
+                HideObject(_onboardingClassicExplanation);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_onboardingClassicHint.activeSelf)
+            {
+                HideObject(_onboardingClassicHint);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_onboardingClassicUndo.activeSelf)
+            {
+                HideObject(_onboardingClassicUndo);
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_quitGamePopup.activeSelf)
@@ -203,6 +235,7 @@ public class UIManager : MonoBehaviour
         ShowObject(_topPanel);
         HideObject(_classicMenu);
         _topBarManager.SelectHomeButton();
+        ShowOnboardingWelcome();
     }
 
     public async void ShowClassicMenu()
@@ -423,6 +456,7 @@ public class UIManager : MonoBehaviour
             {
                 _timer.RestartTimer();
             }
+            _gameManager.ShowOnboardings();
         }
     }
 
@@ -811,6 +845,38 @@ public class UIManager : MonoBehaviour
             }
             ShowObject(_shopPanel);
         }
+    }
+
+    public void ShowOnboarding(GameObject onboarding)
+    {
+        ShowObject(onboarding);
+    }
+
+    public void ShowOnboardingClassicExplanation()
+    {
+        ShowOnboarding(_onboardingClassicExplanation);
+    }
+
+    public void ShowOnboardingWelcome()
+    {
+        if (
+            _gameManager.SavedGameData.EasyStats.GamesCompleted == 0
+            && !_gameManager.SavedGameData.Onboardings.Welcome
+        )
+        {
+            _gameManager.SavedGameData.Onboardings.Welcome = true;
+            ShowOnboarding(_onboardingWelcome);
+        }
+    }
+
+    public void ShowOnboardingClassicHint()
+    {
+        ShowOnboarding(_onboardingClassicHint);
+    }
+
+    public void ShowOnboardingClassicUndo()
+    {
+        ShowOnboarding(_onboardingClassicUndo);
     }
 
     public void QuitApplicationClick()

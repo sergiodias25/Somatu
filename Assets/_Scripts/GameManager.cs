@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
             SelectedDifficulty == Constants.Difficulty.Challenge,
             SavedGameData != null ? SavedGameData.GameInProgressData.TimerValue : 0d
         );
+        ShowOnboardings();
     }
 
     private void UpdateModeTranslation()
@@ -966,5 +967,60 @@ public class GameManager : MonoBehaviour
     {
         SavedGameData = new SaveGame();
         SavedGameData.PersistData();
+    }
+
+    public void ShowOnboardings()
+    {
+        if (SelectedDifficulty != Constants.Difficulty.Challenge)
+        {
+            if (!SavedGameData.Onboardings.ClassicExplanation)
+            {
+                _allNodes.ForEach(node =>
+                {
+                    node.GetBlockInNode().ChangeInteraction(false);
+                });
+                _uiManager.ShowOnboardingClassicExplanation();
+                _timer.PauseTimer();
+                SavedGameData.Onboardings.ClassicExplanation = true;
+            }
+            else if (
+                !SavedGameData.Onboardings.ClassicHint && SavedGameData.HintsAvailableClassic > 0
+            )
+            {
+                _allNodes.ForEach(node =>
+                {
+                    node.GetBlockInNode().ChangeInteraction(false);
+                });
+                _uiManager.ShowOnboardingClassicHint();
+                _timer.PauseTimer();
+                SavedGameData.Onboardings.ClassicHint = true;
+            }
+        }
+    }
+
+    public void ShowOnboardingClassicUndo()
+    {
+        if (SelectedDifficulty != Constants.Difficulty.Challenge)
+        {
+            if (!SavedGameData.Onboardings.ClassicUndo)
+            {
+                _allNodes.ForEach(node =>
+                {
+                    node.GetBlockInNode().ChangeInteraction(false);
+                });
+                _uiManager.ShowOnboardingClassicUndo();
+                _timer.PauseTimer();
+                SavedGameData.Onboardings.ClassicUndo = true;
+            }
+        }
+    }
+
+    internal void EnableGameplayBlocks()
+    {
+        if (_allNodes != null && _allNodes.Count > 0)
+        {
+            _allNodes.ForEach(node => node.GetBlockInNode().ChangeInteraction(true));
+            _timer.UnpauseTimer();
+        }
     }
 }

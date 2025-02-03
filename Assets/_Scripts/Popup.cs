@@ -19,6 +19,13 @@ public class Popup : MonoBehaviour
         _popupPanel.SetActive(false); //TODO: animation
     }
 
+    public async void CloseOnboarding()
+    {
+        await CustomAnimation.ButtonClicked(_closePopupButton.transform);
+        FindObjectOfType<GameManager>().EnableGameplayBlocks();
+        _popupPanel.SetActive(false); //TODO: animation
+    }
+
     public async void ActionQuitApplication()
     {
         await CustomAnimation.ButtonClicked(_actionButton.transform);

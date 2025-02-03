@@ -20,6 +20,7 @@ namespace Assets.Scripts.SaveGame
         public ModeStats HardStats;
         public ModeStats ExtremeStats;
         public ModeStats ChallengeStats;
+        public Onboarding Onboardings;
 
         public class Purchases
         {
@@ -31,13 +32,13 @@ namespace Assets.Scripts.SaveGame
 
         public class Settings
         {
-            public bool SoundEnabled = true;
+            public bool SoundEnabled = false;
             public bool MusicEnabled = false;
             public bool VibrationEnabled = false;
             public int SelectedThemeIndex = 0;
-            public string LanguageSelected = "English";
-            public bool LanguageChangedOnce = false;
-            public bool ControlMethodDrag = false;
+            public string LanguageSelected = "Portuguese";
+            public bool LanguageChangedOnce = true;
+            public bool ControlMethodDrag = true;
         }
 
         public class GameInProgress
@@ -125,6 +126,14 @@ namespace Assets.Scripts.SaveGame
             }
         }
 
+        public class Onboarding
+        {
+            public bool Welcome = false;
+            public bool ClassicExplanation = false;
+            public bool ClassicUndo = false;
+            public bool ClassicHint = false;
+        }
+
         public SaveGame()
         {
             GameInProgressData = new GameInProgress();
@@ -135,6 +144,7 @@ namespace Assets.Scripts.SaveGame
             HardStats = new ModeStats();
             ExtremeStats = new ModeStats();
             ChallengeStats = new ModeStats();
+            Onboardings = new Onboarding();
             TimeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
         }
 
