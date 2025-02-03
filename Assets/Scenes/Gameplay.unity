@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 58428101}
+  _popupWindow: {fileID: 0}
   _closePopupButton: {fileID: 1891917444}
   _actionButton: {fileID: 1704067983}
 --- !u!1 &63149765
@@ -3330,7 +3331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273f2bf6664147b7bd18552005e4c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCount: 25
+  referenceCount: 26
 --- !u!4 &248011497
 Transform:
   m_ObjectHideFlags: 3
@@ -4037,6 +4038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 260913951}
+  _popupWindow: {fileID: 0}
   _closePopupButton: {fileID: 1489934803}
   _actionButton: {fileID: 0}
 --- !u!1 &263922125 stripped
@@ -5785,6 +5787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 401100904}
+  _popupWindow: {fileID: 0}
   _closePopupButton: {fileID: 826701053}
   _actionButton: {fileID: 0}
 --- !u!1 &403875593
@@ -9495,7 +9498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
-      value: QuitPopup
+      value: Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_IsActive
@@ -19732,7 +19735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
-      value: QuitPopup
+      value: Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_IsActive
@@ -22499,7 +22502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
-      value: QuitPopup
+      value: Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_IsActive
@@ -28625,6 +28628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 1667012212}
+  _popupWindow: {fileID: 0}
   _closePopupButton: {fileID: 372248693}
   _actionButton: {fileID: 1230975988}
 --- !u!1 &1669322049
@@ -31155,6 +31159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 1760725384}
+  _popupWindow: {fileID: 1275589229}
   _closePopupButton: {fileID: 968823017}
   _actionButton: {fileID: 968823017}
 --- !u!1 &1761268778 stripped
@@ -32416,6 +32421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 1851907334}
+  _popupWindow: {fileID: 1738512009}
   _closePopupButton: {fileID: 1122247574}
   _actionButton: {fileID: 1122247574}
 --- !u!114 &1854439832 stripped
@@ -33736,7 +33742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
-      value: QuitPopup
+      value: Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_IsActive
@@ -34716,6 +34722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 1965137569}
+  _popupWindow: {fileID: 1311563379}
   _closePopupButton: {fileID: 1337937257}
   _actionButton: {fileID: 1337937257}
 --- !u!1 &1972436767 stripped
@@ -36866,6 +36873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 2074189147}
+  _popupWindow: {fileID: 1132295369}
   _closePopupButton: {fileID: 607535449}
   _actionButton: {fileID: 607535449}
 --- !u!1 &2082251728 stripped

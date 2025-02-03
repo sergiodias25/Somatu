@@ -855,6 +855,7 @@ public class UIManager : MonoBehaviour
     public void ShowOnboardingClassicExplanation()
     {
         ShowOnboarding(_onboardingClassicExplanation);
+        CustomAnimation.PopupLoad(_onboardingClassicExplanation.transform);
     }
 
     public void ShowOnboardingWelcome()
@@ -866,17 +867,20 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.SavedGameData.Onboardings.Welcome = true;
             ShowOnboarding(_onboardingWelcome);
+            CustomAnimation.PopupLoad(_onboardingWelcome.transform);
         }
     }
 
     public void ShowOnboardingClassicHint()
     {
         ShowOnboarding(_onboardingClassicHint);
+        CustomAnimation.PopupLoad(_onboardingClassicHint.transform);
     }
 
     public void ShowOnboardingClassicUndo()
     {
         ShowOnboarding(_onboardingClassicUndo);
+        CustomAnimation.PopupLoad(_onboardingClassicUndo.transform);
     }
 
     public void QuitApplicationClick()

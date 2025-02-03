@@ -198,7 +198,6 @@ namespace Assets.Scripts.CustomAnimation
                 .From()
                 .SetEase(Ease.OutBounce)
                 .SetDelay(RandomizeDelayValue(0.1));
-            ;
         }
 
         internal static DG.Tweening.Core.TweenerCore<
@@ -212,6 +211,24 @@ namespace Assets.Scripts.CustomAnimation
                 .SetEase(Ease.InBounce)
                 .SetDelay(RandomizeDelayValue(0.1));
             ;
+        }
+
+        internal static DG.Tweening.Core.TweenerCore<
+            Vector3,
+            Vector3,
+            DG.Tweening.Plugins.Options.VectorOptions
+        > PopupLoad(Transform transform)
+        {
+            return transform.DOScale(0.85f, .4f).From().SetEase(Ease.OutBounce);
+        }
+
+        internal static DG.Tweening.Core.TweenerCore<
+            Vector3,
+            Vector3,
+            DG.Tweening.Plugins.Options.VectorOptions
+        > PopupUnload(Transform transform)
+        {
+            return transform.DOScale(0.01f, 0.4f).SetEase(Ease.InBounce);
         }
 
         internal static void NodeLoad(Transform transform)

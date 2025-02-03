@@ -1,4 +1,5 @@
 using Assets.Scripts.CustomAnimation;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,9 @@ public class Popup : MonoBehaviour
 {
     [SerializeField]
     private GameObject _popupPanel;
+
+    [SerializeField]
+    private GameObject _popupWindow;
 
     [SerializeField]
     private Button _closePopupButton;
@@ -23,7 +27,9 @@ public class Popup : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_closePopupButton.transform);
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
-        _popupPanel.SetActive(false); //TODO: animation
+        CustomAnimation
+            .PopupUnload(_popupWindow.transform)
+            .OnComplete(() => _popupPanel.SetActive(false));
     }
 
     public async void ActionQuitApplication()
