@@ -159,6 +159,10 @@ namespace Assets.Scripts.SaveGame
 
         public bool IsDifficultyUnlocked(Constants.Difficulty difficulty)
         {
+            if (difficulty == Constants.Difficulty.Challenge)
+            {
+                return Onboardings.ClassicExplanation;
+            }
             return difficulty <= UnlockedDifficulty;
         }
 

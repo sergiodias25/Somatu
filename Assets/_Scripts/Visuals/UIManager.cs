@@ -275,24 +275,17 @@ public class UIManager : MonoBehaviour
     public async void ClickOnChallenge()
     {
         await CustomAnimation.ButtonClicked(_challengeModeButton.transform);
-        /*if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
-        {*/
-        _topBarManager.DeselectHomeButton();
-        HideObject(_mainMenuPanel);
-        ShowGameplayButtons();
-        _gameManager.Init(Constants.Difficulty.Challenge);
-        /*}
+        if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Challenge))
+        {
+            _topBarManager.DeselectHomeButton();
+            HideObject(_mainMenuPanel);
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Challenge);
+        }
         else
         {
-            ShowDifficultyPopup(
-                Constants.Difficulty.Challenge - 1,
-                LocalizationManager.Localize("mode-challenge"),
-                LocalizationManager.Localize("mode-extreme"),
-                Constants.GetNumberOfSolvesToUnlockNextDifficulty(
-                    Constants.Difficulty.Challenge - 1
-                )
-            );
-        }*/
+            ShowDifficultyPopup(Constants.Difficulty.Challenge, null, null, 0);
+        }
     }
 
     public async void ClickOnEasyMode()
@@ -332,25 +325,32 @@ public class UIManager : MonoBehaviour
     )
     {
         int finalSolvesNeededText = numberOfSolvesNeeded;
-        string popuTextKey = "popup-difficulty-plural";
-        if (
-            originalDiff == _gameManager.SavedGameData.UnlockedDifficulty.Value
-            && _gameManager.SavedGameData.TimesBeatenCurrentDifficulty > 0
-        )
+        string popupTextKey = "popup-difficulty-plural";
+        if (originalDiff != Constants.Difficulty.Challenge)
         {
-            finalSolvesNeededText =
-                numberOfSolvesNeeded - _gameManager.SavedGameData.TimesBeatenCurrentDifficulty;
+            if (
+                originalDiff == _gameManager.SavedGameData.UnlockedDifficulty.Value
+                && _gameManager.SavedGameData.TimesBeatenCurrentDifficulty > 0
+            )
+            {
+                finalSolvesNeededText =
+                    numberOfSolvesNeeded - _gameManager.SavedGameData.TimesBeatenCurrentDifficulty;
+            }
+            if (finalSolvesNeededText == 1)
+            {
+                popupTextKey = "popup-difficulty-singular";
+            }
+            _difficultyPanelText.text = LocalizationManager.Localize(
+                popupTextKey,
+                targetDifficulty,
+                previousDifficulty,
+                finalSolvesNeededText
+            );
         }
-        if (finalSolvesNeededText == 1)
+        else
         {
-            popuTextKey = "popup-difficulty-singular";
+            _difficultyPanelText.text = LocalizationManager.Localize("popup-difficulty-challenge");
         }
-        _difficultyPanelText.text = LocalizationManager.Localize(
-            popuTextKey,
-            targetDifficulty,
-            previousDifficulty,
-            finalSolvesNeededText
-        );
         ShowObject(_difficultyLockedPopup);
     }
 

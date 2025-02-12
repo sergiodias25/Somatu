@@ -64,7 +64,7 @@ public class ShowLockImageInButton : MonoBehaviour
                     image.enabled = false;
                     break;
                 case DifficultyValue.Challenge:
-                    /*if (
+                    if (
                         !_gameManager.SavedGameData.IsDifficultyUnlocked(
                             Constants.Difficulty.Challenge
                         )
@@ -72,7 +72,7 @@ public class ShowLockImageInButton : MonoBehaviour
                     {
                         image.enabled = true;
                         break;
-                    }*/
+                    }
                     image.enabled = false;
                     break;
                 default:
