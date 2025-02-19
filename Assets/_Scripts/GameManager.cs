@@ -996,6 +996,19 @@ public class GameManager : MonoBehaviour
                 SavedGameData.Onboardings.ClassicHint = true;
             }
         }
+        else
+        {
+            if (!SavedGameData.Onboardings.ChallengeExplanation)
+            {
+                _allNodes.ForEach(node =>
+                {
+                    node.GetBlockInNode().ChangeInteraction(false);
+                });
+                _uiManager.ShowOnboardingChallenge();
+                _timer.PauseTimer();
+                SavedGameData.Onboardings.ChallengeExplanation = true;
+            }
+        }
     }
 
     public void ShowOnboardingClassicUndo()

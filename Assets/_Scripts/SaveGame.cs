@@ -132,6 +132,7 @@ namespace Assets.Scripts.SaveGame
             public bool ClassicExplanation = false;
             public bool ClassicUndo = false;
             public bool ClassicHint = false;
+            public bool ChallengeExplanation = false;
         }
 
         public SaveGame()

@@ -120,6 +120,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _onboardingClassicUndo;
 
+    [SerializeField]
+    private GameObject _onboardingChallenge;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -163,6 +166,11 @@ public class UIManager : MonoBehaviour
             else if (_onboardingClassicUndo.activeSelf)
             {
                 HideObject(_onboardingClassicUndo);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_onboardingChallenge.activeSelf)
+            {
+                HideObject(_onboardingChallenge);
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_quitGamePopup.activeSelf)
@@ -881,6 +889,12 @@ public class UIManager : MonoBehaviour
     {
         ShowOnboarding(_onboardingClassicUndo);
         CustomAnimation.PopupLoad(_onboardingClassicUndo.transform);
+    }
+
+    public void ShowOnboardingChallenge()
+    {
+        ShowOnboarding(_onboardingChallenge);
+        CustomAnimation.PopupLoad(_onboardingChallenge.transform);
     }
 
     public void QuitApplicationClick()
