@@ -70,6 +70,19 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Button _supportButton;
+
+    [SerializeField]
+    private Button _visualAidButton;
+
+    [SerializeField]
+    private Image _visualAidImage;
+
+    [SerializeField]
+    private Sprite _visualAidOnSprite;
+
+    [SerializeField]
+    private Sprite _visualAidOffSprite;
+
     private AudioManager _audioManager;
     private GameManager _gameManager;
     private GradientBg _gradientBg;
@@ -90,6 +103,7 @@ public class SettingsHandler : MonoBehaviour
         UpdateVibrateIcon();
         UpdateControlIcon();
         UpdateControlTranslation();
+        UpdateVisualAidIcon();
         LocalizationManager.OnLocalizationChanged += () => UpdateControlTranslation();
     }
 
@@ -269,5 +283,27 @@ public class SettingsHandler : MonoBehaviour
         CustomAnimation.ButtonLoad(_musicButton.transform);
         CustomAnimation.ButtonLoad(_soundButton.transform);
         CustomAnimation.ButtonLoad(_supportButton.transform);
+        CustomAnimation.ButtonLoad(_visualAidButton.transform);
+    }
+
+    public async void ChangeVisualAid()
+    {
+        await CustomAnimation.ButtonClicked(_visualAidButton.transform);
+        _gameManager.SavedGameData.SettingsData.VisualAidEnabled = !_gameManager
+            .SavedGameData
+            .SettingsData
+            .VisualAidEnabled;
+        UpdateVisualAidIcon();
+        _gameManager.CheckResult(false);
+    }
+
+    private void UpdateVisualAidIcon()
+    {
+        UpdateSetting(
+            _gameManager.SavedGameData.SettingsData.VisualAidEnabled,
+            _visualAidImage,
+            _visualAidOnSprite,
+            _visualAidOffSprite
+        );
     }
 }

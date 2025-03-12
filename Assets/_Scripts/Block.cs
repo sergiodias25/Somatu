@@ -5,6 +5,8 @@ using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
 using System.Threading.Tasks;
+using UnityEngine.UI;
+using System;
 
 public class Block : MonoBehaviour
 {
@@ -12,12 +14,21 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro _text;
+
+    [SerializeField]
+    private Image _result;
     private GameManager _gameManager;
     private UIManager _uiManager;
     private Node _originalNode;
     private bool _isInteractible = false;
     public bool IsSelected = false;
     float dragTime = 0f;
+
+    [SerializeField]
+    private Sprite _correctResultSprite;
+
+    [SerializeField]
+    private Sprite _incorrectResultSprite;
 
     private void Awake()
     {
@@ -292,6 +303,17 @@ public class Block : MonoBehaviour
         _text.color = _isInteractible
             ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
             : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
+        if (_isInteractible)
+        {
+            HideResultIcon();
+        }
+        else
+        {
+            _result.DOColor(
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                0.1f
+            );
+        }
     }
 
     public Sequence AnimatePartialSumCorrect()
@@ -327,5 +349,35 @@ public class Block : MonoBehaviour
     {
         DOTween.Kill(this);
         DOTween.Kill(transform);
+    }
+
+    internal void UpdateResultIcon(bool showIcon, bool resultIsCorrect)
+    {
+        if (showIcon)
+        {
+            ShowResultIcon();
+            if (resultIsCorrect)
+            {
+                _result.sprite = _correctResultSprite;
+            }
+            else
+            {
+                _result.sprite = _incorrectResultSprite;
+            }
+        }
+        else
+        {
+            HideResultIcon();
+        }
+    }
+
+    internal void ShowResultIcon()
+    {
+        _result.gameObject.SetActive(true);
+    }
+
+    internal void HideResultIcon()
+    {
+        _result.gameObject.SetActive(false);
     }
 }

@@ -412,25 +412,49 @@ public class GameManager : MonoBehaviour
             {
                 _firstRowResultBlock.AnimatePartialSumCorrect();
             }
+            else
+            {
+                _ = _firstRowResultBlock.AnimateIncorrectSolution();
+            }
             if (secondRowCompleted)
             {
                 _secondRowResultBlock.AnimatePartialSumCorrect();
+            }
+            else
+            {
+                _ = _secondRowResultBlock.AnimateIncorrectSolution();
             }
             if (thirdRowCompleted)
             {
                 _thirdRowResultBlock.AnimatePartialSumCorrect();
             }
+            else
+            {
+                _ = _thirdRowResultBlock.AnimateIncorrectSolution();
+            }
             if (firstColumnCompleted)
             {
                 _firstColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            else
+            {
+                _ = _firstColumnResultBlock.AnimateIncorrectSolution();
             }
             if (secondColumnCompleted)
             {
                 _secondColumnResultBlock.AnimatePartialSumCorrect();
             }
+            else
+            {
+                _ = _secondColumnResultBlock.AnimateIncorrectSolution();
+            }
             if (thirdColumnCompleted)
             {
                 _thirdColumnResultBlock.AnimatePartialSumCorrect();
+            }
+            else
+            {
+                _ = _thirdColumnResultBlock.AnimateIncorrectSolution();
             }
         }
     }
@@ -553,6 +577,7 @@ public class GameManager : MonoBehaviour
                     .UpdateColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
                     );
+                block.UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, true);
             }
             else
             {
@@ -561,6 +586,7 @@ public class GameManager : MonoBehaviour
                     .UpdateColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
                     );
+                block.UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, false);
             }
         }
         else if (
@@ -578,6 +604,7 @@ public class GameManager : MonoBehaviour
                         Constants.COLOR_SOLUTION_NODE_NO_HINT
                     ]
                 );
+            block.HideResultIcon();
         }
 
         if (currentSum == expectedResult)
@@ -721,11 +748,6 @@ public class GameManager : MonoBehaviour
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
                     );
                     _ = _allNodes[i].GetBlockInNode().AnimateIncorrectSolution();
-                    /*_allNodes[i].UpdateColor(
-                        ColourManager.Instance.SelectedPalette().Colours[
-                            Constants.COLOR_NODE_NEUTRAL
-                        ]
-                    );*/
                 }
             }
             _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);

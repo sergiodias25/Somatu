@@ -8,7 +8,7 @@ namespace Assets.Scripts.SaveGame
     public class SaveGame
     {
         public double TimeStamp;
-        public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Easy;
+        public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Extreme;
         public int TimesBeatenCurrentDifficulty = 0;
         public int HintsAvailableClassic = 0;
         public int HintsAvailableChallenge = 0;
@@ -39,6 +39,7 @@ namespace Assets.Scripts.SaveGame
             public string LanguageSelected = "Portuguese";
             public bool LanguageChangedOnce = true;
             public bool ControlMethodDrag = true;
+            public bool VisualAidEnabled = false;
         }
 
         public class GameInProgress
