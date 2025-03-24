@@ -17,7 +17,24 @@ public class Popup : MonoBehaviour
     [SerializeField]
     private Button _actionButton;
 
+    public void OnEnable()
+    {
+        FindObjectOfType<GameManager>().DisableGameplayBlocks();
+    }
+
     public async void ClosePopup()
+    {
+        await CustomAnimation.ButtonClicked(_closePopupButton.transform);
+        ClosePopupGameplay();
+    }
+
+    public void ClosePopupGameplay()
+    {
+        FindObjectOfType<GameManager>().EnableGameplayBlocks();
+        _popupPanel.SetActive(false); //TODO: animation
+    }
+
+    public async void ClosePopupMenu()
     {
         await CustomAnimation.ButtonClicked(_closePopupButton.transform);
         _popupPanel.SetActive(false); //TODO: animation

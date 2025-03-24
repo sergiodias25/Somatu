@@ -27,12 +27,6 @@ public class IAPScript : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         _adBanner = FindObjectOfType<AdBanner>();
         _uiManager = FindObjectOfType<UIManager>();
-        LoadIAPStatus();
-    }
-
-    private void OnEnable()
-    {
-        LoadIAPStatus();
     }
 
     public void OnPurchaseComplete(Product product)
@@ -42,35 +36,57 @@ public class IAPScript : MonoBehaviour
             case HINTS_5:
                 _gameManager.SavedGameData.IncrementHintsAvailableClassic(5);
                 _gameManager.SavedGameData.PersistData();
-                _uiManager.UpdateHintButtonText();
+                GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
+                _uiManager.ToggleHintButton(true);
                 break;
             case HINTS_UNLIMITED:
                 _gameManager.SavedGameData.GrantUnlimitedHints();
                 _gameManager.SavedGameData.PersistData();
-                _uiManager.UpdateHintButtonText();
+                GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
+                _uiManager.ToggleHintButton(true);
+
                 break;
             case UNLOCK_LEVELS:
                 _gameManager.SavedGameData.UnlockAllLevels();
                 _gameManager.SavedGameData.PersistData();
+                if (_gameManager.SavedGameData.UnlockedDifficulty == Constants.Difficulty.Challenge)
+                {
+                    ButtonUnlockLevels.interactable = false;
+                    FadeButton(ButtonUnlockLevels);
+                }
                 break;
             case REMOVE_ADS:
                 _gameManager.SavedGameData.RemoveAds();
                 _gameManager.SavedGameData.PersistData();
                 _adBanner.HideBannerAd();
+                if (_gameManager.SavedGameData.PurchaseData.RemovedAds)
+                {
+                    ButtonRemoveAds.interactable = false;
+                    FadeButton(ButtonRemoveAds);
+                }
                 break;
             case SUNRISE_THEME:
                 _gameManager.SavedGameData.EnableSunriseTheme();
                 _gameManager.SavedGameData.PersistData();
+                if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
+                {
+                    ButtonSunriseTheme.interactable = false;
+                    FadeButton(ButtonSunriseTheme);
+                }
                 break;
             case SUNSET_THEME:
                 _gameManager.SavedGameData.EnableSunsetTheme();
                 _gameManager.SavedGameData.PersistData();
+                if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
+                {
+                    ButtonSunsetTheme.interactable = false;
+                    FadeButton(ButtonSunsetTheme);
+                }
                 break;
             default:
                 Debug.LogError("Unknown bought");
                 break;
         }
-        LoadIAPStatus();
     }
 
     public void LoadIAPStatus()

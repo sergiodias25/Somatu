@@ -690,10 +690,11 @@ public class GameManager : MonoBehaviour
     public bool IsHintAvailable()
     {
         return (
-                (
-                    SelectedDifficulty != Constants.Difficulty.Challenge
-                    && SavedGameData.HintsAvailableClassic > 0
-                ) || SavedGameData.PurchaseData.UnlimitedHints
+                SelectedDifficulty != Constants.Difficulty.Challenge
+                && (
+                    SavedGameData.HintsAvailableClassic > 0
+                    || SavedGameData.PurchaseData.UnlimitedHints
+                )
             )
             || SelectedDifficulty == Constants.Difficulty.Challenge
                 && SavedGameData.HintsAvailableChallenge > 0;
@@ -888,7 +889,10 @@ public class GameManager : MonoBehaviour
     {
         foreach (Transform node in _generatedNodesObject.transform)
         {
-            if (node.gameObject.GetComponent<Node>().GetBlockInNode().IsInteractable())
+            if (
+                node.gameObject.GetComponent<Node>().GetColor()
+                != ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+            )
             {
                 return false;
             }
@@ -947,14 +951,14 @@ public class GameManager : MonoBehaviour
     {
         if (paused)
         {
-            Debug.Log("Save by pause");
+            //Debug.Log("Save by pause");
             LastResortSaveGame();
         }
     }
 
     private void OnApplicationQuit()
     {
-        Debug.Log("Save by quit");
+        //Debug.Log("Save by quit");
         LastResortSaveGame();
     }
 
@@ -1050,11 +1054,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    internal void DisableGameplayBlocks()
+    {
+        _allNodes.ForEach(node =>
+        {
+            node.GetBlockInNode().ChangeInteraction(false);
+        });
+    }
+
     internal void EnableGameplayBlocks()
     {
         if (_allNodes != null && _allNodes.Count > 0)
         {
-            _allNodes.ForEach(node => node.GetBlockInNode().ChangeInteraction(true));
+            _allNodes.ForEach(node =>
+            {
+                if (
+                    node.GetColor()
+                    != ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+                )
+                    node.GetBlockInNode().ChangeInteraction(true);
+            });
             _timer.UnpauseTimer();
         }
     }

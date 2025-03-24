@@ -66,4 +66,9 @@ public class Node : MonoBehaviour
         DOTween.Kill(_sprite);
         DOTween.Kill(_sprite.transform);
     }
+
+    public Color GetColor()
+    {
+        return _sprite.color;
+    }
 }

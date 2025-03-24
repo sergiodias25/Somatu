@@ -129,11 +129,11 @@ namespace Assets.Scripts.SaveGame
 
         public class Onboarding
         {
-            public bool Welcome = false;
-            public bool ClassicExplanation = false;
-            public bool ClassicUndo = false;
-            public bool ClassicHint = false;
-            public bool ChallengeExplanation = false;
+            public bool Welcome = true;
+            public bool ClassicExplanation = true;
+            public bool ClassicUndo = true;
+            public bool ClassicHint = true;
+            public bool ChallengeExplanation = true;
         }
 
         public SaveGame()
@@ -429,7 +429,7 @@ namespace Assets.Scripts.SaveGame
                     Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
                     this
                 );
-                Debug.Log("Saved data in PlayerPrefs");
+                //Debug.Log("Saved data in PlayerPrefs");
             }
             catch (Exception)
             {
@@ -481,12 +481,12 @@ namespace Assets.Scripts.SaveGame
                 && !getCloudSaveGame.IsFaulted
             )
             {
-                Debug.Log("Loaded data from Cloud");
+                //Debug.Log("Loaded data from Cloud");
                 return getCloudSaveGame.Result;
             }
             else if (!getPlayerPrefsSaveGame.IsFaulted && getPlayerPrefsSaveGame.Result != null)
             {
-                Debug.Log("Loaded data from PlayerPrefs");
+                //Debug.Log("Loaded data from PlayerPrefs");
                 return getPlayerPrefsSaveGame.Result;
             }
 

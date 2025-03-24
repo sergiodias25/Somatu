@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
 using GridSum.Assets._Scripts.Visuals;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -123,6 +124,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _onboardingChallenge;
 
+    [SerializeField]
+    private GameObject _popupUseHint;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -207,6 +211,11 @@ public class UIManager : MonoBehaviour
             else if (_challengeFinishedPopup.activeSelf)
             {
                 HideObject(_challengeFinishedPopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_popupUseHint.activeSelf)
+            {
+                GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_gameManager.IsGameInProgress())
@@ -504,10 +513,17 @@ public class UIManager : MonoBehaviour
         if (_hintButton.enabled)
         {
             await CustomAnimation.ButtonClicked(_hintButton.transform);
-            if (_gameManager.UseHint())
+            if (_gameManager.IsHintAvailable())
             {
-                _playerStats.UsedHint(_gameManager.SelectedDifficulty);
-                UpdateHintButtonText();
+                if (_gameManager.UseHint())
+                {
+                    _playerStats.UsedHint(_gameManager.SelectedDifficulty);
+                    UpdateHintButtonText();
+                }
+            }
+            else if (_gameManager.SelectedDifficulty != Constants.Difficulty.Challenge)
+            {
+                ShowObject(_popupUseHint);
             }
         }
         ToggleHintButton();
@@ -570,16 +586,24 @@ public class UIManager : MonoBehaviour
 
     public void ToggleHintButton()
     {
-        ToggleHintButton(_gameManager.IsHintAvailable());
+        ToggleHintButton(_gameManager.IsGameInProgress() && !_gameManager.HasGameEnded());
     }
 
     internal void ToggleHintButton(bool enabled)
     {
-        _hintButton.enabled =
-            enabled && !_gameManager.HasGameEnded() && _gameManager.IsHintAvailable();
+        _hintButton.enabled = enabled && !_gameManager.HasGameEnded();
+        if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
+        {
+            _hintButton.enabled = _hintButton.enabled && _gameManager.IsHintAvailable();
+        }
+        UpdateHintButtonText();
+        UpdateHintButtonColor(_hintButton.enabled);
+    }
 
+    private void UpdateHintButtonColor(bool buttonEnabled)
+    {
         Color originalColor = _hintButton.GetComponent<Image>().color;
-        if (_gameManager.IsHintAvailable() && _hintButton.GetComponent<Image>().color.a != 1)
+        if (buttonEnabled && _hintButton.GetComponent<Image>().color.a != 1)
         {
             _hintButton.GetComponent<Image>().color = new Color(
                 originalColor.r,
@@ -588,9 +612,7 @@ public class UIManager : MonoBehaviour
                 1
             );
         }
-        else if (
-            !_gameManager.IsHintAvailable() && _hintButton.GetComponent<Image>().color.a != 0.5f
-        )
+        else if (!buttonEnabled && _hintButton.GetComponent<Image>().color.a != 0.5f)
         {
             _hintButton.GetComponent<Image>().color = new Color(
                 originalColor.r,
@@ -599,8 +621,6 @@ public class UIManager : MonoBehaviour
                 0.5f
             );
         }
-
-        UpdateHintButtonText();
     }
 
     public void UpdateHintButtonText()
@@ -610,7 +630,7 @@ public class UIManager : MonoBehaviour
                 ? _gameManager.SavedGameData.HintsAvailableChallenge
                 : _gameManager.SavedGameData.HintsAvailableClassic;
         string translationText = LocalizationManager.Localize("btn-hint");
-        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints)
+        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints && HintsAvailable > 0)
         {
             _hintButtonText.text = translationText + ": " + HintsAvailable.ToString();
         }

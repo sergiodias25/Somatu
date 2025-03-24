@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using Assets.Scripts.SaveGame;
 
 public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    /*[SerializeField]
+    [SerializeField]
     Button _showAdButton;
-*/
+
     string _androidAdUnitId = "Rewarded_Android";
 
 #pragma warning disable 414
@@ -26,7 +27,8 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
 #endif
 
         // Disable the button until the ad is ready to show:
-        // _showAdButton.interactable = false;
+        _showAdButton.interactable = false;
+        LoadAd();
     }
 
     // Call this public method when you want to get an ad ready to show.
@@ -45,9 +47,9 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
         if (adUnitId.Equals(_adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
-            //_showAdButton.onClick.AddListener(ShowAd);
+            _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
-            //_showAdButton.interactable = true;
+            _showAdButton.interactable = true;
         }
     }
 
@@ -86,7 +88,9 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
         {
             isAdsRunning = false;
             Debug.Log("Unity Ads Rewarded Ad Completed");
-            // Grant a reward.
+            FindObjectOfType<GameManager>().SavedGameData.IncrementHintsAvailableClassic(1);
+            GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
+            FindObjectOfType<UIManager>().ToggleHintButton(true);
         }
     }
 
@@ -108,6 +112,6 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
     void OnDestroy()
     {
         // Clean up the button listeners:
-        //_showAdButton.onClick.RemoveAllListeners();
+        _showAdButton.onClick.RemoveAllListeners();
     }
 }

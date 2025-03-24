@@ -215,10 +215,10 @@ public class Block : MonoBehaviour
             else if (nodeWhereBlockIsDropped == null || !_isInteractible)
             {
                 CustomAnimation.NumberDropped(transform, _originalNode.transform.position);
-                if (!FindObjectOfType<GameManager>().CheckResult(true))
-                {
-                    _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
-                }
+                //if (!FindObjectOfType<GameManager>().CheckResult(true))
+                //{
+                _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                //}
             }
             _text.DOFade(1f, .25f);
         }
