@@ -3,8 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
-using GridSum.Assets._Scripts.Visuals;
-using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -127,6 +125,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _popupUseHint;
 
+    [SerializeField]
+    private GameObject _popupTheme;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -190,6 +191,11 @@ public class UIManager : MonoBehaviour
             else if (_difficultyLockedPopup.activeSelf)
             {
                 HideObject(_difficultyLockedPopup);
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_popupTheme.activeSelf)
+            {
+                HideObject(_popupTheme);
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_settingsPanel.activeSelf)
@@ -550,6 +556,11 @@ public class UIManager : MonoBehaviour
         {
             CustomAnimation.ButtonLoad(_continueGameButton.transform);
         }
+    }
+
+    public void SelectThemeClick()
+    {
+        ShowObject(_popupTheme);
     }
 
     public void ToggleUndoButton()

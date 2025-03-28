@@ -21,12 +21,14 @@ public class IAPScript : MonoBehaviour
     private GameManager _gameManager;
     private AdBanner _adBanner;
     private UIManager _uiManager;
+    private SettingsHandler _settingsHandler;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _adBanner = FindObjectOfType<AdBanner>();
         _uiManager = FindObjectOfType<UIManager>();
+        _settingsHandler = FindObjectOfType<SettingsHandler>();
     }
 
     public void OnPurchaseComplete(Product product)
@@ -68,20 +70,12 @@ public class IAPScript : MonoBehaviour
             case SUNRISE_THEME:
                 _gameManager.SavedGameData.EnableSunriseTheme();
                 _gameManager.SavedGameData.PersistData();
-                if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
-                {
-                    ButtonSunriseTheme.interactable = false;
-                    FadeButton(ButtonSunriseTheme);
-                }
+                _settingsHandler.ChangeTheme(2);
                 break;
             case SUNSET_THEME:
                 _gameManager.SavedGameData.EnableSunsetTheme();
                 _gameManager.SavedGameData.PersistData();
-                if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
-                {
-                    ButtonSunsetTheme.interactable = false;
-                    FadeButton(ButtonSunsetTheme);
-                }
+                _settingsHandler.ChangeTheme(3);
                 break;
             default:
                 Debug.LogError("Unknown bought");
@@ -138,5 +132,15 @@ public class IAPScript : MonoBehaviour
         Debug.LogError(
             $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
         );
+        switch (product.definition.id)
+        {
+            case SUNRISE_THEME:
+            case SUNSET_THEME:
+                _settingsHandler.RevertTheme();
+                break;
+            default:
+                Debug.LogError("Unknown bought");
+                break;
+        }
     }
 }

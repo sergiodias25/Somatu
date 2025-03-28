@@ -4,6 +4,7 @@ using Assets.SimpleLocalization.Scripts;
 using CandyCabinets.Components.Colour;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class SettingsHandler : MonoBehaviour
@@ -75,6 +76,12 @@ public class SettingsHandler : MonoBehaviour
     private Button _visualAidButton;
 
     [SerializeField]
+    private CodelessIAPButton _sunriseShopButton;
+
+    [SerializeField]
+    private CodelessIAPButton _sunsetShopButton;
+
+    [SerializeField]
     private Image _visualAidImage;
 
     [SerializeField]
@@ -86,6 +93,8 @@ public class SettingsHandler : MonoBehaviour
     private AudioManager _audioManager;
     private GameManager _gameManager;
     private GradientBg _gradientBg;
+
+    private int _previousSelectedThemeidx = 0;
 
     public void LoadData(GameManager gameManager)
     {
@@ -107,16 +116,43 @@ public class SettingsHandler : MonoBehaviour
         LocalizationManager.OnLocalizationChanged += () => UpdateControlTranslation();
     }
 
-    public async void ChangeTheme()
+    // TODO: delete this
+    public void ChangeTheme(int selectedThemeIndex)
     {
-        await CustomAnimation.ButtonClicked(_themeButton.transform);
-        int _selectedColorsIndex = _gameManager.SavedGameData.SettingsData.SelectedThemeIndex;
-        int _newSelectedColorsIndex = GetNextTheme(_selectedColorsIndex);
-        ColourManager.Instance.SelectPalette(_newSelectedColorsIndex);
-        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = _newSelectedColorsIndex;
+        if (selectedThemeIndex == 2)
+        {
+            if (!_gameManager.SavedGameData.PurchaseData.SunriseTheme)
+            {
+                _previousSelectedThemeidx = _gameManager
+                    .SavedGameData
+                    .SettingsData
+                    .SelectedThemeIndex;
+                ColourManager.Instance.SelectPalette(selectedThemeIndex);
+                _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
+                _sunriseShopButton.Invoke("PurchaseProduct", 0);
+                return;
+            }
+        }
+        if (selectedThemeIndex == 3)
+        {
+            if (!_gameManager.SavedGameData.PurchaseData.SunsetTheme)
+            {
+                _previousSelectedThemeidx = _gameManager
+                    .SavedGameData
+                    .SettingsData
+                    .SelectedThemeIndex;
+                ColourManager.Instance.SelectPalette(selectedThemeIndex);
+                _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
+                _sunsetShopButton.Invoke("PurchaseProduct", 0);
+                return;
+            }
+        }
+
+        ColourManager.Instance.SelectPalette(selectedThemeIndex);
+        _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedThemeIndex;
         _gameManager.SavedGameData.PersistData();
 
-        _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(_newSelectedColorsIndex));
+        _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
         _gameManager.CheckResult(false);
         _gameManager.RemoveHints();
 
@@ -124,29 +160,10 @@ public class SettingsHandler : MonoBehaviour
         FindObjectOfType<ColorHelper>().ApplyUpdates();
     }
 
-    private int GetNextTheme(int selectedColorsIndex)
+    public void RevertTheme()
     {
-        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 2)
-        {
-            return 0;
-        }
-        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 3)
-        {
-            if (_gameManager.SavedGameData.PurchaseData.SunsetTheme)
-            {
-                return selectedColorsIndex + 1;
-            }
-            return 0;
-        }
-        if (selectedColorsIndex == ColourManager.Instance.Palettes.Count - 4)
-        {
-            if (_gameManager.SavedGameData.PurchaseData.SunriseTheme)
-            {
-                return selectedColorsIndex + 1;
-            }
-            return GetNextTheme(selectedColorsIndex + 1);
-        }
-        return selectedColorsIndex + 1;
+        ColourManager.Instance.SelectPalette(_previousSelectedThemeidx);
+        _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(_previousSelectedThemeidx));
     }
 
     private void UpdateSoundIcon()
