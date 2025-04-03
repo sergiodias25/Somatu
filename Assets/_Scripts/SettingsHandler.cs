@@ -275,14 +275,22 @@ public class SettingsHandler : MonoBehaviour
 
     public void ChangeLanguage(string language)
     {
+        bool _showMainMenu = false;
+
         LocalizationManager.Language = language;
         if (!_gameManager.SavedGameData.SettingsData.LanguageChangedOnce)
         {
             _gameManager.SavedGameData.SettingsData.LanguageChangedOnce = true;
+            _showMainMenu = true;
         }
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
         FindObjectOfType<UIManager>().UpdateHintButtonText();
+
+        if (_showMainMenu)
+        {
+            FindObjectOfType<UIManager>().ShowMainMenu();
+        }
     }
 
     public async void CloseLanguagePopup(Button buttonClicked)

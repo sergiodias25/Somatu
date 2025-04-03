@@ -908,12 +908,6 @@ public class GameManager : MonoBehaviour
         await load;
         SavedGameData = load.Result;
 
-        LocalizationManager.Read();
-        if (!SavedGameData.SettingsData.LanguageChangedOnce)
-        {
-            _languagePopup.SetActive(true);
-        }
-        LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
         if (!SavedGameData.PurchaseData.RemovedAds)
         {
             _adBanner.ShowBannerAd();
@@ -932,10 +926,20 @@ public class GameManager : MonoBehaviour
         );
         _gameBackground.transform.position = boardCenter;
 
-        _uiManager.ShowMainMenu();
         FindObjectOfType<ColorHelper>().ApplyUpdates();
         _backgroundCamera.enabled = true;
         loadingCanvas.gameObject.SetActive(false);
+
+        LocalizationManager.Read();
+        if (!SavedGameData.SettingsData.LanguageChangedOnce)
+        {
+            _languagePopup.SetActive(true);
+        }
+        else
+        {
+            _uiManager.ShowMainMenu();
+        }
+        LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
     }
 
     /*     private void OnApplicationFocus(bool focusedOn)
