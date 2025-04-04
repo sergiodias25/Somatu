@@ -3,6 +3,10 @@ using UnityEngine.Rendering;
 
 public class GradientBg : MonoBehaviour
 {
+    private MeshFilter mf;
+    private MeshRenderer mr;
+    private Material mat;
+
     void Start()
     {
         // put the backgorund plane in front of camera (you can change this later);
@@ -13,9 +17,9 @@ public class GradientBg : MonoBehaviour
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
 
         // create the background plane
-        MeshFilter mf = this.gameObject.AddComponent<MeshFilter>();
-        MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
-        Material mat = new Material(Shader.Find("Sprites/Default"));
+        mf = this.gameObject.AddComponent<MeshFilter>();
+        mr = this.gameObject.AddComponent<MeshRenderer>();
+        mat = new Material(Shader.Find("Sprites/Default"));
 
         // set the proper renderering order for the background plane
         mat.renderQueue = ((int)RenderQueue.Background);
@@ -26,7 +30,6 @@ public class GradientBg : MonoBehaviour
 
     public void UpdateTheme(Color[] colors)
     {
-        MeshFilter mf = this.gameObject.GetComponent<MeshFilter>();
         // setting the background plane's 4 corner positions ( you def want to change them later )
         Vector3[] BackgroundPlaneVerteices = new Vector3[4];
         BackgroundPlaneVerteices[0] = new Vector3(0, 0, 0) * 0.25f;

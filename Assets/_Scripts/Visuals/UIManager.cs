@@ -42,9 +42,6 @@ public class UIManager : MonoBehaviour
     private GameObject _gameNodes;
 
     [SerializeField]
-    private GameObject _shopPanel;
-
-    [SerializeField]
     private GameObject _settingsPanel;
 
     [SerializeField]
@@ -214,10 +211,6 @@ public class UIManager : MonoBehaviour
             {
                 ToggleSupportPanel();
             }
-            else if (_shopPanel.activeSelf)
-            {
-                ToggleShopPanel();
-            }
             else if (_profilePanel.activeSelf)
             {
                 ToggleProfilePanel();
@@ -259,7 +252,6 @@ public class UIManager : MonoBehaviour
         ShowObject(_mainMenuPanel);
         CustomAnimation.ButtonLoad(_classicModeButton.transform);
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
-        HideObject(_shopPanel);
         HideObject(_settingsPanel);
         HideObject(_supportPanel);
         HideObject(_profilePanel);
@@ -517,7 +509,6 @@ public class UIManager : MonoBehaviour
         HideObject(_gameplayStatsPanel);
         HideObject(_gameplayInGamePanel);
         HideObject(_gameplayEndGamePanel);
-        HideObject(_shopPanel);
         HideObject(_profilePanel);
         HideObject(_settingsPanel);
         HideObject(_supportPanel);
@@ -757,10 +748,6 @@ public class UIManager : MonoBehaviour
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);
-            if (_shopPanel.activeSelf)
-            {
-                HideObject(_shopPanel);
-            }
             if (_profilePanel.activeSelf)
             {
                 HideObject(_profilePanel);
@@ -799,10 +786,6 @@ public class UIManager : MonoBehaviour
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);
-            if (_shopPanel.activeSelf)
-            {
-                HideObject(_shopPanel);
-            }
             if (_profilePanel.activeSelf)
             {
                 HideObject(_profilePanel);
@@ -837,10 +820,6 @@ public class UIManager : MonoBehaviour
             HideObject(_mainMenuPanel);
             HideClassicMenu();
             ToggleGameplayElements(false);
-            if (_shopPanel.activeSelf)
-            {
-                HideObject(_shopPanel);
-            }
             if (_settingsPanel.activeSelf)
             {
                 HideObject(_settingsPanel);
@@ -855,47 +834,6 @@ public class UIManager : MonoBehaviour
             }
 
             ShowObject(_profilePanel);
-        }
-    }
-
-    public void ToggleShopPanel()
-    {
-        if (_shopPanel.activeSelf)
-        {
-            _topBarManager.DeselectShopButton();
-            HideObject(_shopPanel);
-            if (_gameManager.IsGameInProgress())
-            {
-                RestoreGameplayPanel();
-            }
-            else
-            {
-                ShowMainMenu();
-            }
-        }
-        else
-        {
-            _topBarManager.SelectShopButton();
-            HideObject(_mainMenuPanel);
-            HideClassicMenu();
-            ToggleGameplayElements(false);
-            if (_settingsPanel.activeSelf)
-            {
-                HideObject(_settingsPanel);
-            }
-            if (_supportPanel.activeSelf)
-            {
-                HideObject(_supportPanel);
-            }
-            if (_profilePanel.activeSelf)
-            {
-                HideObject(_profilePanel);
-            }
-            if (_gameManager.IsGameInProgress())
-            {
-                _timer.PauseTimer();
-            }
-            ShowObject(_shopPanel);
         }
     }
 

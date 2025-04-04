@@ -93,7 +93,7 @@ namespace CandyCabinets.Components.Colour
                 FindObjectOfType<UIManager>().ToggleHintButton();
             }
 
-            if (
+            /* if (
                 gameObject.name == "ButtonHintsUnlimited"
                 || gameObject.name == "ButtonHints5"
                 || gameObject.name == "ButtonUnlockLevels"
@@ -107,7 +107,7 @@ namespace CandyCabinets.Components.Colour
                 {
                     iapScript.LoadIAPStatus();
                 }
-            }
+            } */
         }
 
         public List<Component> ScanForComponents()

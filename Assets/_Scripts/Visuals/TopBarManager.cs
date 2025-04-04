@@ -9,9 +9,6 @@ public class TopBarManager : MonoBehaviour
     private Button _homeButton;
 
     [SerializeField]
-    private Button _shopButton;
-
-    [SerializeField]
     private Button _profileButton;
 
     [SerializeField]
@@ -46,25 +43,14 @@ public class TopBarManager : MonoBehaviour
     public async void SelectHomeButton()
     {
         MakeActive(_homeButton);
-        MakeInactive(_shopButton);
         MakeInactive(_settingsButton);
         MakeInactive(_profileButton);
         await CustomAnimation.ButtonClicked(_homeButton.transform);
     }
 
-    public async void SelectShopButton()
-    {
-        MakeInactive(_homeButton);
-        MakeActive(_shopButton);
-        MakeInactive(_settingsButton);
-        MakeInactive(_profileButton);
-        await CustomAnimation.ButtonClicked(_shopButton.transform);
-    }
-
     public async void SelectSettingsButton()
     {
         MakeInactive(_homeButton);
-        MakeInactive(_shopButton);
         MakeActive(_settingsButton);
         MakeInactive(_profileButton);
         await CustomAnimation.ButtonClicked(_settingsButton.transform);
@@ -73,7 +59,6 @@ public class TopBarManager : MonoBehaviour
     public async void SelectProfileButton()
     {
         MakeInactive(_homeButton);
-        MakeInactive(_shopButton);
         MakeInactive(_settingsButton);
         MakeActive(_profileButton);
         await CustomAnimation.ButtonClicked(_profileButton.transform);
@@ -83,12 +68,6 @@ public class TopBarManager : MonoBehaviour
     {
         MakeInactive(_homeButton);
         await CustomAnimation.ButtonClicked(_homeButton.transform);
-    }
-
-    public async void DeselectShopButton()
-    {
-        MakeInactive(_shopButton);
-        await CustomAnimation.ButtonClicked(_shopButton.transform);
     }
 
     public async void DeselectSettingsButton()
@@ -106,7 +85,6 @@ public class TopBarManager : MonoBehaviour
     public void DeselectAll()
     {
         MakeInactive(_homeButton);
-        MakeInactive(_shopButton);
         MakeInactive(_settingsButton);
         MakeInactive(_profileButton);
     }
