@@ -61,4 +61,11 @@ public class Popup : MonoBehaviour
         FindObjectOfType<UIManager>().ChangeModeClick();
         _popupPanel.SetActive(false); //TODO: animation
     }
+
+    public async void ActionRemoveBanner()
+    {
+        await CustomAnimation.ButtonClicked(_actionButton.transform);
+        FindObjectOfType<IAPScript>().RemoveAds();
+        _popupPanel.SetActive(false); //TODO: animation
+    }
 }

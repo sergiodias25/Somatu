@@ -128,6 +128,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _popupTheme;
 
+    [SerializeField]
+    private GameObject _removeBannerPopup;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -151,6 +154,11 @@ public class UIManager : MonoBehaviour
                 {
                     HideObject(_languagePopup);
                 }
+                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            }
+            else if (_removeBannerPopup.activeSelf)
+            {
+                HideObject(_removeBannerPopup);
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingWelcome.activeSelf)
@@ -386,6 +394,11 @@ public class UIManager : MonoBehaviour
             LocalizationManager.Localize("mode-" + newDifficulty.ToString().ToLower())
         );
         ShowObject(_unlockLevelPopup);
+    }
+
+    public void ShowRemoveBannerPopup()
+    {
+        ShowObject(_removeBannerPopup);
     }
 
     public async void ClickOnHardMode()

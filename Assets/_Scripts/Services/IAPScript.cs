@@ -143,4 +143,9 @@ public class IAPScript : MonoBehaviour
                 break;
         }
     }
+
+    internal void RemoveAds()
+    {
+        ButtonRemoveAds.Invoke("PurchaseProduct", 0);
+    }
 }

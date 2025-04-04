@@ -535,6 +535,13 @@ public class GameManager : MonoBehaviour
                 false
             );
         }
+        else
+        {
+            if (!SavedGameData.PurchaseData.RemovedAds && (Random.Range(0, 5) < 2))
+            {
+                _uiManager.ShowRemoveBannerPopup();
+            }
+        }
     }
 
     public void PuzzleFailed(double _elapsedTime)
