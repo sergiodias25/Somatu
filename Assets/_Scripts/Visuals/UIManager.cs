@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _gameplayEndGamePanel;
+
+    [SerializeField]
     private PlayerStats _playerStats;
 
     [SerializeField]
@@ -132,7 +134,6 @@ public class UIManager : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
-        _playerStats = FindObjectOfType<PlayerStats>();
         _topBarManager = FindObjectOfType<TopBarManager>();
         HideClassicMenu();
         HideObject(_gameplayStatsPanel);

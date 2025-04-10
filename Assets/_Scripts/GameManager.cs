@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
+using UnityEngine.Purchasing;
 
 public class GameManager : MonoBehaviour
 {
@@ -909,6 +910,8 @@ public class GameManager : MonoBehaviour
 
     public async void StartGame(Canvas loadingCanvas)
     {
+        StandardPurchasingModule.Instance().useFakeStoreAlways = true;
+        StandardPurchasingModule.Instance().useFakeStoreUIMode = FakeStoreUIMode.DeveloperUser;
         QualitySettings.SetQualityLevel(5, true);
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
         Task<SaveGame> load = SaveGame.LoadSaveGame();

@@ -2,7 +2,6 @@ using UnityEngine;
 using TMPro;
 using static Constants;
 using System;
-using Assets.Scripts.SaveGame;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -256,9 +255,23 @@ public class PlayerStats : MonoBehaviour
 
         _challengeGamesPlayedText.text =
             _gameManager.SavedGameData.ChallengeStats.GamesCompleted.ToString();
-        _challengeSolvesMaximumText.text = (
-            _gameManager.SavedGameData.ChallengeStats.SolveCountBest + 1
-        ).ToString();
+        if (_gameManager.SavedGameData.ChallengeStats.GamesCompleted == 0)
+        {
+            _challengeSolvesMaximumText.text = "0";
+        }
+        else if (
+            _gameManager.SavedGameData.ChallengeStats.GamesCompleted > 0
+            && _gameManager.SavedGameData.ChallengeStats.SolveCountBest == 0
+        )
+        {
+            _challengeSolvesMaximumText.text = "1";
+        }
+        else
+        {
+            _challengeSolvesMaximumText.text = (
+                _gameManager.SavedGameData.ChallengeStats.SolveCountBest + 1
+            ).ToString();
+        }
         _challengeSolvesAverageText.text = Math.Round(
                 _gameManager.SavedGameData.ChallengeStats.SolveCountAverage,
                 2

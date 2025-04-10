@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using CandyCabinets.Components.Colour;
-using TMPro;
+using Assets.Scripts.CustomAnimation;
 
 //------- Created by  : Hamza Herbou
 //------- Email       : hamza95herbou@gmail.com
@@ -56,7 +55,7 @@ namespace EasyUI.Tabs
 
         private void OnEnable()
         {
-            UpdateTabColors();
+            AnimateContent(tabContent[current]);
         }
 
         private void GetTabBtns()
@@ -88,45 +87,12 @@ namespace EasyUI.Tabs
                 tabBtns[i].uiButton.onClick.AddListener(() => OnTabButtonClicked(i_copy));
 
                 tabContent[i] = parentContent.GetChild(i).gameObject;
-                tabContent[i].SetActive(false);
-                tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                    Constants.COLOR_BUTTON
-                ];
-                tabBtns[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT];
             }
 
             previous = current = 0;
 
-            tabBtns[0].uiButton.interactable = false;
-            tabContent[0].SetActive(true);
-            tabBtns[0].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                Constants.COLOR_SQUARE
-            ];
-            tabBtns[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
-                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
-        }
-
-        public void UpdateTabColors()
-        {
-            parentBtns = transform.GetChild(0);
-            tabBtnsNum = parentBtns.childCount;
-
-            tabBtns = new TabButtonUI[tabBtnsNum];
-            for (int i = 0; i < tabBtnsNum; i++)
-            {
-                tabBtns[i] = parentBtns.GetChild(i).GetComponent<TabButtonUI>();
-                if (i != current)
-                {
-                    tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                        Constants.COLOR_BUTTON
-                    ];
-                }
-                else
-                    tabBtns[i].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                        Constants.COLOR_SQUARE
-                    ];
-            }
+            tabContent[0].SetActive(true); /* 
+            AnimateContent(tabContent[0]); */
         }
 
         public void OnTabButtonClicked(int tabIndex)
@@ -141,44 +107,23 @@ namespace EasyUI.Tabs
 
                 tabContent[previous].SetActive(false);
                 tabContent[current].SetActive(true);
+                AnimateContent(tabContent[current]);
+            }
+        }
 
-                tabBtns[previous].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                    Constants.COLOR_BUTTON
-                ];
-                tabBtns[previous].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT];
-                tabBtns[current].uiImage.color = ColourManager.Instance.SelectedPalette().Colours[
-                    Constants.COLOR_SQUARE
-                ];
-                tabBtns[current].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color =
-                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
-
-                tabBtns[previous].uiButton.interactable = true;
-                tabBtns[current].uiButton.interactable = false;
+        private void AnimateContent(GameObject content)
+        {
+            foreach (var item in content.transform.GetComponentsInChildren<RectTransform>())
+            {
+                if (item.gameObject == content)
+                {
+                    continue;
+                }
+                CustomAnimation.StatsLoad(item);
             }
         }
 
 #if UNITY_EDITOR
-        public void UpdateThemeColor(Color color)
-        {
-            tabBtns[0].uiImage.color = color;
-            Color colorDark = DarkenColor(color, 0.3f);
-            for (int i = 1; i < tabBtnsNum; i++)
-                tabBtns[i].uiImage.color = colorDark;
-
-            parentContent.GetComponent<Image>().color = color;
-        }
-
-        private Color DarkenColor(Color color, float amount)
-        {
-            float h,
-                s,
-                v;
-            Color.RGBToHSV(color, out h, out s, out v);
-            v = Mathf.Max(0f, v - amount);
-            return Color.HSVToRGB(h, s, v);
-        }
-
         public void Validate(TabsType type)
         {
             parentBtns = transform.GetChild(0);
@@ -194,8 +139,6 @@ namespace EasyUI.Tabs
                 tabBtns[i] = parentBtns.GetChild(i).GetComponent<TabButtonUI>();
                 tabContent[i] = parentContent.GetChild(i).gameObject;
             }
-
-            UpdateThemeColor(themeColor);
 
             if (layoutGroup == null)
                 layoutGroup = parentBtns.GetComponent<LayoutGroup>();

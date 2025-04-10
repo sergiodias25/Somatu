@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,25 @@ namespace Assets.Scripts.CustomAnimation
 
             await WaitForAnimation("ButtonClick" + target.name);
             target.gameObject.GetComponent<Button>().enabled = true;
+        }
+
+        public static async Task TextClicked(Transform target)
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(target.DOScale(BUTTON_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
+            sequence.Append(
+                target
+                    .GetComponent<TextMeshProUGUI>()
+                    .DOFade(BUTTON_SHRINK_ON_CLICK_OPACITY, BUTTON_SHRINK_ON_CLICK_OPACITY_TIME)
+                    .From()
+                    .SetEase(Ease.OutQuad)
+            );
+            sequence.Append(
+                target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
+            );
+            sequence.SetId("TextShrink" + target.name).Play();
+
+            await WaitForAnimation("TextShrink" + target.name);
         }
 
         public static void NumberClicked(Transform transform)
@@ -245,6 +265,15 @@ namespace Assets.Scripts.CustomAnimation
                         .InteractionPerformed(Constants.AudioClip.NodeLoaded);
                 })
                 .SetDelay(RandomizeDelayValue(0.75));
+        }
+
+        internal static void StatsLoad(RectTransform transform)
+        {
+            transform
+                .DOScale(.75f, .5f)
+                .From()
+                .SetEase(Ease.OutBounce)
+                .SetDelay(RandomizeDelayValue(0.15));
         }
 
         static float RandomizeDelayValue(double delay)
