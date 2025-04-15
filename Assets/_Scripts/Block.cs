@@ -342,7 +342,7 @@ public class Block : MonoBehaviour
 
     public async Task AnimateIncorrectSolution()
     {
-        await CustomAnimation.SumIsIncorrect(_text.transform);
+        await CustomAnimation.SumIsIncorrect(_text.transform, GetNode().name);
     }
 
     private void OnDestroy()

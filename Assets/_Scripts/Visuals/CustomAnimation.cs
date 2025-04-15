@@ -131,21 +131,32 @@ namespace Assets.Scripts.CustomAnimation
             return true;
         }
 
-        public static async Task SumIsIncorrect(Transform transform)
+        public static async Task SumIsIncorrect(Transform transform, string nodeName)
         {
-            var sequence = DOTween.Sequence();
-            sequence.Append(
-                transform.DOMoveX(transform.position.x + 0.05f, SUM_CORRECT_ANIMATION_DURATION / 3)
-            );
-            sequence.Append(
-                transform.DOMoveX(transform.position.x - 0.05f, SUM_CORRECT_ANIMATION_DURATION / 3)
-            );
-            sequence.Append(
-                transform.DOMoveX(transform.position.x, SUM_CORRECT_ANIMATION_DURATION / 3)
-            );
-            sequence.SetId("SumIsIncorrect" + transform.name).Play();
+            string animationId = "SumIsIncorrect" + nodeName;
+            if (DOTween.TotalTweensById(animationId) == 0)
+            {
+                var sequence = DOTween.Sequence();
+                sequence.Append(
+                    transform.DOMoveX(
+                        transform.position.x + 0.05f,
+                        SUM_CORRECT_ANIMATION_DURATION / 3
+                    )
+                );
+                sequence.Append(
+                    transform.DOMoveX(
+                        transform.position.x - 0.05f,
+                        SUM_CORRECT_ANIMATION_DURATION / 3
+                    )
+                );
+                sequence.Append(
+                    transform.DOMoveX(transform.position.x, SUM_CORRECT_ANIMATION_DURATION / 3)
+                );
+                sequence.SetId(animationId).Play();
 
-            await WaitForAnimation("SumIsIncorrect" + transform.name);
+                await WaitForAnimation(animationId);
+                DOTween.Kill(animationId, true);
+            }
         }
 
         public static async void AnimatePuzzleSolved(Block[] blocks)
