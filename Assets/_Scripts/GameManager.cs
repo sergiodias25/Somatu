@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int _height = 3;
 
+    private bool _isGameFinished = false;
+
     [SerializeField]
     private Node _nodePrefab;
 
@@ -462,6 +464,7 @@ public class GameManager : MonoBehaviour
 
     private void DoEndGameActions()
     {
+        _isGameFinished = true;
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().ChangeInteraction(false);
@@ -638,6 +641,7 @@ public class GameManager : MonoBehaviour
         bool resetChallengeActualDifficulty
     )
     {
+        _isGameFinished = false;
         DOTween.Kill("NumberJump");
         for (int i = 0; i < _allNodes.Count; i++)
         {
@@ -895,17 +899,7 @@ public class GameManager : MonoBehaviour
 
     public bool HasGameEnded()
     {
-        foreach (Transform node in _generatedNodesObject.transform)
-        {
-            if (
-                node.gameObject.GetComponent<Node>().GetColor()
-                != ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
-            )
-            {
-                return false;
-            }
-        }
-        return true;
+        return _isGameFinished;
     }
 
     public async void StartGame(Canvas loadingCanvas)
@@ -1078,17 +1072,20 @@ public class GameManager : MonoBehaviour
 
     internal void EnableGameplayBlocks()
     {
-        if (_allNodes != null && _allNodes.Count > 0)
+        if (!HasGameEnded())
         {
-            _allNodes.ForEach(node =>
+            if (_allNodes != null && _allNodes.Count > 0)
             {
-                if (
-                    node.GetColor()
-                    != ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
-                )
-                    node.GetBlockInNode().ChangeInteraction(true);
-            });
-            _timer.UnpauseTimer();
+                _allNodes.ForEach(node =>
+                {
+                    if (
+                        node.GetColor()
+                        != ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
+                    )
+                        node.GetBlockInNode().ChangeInteraction(true);
+                });
+                _timer.UnpauseTimer();
+            }
         }
     }
 }

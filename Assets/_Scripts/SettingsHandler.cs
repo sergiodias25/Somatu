@@ -147,14 +147,17 @@ public class SettingsHandler : MonoBehaviour
                 return;
             }
         }
+        if (!_gameManager.HasGameEnded())
+        {
+            _gameManager.CheckResult(false);
+            _gameManager.RemoveHints();
+        }
 
         ColourManager.Instance.SelectPalette(selectedThemeIndex);
         _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedThemeIndex;
         _gameManager.SavedGameData.PersistData();
 
         _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
-        _gameManager.CheckResult(false);
-        _gameManager.RemoveHints();
 
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
         FindObjectOfType<ColorHelper>().ApplyUpdates();
