@@ -31,9 +31,11 @@ public class Profile : MonoBehaviour
     [SerializeField]
     private Button _challengeButton;
 
-    void Start()
+    private void OnEnable()
     {
+        _selectedDifficulty = (int)FindObjectOfType<GameManager>().SelectedDifficulty;
         UpdateModeText();
+        ChangeContentDisplayed();
     }
 
     public void MoveBackward()
