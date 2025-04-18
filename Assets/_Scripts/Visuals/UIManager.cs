@@ -646,7 +646,10 @@ public class UIManager : MonoBehaviour
                 ? _gameManager.SavedGameData.HintsAvailableChallenge
                 : _gameManager.SavedGameData.HintsAvailableClassic;
         string translationText = LocalizationManager.Localize("btn-hint");
-        if (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints && HintsAvailable > 0)
+        if (
+            _gameManager.SelectedDifficulty == Constants.Difficulty.Challenge
+            || (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints && HintsAvailable > 0)
+        )
         {
             _hintButtonText.text = translationText + ": " + HintsAvailable.ToString();
         }
