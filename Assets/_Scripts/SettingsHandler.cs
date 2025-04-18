@@ -96,6 +96,9 @@ public class SettingsHandler : MonoBehaviour
 
     private int _previousSelectedThemeidx = 0;
 
+    [SerializeField]
+    private Popup _themeSelectPopup;
+
     public void LoadData(GameManager gameManager)
     {
         _audioManager = FindObjectOfType<AudioManager>();
@@ -116,9 +119,9 @@ public class SettingsHandler : MonoBehaviour
         LocalizationManager.OnLocalizationChanged += () => UpdateControlTranslation();
     }
 
-    // TODO: delete this
     public void ChangeTheme(int selectedThemeIndex)
     {
+        _gameManager.EnableGameplayBlocks();
         if (selectedThemeIndex == 2)
         {
             if (!_gameManager.SavedGameData.PurchaseData.SunriseTheme)
@@ -147,11 +150,6 @@ public class SettingsHandler : MonoBehaviour
                 return;
             }
         }
-        if (!_gameManager.HasGameEnded())
-        {
-            _gameManager.CheckResult(false);
-            _gameManager.RemoveHints();
-        }
 
         ColourManager.Instance.SelectPalette(selectedThemeIndex);
         _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedThemeIndex;
@@ -159,8 +157,15 @@ public class SettingsHandler : MonoBehaviour
 
         _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
 
+        if (!_gameManager.HasGameEnded())
+        {
+            _gameManager.CheckResult(false);
+            _gameManager.RemoveHints();
+        }
+
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
         FindObjectOfType<ColorHelper>().ApplyUpdates();
+        _themeSelectPopup.ClosePopupGameplay();
     }
 
     public void RevertTheme()
