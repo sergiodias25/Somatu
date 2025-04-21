@@ -67,8 +67,11 @@ public static class Constants
 
     // 1 second does not count
     public static double ChallengeTimeLimit = 61.0f;
-    public static double ChallengeAnimatedTimeThreshold = 20.2f;
-    public static double ChallengePuzzleSolvedBonus = 15.0f;
+    public static double ChallengeAnimatedTimeThreshold = 25f;
+    public static double ChallengeBonusThresholdTimeEasy = 10f;
+    public static double ChallengeBonusThresholdTimeMedium = 20f;
+    public static double ChallengeBonusThresholdTimeHard = 40f;
+    public static double ChallengeBonusThresholdTimeExtreme = 60.0f;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {

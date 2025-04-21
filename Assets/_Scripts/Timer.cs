@@ -15,6 +15,9 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private Image _clockIcon;
 
+    [SerializeField]
+    private GameObject _timerGroup;
+
     [Header("Values")]
     private double _currentTime;
     private double _elapsedTime;
@@ -23,6 +26,7 @@ public class Timer : MonoBehaviour
     private bool _isRunning;
     private double _timeLimitValue;
     private bool _isAnimating = false;
+    private double _lastChallengeStartTime;
 
     private void Awake()
     {
@@ -38,6 +42,7 @@ public class Timer : MonoBehaviour
         {
             _isAnimating = false;
         }
+        _lastChallengeStartTime = isChallenge ? _timeLimitValue : 0f;
         _currentTime = isChallenge ? _timeLimitValue : timerValue;
     }
 
@@ -46,6 +51,7 @@ public class Timer : MonoBehaviour
         Init();
         _isCountdown = isChallenge;
         _currentTime = isChallenge ? _timeLimitValue : 0f;
+        _lastChallengeStartTime = isChallenge ? _timeLimitValue : 0f;
     }
 
     private void Init()
@@ -57,6 +63,7 @@ public class Timer : MonoBehaviour
         _clockIcon.color = ColourManager.Instance.SelectedPalette().Colours[
             Constants.COLOR_LIGHT_TEXT
         ];
+        _timerGroup.transform.DOScale(Vector3.one, .1f);
         _timeLimitValue = Constants.ChallengeTimeLimit;
         _isRunning = true;
     }
@@ -110,24 +117,25 @@ public class Timer : MonoBehaviour
     private void AnimateTimerRunningOut()
     {
         AnimateTimerColor();
-        AnimateTimerScale();
+        AnimateTimerGroupScale();
     }
 
     private void StopAnimatingTimerRunningOut()
     {
         _isAnimating = false;
         FindObjectOfType<AudioManager>().StopSFX();
-        DOTween.Kill("AnimateTimer");
+        DOTween.Kill("AnimateTimerSize");
         DOTween.Kill("AnimateTimerColor");
-        _timerText.rectTransform.localScale = Vector3.one;
         _timerText.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
+        _clockIcon.color = ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED];
+        _timerGroup.transform.DOScale(Vector3.one, .1f);
     }
 
-    private void AnimateTimerScale()
+    private void AnimateTimerGroupScale()
     {
         if (_isAnimating && _isCountdown && _isRunning)
         {
-            _timerText.rectTransform
+            _timerGroup.transform
                 .DOScale(Vector3.one, .5f)
                 .SetUpdate(true)
                 .OnComplete(() =>
@@ -137,15 +145,15 @@ public class Timer : MonoBehaviour
                         audioManager.GetAudioClip(Constants.AudioClip.TimerTicking),
                         0.1f
                     );
-                    _timerText.rectTransform
-                        .DOScale(new Vector3(.92f, .92f, .92f), .5f)
+                    _timerGroup.transform
+                        .DOScale(new Vector3(1.25f, 1.25f, 1.25f), .5f)
                         .SetUpdate(true)
                         .OnComplete(() =>
                         {
-                            AnimateTimerScale();
+                            AnimateTimerGroupScale();
                         });
                 })
-                .SetId("AnimateTimer");
+                .SetId("AnimateTimerSize");
         }
     }
 
@@ -171,6 +179,23 @@ public class Timer : MonoBehaviour
                         {
                             AnimateTimerColor();
                         });
+                })
+                .SetId("AnimateTimerColor");
+
+            _clockIcon
+                .DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                    0.5f
+                )
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    _clockIcon
+                        .DOColor(
+                            ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED],
+                            0.5f
+                        )
+                        .SetUpdate(true);
                 })
                 .SetId("AnimateTimerColor");
         }
@@ -228,9 +253,63 @@ public class Timer : MonoBehaviour
         _isRunning = true;
     }
 
-    public void AddPuzzleSolvedBonus()
+    public void AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
     {
-        _currentTime += Constants.ChallengePuzzleSolvedBonus;
+        double _elapsedTimeInSolvedPuzzle = _lastChallengeStartTime - _currentTime;
+        _currentTime += GetTimeBonus(_elapsedTimeInSolvedPuzzle, actualDifficulty);
+        _lastChallengeStartTime = _currentTime;
+    }
+
+    private int GetTimeBonus(
+        double elapsedTimeInSolvedPuzzle,
+        Constants.Difficulty actualDifficulty
+    )
+    {
+        int timeGainedBase = 0;
+        int timeGainedExtra = 0;
+        int extraCalc;
+        Debug.Log("demorou : " + elapsedTimeInSolvedPuzzle);
+        switch (actualDifficulty)
+        {
+            case Constants.Difficulty.Easy:
+                timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeEasy / 2);
+                Debug.Log("ganhou base : " + timeGainedBase);
+                extraCalc = (int)(
+                    Constants.ChallengeBonusThresholdTimeEasy - elapsedTimeInSolvedPuzzle
+                );
+                timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
+                Debug.Log("ganhou extra: " + extraCalc);
+                break;
+            case Constants.Difficulty.Medium:
+                timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeMedium / 2);
+                Debug.Log("ganhou base : " + timeGainedBase);
+                extraCalc = (int)(
+                    Constants.ChallengeBonusThresholdTimeMedium - elapsedTimeInSolvedPuzzle
+                );
+                timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
+                Debug.Log("ganhou extra: " + extraCalc);
+                break;
+            case Constants.Difficulty.Hard:
+                timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeHard / 2);
+                Debug.Log("ganhou base : " + timeGainedBase);
+                extraCalc = (int)(
+                    Constants.ChallengeBonusThresholdTimeHard - elapsedTimeInSolvedPuzzle
+                );
+                timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
+                Debug.Log("ganhou extra: " + extraCalc);
+                break;
+            case Constants.Difficulty.Extreme:
+                timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeExtreme / 2);
+                Debug.Log("ganhou base : " + timeGainedBase);
+                extraCalc = (int)(
+                    Constants.ChallengeBonusThresholdTimeExtreme - elapsedTimeInSolvedPuzzle
+                );
+                timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
+                Debug.Log("ganhou extra: " + extraCalc);
+                break;
+        }
+        Debug.Log("ganhou : " + (timeGainedBase + timeGainedExtra));
+        return timeGainedBase + timeGainedExtra;
     }
 
     public static string FormatTime(double timeValue)

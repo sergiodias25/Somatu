@@ -508,7 +508,7 @@ public class GameManager : MonoBehaviour
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             SavedGameData.IncrementHintsAvailableChallenge(1);
-            _timer.AddPuzzleSolvedBonus();
+            _timer.AddPuzzleSolvedBonus(ActualDifficulty);
         }
         else
         {
