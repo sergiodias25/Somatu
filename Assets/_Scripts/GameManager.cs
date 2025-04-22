@@ -550,6 +550,7 @@ public class GameManager : MonoBehaviour
 
     public void PuzzleFailed(double _elapsedTime)
     {
+        _isGameFinished = true;
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().ChangeInteraction(false);

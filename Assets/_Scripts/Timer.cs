@@ -1,3 +1,4 @@
+using Assets.Scripts.CustomAnimation;
 using CandyCabinets.Components.Colour;
 using DG.Tweening;
 using TMPro;
@@ -11,6 +12,9 @@ public class Timer : MonoBehaviour
     [Header("Components")]
     [SerializeField]
     private TextMeshProUGUI _timerText;
+
+    [SerializeField]
+    private TextMeshProUGUI _timeRewardText;
 
     [SerializeField]
     private Image _clockIcon;
@@ -86,11 +90,11 @@ public class Timer : MonoBehaviour
                 ? _currentTime -= Time.deltaTime
                 : _currentTime += Time.deltaTime;
             _elapsedTime += Time.deltaTime;
+            UpdateTimerText();
             if (_isCountdown && _currentTime <= 1.0f)
             {
                 HandleTimerExpired();
             }
-            UpdateTimerText();
 
             if (
                 !_isAnimating
@@ -212,6 +216,7 @@ public class Timer : MonoBehaviour
         enabled = false;
         _isRunning = false;
         _gameManager.PuzzleFailed(_elapsedTime);
+        _timerText.text = FormatTime(_elapsedTime);
         LastElapsedTime = _elapsedTime;
         _elapsedTime = 0.0f;
     }
@@ -256,8 +261,36 @@ public class Timer : MonoBehaviour
     public void AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
     {
         double _elapsedTimeInSolvedPuzzle = _lastChallengeStartTime - _currentTime;
-        _currentTime += GetTimeBonus(_elapsedTimeInSolvedPuzzle, actualDifficulty);
-        _lastChallengeStartTime = _currentTime;
+        _timeRewardText.gameObject.SetActive(true);
+        Vector3 originalPosition = _timeRewardText.transform.localPosition;
+        int timeGained = GetTimeBonus(_elapsedTimeInSolvedPuzzle, actualDifficulty);
+        _timeRewardText.text = "+" + timeGained.ToString() + "s";
+
+        CustomAnimation
+            .AnimateTimeReward(
+                _timeRewardText.transform,
+                _timerGroup.transform,
+                _clockIcon,
+                _timerText
+            )
+            .OnComplete(() =>
+            {
+                _clockIcon.DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                    0.15f
+                );
+                _timerText.DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
+                    0.15f
+                );
+
+                _timeRewardText.gameObject.SetActive(false);
+                _timeRewardText.transform.localScale = new Vector3(0f, 0f, 0f);
+                _timeRewardText.rectTransform.anchoredPosition = originalPosition;
+
+                _currentTime += timeGained;
+                _lastChallengeStartTime = _currentTime;
+            });
     }
 
     private int GetTimeBonus(

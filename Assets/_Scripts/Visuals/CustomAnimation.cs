@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CandyCabinets.Components.Colour;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -304,6 +305,43 @@ namespace Assets.Scripts.CustomAnimation
 
             await WaitForAnimation("NodeClick" + target.name);
             target.gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+
+        internal static Sequence AnimateTimeReward(
+            Transform timeRewardText,
+            Transform timerGroup,
+            Image clockIcon,
+            TextMeshProUGUI timerText
+        )
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(timeRewardText.DOScale(1.75f, .5f).SetEase(Ease.OutBack));
+
+            sequence.Append(
+                timeRewardText
+                    .GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(175f, 281f), .5f)
+                    .SetEase(Ease.InBack)
+            );
+
+            sequence.Append(timeRewardText.DOScale(0f, .3f).SetEase(Ease.InBack));
+            sequence
+                .Join(
+                    clockIcon.DOColor(
+                        ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN],
+                        .3f
+                    )
+                )
+                .Join(
+                    timerText.DOColor(
+                        ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN],
+                        .3f
+                    )
+                );
+            sequence.Join(
+                timerGroup.DOShakeRotation(.6f, 90f, 15, 0, true, ShakeRandomnessMode.Harmonic)
+            );
+            return sequence.Play();
         }
     }
 }
