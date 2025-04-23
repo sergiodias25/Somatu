@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _hintButtonText;
 
     [SerializeField]
+    private TextMeshProUGUI _hintRewardText;
+
+    [SerializeField]
     private Button _undoButton;
 
     [SerializeField]
@@ -906,5 +909,10 @@ public class UIManager : MonoBehaviour
             AudioManager audioManager = FindObjectOfType<AudioManager>();
             audioManager.PlaySFX(audioManager.GetAudioClip(audioClip));
         }
+    }
+
+    internal void AnimateHintReward()
+    {
+        CustomAnimation.AnimateHintReward(_hintRewardText.transform, _hintButton);
     }
 }

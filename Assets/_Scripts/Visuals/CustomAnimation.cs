@@ -25,6 +25,12 @@ namespace Assets.Scripts.CustomAnimation
         private static float SUM_CORRECT_ANIMATION_DURATION = 0.3f;
         private static float PUZZLE_COMPLETED_ANIMATION_DURATION = 0.5f;
         private static int WAIT_FOR_ANIMATION_TO_FINISH_DELAY = 200;
+        private static float TIME_REWARD_TEXT_POP_UP_DURATION = 0.75f;
+        private static float TIME_REWARD_TEXT_MOVE_DURATION = 0.5f;
+        private static float TIME_REWARD_TEXT_SHRINK_DURATION = 0.7f;
+        private static float TIME_REWARD_ICON_SHAKE_DURATION = 0.6f;
+        private static float TIME_REWARD_ICON_TURN_GREEN_DURATION = 0.33f;
+        private static float TIME_REWARD_ICON_REVERT_FROM_GREEN_DURATION = 0.1f;
 
         public static async Task ButtonClicked(Transform target)
         {
@@ -315,32 +321,97 @@ namespace Assets.Scripts.CustomAnimation
         )
         {
             var sequence = DOTween.Sequence();
-            sequence.Append(timeRewardText.DOScale(1.75f, .5f).SetEase(Ease.OutBack));
+            sequence.Append(
+                timeRewardText
+                    .DOScale(1.25f, TIME_REWARD_TEXT_POP_UP_DURATION)
+                    .SetEase(Ease.OutBack)
+            );
 
             sequence.Append(
                 timeRewardText
                     .GetComponent<RectTransform>()
-                    .DOAnchorPos(new Vector2(175f, 281f), .5f)
+                    .DOAnchorPos(new Vector2(175f, 281f), TIME_REWARD_TEXT_MOVE_DURATION)
                     .SetEase(Ease.InBack)
             );
 
-            sequence.Append(timeRewardText.DOScale(0f, .3f).SetEase(Ease.InBack));
+            sequence.Append(
+                timeRewardText.DOScale(0f, TIME_REWARD_TEXT_SHRINK_DURATION).SetEase(Ease.InBack)
+            );
             sequence
                 .Join(
                     clockIcon.DOColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN],
-                        .3f
+                        TIME_REWARD_ICON_TURN_GREEN_DURATION
                     )
                 )
                 .Join(
                     timerText.DOColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN],
-                        .3f
+                        TIME_REWARD_ICON_TURN_GREEN_DURATION
                     )
                 );
             sequence.Join(
-                timerGroup.DOShakeRotation(.6f, 90f, 15, 0, true, ShakeRandomnessMode.Harmonic)
+                timerGroup.DOShakeRotation(
+                    TIME_REWARD_ICON_SHAKE_DURATION,
+                    90f,
+                    15,
+                    0,
+                    true,
+                    ShakeRandomnessMode.Harmonic
+                )
             );
+            return sequence.Play();
+        }
+
+        internal static Sequence AnimateHintReward(Transform hintRewardText, Button hintButton)
+        {
+            hintRewardText.gameObject.SetActive(true);
+            Vector3 originalPosition = hintRewardText.transform.localPosition;
+            var sequence = DOTween.Sequence();
+
+            sequence.Append(
+                hintRewardText
+                    .DOScale(1.25f, TIME_REWARD_TEXT_POP_UP_DURATION)
+                    .SetEase(Ease.OutBack)
+            );
+            sequence.Append(
+                hintRewardText
+                    .GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(-163f, 170f), TIME_REWARD_TEXT_MOVE_DURATION)
+                    .SetEase(Ease.InBack)
+            );
+
+            sequence.Append(
+                hintRewardText.DOScale(0f, TIME_REWARD_TEXT_SHRINK_DURATION).SetEase(Ease.InBack)
+            );
+            sequence.Join(
+                hintButton.image.DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN],
+                    TIME_REWARD_ICON_TURN_GREEN_DURATION
+                )
+            );
+            sequence.Join(
+                hintButton.image.rectTransform.DOShakeRotation(
+                    TIME_REWARD_ICON_SHAKE_DURATION,
+                    45f,
+                    10,
+                    0,
+                    true,
+                    ShakeRandomnessMode.Harmonic
+                )
+            );
+            sequence.OnComplete(() =>
+            {
+                hintRewardText.gameObject.SetActive(false);
+
+                hintButton.image.DOColor(
+                    ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL],
+                    TIME_REWARD_ICON_REVERT_FROM_GREEN_DURATION
+                );
+                hintRewardText.transform.localScale = new Vector3(0f, 0f, 0f);
+                hintRewardText.GetComponent<RectTransform>().DOAnchorPos(originalPosition, 0.1f);
+            });
+
             return sequence.Play();
         }
     }

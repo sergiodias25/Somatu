@@ -509,6 +509,7 @@ public class GameManager : MonoBehaviour
         {
             SavedGameData.IncrementHintsAvailableChallenge(1);
             _timer.AddPuzzleSolvedBonus(ActualDifficulty);
+            _uiManager.AnimateHintReward();
         }
         else
         {
