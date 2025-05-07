@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
+using Assets.Scripts.AnalyticsEvent;
 
 public class UIManager : MonoBehaviour
 {
@@ -293,6 +294,10 @@ public class UIManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_continueGameButton.transform);
         HideObject(_mainMenuPanel);
         ShowGameplayButtons();
+
+        ClassicContinued.SendAnalyticsEvent(
+            _gameManager.SavedGameData.GameInProgressData.Difficulty.ToString()
+        );
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
             true
@@ -496,8 +501,6 @@ public class UIManager : MonoBehaviour
     {
         _gameManager.ResetBoard(true, true, false);
         _gameManager.Init((Constants.Difficulty)_gameManager.SavedGameData.UnlockedDifficulty);
-
-        _playerStats.StartedGame(_gameManager.SelectedDifficulty);
         ShowGameplayButtons();
     }
 

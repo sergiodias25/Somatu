@@ -8,6 +8,8 @@ using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
 using UnityEngine.Purchasing;
+using Unity.Services.Analytics;
+using Assets.Scripts.AnalyticsEvent;
 
 public class GameManager : MonoBehaviour
 {
@@ -887,6 +889,7 @@ public class GameManager : MonoBehaviour
             _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);
+            UndoUsed.SendAnalyticsEvent(SelectedDifficulty.ToString());
         }
     }
 
@@ -910,6 +913,7 @@ public class GameManager : MonoBehaviour
         StandardPurchasingModule.Instance().useFakeStoreUIMode = FakeStoreUIMode.DeveloperUser;
         QualitySettings.SetQualityLevel(5, true);
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+        AnalyticsService.Instance.StartDataCollection();
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;

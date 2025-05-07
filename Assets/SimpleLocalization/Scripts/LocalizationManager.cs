@@ -148,6 +148,18 @@ namespace Assets.SimpleLocalization.Scripts
         /// <summary>
         /// Get localized value by localization key.
         /// </summary>
+        public static string LocalizeByLanguage(string localizationKey, string language)
+        {
+            if (Dictionary.Count == 0)
+            {
+                Read();
+            }
+            return Dictionary[language][localizationKey];
+        }
+
+        /// <summary>
+        /// Get localized value by localization key.
+        /// </summary>
         public static string Localize(string localizationKey, params object[] args)
         {
             var pattern = Localize(localizationKey);

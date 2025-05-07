@@ -2,6 +2,8 @@ using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.AnalyticsEvent;
+using System;
 
 public class Profile : MonoBehaviour
 {
@@ -88,6 +90,9 @@ public class Profile : MonoBehaviour
             default:
                 break;
         }
+        Stats.SendAnalyticsEvent(
+            Enum.GetValues(typeof(Constants.Difficulty)).GetValue(_selectedDifficulty).ToString()
+        );
     }
 
     private void UpdateModeText()

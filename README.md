@@ -1,2 +1,2 @@
-# GridSum
+# Somatu
 sum basic numbers game

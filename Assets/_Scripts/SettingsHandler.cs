@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Assets.Scripts.CustomAnimation;
 using Assets.SimpleLocalization.Scripts;
 using CandyCabinets.Components.Colour;
@@ -6,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
+using Assets.Scripts.AnalyticsEvent;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -165,6 +165,8 @@ public class SettingsHandler : MonoBehaviour
 
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
         FindObjectOfType<ColorHelper>().ApplyUpdates();
+
+        Theme.SendAnalyticsEvent(ColourManager.Instance.SelectedPalette().Name);
         _themeSelectPopup.ClosePopupGameplay();
     }
 
@@ -189,6 +191,7 @@ public class SettingsHandler : MonoBehaviour
         await CustomAnimation.ButtonClicked(_soundButton.transform);
         _audioManager.ToggleSFX();
         UpdateSoundIcon();
+        Sound.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.SoundEnabled);
     }
 
     private void UpdateMusicIcon()
@@ -206,6 +209,7 @@ public class SettingsHandler : MonoBehaviour
         await CustomAnimation.ButtonClicked(_musicButton.transform);
         _audioManager.ToggleMusic();
         UpdateMusicIcon();
+        Music.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.MusicEnabled);
     }
 
     private void UpdateVibrateIcon()
@@ -222,6 +226,7 @@ public class SettingsHandler : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_vibrationButton.transform);
         _audioManager.ToggleVibration();
+        Vibration.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.VibrationEnabled);
         UpdateVibrateIcon();
     }
 
@@ -256,6 +261,11 @@ public class SettingsHandler : MonoBehaviour
         }
 
         UpdateControlIcon();
+        Control.SendAnalyticsEvent(
+            _gameManager.SavedGameData.SettingsData.ControlMethodDrag
+                ? LocalizationManager.LocalizeByLanguage("settings-control-drag", "English")
+                : LocalizationManager.LocalizeByLanguage("settings-control-click", "English")
+        );
     }
 
     private void UpdateSetting(
@@ -294,6 +304,7 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
         FindObjectOfType<UIManager>().UpdateHintButtonText();
+        Language.SendAnalyticsEvent(language);
 
         if (_showMainMenu)
         {
@@ -327,6 +338,7 @@ public class SettingsHandler : MonoBehaviour
             .SettingsData
             .VisualAidEnabled;
         UpdateVisualAidIcon();
+        VisualAid.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.VisualAidEnabled);
         _gameManager.CheckResult(false);
     }
 

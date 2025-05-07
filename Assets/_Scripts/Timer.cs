@@ -301,47 +301,37 @@ public class Timer : MonoBehaviour
         int timeGainedBase = 0;
         int timeGainedExtra = 0;
         int extraCalc;
-        Debug.Log("demorou : " + elapsedTimeInSolvedPuzzle);
         switch (actualDifficulty)
         {
             case Constants.Difficulty.Easy:
                 timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeEasy / 2);
-                Debug.Log("ganhou base : " + timeGainedBase);
                 extraCalc = (int)(
                     Constants.ChallengeBonusThresholdTimeEasy - elapsedTimeInSolvedPuzzle
                 );
                 timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
-                Debug.Log("ganhou extra: " + extraCalc);
                 break;
             case Constants.Difficulty.Medium:
                 timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeMedium / 2);
-                Debug.Log("ganhou base : " + timeGainedBase);
                 extraCalc = (int)(
                     Constants.ChallengeBonusThresholdTimeMedium - elapsedTimeInSolvedPuzzle
                 );
                 timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
-                Debug.Log("ganhou extra: " + extraCalc);
                 break;
             case Constants.Difficulty.Hard:
                 timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeHard / 2);
-                Debug.Log("ganhou base : " + timeGainedBase);
                 extraCalc = (int)(
                     Constants.ChallengeBonusThresholdTimeHard - elapsedTimeInSolvedPuzzle
                 );
                 timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
-                Debug.Log("ganhou extra: " + extraCalc);
                 break;
             case Constants.Difficulty.Extreme:
                 timeGainedBase = (int)(Constants.ChallengeBonusThresholdTimeExtreme / 2);
-                Debug.Log("ganhou base : " + timeGainedBase);
                 extraCalc = (int)(
                     Constants.ChallengeBonusThresholdTimeExtreme - elapsedTimeInSolvedPuzzle
                 );
                 timeGainedExtra = extraCalc > 0 ? extraCalc : 0;
-                Debug.Log("ganhou extra: " + extraCalc);
                 break;
         }
-        Debug.Log("ganhou : " + (timeGainedBase + timeGainedExtra));
         return timeGainedBase + timeGainedExtra;
     }
 
