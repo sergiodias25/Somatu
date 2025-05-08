@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using Assets.SimpleLocalization.Scripts;
+using Assets.Scripts.AnalyticsEvent;
+using System;
 
 public class ShareButton : MonoBehaviour
 {
@@ -47,6 +49,10 @@ public class ShareButton : MonoBehaviour
         );
 
         Debug.Log(shareMessage);
+        ChallengeShared.SendAnalyticsEvent(
+            Math.Round(FindObjectOfType<Timer>().LastElapsedTime, 2),
+            FindObjectOfType<GameManager>()._timesSolvedText + 1
+        );
 
         isProcessing = true;
 

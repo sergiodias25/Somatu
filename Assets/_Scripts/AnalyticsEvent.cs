@@ -14,9 +14,9 @@ namespace Assets.Scripts.AnalyticsEvent
 
         public static void SendAnalyticsEvent(string difficulty)
         {
-            ClassicPlayed classicPlayeddEvent = new ClassicPlayed();
-            classicPlayeddEvent.difficulty = difficulty;
-            AnalyticsService.Instance.RecordEvent(classicPlayeddEvent);
+            ClassicPlayed classicPlayedEvent = new ClassicPlayed();
+            classicPlayedEvent.difficulty = difficulty;
+            AnalyticsService.Instance.RecordEvent(classicPlayedEvent);
         }
     }
 
@@ -69,13 +69,13 @@ namespace Assets.Scripts.AnalyticsEvent
             set { SetParameter("time", value); }
         }
 
-        public static void SendAnalyticsEvent(string eventName, double time, int solves = 1)
+        public static void SendAnalyticsEvent(string difficulty, double time, int solves = 1)
         {
-            GameFinished gameFinisheddEvent = new GameFinished();
-            gameFinisheddEvent.difficulty = eventName;
-            gameFinisheddEvent.solves = solves;
-            gameFinisheddEvent.time = time;
-            AnalyticsService.Instance.RecordEvent(gameFinisheddEvent);
+            GameFinished gameFinishedEvent = new GameFinished();
+            gameFinishedEvent.difficulty = difficulty;
+            gameFinishedEvent.solves = solves;
+            gameFinishedEvent.time = time;
+            AnalyticsService.Instance.RecordEvent(gameFinishedEvent);
         }
     }
 
@@ -256,6 +256,54 @@ namespace Assets.Scripts.AnalyticsEvent
             VisualAid visualAidEvent = new VisualAid();
             visualAidEvent.enabled = enabled;
             AnalyticsService.Instance.RecordEvent(visualAidEvent);
+        }
+    }
+
+    public class ChallengeShared : Event
+    {
+        public ChallengeShared()
+            : base("ChallengeShared") { }
+
+        public int solves
+        {
+            set { SetParameter("solves", value); }
+        }
+
+        public double time
+        {
+            set { SetParameter("time", value); }
+        }
+
+        public static void SendAnalyticsEvent(double time, int solves = 1)
+        {
+            ChallengeShared challengeSharedEvent = new ChallengeShared();
+            challengeSharedEvent.solves = solves;
+            challengeSharedEvent.time = time;
+            AnalyticsService.Instance.RecordEvent(challengeSharedEvent);
+        }
+    }
+
+    public class Purchase : Event
+    {
+        public Purchase()
+            : base("Purchase") { }
+
+        public string type
+        {
+            set { SetParameter("type", value); }
+        }
+
+        public bool success
+        {
+            set { SetParameter("success", value); }
+        }
+
+        public static void SendAnalyticsEvent(string type, bool success)
+        {
+            Purchase purchaseEvent = new Purchase();
+            purchaseEvent.type = type;
+            purchaseEvent.success = success;
+            AnalyticsService.Instance.RecordEvent(purchaseEvent);
         }
     }
 }
