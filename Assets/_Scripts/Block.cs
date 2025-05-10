@@ -14,9 +14,6 @@ public class Block : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro _text;
-
-    [SerializeField]
-    private Image _result;
     private GameManager _gameManager;
     private UIManager _uiManager;
     private Node _originalNode;
@@ -49,7 +46,7 @@ public class Block : MonoBehaviour
         gameObject.name = string.Concat("Block_", value.ToString());
         if (!interactible)
         {
-            _text.fontSizeMax = 60f;
+            _text.fontSizeMax = 50f;
         }
         _originalNode = node;
         transform.SetParent(node.transform, false);
@@ -303,17 +300,6 @@ public class Block : MonoBehaviour
         _text.color = _isInteractible
             ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
             : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
-        if (_isInteractible)
-        {
-            HideResultIcon();
-        }
-        else
-        {
-            _result.DOColor(
-                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT],
-                0.1f
-            );
-        }
     }
 
     public Sequence AnimatePartialSumCorrect()
@@ -349,35 +335,5 @@ public class Block : MonoBehaviour
     {
         DOTween.Kill(this);
         DOTween.Kill(transform);
-    }
-
-    internal void UpdateResultIcon(bool showIcon, bool resultIsCorrect)
-    {
-        if (showIcon)
-        {
-            ShowResultIcon();
-            if (resultIsCorrect)
-            {
-                _result.sprite = _correctResultSprite;
-            }
-            else
-            {
-                _result.sprite = _incorrectResultSprite;
-            }
-        }
-        else
-        {
-            HideResultIcon();
-        }
-    }
-
-    internal void ShowResultIcon()
-    {
-        _result.gameObject.SetActive(true);
-    }
-
-    internal void HideResultIcon()
-    {
-        _result.gameObject.SetActive(false);
     }
 }

@@ -201,7 +201,10 @@ namespace CandyCabinets.Components.Colour
 
         void OnDestroy()
         {
-            ColourManager.StopListening(ReColour);
+            if (ColourManager != null)
+            {
+                ColourManager.StopListening(ReColour);
+            }
         }
     }
 }

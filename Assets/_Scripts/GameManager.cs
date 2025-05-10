@@ -480,26 +480,32 @@ public class GameManager : MonoBehaviour
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _firstRowResultBlock.UpdateTextColor();
+        _firstRowResultBlock.GetNode().HideResultIcon();
         _secondRowResultBlock
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _secondRowResultBlock.UpdateTextColor();
+        _secondRowResultBlock.GetNode().HideResultIcon();
         _thirdRowResultBlock
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _thirdRowResultBlock.UpdateTextColor();
+        _thirdRowResultBlock.GetNode().HideResultIcon();
         _firstColumnResultBlock
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _firstColumnResultBlock.UpdateTextColor();
+        _firstColumnResultBlock.GetNode().HideResultIcon();
         _secondColumnResultBlock
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _secondColumnResultBlock.UpdateTextColor();
+        _secondColumnResultBlock.GetNode().HideResultIcon();
         _thirdColumnResultBlock
             .GetNode()
             .UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]);
         _thirdColumnResultBlock.UpdateTextColor();
+        _thirdColumnResultBlock.GetNode().HideResultIcon();
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
         _timesSolvedText = _timesSolvedText + 1;
@@ -592,7 +598,7 @@ public class GameManager : MonoBehaviour
                     .UpdateColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_GREEN]
                     );
-                block.UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, true);
+                block.GetNode().UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, true);
             }
             else
             {
@@ -601,7 +607,9 @@ public class GameManager : MonoBehaviour
                     .UpdateColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]
                     );
-                block.UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, false);
+                block
+                    .GetNode()
+                    .UpdateResultIcon(SavedGameData.SettingsData.VisualAidEnabled, false);
             }
         }
         else if (
@@ -619,7 +627,7 @@ public class GameManager : MonoBehaviour
                         Constants.COLOR_SOLUTION_NODE_NO_HINT
                     ]
                 );
-            block.HideResultIcon();
+            block.GetNode().HideResultIcon();
         }
 
         if (currentSum == expectedResult)

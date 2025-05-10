@@ -2,14 +2,19 @@ using Assets.Scripts.CustomAnimation;
 using CandyCabinets.Components.Colour;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Node : MonoBehaviour
 {
     private Block _blockInNode;
 
     [SerializeField]
-    private Image _sprite;
+    private SpriteRenderer _sprite;
+
+    [SerializeField]
+    private SpriteRenderer _resultCornerSpace;
+
+    [SerializeField]
+    private SpriteRenderer _shadowSprite;
 
     internal static Node Init(Node nodePrefab, int i, int j, string parentName)
     {
@@ -20,15 +25,24 @@ public class Node : MonoBehaviour
         );
         node.name = string.Concat("Node_", i, "_", j);
         node.transform.SetParent(GameObject.Find(parentName).transform, true);
-        node.transform.localScale = new Vector3(14, 14, 14);
+        if (parentName == "GeneratedNodes")
+        {
+            node.transform.localScale = new Vector3(15, 15, 15);
+            node._resultCornerSpace.gameObject.SetActive(false);
+        }
+        else
+        {
+            node.transform.localScale = new Vector3(14, 14, 14);
+            node._shadowSprite.transform.localPosition = new Vector3(
+                node._shadowSprite.transform.localPosition.x / 2,
+                node._shadowSprite.transform.localPosition.y / 2,
+                node._shadowSprite.transform.localPosition.z
+            );
+        }
         node.UpdateColor(
             ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL]
         );
         CustomAnimation.NodeLoad(node.transform);
-        if (parentName == "SolutionNodes")
-        {
-            node._sprite.GetComponent<Shadow>().enabled = false;
-        }
         return node;
     }
 
@@ -70,5 +84,22 @@ public class Node : MonoBehaviour
     public Color GetColor()
     {
         return _sprite.color;
+    }
+
+    internal void UpdateResultIcon(bool showIcon, bool resultIsCorrect)
+    {
+        if (showIcon)
+        {
+            CustomAnimation.AnimateVisualAidSpace(_resultCornerSpace.transform, !resultIsCorrect);
+        }
+        else
+        {
+            CustomAnimation.AnimateVisualAidSpace(_resultCornerSpace.transform, false);
+        }
+    }
+
+    internal void HideResultIcon()
+    {
+        _resultCornerSpace.gameObject.SetActive(false);
     }
 }

@@ -12,7 +12,7 @@ namespace Assets.Scripts.CustomAnimation
         private static float BUTTON_SHRINK_ON_CLICK = 0.9f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK = 1f;
         private static float NODE_SHRINK_ON_CLICK = 10f;
-        private static float NODE_SHRINK_REVERSE_ON_CLICK = 14f;
+        private static float NODE_SHRINK_REVERSE_ON_CLICK = 15f;
         private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.1f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK_TIME = 0.05f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY = 0.6f;
@@ -272,8 +272,7 @@ namespace Assets.Scripts.CustomAnimation
         internal static void NodeLoad(Transform transform)
         {
             transform
-                .GetComponent<Image>()
-                .transform.DOScale(.001f, .75f)
+                .DOScale(.001f, .75f)
                 .From()
                 .SetEase(Ease.OutBounce)
                 .OnStart(() =>
@@ -413,6 +412,25 @@ namespace Assets.Scripts.CustomAnimation
             });
 
             return sequence.Play();
+        }
+
+        internal static void AnimateVisualAidSpace(Transform transform, bool show)
+        {
+            float valueToSum = show ? -1.7f : 1.7f;
+            if (
+                (show && transform.localPosition.x == 5.7f)
+                || (!show && transform.localPosition.x != 5.7f)
+            )
+            {
+                transform.DOLocalMove(
+                    new Vector3(
+                        transform.localPosition.x + valueToSum,
+                        transform.localPosition.y + valueToSum,
+                        transform.localPosition.z
+                    ),
+                    SUM_CORRECT_ANIMATION_DURATION
+                );
+            }
         }
     }
 }
