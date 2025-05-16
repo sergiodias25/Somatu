@@ -10,6 +10,7 @@ using DG.Tweening;
 using UnityEngine.Purchasing;
 using Unity.Services.Analytics;
 using Assets.Scripts.AnalyticsEvent;
+using Assets._Scripts;
 
 public class GameManager : MonoBehaviour
 {
@@ -467,6 +468,7 @@ public class GameManager : MonoBehaviour
     private void DoEndGameActions()
     {
         _isGameFinished = true;
+        FindObjectOfType<FireworkManager>().ThrowFireworks();
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().ChangeInteraction(false);
@@ -550,7 +552,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!SavedGameData.PurchaseData.RemovedAds && (Random.Range(0, 5) < 2))
+            if (
+                !SavedGameData.PurchaseData.RemovedAds
+                && (Random.Range(0, 100) < Constants.ShowRemoveAdsPopupPercentage)
+            )
             {
                 _uiManager.ShowRemoveBannerPopup();
             }
@@ -653,6 +658,7 @@ public class GameManager : MonoBehaviour
         bool resetChallengeActualDifficulty
     )
     {
+        FindObjectOfType<FireworkManager>().StopFireworks();
         _isGameFinished = false;
         DOTween.Kill("NumberJump");
         for (int i = 0; i < _allNodes.Count; i++)
