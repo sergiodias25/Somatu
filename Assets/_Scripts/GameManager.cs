@@ -107,25 +107,37 @@ public class GameManager : MonoBehaviour
             _uiManager.ToggleUndoButton(false);
         }
 
-        GenerateGrid(
-            GenerateNumbersForLevel(
-                Constants.GetNumbers(ActualDifficulty),
-                Constants.GetRepeatedNumbersCount(
-                    ActualDifficulty,
-                    SavedGameData.IsHalfwayThroughCurrentDifficulty(
-                        ActualDifficulty,
-                        SelectedDifficulty,
-                        _timesSolvedText
-                    )
-                )
-            ),
-            loadGame
-        );
+        GenerateGrid(GenerateNumbersMain(_timesSolvedText), loadGame);
         _timer.Init(
             SelectedDifficulty == Constants.Difficulty.Challenge,
             SavedGameData != null ? SavedGameData.GameInProgressData.TimerValue : 0d
         );
         ShowOnboardings();
+    }
+
+    public List<int> GenerateNumbersMain(int timesSolved)
+    {
+        bool IsHalfwayThroughCurrentDifficulty = SavedGameData.IsHalfwayThroughCurrentDifficulty(
+            ActualDifficulty,
+            SelectedDifficulty,
+            timesSolved
+        );
+
+        if (!IsHalfwayThroughCurrentDifficulty)
+        {
+            return GenerateNumbersForFirstLevels(
+                Constants.GetNumbers(ActualDifficulty),
+                Constants.GetRepeatedNumbersCount(
+                    ActualDifficulty,
+                    IsHalfwayThroughCurrentDifficulty
+                )
+            );
+        }
+
+        return GenerateNumbersForLevel(
+            Constants.GetNumbers(ActualDifficulty),
+            Constants.GetRepeatedNumbersCount(ActualDifficulty, IsHalfwayThroughCurrentDifficulty)
+        );
     }
 
     private void UpdateModeTranslation()
@@ -178,6 +190,31 @@ public class GameManager : MonoBehaviour
                 result.Add(currentPossibleValues[randomized]);
             }
             currentPossibleValues.RemoveAt(randomized);
+        }
+
+        for (int i = repeatedCount; i < 9; i++)
+        {
+            int nextNumber = Random.Range(0, currentPossibleValues.Count);
+            result.Add(currentPossibleValues[nextNumber]);
+            currentPossibleValues.RemoveAt(nextNumber);
+        }
+        return result;
+    }
+
+    public static List<int> GenerateNumbersForFirstLevels(
+        List<int> possibleValues,
+        int repeatedCount
+    )
+    {
+        List<int> currentPossibleValues = new List<int>(possibleValues);
+        List<int> result = new();
+        if (repeatedCount > 0)
+        {
+            for (int i = 0; i < repeatedCount; i++)
+            {
+                result.Add(1);
+            }
+            currentPossibleValues.RemoveAt(0);
         }
 
         for (int i = repeatedCount; i < 9; i++)
@@ -535,20 +572,7 @@ public class GameManager : MonoBehaviour
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             ResetBoard(false, false, false);
-            GenerateGrid(
-                GenerateNumbersForLevel(
-                    Constants.GetNumbers(ActualDifficulty),
-                    Constants.GetRepeatedNumbersCount(
-                        ActualDifficulty,
-                        SavedGameData.IsHalfwayThroughCurrentDifficulty(
-                            ActualDifficulty,
-                            SelectedDifficulty,
-                            _timesSolvedText
-                        )
-                    )
-                ),
-                false
-            );
+            GenerateGrid(GenerateNumbersMain(_timesSolvedText), false);
         }
         else
         {

@@ -39,7 +39,16 @@ namespace Assets.Scripts.SaveGame
             public string LanguageSelected = "Portuguese";
             public bool LanguageChangedOnce = true;
             public bool ControlMethodDrag = false;
-            public bool VisualAidEnabled = false;
+            public bool VisualAidEnabled = true;
+        }
+
+        public class Onboarding
+        {
+            public bool Welcome = true;
+            public bool ClassicExplanation = true;
+            public bool ClassicUndo = true;
+            public bool ClassicHint = true;
+            public bool ChallengeExplanation = true;
         }
 
         public class GameInProgress
@@ -125,15 +134,6 @@ namespace Assets.Scripts.SaveGame
                 SolveCountAverage = 0.0;
                 HintsUsed = 0;
             }
-        }
-
-        public class Onboarding
-        {
-            public bool Welcome = true;
-            public bool ClassicExplanation = true;
-            public bool ClassicUndo = true;
-            public bool ClassicHint = true;
-            public bool ChallengeExplanation = true;
         }
 
         public SaveGame()

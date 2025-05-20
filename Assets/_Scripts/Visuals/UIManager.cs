@@ -467,20 +467,7 @@ public class UIManager : MonoBehaviour
         if (_playAgainButton.enabled)
         {
             _gameManager.ResetBoard(false, true, true);
-            _gameManager.GenerateGrid(
-                GameManager.GenerateNumbersForLevel(
-                    Constants.GetNumbers(_gameManager.ActualDifficulty),
-                    Constants.GetRepeatedNumbersCount(
-                        _gameManager.ActualDifficulty,
-                        _gameManager.SavedGameData.IsHalfwayThroughCurrentDifficulty(
-                            _gameManager.ActualDifficulty,
-                            _gameManager.SelectedDifficulty,
-                            0
-                        )
-                    )
-                ),
-                false
-            );
+            _gameManager.GenerateGrid(_gameManager.GenerateNumbersMain(0), false);
             _playerStats.StartedGame(_gameManager.SelectedDifficulty);
             ShowGameplayButtons();
 
