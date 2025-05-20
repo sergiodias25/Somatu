@@ -19,26 +19,12 @@ namespace EasyUI.Tabs
         [System.Serializable]
         public class TabsUIEvent : UnityEvent<int> { }
 
-        [Header("Tabs customization :")]
-        [SerializeField]
-        private Color themeColor = Color.gray;
-
-        [SerializeField]
-        private float tabSpacing = 2f;
-
-        [Space]
-        [Header("OnTabChange event :")]
-        public TabsUIEvent OnTabChange;
-
         private TabButtonUI[] tabBtns;
         private GameObject[] tabContent;
 
 #if UNITY_EDITOR
         private LayoutGroup layoutGroup;
 #endif
-
-        private Color tabColorActive,
-            tabColorInactive;
         private int current,
             previous;
 
@@ -51,11 +37,6 @@ namespace EasyUI.Tabs
         private void Start()
         {
             GetTabBtns();
-        }
-
-        private void OnEnable()
-        {
-            AnimateContent(tabContent[current]);
         }
 
         private void GetTabBtns()
@@ -91,28 +72,22 @@ namespace EasyUI.Tabs
 
             previous = current = 0;
 
-            tabContent[0].SetActive(true); /* 
-            AnimateContent(tabContent[0]); */
+            tabContent[0].SetActive(true);
         }
 
         public void OnTabButtonClicked(int tabIndex)
         {
-            if (current != tabIndex)
-            {
-                if (OnTabChange != null)
-                    OnTabChange.Invoke(tabIndex);
+            previous = current;
+            current = tabIndex;
 
-                previous = current;
-                current = tabIndex;
-
-                tabContent[previous].SetActive(false);
-                tabContent[current].SetActive(true);
-                AnimateContent(tabContent[current]);
-            }
+            tabContent[previous].SetActive(false);
+            tabContent[current].SetActive(true);
+            AnimateContent(tabContent[current]);
         }
 
         private void AnimateContent(GameObject content)
         {
+            CustomAnimation.ButtonLoad(content.transform.parent);
             foreach (var item in content.transform.GetComponentsInChildren<RectTransform>())
             {
                 if (item.gameObject == content)
@@ -124,7 +99,7 @@ namespace EasyUI.Tabs
         }
 
 #if UNITY_EDITOR
-        public void Validate(TabsType type)
+        public void Validate()
         {
             parentBtns = transform.GetChild(0);
             parentContent = transform.GetChild(1);
@@ -142,11 +117,6 @@ namespace EasyUI.Tabs
 
             if (layoutGroup == null)
                 layoutGroup = parentBtns.GetComponent<LayoutGroup>();
-
-            if (type == TabsType.Horizontal)
-                ((HorizontalLayoutGroup)layoutGroup).spacing = tabSpacing;
-            else if (type == TabsType.Vertical)
-                ((VerticalLayoutGroup)layoutGroup).spacing = tabSpacing;
         }
 #endif
     }
