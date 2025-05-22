@@ -66,7 +66,13 @@ public class UIManager : MonoBehaviour
     private GameObject _topPanel;
 
     [SerializeField]
-    private GameObject _gameTitle;
+    private GameObject _mainTitle;
+
+    [SerializeField]
+    private GameObject _classicTitle;
+
+    [SerializeField]
+    private GameObject _gameplayTitle;
 
     [SerializeField]
     private GameObject _classicMenu;
@@ -257,6 +263,7 @@ public class UIManager : MonoBehaviour
         ShowObject(_mainMenuPanel);
         CustomAnimation.ButtonLoad(_classicModeButton.transform);
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
+        CustomAnimation.AnimateTitle(_mainTitle.transform);
         HideObject(_settingsPanel);
         HideObject(_supportPanel);
         HideObject(_profilePanel);
@@ -269,6 +276,7 @@ public class UIManager : MonoBehaviour
     public async void ShowClassicMenu()
     {
         await CustomAnimation.ButtonClicked(_classicModeButton.transform);
+        CustomAnimation.AnimateTitle(_classicTitle.transform);
         HideObject(_mainMenuPanel);
         ShowObject(_classicMenu);
         CustomAnimation.ButtonLoad(_easyModeButton.transform);
@@ -449,12 +457,13 @@ public class UIManager : MonoBehaviour
         ShowObject(_gameNodes);
         ShowObject(_gameplayStatsPanel);
         ShowObject(_gameplayInGamePanel);
+        CustomAnimation.AnimateTitle(_gameplayTitle.transform);
         CustomAnimation.AnimateStartGameButtons(
             _gameplayInGamePanel.transform,
             _gameplayEndGamePanel.transform
         );
         HideObject(_gameplayEndGamePanel);
-        ShowObject(_gameTitle);
+        ShowObject(_gameplayTitle);
         HideObject(_classicMenu);
         ToggleUndoButton(
             _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
@@ -711,7 +720,7 @@ public class UIManager : MonoBehaviour
                 HideObject(_gameplayEndGamePanel);
                 ShowObject(_gameplayInGamePanel);
             }
-            ShowObject(_gameTitle);
+            ShowObject(_gameplayTitle);
         }
         else
         {
@@ -719,7 +728,7 @@ public class UIManager : MonoBehaviour
             HideObject(_gameplayStatsPanel);
             HideObject(_gameplayInGamePanel);
             HideObject(_gameplayEndGamePanel);
-            HideObject(_gameTitle);
+            HideObject(_gameplayTitle);
         }
         _gameNodes.SetActive(statusToChangeTo);
     }

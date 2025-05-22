@@ -232,7 +232,7 @@ namespace Assets.Scripts.CustomAnimation
         internal static void ButtonLoad(Transform transform)
         {
             transform
-                .DOScale(0.85f, .5f)
+                .DOScale(0.85f, .75f)
                 .From()
                 .SetEase(Ease.OutBounce)
                 .SetDelay(RandomizeDelayValue(0.1));
@@ -431,6 +431,17 @@ namespace Assets.Scripts.CustomAnimation
                     SUM_CORRECT_ANIMATION_DURATION
                 );
             }
+        }
+
+        public static void AnimateTitle(Transform transform)
+        {
+            transform
+                .DOScale(new Vector3(1.25f, 1.25f, 1.25f), .5f)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    transform.DOScale(Vector3.one, .75f).SetUpdate(true);
+                });
         }
     }
 }

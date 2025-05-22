@@ -14,6 +14,23 @@ public class TopBarManager : MonoBehaviour
     [SerializeField]
     private Button _settingsButton;
 
+    [SerializeField]
+    private GameObject _mainTitle;
+
+    [SerializeField]
+    private GameObject _settingsTitle;
+
+    [SerializeField]
+    private GameObject _profileTitle;
+
+    private void Start()
+    {
+        CustomAnimation.ButtonLoad(_homeButton.transform.parent);
+        CustomAnimation.ButtonLoad(_profileButton.transform.parent);
+        CustomAnimation.ButtonLoad(_settingsButton.transform.parent);
+        CustomAnimation.AnimateTitle(_mainTitle.transform);
+    }
+
     private void MakeActive(Button button)
     {
         button.GetComponent<Image>().color = ColourManager.Instance.SelectedPalette().Colours[
@@ -48,20 +65,22 @@ public class TopBarManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_homeButton.transform);
     }
 
-    public async void SelectSettingsButton()
+    public void SelectSettingsButton()
     {
         MakeInactive(_homeButton);
         MakeActive(_settingsButton);
         MakeInactive(_profileButton);
-        await CustomAnimation.ButtonClicked(_settingsButton.transform);
+        CustomAnimation.AnimateTitle(_settingsTitle.transform);
+        _ = CustomAnimation.ButtonClicked(_settingsButton.transform);
     }
 
-    public async void SelectProfileButton()
+    public void SelectProfileButton()
     {
         MakeInactive(_homeButton);
         MakeInactive(_settingsButton);
         MakeActive(_profileButton);
-        await CustomAnimation.ButtonClicked(_profileButton.transform);
+        CustomAnimation.AnimateTitle(_profileTitle.transform);
+        _ = CustomAnimation.ButtonClicked(_profileButton.transform);
     }
 
     public async void DeselectHomeButton()
