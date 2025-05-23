@@ -48,9 +48,12 @@ namespace Assets.Scripts.CustomAnimation
                 target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
             );
             sequence.SetId("ButtonClick" + target.name).Play();
-            Object
-                .FindObjectOfType<UIManager>()
-                .InteractionPerformed(Constants.AudioClip.DropBlock);
+            if (target.name != "UndoButton")
+            {
+                Object
+                    .FindObjectOfType<UIManager>()
+                    .InteractionPerformed(Constants.AudioClip.DropBlock);
+            }
 
             await WaitForAnimation("ButtonClick" + target.name);
             target.gameObject.GetComponent<Button>().enabled = true;
