@@ -307,6 +307,7 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.ToggleHintButton(true);
         LogSolution();
+        CustomAnimation.PopupLoad(_gameBackground.transform);
     }
 
     private Block GenerateResultBlock(int x, int y, int numberValue)
