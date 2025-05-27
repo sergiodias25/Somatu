@@ -417,22 +417,33 @@ namespace Assets.Scripts.CustomAnimation
             return sequence.Play();
         }
 
-        internal static void AnimateVisualAidSpace(Transform transform, bool show)
+        internal static void AnimateVisualAidSpace(
+            Transform transform,
+            RectTransform rectTransform,
+            bool show
+        )
         {
             float valueToSum = show ? -1.7f : 1.7f;
+            float newScale = show ? 4f : .01f;
+            var sequence = DOTween.Sequence();
+
             if (
                 (show && transform.localPosition.x == 5.7f)
                 || (!show && transform.localPosition.x != 5.7f)
             )
             {
-                transform.DOLocalMove(
-                    new Vector3(
-                        transform.localPosition.x + valueToSum,
-                        transform.localPosition.y + valueToSum,
-                        transform.localPosition.z
-                    ),
-                    SUM_CORRECT_ANIMATION_DURATION
+                sequence.Append(rectTransform.DOScale(newScale, SUM_CORRECT_ANIMATION_DURATION));
+                sequence.Join(
+                    transform.DOLocalMove(
+                        new Vector3(
+                            transform.localPosition.x + valueToSum,
+                            transform.localPosition.y + valueToSum,
+                            transform.localPosition.z
+                        ),
+                        SUM_CORRECT_ANIMATION_DURATION
+                    )
                 );
+                sequence.Play();
             }
         }
 

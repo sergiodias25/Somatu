@@ -90,11 +90,19 @@ public class Node : MonoBehaviour
     {
         if (showIcon)
         {
-            CustomAnimation.AnimateVisualAidSpace(_resultCornerSpace.transform, !resultIsCorrect);
+            CustomAnimation.AnimateVisualAidSpace(
+                _resultCornerSpace.transform,
+                _resultCornerSpace.GetComponent<RectTransform>(),
+                !resultIsCorrect
+            );
         }
         else
         {
-            CustomAnimation.AnimateVisualAidSpace(_resultCornerSpace.transform, false);
+            CustomAnimation.AnimateVisualAidSpace(
+                _resultCornerSpace.transform,
+                _resultCornerSpace.GetComponent<RectTransform>(),
+                false
+            );
         }
     }
 
