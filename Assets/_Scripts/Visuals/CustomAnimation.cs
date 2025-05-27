@@ -234,11 +234,15 @@ namespace Assets.Scripts.CustomAnimation
 
         internal static void ButtonLoad(Transform transform)
         {
-            transform
-                .DOScale(0.85f, .75f)
-                .From()
-                .SetEase(Ease.OutBounce)
-                .SetDelay(RandomizeDelayValue(0.1));
+            if (DOTween.TotalTweensById(transform.name + "ButtonLoad") == 0)
+            {
+                transform
+                    .DOScale(0.85f, .75f)
+                    .From()
+                    .SetEase(Ease.OutBounce)
+                    .SetDelay(RandomizeDelayValue(0.1))
+                    .SetId(transform.name + "ButtonLoad");
+            }
         }
 
         internal static DG.Tweening.Core.TweenerCore<
