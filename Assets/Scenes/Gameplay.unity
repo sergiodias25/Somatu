@@ -128,12 +128,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 237978524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9655103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3075830299366915451, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &16032471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8910484083584685001, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 264274397}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -328,6 +333,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1783903522}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &43309917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4200730820121816261, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &43309923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43309917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &45396999
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +657,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 742762141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &85381637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2479743030611955548, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &86865751 stripped
 GameObject:
@@ -2151,6 +2186,31 @@ RectTransform:
   m_AnchoredPosition: {x: -5.0000153, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &198637041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 54654148351979979, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &198637047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198637041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!114 &199098618 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8592108138949780018, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -3604,6 +3664,31 @@ MonoBehaviour:
   _popupWindow: {fileID: 0}
   _closePopupButton: {fileID: 1489934803}
   _actionButton: {fileID: 0}
+--- !u!1 &264274397 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4865446834964605347, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &264274401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264274397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &264863649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3677,7 +3762,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8907022449047595140, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1351543935}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -4088,6 +4173,31 @@ Transform:
   - {fileID: 1299107294}
   m_Father: {fileID: 1907222083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &281279680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3732667741612279638, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &281279686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281279680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1001 &284609882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4835,6 +4945,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291272941}
   m_CullTransparentMesh: 1
+--- !u!1 &299015574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6142869638480966006, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &305826842
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,6 +5606,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327863379}
   m_CullTransparentMesh: 1
+--- !u!1 &337015134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3426264252671626187, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &337015140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337015134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &337814498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3914001975973444831, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &337814504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337814498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &361328919
 GameObject:
   m_ObjectHideFlags: 0
@@ -6047,6 +6212,11 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &415221570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730483333367410927, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &419227398 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -6825,7 +6995,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 77270264256284952, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2044709881}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -9946,12 +10116,32 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2792880311768308100, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 9655103}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &550865985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9655103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!114 &554956641 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114387782155977098, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -10485,6 +10675,31 @@ MonoBehaviour:
     PaletteColour: Colour.8
     ColourIndex: 7
     IsChanged: 0
+--- !u!1 &581521143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4534134344611401046, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &581521149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581521143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &584266468
 GameObject:
   m_ObjectHideFlags: 0
@@ -10738,10 +10953,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594674786}
   m_CullTransparentMesh: 1
+--- !u!1 &597296953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4943364673295033072, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &597296959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597296953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &598711566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 829363202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &598883315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1188881301553015466, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &605269812
 PrefabInstance:
@@ -11724,7 +11969,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6740982550012516365, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 708532840}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -11735,7 +11980,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3627405977819105586, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2106772363}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -12472,6 +12717,31 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2082251735}
   m_SourcePrefab: {fileID: 100100000, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+--- !u!1 &708532840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3600339422073820275, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &708532844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708532840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &708629579
 GameObject:
   m_ObjectHideFlags: 0
@@ -12586,7 +12856,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2344941788224942061, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 800886120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -12916,6 +13186,36 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1829643184}
   m_SourcePrefab: {fileID: 100100000, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+--- !u!1 &730509004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5569072554925584473, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &730509010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730509004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &742446526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2625602066523972474, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &742762141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13355,6 +13655,11 @@ MonoBehaviour:
     PaletteColour: Colour.8
     ColourIndex: 7
     IsChanged: 0
+--- !u!1 &749996098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3945078328313690336, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &754833946
 GameObject:
   m_ObjectHideFlags: 0
@@ -15261,6 +15566,56 @@ MonoBehaviour:
     PaletteColour: Colour.8
     ColourIndex: 7
     IsChanged: 0
+--- !u!1 &800886120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6518515258099567912, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &800886124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800886120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &803939805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6229488549500553723, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &803939811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803939805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &812555012
 GameObject:
   m_ObjectHideFlags: 0
@@ -16972,18 +17327,174 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1761323016251552, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 841675583}
+    - targetCorrespondingSourceObject: {fileID: 864667976549844029, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1011155385}
+    - targetCorrespondingSourceObject: {fileID: 1188881301553015466, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1466438952}
+    - targetCorrespondingSourceObject: {fileID: 3914001975973444831, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 337814504}
+    - targetCorrespondingSourceObject: {fileID: 6576233394470326042, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1645324212}
+    - targetCorrespondingSourceObject: {fileID: 2253827331639788841, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1172002406}
+    - targetCorrespondingSourceObject: {fileID: 8791862966324099272, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1532302083}
+    - targetCorrespondingSourceObject: {fileID: 6229488549500553723, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 803939811}
+    - targetCorrespondingSourceObject: {fileID: 6356328565938226066, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1351543939}
+    - targetCorrespondingSourceObject: {fileID: 1917864631297805476, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1495992300}
+    - targetCorrespondingSourceObject: {fileID: 8185055738999242372, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2106772367}
     - targetCorrespondingSourceObject: {fileID: 3587295111517599812, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2108744859}
+    - targetCorrespondingSourceObject: {fileID: 3775018571443609192, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1473579504}
+    - targetCorrespondingSourceObject: {fileID: 7931776893044417684, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2010111076}
+    - targetCorrespondingSourceObject: {fileID: 529385179883240587, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1789511319}
+    - targetCorrespondingSourceObject: {fileID: 2625602066523972474, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 814109531}
+    - targetCorrespondingSourceObject: {fileID: 4325314848155817964, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 867328264}
+    - targetCorrespondingSourceObject: {fileID: 746516369269014457, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1352248396}
+    - targetCorrespondingSourceObject: {fileID: 3178022561555834600, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1558403476}
+    - targetCorrespondingSourceObject: {fileID: 8683437827205330783, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 886404889}
+    - targetCorrespondingSourceObject: {fileID: 5290218477286146330, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1387675612}
+    - targetCorrespondingSourceObject: {fileID: 3945078328313690336, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 814109528}
     - targetCorrespondingSourceObject: {fileID: 7496873215396783545, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 378238306}
+    - targetCorrespondingSourceObject: {fileID: 4534134344611401046, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 581521149}
+    - targetCorrespondingSourceObject: {fileID: 6730483333367410927, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1473374361}
+    - targetCorrespondingSourceObject: {fileID: 5569072554925584473, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 730509010}
+    - targetCorrespondingSourceObject: {fileID: 4232053699598742090, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490733349}
+    - targetCorrespondingSourceObject: {fileID: 7022420407888886089, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2056783498}
+    - targetCorrespondingSourceObject: {fileID: 2479743030611955548, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1700546116}
+    - targetCorrespondingSourceObject: {fileID: 4943364673295033072, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 597296959}
+    - targetCorrespondingSourceObject: {fileID: 7080268880469237960, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 853676122}
+    - targetCorrespondingSourceObject: {fileID: 344267213387670680, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 928584972}
+    - targetCorrespondingSourceObject: {fileID: 217589818223999072, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 947116856}
     - targetCorrespondingSourceObject: {fileID: 5753654892257805792, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1522814398}
+    - targetCorrespondingSourceObject: {fileID: 9028211316422028222, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214980177}
+    - targetCorrespondingSourceObject: {fileID: 6142869638480966006, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 865471292}
+    - targetCorrespondingSourceObject: {fileID: 3732667741612279638, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 281279686}
+    - targetCorrespondingSourceObject: {fileID: 3600339422073820275, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 708532844}
+    - targetCorrespondingSourceObject: {fileID: 5350665584351903676, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 891133886}
+    - targetCorrespondingSourceObject: {fileID: 3596296243736526485, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1368443633}
+    - targetCorrespondingSourceObject: {fileID: 6604599997474548095, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246630292}
+    - targetCorrespondingSourceObject: {fileID: 5949636349429196824, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1386848797}
+    - targetCorrespondingSourceObject: {fileID: 1324399528138048984, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1583663395}
+    - targetCorrespondingSourceObject: {fileID: 1872875764869826679, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2044709885}
     - targetCorrespondingSourceObject: {fileID: 5862934236982873323, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 592294425}
+    - targetCorrespondingSourceObject: {fileID: 4692621205792450657, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1674540570}
+    - targetCorrespondingSourceObject: {fileID: 3273717751042919200, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1642531189}
+    - targetCorrespondingSourceObject: {fileID: 3426264252671626187, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 337015140}
+    - targetCorrespondingSourceObject: {fileID: 3075830299366915451, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 550865985}
+    - targetCorrespondingSourceObject: {fileID: 54654148351979979, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 198637047}
+    - targetCorrespondingSourceObject: {fileID: 6518515258099567912, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 800886124}
+    - targetCorrespondingSourceObject: {fileID: 5338969612790530966, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838097366}
+    - targetCorrespondingSourceObject: {fileID: 4865446834964605347, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 264274401}
+    - targetCorrespondingSourceObject: {fileID: 4200730820121816261, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 43309923}
+    - targetCorrespondingSourceObject: {fileID: 1766666772580448884, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2049379039}
+    - targetCorrespondingSourceObject: {fileID: 6665435757324342030, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 815417073}
+    - targetCorrespondingSourceObject: {fileID: 8763316595372930229, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 898046917}
   m_SourcePrefab: {fileID: 100100000, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
 --- !u!224 &814109514 stripped
 RectTransform:
@@ -16995,7 +17506,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9197242425762936945, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 947116852}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17006,7 +17517,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8656542553295332371, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 853676118}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17017,7 +17528,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6791096979457844367, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 85381637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17028,7 +17539,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7568309122144041553, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1490733345}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17039,7 +17550,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5241132949569215834, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 415221570}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17050,7 +17561,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7198722007139744401, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 749996098}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17061,7 +17572,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7101256220128414466, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 886404885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17072,7 +17583,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 394481289460909841, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1352248392}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17083,7 +17594,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4344048554348361090, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 742446526}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -17094,12 +17605,52 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3229073976061283217, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2010111072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &814109528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749996098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!114 &814109531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742446526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1001 &814110623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17409,6 +17960,31 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 680817406}
   m_SourcePrefab: {fileID: 100100000, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+--- !u!1 &815417067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6665435757324342030, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &815417073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815417067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &817105871
 GameObject:
   m_ObjectHideFlags: 0
@@ -18237,6 +18813,31 @@ MonoBehaviour:
     PaletteColour: Colour.3
     ColourIndex: 2
     IsChanged: 0
+--- !u!1 &853676118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7080268880469237960, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &853676122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853676118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &857150718
 GameObject:
   m_ObjectHideFlags: 0
@@ -18533,12 +19134,57 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8858035510848198621, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 299015574}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &865471292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299015574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &867328258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4325314848155817964, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &867328264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867328258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &877507142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -18597,6 +19243,31 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &886404885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8683437827205330783, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &886404889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886404885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
     PaletteColour: Colour.8
     ColourIndex: 7
     IsChanged: 0
@@ -18769,12 +19440,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889448956}
   m_CullTransparentMesh: 1
+--- !u!1 &891133880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5350665584351903676, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &891133886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891133880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!114 &894011745 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1559114417203907187, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 898046913}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -19003,6 +19699,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896110804}
   m_CullTransparentMesh: 1
+--- !u!1 &898046913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8763316595372930229, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &898046917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898046913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &903802616
 GameObject:
   m_ObjectHideFlags: 0
@@ -19504,6 +20225,31 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 926427378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &928584966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 344267213387670680, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &928584972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928584966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &930734631
 GameObject:
   m_ObjectHideFlags: 0
@@ -19773,6 +20519,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946124813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &947116852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 217589818223999072, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &947116856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947116852}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
@@ -21416,6 +22187,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004971076}
   m_CullTransparentMesh: 1
+--- !u!1 &1011155379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 864667976549844029, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1011155385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011155379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1018860401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -23295,6 +24091,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143596927}
   m_CullTransparentMesh: 1
+--- !u!1 &1145990456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8791862966324099272, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1157152555
 GameObject:
   m_ObjectHideFlags: 0
@@ -23493,7 +24294,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7797976798097816847, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1386848793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -23615,6 +24416,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1434648899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1172002400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2253827331639788841, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1172002406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172002400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1001 &1188014718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24187,6 +25013,31 @@ MonoBehaviour:
   _popupUseHint: {fileID: 930734631}
   _popupTheme: {fileID: 812555012}
   _removeBannerPopup: {fileID: 1525656868}
+--- !u!1 &1214980171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9028211316422028222, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1214980177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214980171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1001 &1215716892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25566,6 +26417,31 @@ MonoBehaviour:
     BaseName: Outline
     PaletteColour: Colour.13
     ColourIndex: 12
+    IsChanged: 0
+--- !u!1 &1246630286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6604599997474548095, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1246630292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246630286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
     IsChanged: 0
 --- !u!1 &1248461556
 GameObject:
@@ -26956,6 +27832,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1304972852}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305058109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3596296243736526485, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1309487195
 GameObject:
   m_ObjectHideFlags: 0
@@ -27494,6 +28375,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1351543935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6356328565938226066, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1351543939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351543935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1352248392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 746516369269014457, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1352248396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352248392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1357375327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -27590,12 +28521,32 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 321846386362155955, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1305058109}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1368443633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305058109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1376576304 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -27608,6 +28559,56 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376576304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1386848793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5949636349429196824, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1386848797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386848793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1387675606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5290218477286146330, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1387675612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387675606}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
@@ -28471,7 +29472,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173809450469176428, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1645324208}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -29479,12 +30480,32 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1432681980917401994, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 598883315}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1466438952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598883315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1466562391
 GameObject:
   m_ObjectHideFlags: 0
@@ -29574,7 +30595,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4576667710443635234, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2049379035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -29585,6 +30606,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1979269125}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1473374361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415221570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1473579498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3775018571443609192, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1473579504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473579498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1485985325
 GameObject:
   m_ObjectHideFlags: 0
@@ -29857,6 +30923,31 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
+--- !u!1 &1490733345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4232053699598742090, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1490733349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490733345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1493806731 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -29869,6 +30960,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493806731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1495992294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1917864631297805476, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1495992300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495992294}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
@@ -30994,12 +32110,32 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1069944288753644334, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1145990456}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1532302083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145990456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1540951699
 GameObject:
   m_ObjectHideFlags: 0
@@ -31107,6 +32243,31 @@ Transform:
   - {fileID: 1735692455}
   m_Father: {fileID: 1553360193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1558403470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3178022561555834600, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1558403476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558403470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1561095385
 GameObject:
   m_ObjectHideFlags: 0
@@ -31988,6 +33149,31 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1570532694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1583663389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1324399528138048984, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1583663395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583663389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1587009614
 GameObject:
   m_ObjectHideFlags: 0
@@ -32552,6 +33738,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 981658785}
   m_SourcePrefab: {fileID: 100100000, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+--- !u!1 &1594521977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3273717751042919200, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1600540812
 GameObject:
   m_ObjectHideFlags: 0
@@ -33122,12 +34313,57 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3055509475264382814, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
   m_PrefabInstance: {fileID: 814109513}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1594521977}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1642531189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594521977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &1645324208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6576233394470326042, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1645324212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645324208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1654359768
 GameObject:
   m_ObjectHideFlags: 0
@@ -33880,6 +35116,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801c40c8f8c0b91468f5b43b0ea17a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1674540564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4692621205792450657, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1674540570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674540564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1679448410
 GameObject:
   m_ObjectHideFlags: 0
@@ -34333,6 +35594,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689559920}
   m_CullTransparentMesh: 1
+--- !u!114 &1700546116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85381637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1001 &1704067982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37264,6 +38545,31 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.09803922}
   m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 0
+--- !u!1 &1789511313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 529385179883240587, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1789511319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789511313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1792324914
 GameObject:
   m_ObjectHideFlags: 0
@@ -38097,6 +39403,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832827772}
   m_CullTransparentMesh: 1
+--- !u!1 &1838097360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338969612790530966, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838097366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838097360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &1845257648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -42338,6 +43669,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007080770}
   m_CullTransparentMesh: 1
+--- !u!1 &2010111072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7931776893044417684, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2010111076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010111072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &2013500586
 GameObject:
   m_ObjectHideFlags: 0
@@ -43747,6 +45103,56 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 217056952}
   m_SourcePrefab: {fileID: 100100000, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+--- !u!1 &2044709881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1872875764869826679, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044709885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044709881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &2049379035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1766666772580448884, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2049379039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049379035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &2052793547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -43759,6 +45165,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052793547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
+--- !u!1 &2056783492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7022420407888886089, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2056783498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056783492}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
@@ -45022,6 +46453,31 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.09803922}
   m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 0
+--- !u!1 &2106772363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8185055738999242372, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
+  m_PrefabInstance: {fileID: 814109513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2106772367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106772363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e158cda6484f2014bb2b1626b78df421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Palette: Dummy
+  ColouriseComponents:
+  - Name: TextMeshProUGUI.Color
+    FullName: TMPro.TextMeshProUGUI
+    BaseName: TextMeshProUGUI
+    PaletteColour: Colour.8
+    ColourIndex: 7
+    IsChanged: 0
 --- !u!1 &2108158423
 GameObject:
   m_ObjectHideFlags: 0
