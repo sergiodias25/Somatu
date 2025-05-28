@@ -258,22 +258,26 @@ namespace Assets.Scripts.CustomAnimation
             ;
         }
 
-        internal static DG.Tweening.Core.TweenerCore<
-            Vector3,
-            Vector3,
-            DG.Tweening.Plugins.Options.VectorOptions
-        > PopupLoad(Transform transform)
+        internal static void PopupLoad(Transform transform)
         {
-            return transform.DOScale(0.85f, .4f).From().SetEase(Ease.OutBounce);
+            transform.GetComponent<CanvasGroup>().alpha = 0;
+            transform.gameObject.SetActive(true);
+            transform.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+            transform.DOScale(0.65f, .75f).From().SetEase(Ease.OutBack);
         }
 
-        internal static DG.Tweening.Core.TweenerCore<
-            Vector3,
-            Vector3,
-            DG.Tweening.Plugins.Options.VectorOptions
-        > PopupUnload(Transform transform)
+        internal static void PopupUnload(Transform mainTransform, Transform panelTransform)
         {
-            return transform.DOScale(0.01f, 0.4f).SetEase(Ease.InBounce);
+            mainTransform.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+            panelTransform
+                .DOScale(0.33f, 0.6f)
+                .SetEase(Ease.InBack)
+                .OnComplete(() =>
+                {
+                    mainTransform.gameObject.SetActive(false);
+                    panelTransform.localScale = new Vector3(1, 1, 1);
+                });
+            ;
         }
 
         internal static void NodeLoad(Transform transform)

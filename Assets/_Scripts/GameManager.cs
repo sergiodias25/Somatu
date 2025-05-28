@@ -608,7 +608,7 @@ public class GameManager : MonoBehaviour
             _timesSolvedText + 1,
             Timer.FormatTimeForText(_elapsedTime)
         );
-        _challengeFinishedPopup.SetActive(true);
+        CustomAnimation.PopupLoad(_challengeFinishedPopup.transform);
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)

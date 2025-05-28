@@ -160,58 +160,96 @@ public class UIManager : MonoBehaviour
             {
                 if (_gameManager.SavedGameData.SettingsData.LanguageChangedOnce)
                 {
-                    HideObject(_languagePopup);
+                    CustomAnimation.PopupUnload(
+                        _languagePopup.transform,
+                        _languagePopup.transform.Find("Interactible")
+                    );
                 }
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_removeBannerPopup.activeSelf)
             {
-                HideObject(_removeBannerPopup);
+                CustomAnimation.PopupUnload(
+                    _removeBannerPopup.transform,
+                    _removeBannerPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingWelcome.activeSelf)
             {
-                HideObject(_onboardingWelcome);
+                CustomAnimation.PopupUnload(
+                    _onboardingWelcome.transform,
+                    _onboardingWelcome.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingClassicExplanation.activeSelf)
             {
-                HideObject(_onboardingClassicExplanation);
+                CustomAnimation.PopupUnload(
+                    _onboardingClassicExplanation.transform,
+                    _onboardingClassicExplanation.transform.Find("Interactible")
+                );
+                FindObjectOfType<GameManager>().EnableGameplayBlocks();
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingClassicHint.activeSelf)
             {
-                HideObject(_onboardingClassicHint);
+                CustomAnimation.PopupUnload(
+                    _onboardingClassicHint.transform,
+                    _onboardingClassicHint.transform.Find("Interactible")
+                );
+                FindObjectOfType<GameManager>().EnableGameplayBlocks();
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingClassicUndo.activeSelf)
             {
-                HideObject(_onboardingClassicUndo);
+                CustomAnimation.PopupUnload(
+                    _onboardingClassicUndo.transform,
+                    _onboardingClassicUndo.transform.Find("Interactible")
+                );
+                FindObjectOfType<GameManager>().EnableGameplayBlocks();
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_onboardingChallenge.activeSelf)
             {
-                HideObject(_onboardingChallenge);
+                CustomAnimation.PopupUnload(
+                    _onboardingChallenge.transform,
+                    _onboardingChallenge.transform.Find("Interactible")
+                );
+                FindObjectOfType<GameManager>().EnableGameplayBlocks();
+                FindObjectOfType<GameManager>().EnableGameplayBlocks();
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_quitGamePopup.activeSelf)
             {
-                HideObject(_quitGamePopup);
+                CustomAnimation.PopupUnload(
+                    _quitGamePopup.transform,
+                    _quitGamePopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_unlockLevelPopup.activeSelf)
             {
-                HideObject(_unlockLevelPopup);
+                CustomAnimation.PopupUnload(
+                    _unlockLevelPopup.transform,
+                    _unlockLevelPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_difficultyLockedPopup.activeSelf)
             {
-                HideObject(_difficultyLockedPopup);
+                CustomAnimation.PopupUnload(
+                    _difficultyLockedPopup.transform,
+                    _difficultyLockedPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_popupTheme.activeSelf)
             {
-                HideObject(_popupTheme);
+                CustomAnimation.PopupUnload(
+                    _popupTheme.transform,
+                    _popupTheme.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_settingsPanel.activeSelf)
@@ -228,7 +266,10 @@ public class UIManager : MonoBehaviour
             }
             else if (_challengeFinishedPopup.activeSelf)
             {
-                HideObject(_challengeFinishedPopup);
+                CustomAnimation.PopupUnload(
+                    _challengeFinishedPopup.transform,
+                    _challengeFinishedPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.DropBlockUndo);
             }
             else if (_popupUseHint.activeSelf)
@@ -247,7 +288,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                ShowObject(_quitGamePopup);
+                ShowObjectWithAnimation(_quitGamePopup);
             }
         }
     }
@@ -295,6 +336,11 @@ public class UIManager : MonoBehaviour
     private void ShowObject(GameObject gameObject)
     {
         gameObject.SetActive(true);
+    }
+
+    private void ShowObjectWithAnimation(GameObject gameObject)
+    {
+        CustomAnimation.PopupLoad(gameObject.GetComponent<RectTransform>());
     }
 
     public async void ClickOnContinueGame()
@@ -391,7 +437,7 @@ public class UIManager : MonoBehaviour
         {
             _difficultyPanelText.text = LocalizationManager.Localize("popup-difficulty-challenge");
         }
-        ShowObject(_difficultyLockedPopup);
+        ShowObjectWithAnimation(_difficultyLockedPopup);
     }
 
     public void ShowUnlockPopup(Constants.Difficulty newDifficulty)
@@ -402,12 +448,12 @@ public class UIManager : MonoBehaviour
             popuTextKey,
             LocalizationManager.Localize("mode-" + newDifficulty.ToString().ToLower())
         );
-        ShowObject(_unlockLevelPopup);
+        ShowObjectWithAnimation(_unlockLevelPopup);
     }
 
     public void ShowRemoveBannerPopup()
     {
-        ShowObject(_removeBannerPopup);
+        CustomAnimation.PopupLoad(_removeBannerPopup.transform);
     }
 
     public async void ClickOnHardMode()
@@ -536,7 +582,7 @@ public class UIManager : MonoBehaviour
             }
             else if (_gameManager.SelectedDifficulty != Constants.Difficulty.Challenge)
             {
-                ShowObject(_popupUseHint);
+                ShowObjectWithAnimation(_popupUseHint);
             }
         }
         ToggleHintButton();
@@ -567,7 +613,7 @@ public class UIManager : MonoBehaviour
 
     public void SelectThemeClick()
     {
-        ShowObject(_popupTheme);
+        ShowObjectWithAnimation(_popupTheme);
     }
 
     public void ToggleUndoButton()
@@ -843,14 +889,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowOnboarding(GameObject onboarding)
-    {
-        ShowObject(onboarding);
-    }
-
     public void ShowOnboardingClassicExplanation()
     {
-        ShowOnboarding(_onboardingClassicExplanation);
         CustomAnimation.PopupLoad(_onboardingClassicExplanation.transform);
     }
 
@@ -862,26 +902,22 @@ public class UIManager : MonoBehaviour
         )
         {
             _gameManager.SavedGameData.Onboardings.Welcome = true;
-            ShowOnboarding(_onboardingWelcome);
             CustomAnimation.PopupLoad(_onboardingWelcome.transform);
         }
     }
 
     public void ShowOnboardingClassicHint()
     {
-        ShowOnboarding(_onboardingClassicHint);
         CustomAnimation.PopupLoad(_onboardingClassicHint.transform);
     }
 
     public void ShowOnboardingClassicUndo()
     {
-        ShowOnboarding(_onboardingClassicUndo);
         CustomAnimation.PopupLoad(_onboardingClassicUndo.transform);
     }
 
     public void ShowOnboardingChallenge()
     {
-        ShowOnboarding(_onboardingChallenge);
         CustomAnimation.PopupLoad(_onboardingChallenge.transform);
     }
 

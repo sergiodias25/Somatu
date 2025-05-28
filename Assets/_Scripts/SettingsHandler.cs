@@ -312,10 +312,12 @@ public class SettingsHandler : MonoBehaviour
         }
     }
 
-    public async void CloseLanguagePopup(Button buttonClicked)
+    public void CloseLanguagePopup(GameObject languagePanel)
     {
-        await CustomAnimation.ButtonClicked(buttonClicked.transform);
-        _languagePopup.SetActive(false);
+        CustomAnimation.PopupUnload(
+            languagePanel.transform,
+            languagePanel.transform.Find("Interactible")
+        );
     }
 
     internal void LoadSettingsButtons()

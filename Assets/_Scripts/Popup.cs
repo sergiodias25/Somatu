@@ -31,22 +31,29 @@ public class Popup : MonoBehaviour
     public void ClosePopupGameplay()
     {
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
-        _popupPanel.SetActive(false); //TODO: animation
+        CustomAnimation.PopupUnload(
+            _popupPanel.transform,
+            _popupPanel.transform.Find("Interactible")
+        );
     }
 
     public async void ClosePopupMenu()
     {
         await CustomAnimation.ButtonClicked(_closePopupButton.transform);
-        _popupPanel.SetActive(false); //TODO: animation
+        CustomAnimation.PopupUnload(
+            _popupPanel.transform,
+            _popupPanel.transform.Find("Interactible")
+        );
     }
 
     public async void CloseOnboarding()
     {
         await CustomAnimation.ButtonClicked(_closePopupButton.transform);
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
-        CustomAnimation
-            .PopupUnload(_popupWindow.transform)
-            .OnComplete(() => _popupPanel.SetActive(false));
+        CustomAnimation.PopupUnload(
+            _popupPanel.transform,
+            _popupPanel.transform.Find("Interactible")
+        );
     }
 
     public async void ActionQuitApplication()
@@ -58,14 +65,20 @@ public class Popup : MonoBehaviour
     public async void ActionChangeDifficulty()
     {
         await CustomAnimation.ButtonClicked(_actionButton.transform);
+        CustomAnimation.PopupUnload(
+            _popupPanel.transform,
+            _popupPanel.transform.Find("Interactible")
+        );
         FindObjectOfType<UIManager>().ChangeModeClick();
-        _popupPanel.SetActive(false); //TODO: animation
     }
 
     public async void ActionRemoveBanner()
     {
         await CustomAnimation.ButtonClicked(_actionButton.transform);
         FindObjectOfType<IAPScript>().RemoveAds();
-        _popupPanel.SetActive(false); //TODO: animation
+        CustomAnimation.PopupUnload(
+            _popupPanel.transform,
+            _popupPanel.transform.Find("Interactible")
+        );
     }
 }
