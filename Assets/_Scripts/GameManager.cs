@@ -982,7 +982,7 @@ public class GameManager : MonoBehaviour
         LocalizationManager.Read();
         if (!SavedGameData.SettingsData.LanguageChangedOnce)
         {
-            _languagePopup.SetActive(true);
+            CustomAnimation.PopupLoad(_languagePopup.transform);
         }
         else
         {

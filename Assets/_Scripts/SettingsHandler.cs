@@ -288,7 +288,7 @@ public class SettingsHandler : MonoBehaviour
     public async void ShowLanguagePopup()
     {
         await CustomAnimation.ButtonClicked(_languageButton.transform);
-        _languagePopup.SetActive(true);
+        CustomAnimation.PopupLoad(_languagePopup.transform);
     }
 
     public void ChangeLanguage(string language)
