@@ -568,7 +568,7 @@ public class GameManager : MonoBehaviour
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
         }
-        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved);
+        _uiManager.InteractionPerformed(Constants.AudioClip.ClassicFinish);
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -596,7 +596,7 @@ public class GameManager : MonoBehaviour
             node.UpdateColor(ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_RED]);
             node.GetBlockInNode().UpdateTextColor();
         }
-        _uiManager.InteractionPerformed(Constants.AudioClip.PuzzleSolved);
+        _uiManager.InteractionPerformed(Constants.AudioClip.ChallengeFinish);
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
@@ -788,7 +788,7 @@ public class GameManager : MonoBehaviour
                 correctNodes[randomNodeIndex].GetBlockInNode().ChangeInteraction(false);
                 correctNodes.RemoveAt(randomNodeIndex);
             }
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlock);
+            _uiManager.InteractionPerformed(Constants.AudioClip.MenuInteraction);
             return true;
         }
         else
@@ -806,7 +806,7 @@ public class GameManager : MonoBehaviour
                     _ = _allNodes[i].GetBlockInNode().AnimateIncorrectSolution();
                 }
             }
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            _uiManager.InteractionPerformed(Constants.AudioClip.NoHintAvailable);
         }
         return false;
     }
@@ -925,7 +925,7 @@ public class GameManager : MonoBehaviour
                 .GetComponent<Node>()
                 .GetBlockInNode()
                 .ChangeInteraction(true);
-            _uiManager.InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+            _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);
             UndoUsed.SendAnalyticsEvent(SelectedDifficulty.ToString());

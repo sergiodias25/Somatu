@@ -52,7 +52,7 @@ namespace Assets.Scripts.CustomAnimation
             {
                 Object
                     .FindObjectOfType<UIManager>()
-                    .InteractionPerformed(Constants.AudioClip.DropBlock);
+                    .InteractionPerformed(Constants.AudioClip.MenuInteraction);
             }
 
             await WaitForAnimation("ButtonClick" + target.name);
@@ -260,24 +260,40 @@ namespace Assets.Scripts.CustomAnimation
 
         internal static void PopupLoad(Transform transform)
         {
-            transform.GetComponent<CanvasGroup>().alpha = 0;
-            transform.gameObject.SetActive(true);
-            transform.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
-            transform.DOScale(0.65f, .75f).From().SetEase(Ease.OutBack);
+            if (
+                (DOTween.TotalTweensById(transform.name + "PopupLoad") == 0)
+                && (DOTween.TotalTweensById(transform.name + "PopupUnload") == 0)
+            )
+            {
+                transform.GetComponent<CanvasGroup>().alpha = 0;
+                transform.gameObject.SetActive(true);
+                transform.GetComponent<CanvasGroup>().DOFade(1f, 0.5f);
+                transform
+                    .DOScale(0.65f, .75f)
+                    .From()
+                    .SetEase(Ease.OutBack)
+                    .SetId(transform.name + "PopupLoad");
+            }
         }
 
         internal static void PopupUnload(Transform mainTransform, Transform panelTransform)
         {
-            mainTransform.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
-            panelTransform
-                .DOScale(0.33f, 0.6f)
-                .SetEase(Ease.InBack)
-                .OnComplete(() =>
-                {
-                    mainTransform.gameObject.SetActive(false);
-                    panelTransform.localScale = new Vector3(1, 1, 1);
-                });
-            ;
+            if (
+                (DOTween.TotalTweensById(panelTransform.name + "PopupLoad") == 0)
+                && (DOTween.TotalTweensById(panelTransform.name + "PopupUnload") == 0)
+            )
+            {
+                mainTransform.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
+                panelTransform
+                    .DOScale(0.33f, 0.6f)
+                    .SetEase(Ease.InBack)
+                    .SetId(panelTransform.name + "PopupUnload")
+                    .OnComplete(() =>
+                    {
+                        mainTransform.gameObject.SetActive(false);
+                        panelTransform.localScale = new Vector3(1, 1, 1);
+                    });
+            }
         }
 
         internal static void NodeLoad(Transform transform)

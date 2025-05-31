@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -19,14 +20,21 @@ namespace Somatu.Assets._Scripts
 
         public void Play()
         {
-            _mainModuleReference.startDelay = Random.Range(0.1f, 0.9f);
             ChangePosition();
             ChangeColor();
             ChangeTrail();
+            StartCoroutine(ExecuteDelayed());
+        }
 
+        public IEnumerator ExecuteDelayed()
+        {
+            MinMaxCurve delay = Random.Range(0.1f, 0.9f);
+            _mainModuleReference.startDelay = delay.constant;
             if (Enabled)
             {
                 _explosionParticle.Play();
+                yield return new WaitForSeconds(delay.constant);
+                FindObjectOfType<UIManager>().InteractionPerformed(Constants.AudioClip.Firework);
             }
         }
 

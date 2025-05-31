@@ -187,11 +187,15 @@ public static class Constants
 
     public enum AudioClip
     {
-        DropBlock,
-        DropBlockUndo,
-        PuzzleSolved,
+        GameplayInteraction,
+        Undo,
+        ClassicFinish,
+        ChallengeFinish,
         NodeLoaded,
         NoClip,
-        TimerTicking
+        TimerTicking,
+        Firework,
+        MenuInteraction,
+        NoHintAvailable
     };
 }

@@ -4273,12 +4273,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSource: {fileID: 1299107293}
   _sfxSource: {fileID: 2072426480}
-  DropBlock: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-  DropBlockUndo: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
-  PuzzleSolved: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  GameplayInteraction: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+  Undo: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  ClassicFinish: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  ChallengeFinish: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
   MainMusicTheme: {fileID: 8300000, guid: 8b8ab71ffffc24e5582de0192d9dcee8, type: 3}
   NodeLoaded: {fileID: 8300000, guid: b91838e7cae1efd4fa0f278cf7bc2014, type: 3}
   TimerTicking: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+  Firework: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  MenuInteraction: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  NoHintAvailable: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!4 &279916186
 Transform:
   m_ObjectHideFlags: 0

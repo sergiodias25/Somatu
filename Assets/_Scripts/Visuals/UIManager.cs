@@ -165,7 +165,7 @@ public class UIManager : MonoBehaviour
                         _languagePopup.transform.Find("Interactible")
                     );
                 }
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_removeBannerPopup.activeSelf)
             {
@@ -173,7 +173,7 @@ public class UIManager : MonoBehaviour
                     _removeBannerPopup.transform,
                     _removeBannerPopup.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_onboardingWelcome.activeSelf)
             {
@@ -181,7 +181,7 @@ public class UIManager : MonoBehaviour
                     _onboardingWelcome.transform,
                     _onboardingWelcome.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_onboardingClassicExplanation.activeSelf)
             {
@@ -190,7 +190,7 @@ public class UIManager : MonoBehaviour
                     _onboardingClassicExplanation.transform.Find("Interactible")
                 );
                 FindObjectOfType<GameManager>().EnableGameplayBlocks();
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_onboardingClassicHint.activeSelf)
             {
@@ -199,7 +199,7 @@ public class UIManager : MonoBehaviour
                     _onboardingClassicHint.transform.Find("Interactible")
                 );
                 FindObjectOfType<GameManager>().EnableGameplayBlocks();
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_onboardingClassicUndo.activeSelf)
             {
@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
                     _onboardingClassicUndo.transform.Find("Interactible")
                 );
                 FindObjectOfType<GameManager>().EnableGameplayBlocks();
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_onboardingChallenge.activeSelf)
             {
@@ -218,7 +218,7 @@ public class UIManager : MonoBehaviour
                 );
                 FindObjectOfType<GameManager>().EnableGameplayBlocks();
                 FindObjectOfType<GameManager>().EnableGameplayBlocks();
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_quitGamePopup.activeSelf)
             {
@@ -226,7 +226,7 @@ public class UIManager : MonoBehaviour
                     _quitGamePopup.transform,
                     _quitGamePopup.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_unlockLevelPopup.activeSelf)
             {
@@ -234,7 +234,7 @@ public class UIManager : MonoBehaviour
                     _unlockLevelPopup.transform,
                     _unlockLevelPopup.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_difficultyLockedPopup.activeSelf)
             {
@@ -242,7 +242,7 @@ public class UIManager : MonoBehaviour
                     _difficultyLockedPopup.transform,
                     _difficultyLockedPopup.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_popupTheme.activeSelf)
             {
@@ -250,7 +250,7 @@ public class UIManager : MonoBehaviour
                     _popupTheme.transform,
                     _popupTheme.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_settingsPanel.activeSelf)
             {
@@ -270,12 +270,12 @@ public class UIManager : MonoBehaviour
                     _challengeFinishedPopup.transform,
                     _challengeFinishedPopup.transform.Find("Interactible")
                 );
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_popupUseHint.activeSelf)
             {
                 GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
-                InteractionPerformed(Constants.AudioClip.DropBlockUndo);
+                InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_gameManager.IsGameInProgress())
             {
@@ -288,6 +288,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                InteractionPerformed(Constants.AudioClip.Undo);
                 ShowObjectWithAnimation(_quitGamePopup);
             }
         }

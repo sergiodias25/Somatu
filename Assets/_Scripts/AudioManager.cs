@@ -7,12 +7,16 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource _sfxSource;
-    public AudioClip DropBlock;
-    public AudioClip DropBlockUndo;
-    public AudioClip PuzzleSolved;
+    public AudioClip GameplayInteraction;
+    public AudioClip Undo;
+    public AudioClip ClassicFinish;
+    public AudioClip ChallengeFinish;
     public AudioClip MainMusicTheme;
     public AudioClip NodeLoaded;
     public AudioClip TimerTicking;
+    public AudioClip Firework;
+    public AudioClip MenuInteraction;
+    public AudioClip NoHintAvailable;
     private GameManager gameManager;
 
     private void Start()
@@ -114,25 +118,41 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip GetAudioClip(Constants.AudioClip clip)
     {
-        if (clip == Constants.AudioClip.DropBlock)
+        if (clip == Constants.AudioClip.GameplayInteraction)
         {
-            return DropBlock;
+            return GameplayInteraction;
         }
-        else if (clip == Constants.AudioClip.DropBlockUndo)
+        else if (clip == Constants.AudioClip.Undo)
         {
-            return DropBlockUndo;
+            return Undo;
         }
         else if (clip == Constants.AudioClip.NodeLoaded)
         {
             return NodeLoaded;
         }
-        else if (clip == Constants.AudioClip.PuzzleSolved)
+        else if (clip == Constants.AudioClip.ClassicFinish)
         {
-            return PuzzleSolved;
+            return ClassicFinish;
+        }
+        else if (clip == Constants.AudioClip.ChallengeFinish)
+        {
+            return ChallengeFinish;
         }
         else if (clip == Constants.AudioClip.TimerTicking)
         {
             return TimerTicking;
+        }
+        else if (clip == Constants.AudioClip.Firework)
+        {
+            return Firework;
+        }
+        else if (clip == Constants.AudioClip.MenuInteraction)
+        {
+            return MenuInteraction;
+        }
+        else if (clip == Constants.AudioClip.NoHintAvailable)
+        {
+            return NoHintAvailable;
         }
         else
             return null;
