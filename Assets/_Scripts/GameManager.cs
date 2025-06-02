@@ -925,7 +925,6 @@ public class GameManager : MonoBehaviour
                 .GetComponent<Node>()
                 .GetBlockInNode()
                 .ChangeInteraction(true);
-            _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);
             UndoUsed.SendAnalyticsEvent(SelectedDifficulty.ToString());

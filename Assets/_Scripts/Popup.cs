@@ -24,7 +24,11 @@ public class Popup : MonoBehaviour
 
     public async void ClosePopup()
     {
-        await CustomAnimation.ButtonClicked(_closePopupButton.transform);
+        await CustomAnimation.ButtonClicked(
+            _closePopupButton.transform,
+            Constants.AudioClip.Undo,
+            true
+        );
         ClosePopupGameplay();
     }
 
@@ -39,7 +43,11 @@ public class Popup : MonoBehaviour
 
     public async void ClosePopupMenu()
     {
-        await CustomAnimation.ButtonClicked(_closePopupButton.transform);
+        await CustomAnimation.ButtonClicked(
+            _closePopupButton.transform,
+            Constants.AudioClip.Undo,
+            true
+        );
         CustomAnimation.PopupUnload(
             _popupPanel.transform,
             _popupPanel.transform.Find("Interactible")

@@ -34,6 +34,20 @@ namespace Assets.Scripts.CustomAnimation
 
         public static async Task ButtonClicked(Transform target)
         {
+            await ButtonClicked(target, Constants.AudioClip.MenuInteraction, true);
+        }
+
+        public static async Task ButtonClicked(Transform target, bool playSFX)
+        {
+            await ButtonClicked(target, Constants.AudioClip.MenuInteraction, playSFX);
+        }
+
+        public static async Task ButtonClicked(
+            Transform target,
+            Constants.AudioClip clipToPlay,
+            bool playSFX
+        )
+        {
             target.gameObject.GetComponent<Button>().enabled = false;
             var sequence = DOTween.Sequence();
             sequence.Append(target.DOScale(BUTTON_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
@@ -48,11 +62,9 @@ namespace Assets.Scripts.CustomAnimation
                 target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
             );
             sequence.SetId("ButtonClick" + target.name).Play();
-            if (target.name != "UndoButton")
+            if (playSFX)
             {
-                Object
-                    .FindObjectOfType<UIManager>()
-                    .InteractionPerformed(Constants.AudioClip.MenuInteraction);
+                Object.FindObjectOfType<UIManager>().InteractionPerformed(clipToPlay);
             }
 
             await WaitForAnimation("ButtonClick" + target.name);

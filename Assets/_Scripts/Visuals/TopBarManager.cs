@@ -86,19 +86,19 @@ public class TopBarManager : MonoBehaviour
     public async void DeselectHomeButton()
     {
         MakeInactive(_homeButton);
-        await CustomAnimation.ButtonClicked(_homeButton.transform);
+        await CustomAnimation.ButtonClicked(_homeButton.transform, false);
     }
 
     public async void DeselectSettingsButton()
     {
         MakeInactive(_settingsButton);
-        await CustomAnimation.ButtonClicked(_settingsButton.transform);
+        await CustomAnimation.ButtonClicked(_settingsButton.transform, false);
     }
 
     public async void DeselectProfileButton()
     {
         MakeInactive(_profileButton);
-        await CustomAnimation.ButtonClicked(_profileButton.transform);
+        await CustomAnimation.ButtonClicked(_profileButton.transform, false);
     }
 
     public void DeselectAll()

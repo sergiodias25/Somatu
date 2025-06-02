@@ -15,30 +15,49 @@ public class Swipe : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             endTouchPosition = Input.GetTouch(0).position;
+            if (swipeIsConsiderable(startTouchPosition, endTouchPosition))
+            {
+                processSwipe(endTouchPosition - startTouchPosition);
+            }
+        }
+    }
 
-            Vector2 inputVector = endTouchPosition - startTouchPosition;
-            if (Mathf.Abs(inputVector.x) > Mathf.Abs(inputVector.y))
-            {
-                if (inputVector.x > 0)
-                {
-                    RightSwipe();
-                }
-                else
-                {
-                    LeftSwipe();
-                }
-            }
-            else
-            {
-                if (inputVector.y > 0)
-                {
-                    UpSwipe();
-                }
-                else
-                {
-                    DownSwipe();
-                }
-            }
+    private bool swipeIsConsiderable(Vector2 startTouchPosition, Vector2 endTouchPosition)
+    {
+        float minSwipeDistance = .015f;
+        if (
+            (
+                Mathf.Abs(startTouchPosition.normalized.x - endTouchPosition.normalized.x)
+                < minSwipeDistance
+            )
+            || (
+                Mathf.Abs(startTouchPosition.normalized.y - endTouchPosition.normalized.y)
+                < minSwipeDistance
+            )
+        )
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private void processSwipe(Vector2 inputVector)
+    {
+        if (inputVector.x > 0)
+        {
+            RightSwipe();
+        }
+        else
+        {
+            LeftSwipe();
+        }
+        if (inputVector.y > 0)
+        {
+            UpSwipe();
+        }
+        else
+        {
+            DownSwipe();
         }
     }
 
@@ -49,10 +68,12 @@ public class Swipe : MonoBehaviour
     private void LeftSwipe()
     {
         FindObjectOfType<Profile>().MoveBackward();
+        FindObjectOfType<UIManager>().InteractionPerformed(Constants.AudioClip.MenuInteraction);
     }
 
     private void RightSwipe()
     {
         FindObjectOfType<Profile>().MoveForward();
+        FindObjectOfType<UIManager>().InteractionPerformed(Constants.AudioClip.MenuInteraction);
     }
 }

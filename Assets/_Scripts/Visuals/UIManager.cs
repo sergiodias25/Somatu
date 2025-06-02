@@ -565,7 +565,6 @@ public class UIManager : MonoBehaviour
         HideObject(_classicMenu);
         HideObject(_backgroundsPanel);
         ShowMainMenu();
-        _topBarManager.SelectHomeButton();
     }
 
     public async void HintClick()
