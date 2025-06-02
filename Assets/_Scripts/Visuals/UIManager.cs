@@ -567,11 +567,11 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
     }
 
-    public async void HintClick()
+    public void HintClick()
     {
         if (_hintButton.enabled)
         {
-            await CustomAnimation.ButtonClicked(_hintButton.transform);
+            _ = CustomAnimation.ButtonClicked(_hintButton.transform);
             if (_gameManager.IsHintAvailable())
             {
                 if (_gameManager.UseHint())
@@ -594,7 +594,7 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.UndoLastMove();
             FindObjectOfType<GameManager>().RemoveHints();
-            await CustomAnimation.ButtonClicked(_undoButton.transform);
+            await CustomAnimation.ButtonClicked(_undoButton.transform, Constants.AudioClip.Undo);
             ToggleUndoButton(
                 _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
             );

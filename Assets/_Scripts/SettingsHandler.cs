@@ -163,9 +163,7 @@ public class SettingsHandler : MonoBehaviour
             _gameManager.RemoveHints();
         }
 
-        FindObjectOfType<TopBarManager>().SelectSettingsButton();
         FindObjectOfType<ColorHelper>().ApplyUpdates();
-
         Theme.SendAnalyticsEvent(ColourManager.Instance.SelectedPalette().Name);
         _themeSelectPopup.ClosePopupGameplay();
     }
@@ -285,9 +283,9 @@ public class SettingsHandler : MonoBehaviour
         }
     }
 
-    public async void ShowLanguagePopup()
+    public void ShowLanguagePopup()
     {
-        await CustomAnimation.ButtonClicked(_languageButton.transform);
+        _ = CustomAnimation.ButtonClicked(_languageButton.transform);
         CustomAnimation.PopupLoad(_languagePopup.transform);
     }
 

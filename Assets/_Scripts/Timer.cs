@@ -146,8 +146,7 @@ public class Timer : MonoBehaviour
                 {
                     AudioManager audioManager = FindObjectOfType<AudioManager>();
                     audioManager.PlaySFX(
-                        audioManager.GetAudioClip(Constants.AudioClip.TimerTicking),
-                        0.1f
+                        audioManager.GetAudioClip(Constants.AudioClip.TimerTicking)
                     );
                     _timerGroup.transform
                         .DOScale(new Vector3(1.25f, 1.25f, 1.25f), .5f)

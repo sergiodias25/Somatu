@@ -58,84 +58,92 @@ public class Block : MonoBehaviour
 
     private async void OnMouseDown()
     {
-        Node nodeClickedOn = GetNodeTouched();
-        if (nodeClickedOn != null && _isInteractible)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
+            Node nodeClickedOn = GetNodeTouched();
+            if (nodeClickedOn != null && _isInteractible)
             {
-                CustomAnimation.NumberClicked(transform);
-                _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
-                _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
-            }
-            else
-            {
-                Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
-                if (selectedBlock == null)
+                if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
                 {
-                    FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    IsSelected = true;
-                    nodeClickedOn.UpdateColor(
-                        ColourManager.Instance.SelectedPalette().Colours[
-                            Constants.COLOR_SELECTED_NODE
-                        ]
-                    );
+                    CustomAnimation.NumberClicked(transform);
+                    _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
                     _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
-                    await CustomAnimation.NodeClicked(nodeClickedOn.transform);
                 }
-                else if (selectedBlock._originalNode.name == _originalNode.name)
+                else
                 {
-                    FindObjectOfType<GameManager>().ResetSelectedBlock();
-                    selectedBlock._originalNode.UpdateColor(
-                        ColourManager.Instance.SelectedPalette().Colours[
-                            Constants.COLOR_NODE_NEUTRAL
-                        ]
-                    );
-                    _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
-                    await CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
-                }
-                else if (selectedBlock._originalNode.name != _originalNode.name)
-                {
-                    if (_originalNode != null && _originalNode.name != selectedBlock.GetNode().name)
+                    Block selectedBlock = FindObjectOfType<GameManager>().GetSelectedBlock();
+                    if (selectedBlock == null)
                     {
-                        _originalNode.UpdateColor(
+                        FindObjectOfType<GameManager>().ResetSelectedBlock();
+                        IsSelected = true;
+                        nodeClickedOn.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
                                 Constants.COLOR_SELECTED_NODE
                             ]
                         );
-
+                        _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
+                        await CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                    }
+                    else if (selectedBlock._originalNode.name == _originalNode.name)
+                    {
+                        FindObjectOfType<GameManager>().ResetSelectedBlock();
                         selectedBlock._originalNode.UpdateColor(
                             ColourManager.Instance.SelectedPalette().Colours[
                                 Constants.COLOR_NODE_NEUTRAL
                             ]
                         );
-                        _originalNode.UpdateColor(
-                            ColourManager.Instance.SelectedPalette().Colours[
-                                Constants.COLOR_NODE_NEUTRAL
-                            ]
-                        );
-                        _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
-                        _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
-                        _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
-                        _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
-                        await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
-
-                        FindObjectOfType<GameManager>().ResetSelectedBlock();
-                        if (!FindObjectOfType<GameManager>().CheckResult(true))
+                        _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
+                        await CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
+                    }
+                    else if (selectedBlock._originalNode.name != _originalNode.name)
+                    {
+                        if (
+                            _originalNode != null
+                            && _originalNode.name != selectedBlock.GetNode().name
+                        )
                         {
-                            _gameManager.ShowOnboardingClassicUndo();
+                            _originalNode.UpdateColor(
+                                ColourManager.Instance.SelectedPalette().Colours[
+                                    Constants.COLOR_SELECTED_NODE
+                                ]
+                            );
+
+                            selectedBlock._originalNode.UpdateColor(
+                                ColourManager.Instance.SelectedPalette().Colours[
+                                    Constants.COLOR_NODE_NEUTRAL
+                                ]
+                            );
+                            _originalNode.UpdateColor(
+                                ColourManager.Instance.SelectedPalette().Colours[
+                                    Constants.COLOR_NODE_NEUTRAL
+                                ]
+                            );
+                            _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
+                            _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
+                            _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                            _uiManager.InteractionPerformed(
+                                Constants.AudioClip.GameplayInteraction
+                            );
+                            await SwitchBlocksUndo(nodeClickedOn, selectedBlock._originalNode);
+
+                            FindObjectOfType<GameManager>().ResetSelectedBlock();
+                            if (!FindObjectOfType<GameManager>().CheckResult(true))
+                            {
+                                _gameManager.ShowOnboardingClassicUndo();
+                            }
                         }
                     }
                 }
+                FindObjectOfType<GameManager>().RemoveHints();
             }
-            FindObjectOfType<GameManager>().RemoveHints();
-        }
-        else if (
-            nodeClickedOn != null
-            && !_isInteractible
-            && !_gameManager.SavedGameData.SettingsData.ControlMethodDrag
-        )
-        {
-            _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
+            else if (
+                nodeClickedOn != null
+                && !_isInteractible
+                && !_gameManager.SavedGameData.SettingsData.ControlMethodDrag
+            )
+            {
+                _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
+            }
         }
     }
 
@@ -182,6 +190,8 @@ public class Block : MonoBehaviour
         if (
             !_gameManager.HasGameEnded()
             && _gameManager.SavedGameData.SettingsData.ControlMethodDrag
+            && !EventSystem.current.IsPointerOverGameObject()
+            && true
         )
         {
             Node nodeWhereBlockIsDropped = GetNodeTouched();

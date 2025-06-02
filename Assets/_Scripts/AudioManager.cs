@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip audioClip)
     {
-        PlaySFX(audioClip, 1f);
+        PlaySFX(audioClip, _sfxSource.volume);
     }
 
     public void PlaySFX(AudioClip audioClip, float customVolumeModifierValue)

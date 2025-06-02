@@ -42,6 +42,11 @@ namespace Assets.Scripts.CustomAnimation
             await ButtonClicked(target, Constants.AudioClip.MenuInteraction, playSFX);
         }
 
+        public static async Task ButtonClicked(Transform target, Constants.AudioClip clipToPlay)
+        {
+            await ButtonClicked(target, clipToPlay, true);
+        }
+
         public static async Task ButtonClicked(
             Transform target,
             Constants.AudioClip clipToPlay,
@@ -297,7 +302,7 @@ namespace Assets.Scripts.CustomAnimation
             {
                 mainTransform.GetComponent<CanvasGroup>().DOFade(0f, 0.5f);
                 panelTransform
-                    .DOScale(0.33f, 0.6f)
+                    .DOScale(0.33f, 0.5f)
                     .SetEase(Ease.InBack)
                     .SetId(panelTransform.name + "PopupUnload")
                     .OnComplete(() =>
