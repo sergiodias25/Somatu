@@ -22,6 +22,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        _musicSource.loop = true;
+        _musicSource.clip = MainMusicTheme;
+        _musicSource.PlayOneShot(MainMusicTheme, _musicSource.volume);
+        _musicSource.Pause();
     }
 
     public void PlaySFX(AudioClip audioClip)
@@ -57,9 +61,7 @@ public class AudioManager : MonoBehaviour
     {
         if (gameManager.SavedGameData.SettingsData.MusicEnabled)
         {
-            _musicSource.loop = true;
-            _musicSource.clip = MainMusicTheme;
-            _musicSource.Play();
+            _musicSource.PlayOneShot(MainMusicTheme, _musicSource.volume);
         }
     }
 
@@ -82,20 +84,13 @@ public class AudioManager : MonoBehaviour
         gameManager.SavedGameData.PersistData();
 
         _musicSource.mute = !gameManager.SavedGameData.SettingsData.MusicEnabled;
-        if (!gameManager.SavedGameData.SettingsData.MusicEnabled)
+        if (_musicSource.mute)
         {
             _musicSource.Pause();
         }
         else
         {
-            if (_musicSource.isPlaying)
-            {
-                _musicSource.UnPause();
-            }
-            else
-            {
-                PlayMusic();
-            }
+            _musicSource.UnPause();
         }
     }
 
