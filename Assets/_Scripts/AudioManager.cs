@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -18,9 +19,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip MenuInteraction;
     public AudioClip NoHintAvailable;
     private GameManager gameManager;
+    List<int> PentatonicSemitones = new List<int>();
 
     private void Start()
     {
+        PentatonicSemitones.Add(0);
+        PentatonicSemitones.Add(1);
+        PentatonicSemitones.Add(3);
+        PentatonicSemitones.Add(4);
+        PentatonicSemitones.Add(5);
+        PentatonicSemitones.Add(8);
         gameManager = FindObjectOfType<GameManager>();
         _musicSource.loop = true;
         _musicSource.clip = MainMusicTheme;
@@ -28,20 +36,25 @@ public class AudioManager : MonoBehaviour
         _musicSource.Pause();
     }
 
-    public void PlaySFX(AudioClip audioClip)
+    public void PlaySFX(Constants.AudioClip audioClip)
     {
-        PlaySFX(audioClip, _sfxSource.volume);
+        PlaySFX(audioClip, 1f);
     }
 
-    public void PlaySFX(AudioClip audioClip, float customVolumeModifierValue)
+    public void PlaySFX(Constants.AudioClip audioClip, float customVolumeModifierValue)
     {
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
-            /*if (_sfxSource.isPlaying)
+            _sfxSource.pitch = 1;
+            int x = PentatonicSemitones[Random.Range(0, PentatonicSemitones.Count)];
+            if (ShouldChangePitch(audioClip) && !_sfxSource.isPlaying)
             {
-                _sfxSource.Stop();
-            }*/
-            _sfxSource.PlayOneShot(audioClip, customVolumeModifierValue);
+                for (int i = 0; i < x; i++)
+                {
+                    _sfxSource.pitch *= 1.059463f;
+                }
+            }
+            _sfxSource.PlayOneShot(GetAudioClip(audioClip), customVolumeModifierValue);
         }
         if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
@@ -151,5 +164,47 @@ public class AudioManager : MonoBehaviour
         }
         else
             return null;
+    }
+
+    private bool ShouldChangePitch(Constants.AudioClip clipToPlay)
+    {
+        if (clipToPlay == Constants.AudioClip.GameplayInteraction)
+        {
+            return true;
+        }
+        else if (clipToPlay == Constants.AudioClip.Undo)
+        {
+            return true;
+        }
+        else if (clipToPlay == Constants.AudioClip.NodeLoaded)
+        {
+            return false;
+        }
+        else if (clipToPlay == Constants.AudioClip.ClassicFinish)
+        {
+            return false;
+        }
+        else if (clipToPlay == Constants.AudioClip.ChallengeFinish)
+        {
+            return false;
+        }
+        else if (clipToPlay == Constants.AudioClip.TimerTicking)
+        {
+            return false;
+        }
+        else if (clipToPlay == Constants.AudioClip.Firework)
+        {
+            return false;
+        }
+        else if (clipToPlay == Constants.AudioClip.MenuInteraction)
+        {
+            return true;
+        }
+        else if (clipToPlay == Constants.AudioClip.NoHintAvailable)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }

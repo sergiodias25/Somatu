@@ -730,6 +730,7 @@ public class UIManager : MonoBehaviour
     {
         ToggleGameplayElements(true);
         _topBarManager.DeselectAll();
+        InteractionPerformed(Constants.AudioClip.MenuInteraction);
         if (_gameManager.IsGameInProgress() && !_gameManager.HasGameEnded())
         {
             _timer.UnpauseTimer();
@@ -942,7 +943,7 @@ public class UIManager : MonoBehaviour
         if (audioClip != Constants.AudioClip.NoClip)
         {
             AudioManager audioManager = FindObjectOfType<AudioManager>();
-            audioManager.PlaySFX(audioManager.GetAudioClip(audioClip));
+            audioManager.PlaySFX(audioClip);
         }
     }
 

@@ -66,7 +66,7 @@ public static class Constants
     }
 
     // 1 second does not count
-    public static double ChallengeTimeLimit = 61.0f;
+    public static double ChallengeTimeLimit = 60.5f;
     public static double ChallengeAnimatedTimeThreshold = 25f;
     public static double ChallengeBonusThresholdTimeEasy = 10f;
     public static double ChallengeBonusThresholdTimeMedium = 20f;

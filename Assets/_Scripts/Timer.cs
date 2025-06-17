@@ -91,7 +91,7 @@ public class Timer : MonoBehaviour
                 : _currentTime += Time.deltaTime;
             _elapsedTime += Time.deltaTime;
             UpdateTimerText();
-            if (_isCountdown && _currentTime <= 1.0f)
+            if (_isCountdown && _currentTime <= 0.0f)
             {
                 HandleTimerExpired();
             }
@@ -145,9 +145,7 @@ public class Timer : MonoBehaviour
                 .OnComplete(() =>
                 {
                     AudioManager audioManager = FindObjectOfType<AudioManager>();
-                    audioManager.PlaySFX(
-                        audioManager.GetAudioClip(Constants.AudioClip.TimerTicking)
-                    );
+                    audioManager.PlaySFX(Constants.AudioClip.TimerTicking);
                     _timerGroup.transform
                         .DOScale(new Vector3(1.25f, 1.25f, 1.25f), .5f)
                         .SetUpdate(true)
@@ -259,6 +257,7 @@ public class Timer : MonoBehaviour
 
     public void AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
     {
+        PauseTimer();
         double _elapsedTimeInSolvedPuzzle = _lastChallengeStartTime - _currentTime;
         _timeRewardText.gameObject.SetActive(true);
         Vector3 originalPosition = _timeRewardText.transform.localPosition;
@@ -289,6 +288,7 @@ public class Timer : MonoBehaviour
 
                 _currentTime += timeGained;
                 _lastChallengeStartTime = _currentTime;
+                UnpauseTimer();
             });
     }
 
