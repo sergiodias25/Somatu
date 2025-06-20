@@ -7,7 +7,13 @@ public class AudioManager : MonoBehaviour
     private AudioSource _musicSource;
 
     [SerializeField]
-    private AudioSource _sfxSource;
+    private AudioSource _neutralAudioSource;
+
+    [SerializeField]
+    private AudioSource _lowDiffPitchAudioSource;
+
+    [SerializeField]
+    private AudioSource _highDiffPitchAudioSource;
     public AudioClip GameplayInteraction;
     public AudioClip Undo;
     public AudioClip ClassicFinish;
@@ -20,6 +26,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip NoHintAvailable;
     private GameManager gameManager;
     List<int> PentatonicSemitones = new List<int>();
+#if UNITY_ANDROID && !UNITY_EDITOR
+    public static AndroidJavaObject vibrator = currentActivity.Call<AndroidJavaObject>(
+        "getSystemService",
+        "vibrator"
+    );
+#else
+    public static AndroidJavaObject vibrator;
+#endif
 
     private void Start()
     {
@@ -38,23 +52,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(Constants.AudioClip audioClip)
     {
-        PlaySFX(audioClip, 1f);
-    }
-
-    public void PlaySFX(Constants.AudioClip audioClip, float customVolumeModifierValue)
-    {
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
-            _sfxSource.pitch = 1;
-            int x = PentatonicSemitones[Random.Range(0, PentatonicSemitones.Count)];
-            if (ShouldChangePitch(audioClip) && !_sfxSource.isPlaying)
-            {
-                for (int i = 0; i < x; i++)
-                {
-                    _sfxSource.pitch *= 1.059463f;
-                }
-            }
-            _sfxSource.PlayOneShot(GetAudioClip(audioClip), customVolumeModifierValue);
+            ShouldChangePitch(audioClip);
         }
         if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
@@ -66,7 +66,9 @@ public class AudioManager : MonoBehaviour
     {
         if (gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
-            _sfxSource.Stop();
+            _neutralAudioSource.Stop();
+            _lowDiffPitchAudioSource.Stop();
+            _highDiffPitchAudioSource.Stop();
         }
     }
 
@@ -85,7 +87,9 @@ public class AudioManager : MonoBehaviour
             .SettingsData
             .SoundEnabled;
         gameManager.SavedGameData.PersistData();
-        _sfxSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _neutralAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _lowDiffPitchAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _highDiffPitchAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
     }
 
     public void ToggleMusic()
@@ -120,7 +124,14 @@ public class AudioManager : MonoBehaviour
     {
         if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
-            Handheld.Vibrate();
+            if (isAndroid())
+            {
+                vibrator.Call("vibrate", 100);
+            }
+            else
+            {
+                Handheld.Vibrate();
+            }
         }
     }
 
@@ -166,45 +177,56 @@ public class AudioManager : MonoBehaviour
             return null;
     }
 
-    private bool ShouldChangePitch(Constants.AudioClip clipToPlay)
+    private void ShouldChangePitch(Constants.AudioClip clipToPlay)
     {
-        if (clipToPlay == Constants.AudioClip.GameplayInteraction)
+        if (
+            clipToPlay == Constants.AudioClip.ClassicFinish
+            || clipToPlay == Constants.AudioClip.ChallengeFinish
+        )
         {
-            return true;
+            _neutralAudioSource.PlayOneShot(GetAudioClip(clipToPlay), 1f);
         }
-        else if (clipToPlay == Constants.AudioClip.Undo)
+        else if (
+            clipToPlay == Constants.AudioClip.NodeLoaded
+            || clipToPlay == Constants.AudioClip.TimerTicking
+            || clipToPlay == Constants.AudioClip.Firework
+            || clipToPlay == Constants.AudioClip.NoHintAvailable
+        )
         {
-            return true;
+            PlaySFXWithSource(_lowDiffPitchAudioSource, clipToPlay, 2);
         }
-        else if (clipToPlay == Constants.AudioClip.NodeLoaded)
+        else if (
+            clipToPlay == Constants.AudioClip.GameplayInteraction
+            || clipToPlay == Constants.AudioClip.Undo
+            || clipToPlay == Constants.AudioClip.MenuInteraction
+        )
         {
-            return false;
+            PlaySFXWithSource(_highDiffPitchAudioSource, clipToPlay, 5);
         }
-        else if (clipToPlay == Constants.AudioClip.ClassicFinish)
+    }
+
+    private void PlaySFXWithSource(
+        AudioSource audioSource,
+        Constants.AudioClip clipToPlay,
+        int varianceNotesCount
+    )
+    {
+        audioSource.pitch = 1;
+        int x = PentatonicSemitones[Random.Range(0, varianceNotesCount)];
+
+        for (int i = 0; i < x; i++)
         {
-            return false;
+            audioSource.pitch *= 1.059463f;
         }
-        else if (clipToPlay == Constants.AudioClip.ChallengeFinish)
-        {
-            return false;
-        }
-        else if (clipToPlay == Constants.AudioClip.TimerTicking)
-        {
-            return false;
-        }
-        else if (clipToPlay == Constants.AudioClip.Firework)
-        {
-            return false;
-        }
-        else if (clipToPlay == Constants.AudioClip.MenuInteraction)
-        {
-            return true;
-        }
-        else if (clipToPlay == Constants.AudioClip.NoHintAvailable)
-        {
-            return true;
-        }
-        else
-            return false;
+        audioSource.PlayOneShot(GetAudioClip(clipToPlay), 1f);
+    }
+
+    private static bool isAndroid()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        return true;
+#else
+        return false;
+#endif
     }
 }
