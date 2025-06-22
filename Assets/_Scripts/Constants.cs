@@ -161,9 +161,12 @@ public static class Constants
     public static int COLOR_DARK_TEXT = 7;
     public static int COLOR_NODE_NEUTRAL = 8;
     public static int COLOR_CLOUD = 9;
-    public static int COLOR_BACKGROUND = 10;
-    public static int COLOR_BACKGROUND_GRADIENT = 11;
+    public static int COLOR_BACKGROUND_UPPER_RIGHT = 10;
+    public static int COLOR_BACKGROUND_LOWER_RIGHT = 11;
     public static int COLOR_TITLE = 12;
+    public static int COLOR_BACKGROUND_LOWER_LEFT = 13;
+    public static int COLOR_BACKGROUND_UPPER_LEFT = 14;
+    public static int COLOR_BUTTON_DARK = 15;
 
     /*
         1st - bottom left
@@ -176,10 +179,10 @@ public static class Constants
         Palette selectedPalette = ColourManager.Instance.Palettes[selectedPaletteIndex];
         Color[] paletteColors =
         {
-            selectedPalette.Colours[COLOR_BACKGROUND],
-            selectedPalette.Colours[COLOR_BACKGROUND_GRADIENT],
-            selectedPalette.Colours[COLOR_BACKGROUND],
-            selectedPalette.Colours[COLOR_BACKGROUND]
+            selectedPalette.Colours[COLOR_BACKGROUND_LOWER_LEFT],
+            selectedPalette.Colours[COLOR_BACKGROUND_LOWER_RIGHT],
+            selectedPalette.Colours[COLOR_BACKGROUND_UPPER_RIGHT],
+            selectedPalette.Colours[COLOR_BACKGROUND_UPPER_LEFT]
         };
 
         return paletteColors;

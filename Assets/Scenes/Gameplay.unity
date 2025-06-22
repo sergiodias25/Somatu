@@ -1454,8 +1454,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -2930,8 +2930,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &237978532
 MonoBehaviour:
@@ -4182,8 +4182,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
@@ -7364,8 +7364,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
@@ -7842,8 +7842,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -8967,8 +8967,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -13896,8 +13896,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &742762149
 MonoBehaviour:
@@ -18608,8 +18608,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &826701053 stripped
 MonoBehaviour:
@@ -20052,19 +20052,19 @@ MonoBehaviour:
     BaseName: Image
     PaletteColour: Colour.3
     ColourIndex: 2
-    IsChanged: 0
+    IsChanged: 1
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
     PaletteColour: Colour.1
     ColourIndex: 0
-    IsChanged: 0
+    IsChanged: 1
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
     BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
-    IsChanged: 0
+    IsChanged: 1
 --- !u!114 &896110809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26262,8 +26262,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -26375,8 +26375,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1238067749
 MonoBehaviour:
@@ -28706,8 +28706,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
@@ -29264,8 +29264,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1395060273
 MonoBehaviour:
@@ -30239,8 +30239,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1434648907
 MonoBehaviour:
@@ -30615,8 +30615,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -30706,8 +30706,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
@@ -33276,13 +33276,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Persistent: 0
-  ColoursPerPalette: 13
-  OldColoursPerPalette: 13
+  ColoursPerPalette: 16
+  OldColoursPerPalette: 16
   Palettes:
   - Name: Day
     Selected: 0
     Colours:
-    - {r: 0.007843138, g: 0.24313726, b: 0.49019608, a: 1}
+    - {r: 0.007843138, g: 0.24313726, b: 0.49019608, a: 0.6862745}
     - {r: 1, g: 1, b: 1, a: 1}
     - {r: 0.7529412, g: 0.8862745, b: 0.99215686, a: 1}
     - {r: 0.3019608, g: 0.6666667, b: 0.34117648, a: 1}
@@ -33295,10 +33295,13 @@ MonoBehaviour:
     - {r: 0.015686275, g: 0.3882353, b: 0.7921569, a: 1}
     - {r: 0.4179868, g: 0.7160964, b: 0.9528302, a: 1}
     - {r: 0.9607843, g: 0.94509804, b: 0.39215687, a: 1}
+    - {r: 0.015686275, g: 0.3882353, b: 0.7921569, a: 1}
+    - {r: 0.015686275, g: 0.3882353, b: 0.7921569, a: 1}
+    - {r: 0.007843138, g: 0.24313726, b: 0.49019608, a: 1}
   - Name: Night
     Selected: 0
     Colours:
-    - {r: 0.054901965, g: 0.054901965, b: 0.09411766, a: 1}
+    - {r: 0.17254902, g: 0.17254902, b: 0.22745098, a: 0.39215687}
     - {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 1}
     - {r: 0.6784314, g: 0.7254902, b: 0.77647066, a: 1}
     - {r: 0.023529414, g: 0.3803922, b: 0.0627451, a: 1}
@@ -33308,25 +33311,31 @@ MonoBehaviour:
     - {r: 0.06666667, g: 0.121568635, b: 0.15686275, a: 1}
     - {r: 0.6862745, g: 0.7254902, b: 0.7725491, a: 1}
     - {r: 0.1137255, g: 0.20392159, b: 0.2627451, a: 1}
-    - {r: 0.06666667, g: 0.121568635, b: 0.15686275, a: 1}
-    - {r: 0.023529414, g: 0.023529414, b: 0.027450982, a: 1}
+    - {r: 0.023529412, g: 0.023529412, b: 0.02745098, a: 1}
+    - {r: 0.06666667, g: 0.12156863, b: 0.15686275, a: 1}
     - {r: 0.8901961, g: 0.8039216, b: 0.702, a: 1}
+    - {r: 0.06666667, g: 0.12156863, b: 0.15686275, a: 1}
+    - {r: 0.06666667, g: 0.12156863, b: 0.15686275, a: 1}
+    - {r: 0.17254902, g: 0.17254902, b: 0.22745098, a: 1}
   - Name: Sunrise
     Selected: 0
     Colours:
-    - {r: 0.4123836, g: 0.41144538, b: 0.4339623, a: 1}
-    - {r: 0.009295447, g: 0.009211485, b: 0.009433985, a: 1}
-    - {r: 0.86627805, g: 0.92484474, b: 0.9716981, a: 1}
-    - {r: 0.5918476, g: 0.9433962, b: 0.6270298, a: 1}
-    - {r: 0.9622642, g: 0.61786973, b: 0.6036846, a: 1}
-    - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
-    - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
-    - {r: 0.6541474, g: 0.8361972, b: 0.9433962, a: 1}
-    - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
-    - {r: 0.903043, g: 0.9150943, b: 0.64315593, a: 1}
-    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
-    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
-    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0, g: 0, b: 0, a: 0.39607844}
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.92941177, g: 0.88235295, b: 0.9372549, a: 1}
+    - {r: 0.4, g: 0.79607844, b: 0.6, a: 1}
+    - {r: 1, g: 0.6039216, b: 0.63529414, a: 1}
+    - {r: 1, g: 0.98746276, b: 0.5235849, a: 1}
+    - {r: 0.5176471, g: 0.2901961, b: 0.5176471, a: 1}
+    - {r: 0.5176471, g: 0.2901961, b: 0.5176471, a: 0.77254903}
+    - {r: 0.9622642, g: 0.9304913, b: 0.94955504, a: 1}
+    - {r: 0.9716981, g: 0.8479441, b: 0.95622885, a: 1}
+    - {r: 0.9254902, g: 0.42352948, b: 0.72749937, a: 1}
+    - {r: 0.41006586, g: 0.77831566, b: 0.9150943, a: 1}
+    - {r: 0.9607843, g: 0.94509804, b: 0.39215687, a: 1}
+    - {r: 0.8768957, g: 0.47419012, b: 0.9056604, a: 1}
+    - {r: 1, g: 0.95923173, b: 0.4292453, a: 1}
+    - {r: 0.5176471, g: 0.2901961, b: 0.5176471, a: 1}
   - Name: Sunset
     Selected: 0
     Colours:
@@ -33340,6 +33349,9 @@ MonoBehaviour:
     - {r: 0.8117647, g: 0.5546108, b: 0.40784314, a: 1}
     - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
     - {r: 0.4094874, g: 0.63253266, b: 0.8113208, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
     - {r: 0.702, g: 0.702, b: 0.702, a: 1}
     - {r: 0.702, g: 0.702, b: 0.702, a: 1}
     - {r: 0.702, g: 0.702, b: 0.702, a: 1}
@@ -33358,6 +33370,9 @@ MonoBehaviour:
     - {r: 1, g: 1, b: 1, a: 1}
     - {r: 1, g: 1, b: 1, a: 1}
     - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
+    - {r: 0.702, g: 0.702, b: 0.702, a: 1}
     - {r: 0.702, g: 0.702, b: 0.702, a: 1}
   OldPaletteCount: 5
   SelectedPaletteIdx: -1
@@ -38347,8 +38362,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1761268785
 MonoBehaviour:
@@ -38443,8 +38458,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1768239107
 MonoBehaviour:
@@ -38927,8 +38942,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1783903530
 MonoBehaviour:
@@ -39137,8 +39152,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1799953809
 MonoBehaviour:
@@ -40620,8 +40635,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -42794,8 +42809,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1951626684
 MonoBehaviour:
@@ -43009,8 +43024,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1972436774
 MonoBehaviour:
@@ -43710,8 +43725,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1979269133
 MonoBehaviour:
@@ -44521,7 +44536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 0
 --- !u!114 &2016201901
@@ -44581,18 +44596,12 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
-    PaletteColour: Colour.1
-    ColourIndex: 0
-    IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -46591,8 +46600,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &2101726244
 MonoBehaviour:
@@ -46797,8 +46806,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &2105107113
 MonoBehaviour:
