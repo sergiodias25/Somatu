@@ -11,6 +11,7 @@ using UnityEngine.Purchasing;
 using Unity.Services.Analytics;
 using Assets.Scripts.AnalyticsEvent;
 using Assets._Scripts;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +53,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _challengeFinishedPopupText;
+
+    [SerializeField]
+    private Button _playAgainButton;
 
     private Timer _timer;
     private UIManager _uiManager;
@@ -402,7 +406,11 @@ public class GameManager : MonoBehaviour
                     _allNodes[7].GetBlockInNode(),
                     _allNodes[8].GetBlockInNode(),
                 };
-                CustomAnimation.AnimatePuzzleSolved(blocksToAnimate);
+                CustomAnimation.AnimatePuzzleSolved(
+                    blocksToAnimate,
+                    _playAgainButton.transform,
+                    _playAgainButton.GetComponent<Image>()
+                );
                 DoEndGameActions();
             }
             return true;

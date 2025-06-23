@@ -35987,6 +35987,7 @@ MonoBehaviour:
   _languagePopup: {fileID: 254790883}
   _challengeFinishedPopup: {fileID: 260913951}
   _challengeFinishedPopupText: {fileID: 1714766194}
+  _playAgainButton: {fileID: 1724741423}
   SelectedDifficulty: 0
   ActualDifficulty: 0
   _timesSolvedText: 0
