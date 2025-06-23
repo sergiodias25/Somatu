@@ -286,9 +286,12 @@ public class Timer : MonoBehaviour
                 _timeRewardText.transform.localScale = new Vector3(0f, 0f, 0f);
                 _timeRewardText.rectTransform.anchoredPosition = originalPosition;
 
-                _currentTime += timeGained;
-                _lastChallengeStartTime = _currentTime;
-                UnpauseTimer();
+                if (_gameManager.IsGameInProgress())
+                {
+                    _currentTime += timeGained;
+                    _lastChallengeStartTime = _currentTime;
+                    UnpauseTimer();
+                }
             });
     }
 
