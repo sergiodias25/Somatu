@@ -1132,4 +1132,18 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void UnlockAllFeatures()
+    {
+        SavedGameData.UnlockAllLevels();
+        SavedGameData.RemoveAds();
+        SavedGameData.GrantUnlimitedHints();
+        SavedGameData.EnableSunriseTheme();
+        SavedGameData.EnableSunsetTheme();
+        SavedGameData.Onboardings.Welcome = true;
+        SavedGameData.Onboardings.ChallengeExplanation = true;
+        SavedGameData.Onboardings.ClassicExplanation = true;
+        SavedGameData.Onboardings.ClassicHint = true;
+        SavedGameData.Onboardings.ClassicUndo = true;
+    }
 }

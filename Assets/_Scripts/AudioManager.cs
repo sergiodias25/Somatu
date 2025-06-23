@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip NoHintAvailable;
     private GameManager gameManager;
     List<int> PentatonicSemitones = new List<int>();
+
+    /*
 #if UNITY_ANDROID && !UNITY_EDITOR
     public static AndroidJavaObject vibrator = currentActivity.Call<AndroidJavaObject>(
         "getSystemService",
@@ -33,7 +35,8 @@ public class AudioManager : MonoBehaviour
     );
 #else
     public static AndroidJavaObject vibrator;
-#endif
+#endif*/
+    public static AndroidJavaObject vibrator;
 
     private void Start()
     {

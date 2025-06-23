@@ -32,7 +32,7 @@ namespace Assets.Scripts.SaveGame
 
         public class Settings
         {
-            public bool SoundEnabled = false;
+            public bool SoundEnabled = true;
             public bool MusicEnabled = false;
             public bool VibrationEnabled = false;
             public int SelectedThemeIndex = 0;
@@ -44,11 +44,11 @@ namespace Assets.Scripts.SaveGame
 
         public class Onboarding
         {
-            public bool Welcome = true;
-            public bool ClassicExplanation = true;
-            public bool ClassicUndo = true;
-            public bool ClassicHint = true;
-            public bool ChallengeExplanation = true;
+            public bool Welcome = false;
+            public bool ClassicExplanation = false;
+            public bool ClassicUndo = false;
+            public bool ClassicHint = false;
+            public bool ChallengeExplanation = false;
         }
 
         public class GameInProgress
