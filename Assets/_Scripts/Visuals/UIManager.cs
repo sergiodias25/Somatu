@@ -634,6 +634,7 @@ public class UIManager : MonoBehaviour
                 originalColor.b,
                 1
             );
+            _undoButton.GetComponent<Shadow>().enabled = true;
         }
         else if (!enabled && _undoButton.GetComponent<Image>().color.a != 0.5f)
         {
@@ -643,6 +644,7 @@ public class UIManager : MonoBehaviour
                 originalColor.b,
                 0.5f
             );
+            _undoButton.GetComponent<Shadow>().enabled = false;
         }
 
         _undoButton.enabled = enabled;
