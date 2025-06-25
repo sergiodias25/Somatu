@@ -8870,7 +8870,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.2
 --- !u!222 &497180681
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9873,9 +9873,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07219255
+    y: 0
     width: 1
-    height: 0.8556149
+    height: 1
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -10860,8 +10860,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &567653706
 MonoBehaviour:
@@ -11673,8 +11673,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &607535449 stripped
 MonoBehaviour:
@@ -20356,7 +20356,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.2
 --- !u!222 &896110811
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21914,8 +21914,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!1001 &974031058
 PrefabInstance:
@@ -23961,8 +23961,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1122247574 stripped
 MonoBehaviour:
@@ -24631,19 +24631,19 @@ MonoBehaviour:
     BaseName: Image
     PaletteColour: Colour.3
     ColourIndex: 2
-    IsChanged: 1
+    IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
     PaletteColour: Colour.8
     ColourIndex: 7
-    IsChanged: 1
+    IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
     BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
-    IsChanged: 1
+    IsChanged: 0
 --- !u!114 &1143596932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24729,7 +24729,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.2
 --- !u!222 &1143596934
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28877,8 +28877,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.1
-    ColourIndex: 0
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
 --- !u!114 &1337937257 stripped
 MonoBehaviour:

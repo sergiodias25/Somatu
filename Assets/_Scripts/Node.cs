@@ -7,6 +7,8 @@ public class Node : MonoBehaviour
 {
     private Block _blockInNode;
 
+    private bool _isCorrect = false;
+
     [SerializeField]
     private SpriteRenderer _sprite;
 
@@ -93,7 +95,8 @@ public class Node : MonoBehaviour
             CustomAnimation.AnimateVisualAidSpace(
                 _resultCornerSpace.transform,
                 _resultCornerSpace.GetComponent<RectTransform>(),
-                !resultIsCorrect
+                !resultIsCorrect,
+                _isCorrect
             );
         }
         else
@@ -101,9 +104,11 @@ public class Node : MonoBehaviour
             CustomAnimation.AnimateVisualAidSpace(
                 _resultCornerSpace.transform,
                 _resultCornerSpace.GetComponent<RectTransform>(),
-                false
+                false,
+                _isCorrect
             );
         }
+        _isCorrect = resultIsCorrect;
     }
 
     internal void HideResultIcon()

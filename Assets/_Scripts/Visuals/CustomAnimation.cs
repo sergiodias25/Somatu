@@ -492,17 +492,15 @@ namespace Assets.Scripts.CustomAnimation
         internal static void AnimateVisualAidSpace(
             Transform transform,
             RectTransform rectTransform,
-            bool show
+            bool show,
+            bool wasCorrect
         )
         {
             float valueToSum = show ? -1.7f : 1.7f;
             float newScale = show ? 4f : .01f;
             var sequence = DOTween.Sequence();
 
-            if (
-                (show && transform.localPosition.x == 5.7f)
-                || (!show && transform.localPosition.x != 5.7f)
-            )
+            if ((show && wasCorrect) || (!show && !wasCorrect))
             {
                 sequence.Append(rectTransform.DOScale(newScale, SUM_CORRECT_ANIMATION_DURATION));
                 sequence.Join(
