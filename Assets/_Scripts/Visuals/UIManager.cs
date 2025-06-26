@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
 using Assets.Scripts.AnalyticsEvent;
+using DG.Tweening;
+using CandyCabinets.Components.Colour;
 
 public class UIManager : MonoBehaviour
 {
@@ -519,6 +521,14 @@ public class UIManager : MonoBehaviour
 
     public async void PlayAgainClick()
     {
+        DOTween.Kill("AnimatePlayAgainButtonCallToAction");
+        _playAgainButton.transform.DOScale(1f, 0.01f);
+        _playAgainButton
+            .GetComponent<Image>()
+            .DOColor(
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_BUTTON],
+                0.01f
+            );
         await CustomAnimation.ButtonClicked(_playAgainButton.transform);
         if (_playAgainButton.enabled)
         {

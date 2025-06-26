@@ -406,11 +406,7 @@ public class GameManager : MonoBehaviour
                     _allNodes[7].GetBlockInNode(),
                     _allNodes[8].GetBlockInNode(),
                 };
-                CustomAnimation.AnimatePuzzleSolved(
-                    blocksToAnimate,
-                    _playAgainButton.transform,
-                    _playAgainButton.GetComponent<Image>()
-                );
+                CustomAnimation.AnimatePuzzleSolved(blocksToAnimate, _playAgainButton);
                 DoEndGameActions();
             }
             return true;
@@ -608,6 +604,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
+        CustomAnimation.AnimateButtonCallToAction(_playAgainButton);
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.HintsAvailableChallenge = 0;
         SavedGameData.PersistData();

@@ -186,11 +186,7 @@ namespace Assets.Scripts.CustomAnimation
             }
         }
 
-        public static async void AnimatePuzzleSolved(
-            Block[] blocks,
-            Transform playAgainButton,
-            Image buttonImage
-        )
+        public static async void AnimatePuzzleSolved(Block[] blocks, Button playAgainButton)
         {
             await WaitForAnimation("MoveNumberBack");
 
@@ -214,36 +210,37 @@ namespace Assets.Scripts.CustomAnimation
             sequence.Join(blocks[8].AnimatePuzzleCompleted());
             sequence.Join(blocks[11].AnimatePuzzleCompleted());
             sequence.Join(blocks[14].AnimatePuzzleCompleted());
+            sequence.SetLoops(1);
+            sequence.SetId("NumberJump");
             sequence.OnStepComplete(() =>
             {
-                buttonImage
+                AnimateButtonCallToAction(playAgainButton);
+            });
+
+            sequence.Play();
+        }
+
+        public static void AnimateButtonCallToAction(Button playAgainButton)
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(
+                playAgainButton.transform
+                    .DOScale(1.05f, 0.18f)
+                    .SetLoops(4, LoopType.Yoyo)
+                    .SetId("PlayAgainButtonButtonLoad")
+            );
+            sequence.Join(
+                playAgainButton
+                    .GetComponent<Image>()
                     .DOColor(
                         ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_TITLE],
-                        0.25f
+                        0.18f
                     )
-                    .SetLoops(2, LoopType.Yoyo)
-                    .OnComplete(() =>
-                    {
-                        buttonImage
-                            .DOColor(
-                                ColourManager.Instance.SelectedPalette().Colours[
-                                    Constants.COLOR_TITLE
-                                ],
-                                0.25f
-                            )
-                            .SetLoops(2, LoopType.Yoyo);
-                    });
-                playAgainButton
-                    .DOScale(1.2f, 0.25f)
-                    .SetLoops(2, LoopType.Yoyo)
-                    .SetId("PlayAgainButtonButtonLoad")
-                    .OnComplete(() =>
-                    {
-                        playAgainButton.DOScale(1.2f, 0.25f).SetLoops(2, LoopType.Yoyo);
-                    });
-            });
+                    .SetLoops(4, LoopType.Yoyo)
+            );
+            sequence.AppendInterval(1.25f);
             sequence.SetLoops(-1);
-            sequence.SetId("NumberJump");
+            sequence.SetId("AnimatePlayAgainButtonCallToAction");
             sequence.Play();
         }
 
