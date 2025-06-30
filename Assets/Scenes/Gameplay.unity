@@ -4110,21 +4110,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1405588734}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &276780102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276780100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &276780103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4185,9 +4170,9 @@ MonoBehaviour:
     PaletteColour: Colour.16
     ColourIndex: 15
     IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -4216,6 +4201,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   m_EffectDistance: {x: 6, y: -6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &276780112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276780100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1 &278294250 stripped
 GameObject:
@@ -7292,21 +7292,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 2033746201}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &471666298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471666296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &471666299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7367,9 +7352,9 @@ MonoBehaviour:
     PaletteColour: Colour.16
     ColourIndex: 15
     IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -7398,6 +7383,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   m_EffectDistance: {x: 6, y: -6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &471666308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471666296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1001 &472370193
 PrefabInstance:
@@ -13799,10 +13799,10 @@ PrefabInstance:
       addedObject: {fileID: 1448662183}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1448662182}
+      addedObject: {fileID: 1448662189}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1448662189}
+      addedObject: {fileID: 1448662192}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1829643184}
@@ -28916,21 +28916,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 1593974649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1345667841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345667839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1345667842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28991,9 +28976,9 @@ MonoBehaviour:
     PaletteColour: Colour.16
     ColourIndex: 15
     IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -29022,6 +29007,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   m_EffectDistance: {x: 6, y: -6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1345667851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345667839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!114 &1346962075 stripped
 MonoBehaviour:
@@ -30040,10 +30040,10 @@ PrefabInstance:
       addedObject: {fileID: 276780103}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 276780102}
+      addedObject: {fileID: 276780109}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 276780109}
+      addedObject: {fileID: 276780112}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1668855870}
@@ -30916,21 +30916,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
   m_PrefabInstance: {fileID: 715994715}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1448662182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448662180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1448662183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30991,9 +30976,9 @@ MonoBehaviour:
     PaletteColour: Colour.16
     ColourIndex: 15
     IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
+  - Name: Outline.Color
+    FullName: UnityEngine.UI.Outline
+    BaseName: Outline
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -31022,6 +31007,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   m_EffectDistance: {x: 6, y: -6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1448662192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448662180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1 &1451393834 stripped
 GameObject:
@@ -34511,15 +34511,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e84c3fd2d961da14f9ad9ebf575cfc4f, type: 3}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.b
-      value: 0.04672481
+      value: 0.702
       objectReference: {fileID: 0}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.g
-      value: 0.2830189
+      value: 0.702
       objectReference: {fileID: 0}
     - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Color.r
-      value: 0.27369857
+      value: 0.702
       objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
@@ -34669,10 +34669,10 @@ PrefabInstance:
       addedObject: {fileID: 1345667842}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1345667841}
+      addedObject: {fileID: 1345667848}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1345667848}
+      addedObject: {fileID: 1345667851}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 981658785}
@@ -45905,10 +45905,10 @@ PrefabInstance:
       addedObject: {fileID: 471666299}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 471666298}
+      addedObject: {fileID: 471666305}
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 471666305}
+      addedObject: {fileID: 471666308}
     - targetCorrespondingSourceObject: {fileID: 8607402916477335016, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 217056952}
