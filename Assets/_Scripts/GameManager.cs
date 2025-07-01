@@ -691,6 +691,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<FireworkManager>().StopFireworks();
         _isGameFinished = false;
         DOTween.Kill("NumberJump");
+        DOTween.Kill("AnimatePlayAgainButtonCallToAction");
         for (int i = 0; i < _allNodes.Count; i++)
         {
             DestroyBlock(_allNodes[i].GetBlockInNode());
