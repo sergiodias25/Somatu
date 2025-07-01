@@ -526,7 +526,7 @@ public class UIManager : MonoBehaviour
         _playAgainButton
             .GetComponent<Image>()
             .DOColor(
-                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_BUTTON],
+                ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_NODE_NEUTRAL],
                 0.01f
             );
         await CustomAnimation.ButtonClicked(_playAgainButton.transform);

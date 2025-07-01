@@ -16,7 +16,7 @@ public class ShowLockImageInButton : MonoBehaviour
     private DifficultyValue value;
 
     [SerializeField]
-    private Image image;
+    private GameObject image;
     private GameManager _gameManager;
 
     private void OnEnable()
@@ -38,18 +38,18 @@ public class ShowLockImageInButton : MonoBehaviour
                         )
                     )
                     {
-                        image.enabled = true;
+                        image.SetActive(true);
                         break;
                     }
-                    image.enabled = false;
+                    image.SetActive(false);
                     break;
                 case DifficultyValue.Hard:
                     if (!_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Hard))
                     {
-                        image.enabled = true;
+                        image.SetActive(true);
                         break;
                     }
-                    image.enabled = false;
+                    image.SetActive(false);
                     break;
                 case DifficultyValue.Extreme:
                     if (
@@ -58,10 +58,10 @@ public class ShowLockImageInButton : MonoBehaviour
                         )
                     )
                     {
-                        image.enabled = true;
+                        image.SetActive(true);
                         break;
                     }
-                    image.enabled = false;
+                    image.SetActive(false);
                     break;
                 case DifficultyValue.Challenge:
                     if (
@@ -70,10 +70,10 @@ public class ShowLockImageInButton : MonoBehaviour
                         )
                     )
                     {
-                        image.enabled = true;
+                        image.SetActive(true);
                         break;
                     }
-                    image.enabled = false;
+                    image.SetActive(false);
                     break;
                 default:
                     break;
