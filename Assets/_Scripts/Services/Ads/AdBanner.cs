@@ -37,8 +37,11 @@ public class AdBanner : MonoBehaviour
             errorCallback = OnBannerError
         };
 
-        // Load the Ad Unit with banner content:
-        Advertisement.Banner.Load(_adUnitId, options);
+        if (!FindObjectOfType<GameManager>().SavedGameData.PurchaseData.RemovedAds)
+        {
+            // Load the Ad Unit with banner content:
+            Advertisement.Banner.Load(_adUnitId, options);
+        }
     }
 
     // Implement code to execute when the loadCallback event triggers:
