@@ -67,13 +67,13 @@ public class Swipe : MonoBehaviour
 
     private void LeftSwipe()
     {
-        FindObjectOfType<Profile>().MoveBackward();
+        FindObjectOfType<Profile>().MoveForward();
         FindObjectOfType<UIManager>().InteractionPerformed(Constants.AudioClip.MenuInteraction);
     }
 
     private void RightSwipe()
     {
-        FindObjectOfType<Profile>().MoveForward();
+        FindObjectOfType<Profile>().MoveBackward();
         FindObjectOfType<UIManager>().InteractionPerformed(Constants.AudioClip.MenuInteraction);
     }
 }
