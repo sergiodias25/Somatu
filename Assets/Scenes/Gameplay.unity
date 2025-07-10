@@ -9877,9 +9877,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07522127
+    y: 0
     width: 1
-    height: 0.84955746
+    height: 1
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -19009,6 +19009,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9811321
       objectReference: {fileID: 0}
+    - target: {fileID: 4716252551070789090, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_Name
       value: ClassicButton
@@ -24627,19 +24631,19 @@ MonoBehaviour:
     BaseName: Image
     PaletteColour: Colour.3
     ColourIndex: 2
-    IsChanged: 1
+    IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
     PaletteColour: Colour.8
     ColourIndex: 7
-    IsChanged: 1
+    IsChanged: 0
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
     BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
-    IsChanged: 1
+    IsChanged: 0
 --- !u!114 &1143596932
 MonoBehaviour:
   m_ObjectHideFlags: 0

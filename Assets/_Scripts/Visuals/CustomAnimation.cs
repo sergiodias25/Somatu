@@ -494,7 +494,7 @@ namespace Assets.Scripts.CustomAnimation
         )
         {
             float valueToSum = show ? -1.7f : 1.7f;
-            float newScale = show ? 4f : .01f;
+            float newScale = show ? 2.25f : .01f;
             var sequence = DOTween.Sequence();
 
             if ((show && wasCorrect) || (!show && !wasCorrect))
