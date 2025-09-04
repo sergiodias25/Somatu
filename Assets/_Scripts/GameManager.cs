@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
     private PlayerStats _playerStats;
 
     [SerializeField]
-    private AdBanner _adBanner;
-
-    [SerializeField]
     private Camera _backgroundCamera;
 
     [SerializeField]
@@ -961,11 +958,6 @@ public class GameManager : MonoBehaviour
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;
-
-        if (!SavedGameData.PurchaseData.RemovedAds)
-        {
-            _adBanner.ShowBannerAd();
-        }
 
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
