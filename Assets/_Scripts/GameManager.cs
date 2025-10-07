@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
-using UnityEngine.Purchasing;
 using Unity.Services.Analytics;
 using Assets.Scripts.AnalyticsEvent;
 using Assets._Scripts;
@@ -234,7 +233,7 @@ public class GameManager : MonoBehaviour
 
         while (needsRandom == true)
         {
-            randomized = UnityEngine.Random.Range(0, 9);
+            randomized = Random.Range(0, 9);
             if (!_indexesUsedForStartingPosition.Contains(randomized))
             {
                 needsRandom = false;
@@ -250,7 +249,7 @@ public class GameManager : MonoBehaviour
         bool needsRandom = true;
         while (needsRandom == true)
         {
-            int randomized = UnityEngine.Random.Range(0, 9);
+            int randomized = Random.Range(0, 9);
             if (!_indexesUsedForSolution.Contains(randomized))
             {
                 needsRandom = false;
@@ -950,8 +949,6 @@ public class GameManager : MonoBehaviour
 
     public async void StartGame(Canvas loadingCanvas)
     {
-        StandardPurchasingModule.Instance().useFakeStoreAlways = true;
-        StandardPurchasingModule.Instance().useFakeStoreUIMode = FakeStoreUIMode.DeveloperUser;
         QualitySettings.SetQualityLevel(5, true);
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
         AnalyticsService.Instance.StartDataCollection();

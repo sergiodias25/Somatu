@@ -24,7 +24,6 @@ public class AdBanner : MonoBehaviour
 
         // Set the banner position:
         Advertisement.Banner.SetPosition(_bannerPosition);
-        LoadBanner();
     }
 
     // Implement a method to call when the Load Banner button is clicked:

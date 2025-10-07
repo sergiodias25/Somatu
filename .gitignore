@@ -76,3 +76,8 @@ crashlytics-build.properties
 .config/dotnet-tools.json
 Assets/Plugins/Android/*
 Somatu_BurstDebugInformation_DoNotShip/*
+Assets/_Scripts/bin/*
+Assets/_Scripts/obj/*
+Assets/_Scripts/bin.meta
+Assets/_Scripts/obj.meta
+Assets/MobileDependencyResolver/*
