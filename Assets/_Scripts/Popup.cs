@@ -17,6 +17,9 @@ public class Popup : MonoBehaviour
     [SerializeField]
     private Button _actionButton;
 
+    [SerializeField]
+    private Button _secondActionButton;
+
     public void OnEnable()
     {
         FindObjectOfType<GameManager>().DisableGameplayBlocks();
@@ -88,5 +91,11 @@ public class Popup : MonoBehaviour
             _popupPanel.transform,
             _popupPanel.transform.Find("Interactible")
         );
+    }
+
+    public async void ActionWatchAd()
+    {
+        await CustomAnimation.ButtonClicked(_secondActionButton.transform);
+        FindObjectOfType<AdRewarded>().ShowAd();
     }
 }
