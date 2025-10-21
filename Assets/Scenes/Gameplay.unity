@@ -6806,7 +6806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: HINTS_5
+  productId: hints_5
   buttonType: 0
   automaticallyConfirmTransaction: 1
   onProductFetched:
@@ -7278,7 +7278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: HINTS_UNLIMITED
+  productId: hints_unlimited
   buttonType: 0
   automaticallyConfirmTransaction: 1
   onProductFetched:
@@ -10292,7 +10292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: SUNRISE_THEME
+  productId: sunrise_theme
   buttonType: 0
   automaticallyConfirmTransaction: 1
   onProductFetched:
@@ -14430,7 +14430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfec3f0547029264b9ea1c0ab9abdd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalizationKey: popup-remove-ads
+  LocalizationKey: btn-shop-removeads
 --- !u!1 &742446526 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2625602066523972474, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
@@ -29547,7 +29547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: SUNSET_THEME
+  productId: sunset_theme
   buttonType: 0
   automaticallyConfirmTransaction: 1
   onProductFetched:
@@ -32121,7 +32121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b79b5624d944058bd39aad2b90fb275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: REMOVE_ADS
+  productId: remove_ads
   buttonType: 0
   automaticallyConfirmTransaction: 1
   onProductFetched:

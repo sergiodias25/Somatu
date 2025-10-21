@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Extension;
 using Assets.Scripts.AnalyticsEvent;
 
 public class IAPScript : MonoBehaviour
 {
-    private const string HINTS_5 = "HINTS_5";
-    private const string HINTS_UNLIMITED = "HINTS_UNLIMITED";
-    private const string REMOVE_ADS = "REMOVE_ADS";
-    private const string SUNRISE_THEME = "SUNRISE_THEME";
-    private const string SUNSET_THEME = "SUNSET_THEME";
+    private const string HINTS_5 = "hints_5";
+    private const string HINTS_UNLIMITED = "hints_unlimited";
+    private const string REMOVE_ADS = "remove_ads";
+    private const string SUNRISE_THEME = "sunrise_theme";
+    private const string SUNSET_THEME = "sunset_theme";
     public CodelessIAPButton ButtonRemoveAds;
     private GameManager _gameManager;
     private AdBanner _adBanner;
