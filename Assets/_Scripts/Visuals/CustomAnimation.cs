@@ -76,6 +76,42 @@ namespace Assets.Scripts.CustomAnimation
             target.gameObject.GetComponent<Button>().enabled = true;
         }
 
+        public static async Task ButtonPressed(
+            Transform target,
+            Constants.AudioClip clipToPlay,
+            bool playSFX
+        )
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(target.DOScale(BUTTON_SHRINK_ON_CLICK, BUTTON_SHRINK_ON_CLICK_TIME));
+            sequence.SetId("ButtonPressed" + target.name).Play();
+            if (playSFX)
+            {
+                Object.FindObjectOfType<UIManager>().InteractionPerformed(clipToPlay);
+            }
+
+            await WaitForAnimation("ButtonPressed" + target.name);
+        }
+
+        public static async Task ButtonReleased(
+            Transform target,
+            Constants.AudioClip clipToPlay,
+            bool playSFX
+        )
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(
+                target.DOScale(BUTTON_SHRINK_REVERSE_ON_CLICK, BUTTON_SHRINK_REVERSE_ON_CLICK_TIME)
+            );
+            sequence.SetId("ButtonReleased" + target.name).Play();
+            if (playSFX)
+            {
+                Object.FindObjectOfType<UIManager>().InteractionPerformed(clipToPlay);
+            }
+
+            await WaitForAnimation("ButtonReleased" + target.name);
+        }
+
         public static async Task TextClicked(Transform target)
         {
             var sequence = DOTween.Sequence();

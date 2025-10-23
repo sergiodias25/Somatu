@@ -35,6 +35,11 @@ public class Popup : MonoBehaviour
         ClosePopupGameplay();
     }
 
+    public void ClosePopupFromHolding()
+    {
+        ClosePopupGameplay();
+    }
+
     public void ClosePopupGameplay()
     {
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
