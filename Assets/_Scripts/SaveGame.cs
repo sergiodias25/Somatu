@@ -36,8 +36,8 @@ namespace Assets.Scripts.SaveGame
             public bool MusicEnabled = false;
             public bool VibrationEnabled = false;
             public int SelectedThemeIndex = 0;
-            public string LanguageSelected = "Portuguese";
-            public bool LanguageChangedOnce = true;
+            public string LanguageSelected = "English";
+            public bool LanguageChangedOnce = false;
             public bool ControlMethodDrag = false;
             public bool VisualAidEnabled = true;
         }
