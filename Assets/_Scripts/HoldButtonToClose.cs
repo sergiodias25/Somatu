@@ -1,9 +1,11 @@
+using System;
 using Assets.Scripts.CustomAnimation;
 using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class HoldButtonToClose : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -17,19 +19,42 @@ public class HoldButtonToClose : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private TextMeshProUGUI buttonText;
 
     [SerializeField]
+    public VideoPlayer vid;
+
+    [SerializeField]
     private float maxDuration = 2f;
     private float durationHeld = 0f;
 
     private bool isPressing = false;
+    private bool videoFinished = false;
 
     private void Start()
     {
+        if (vid != null)
+        {
+            UpdateButtonAvailability(false);
+            vid.loopPointReached += VideoFinished;
+        }
+        else
+        {
+            UpdateButtonAvailability(true);
+            videoFinished = true;
+        }
         buttonText.text = LocalizationManager.Localize("btn-close");
+    }
+
+    private void VideoFinished(VideoPlayer source)
+    {
+        if (!videoFinished)
+        {
+            UpdateButtonAvailability(true);
+        }
+        videoFinished = true;
     }
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
-        if (!isPressing)
+        if (!isPressing & videoFinished)
         {
             buttonText.text = LocalizationManager.Localize("btn-closing");
             isPressing = true;
@@ -86,5 +111,18 @@ public class HoldButtonToClose : MonoBehaviour, IPointerDownHandler, IPointerUpH
             .GetComponentInParent<Transform>()
             .GetComponentInParent<Popup>()
             .ClosePopupFromHolding();
+    }
+
+    private void UpdateButtonAvailability(bool buttonEnabled)
+    {
+        Color originalColor = button.color;
+        if (buttonEnabled && button.color.a != 1)
+        {
+            button.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1);
+        }
+        else if (!buttonEnabled && button.color.a != 0.5f)
+        {
+            button.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
+        }
     }
 }
