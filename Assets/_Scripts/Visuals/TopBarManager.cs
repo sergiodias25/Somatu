@@ -63,6 +63,7 @@ public class TopBarManager : MonoBehaviour
         MakeInactive(_settingsButton);
         MakeInactive(_profileButton);
         await CustomAnimation.ButtonClicked(_homeButton.transform);
+        FindObjectOfType<AudioManager>().UnpauseMusic();
     }
 
     public void SelectSettingsButton()

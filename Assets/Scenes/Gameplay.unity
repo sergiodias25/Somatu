@@ -4281,11 +4281,31 @@ MonoBehaviour:
   _neutralAudioSource: {fileID: 2072426480}
   _lowDiffPitchAudioSource: {fileID: 550734787}
   _highDiffPitchAudioSource: {fileID: 666894018}
+  _menuMusics:
+  - {fileID: 8300000, guid: 9e7048468f77bea4cb8a89672964e4d2, type: 3}
+  - {fileID: 8300000, guid: af09de2f066fa014d860bab4831024fa, type: 3}
+  - {fileID: 8300000, guid: 774184d9c3d04f447976c3b3986b0b5e, type: 3}
+  - {fileID: 8300000, guid: c92d90cf4d23c494c89336216eb2b69c, type: 3}
+  - {fileID: 8300000, guid: 5881a8be3cbc8d94ebeda6ae62c7757e, type: 3}
+  _classicMusics:
+  - {fileID: 8300000, guid: 8a58eb1008e264d489ced95c1fe8f08c, type: 3}
+  - {fileID: 8300000, guid: 9d2a7d19ed7455e4596511f00d1b10ed, type: 3}
+  - {fileID: 8300000, guid: 0391f8871a53a174ca6a24dccd0033e1, type: 3}
+  - {fileID: 8300000, guid: 6e884ad3a964a4747b7aad4b5dfcabfe, type: 3}
+  - {fileID: 8300000, guid: 8a58eb1008e264d489ced95c1fe8f08c, type: 3}
+  - {fileID: 8300000, guid: 3614ef280fb2ada47b7bfbd1cb13c9a1, type: 3}
+  - {fileID: 8300000, guid: 5e3f44c2f295d8c4daae4eff041fef58, type: 3}
+  _challengeMusics:
+  - {fileID: 8300000, guid: c11a5a9eb3cf7724d8374e815dd9033e, type: 3}
+  - {fileID: 8300000, guid: 783d144f323ac6d4e884536318f5a929, type: 3}
+  - {fileID: 8300000, guid: fae25ea8ba0f6e64b84a3755cd7f5e01, type: 3}
+  - {fileID: 8300000, guid: 9614735a33fc2fa41a837058da4bcd7b, type: 3}
+  - {fileID: 8300000, guid: 0333fd7eed2ac8744bcb3f88637fce46, type: 3}
+  - {fileID: 8300000, guid: 49aeba1bd5f8ab140a8456fa6e3539eb, type: 3}
   GameplayInteraction: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   Undo: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   ClassicFinish: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   ChallengeFinish: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-  MainMusicTheme: {fileID: 8300000, guid: 8b8ab71ffffc24e5582de0192d9dcee8, type: 3}
   NodeLoaded: {fileID: 8300000, guid: b91838e7cae1efd4fa0f278cf7bc2014, type: 3}
   TimerTicking: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
   Firework: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
@@ -4561,7 +4581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopup
+      value: ClosePopupMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -16250,7 +16270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopup
+      value: ClosePopupMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -26056,7 +26076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopup
+      value: ClosePopupMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -26372,7 +26392,7 @@ MonoBehaviour:
   _onboardingClassicHint: {fileID: 1851907334}
   _onboardingClassicUndo: {fileID: 2074189147}
   _onboardingChallenge: {fileID: 2111114239}
-  _popupUseHint: {fileID: 930734631}
+  _hintPurchasePopup: {fileID: 930734631}
   _popupTheme: {fileID: 812555012}
   _removeBannerPopup: {fileID: 1525656868}
 --- !u!1 &1214980171 stripped
@@ -28959,7 +28979,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -38363,7 +38383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopup
+      value: ClosePopupMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7306357715556624015, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

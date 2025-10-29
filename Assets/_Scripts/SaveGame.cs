@@ -33,8 +33,8 @@ namespace Assets.Scripts.SaveGame
         public class Settings
         {
             public bool SoundEnabled = true;
-            public bool MusicEnabled = false;
-            public bool VibrationEnabled = false;
+            public bool MusicEnabled = true;
+            public bool VibrationEnabled = true;
             public int SelectedThemeIndex = 0;
             public string LanguageSelected = "English";
             public bool LanguageChangedOnce = false;

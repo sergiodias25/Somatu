@@ -14,18 +14,38 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource _highDiffPitchAudioSource;
+
+    [SerializeField]
+    private List<AudioClip> _menuMusics;
+
+    [SerializeField]
+    private List<AudioClip> _classicMusics;
+
+    [SerializeField]
+    private List<AudioClip> _challengeMusics;
+
     public AudioClip GameplayInteraction;
     public AudioClip Undo;
     public AudioClip ClassicFinish;
     public AudioClip ChallengeFinish;
-    public AudioClip MainMusicTheme;
     public AudioClip NodeLoaded;
     public AudioClip TimerTicking;
     public AudioClip Firework;
     public AudioClip MenuInteraction;
     public AudioClip NoHintAvailable;
-    private GameManager gameManager;
+    private GameManager _gameManager;
     List<int> PentatonicSemitones = new List<int>();
+
+    public enum MusicType
+    {
+        Nothing,
+        Menu,
+        Classic,
+        Challenge
+    };
+
+    private bool _musicPlaying = false;
+    private MusicType _musicTypePlaying = MusicType.Nothing;
 
     /*
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -46,20 +66,17 @@ public class AudioManager : MonoBehaviour
         PentatonicSemitones.Add(4);
         PentatonicSemitones.Add(5);
         PentatonicSemitones.Add(8);
-        gameManager = FindObjectOfType<GameManager>();
+        _gameManager = FindObjectOfType<GameManager>();
         _musicSource.loop = true;
-        _musicSource.clip = MainMusicTheme;
-        _musicSource.PlayOneShot(MainMusicTheme, _musicSource.volume);
-        _musicSource.Pause();
     }
 
     public void PlaySFX(Constants.AudioClip audioClip)
     {
-        if (gameManager.SavedGameData.SettingsData.SoundEnabled)
+        if (_gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
             ShouldChangePitch(audioClip);
         }
-        if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
+        if (_gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
             Vibrate();
         }
@@ -67,7 +84,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopSFX()
     {
-        if (gameManager.SavedGameData.SettingsData.SoundEnabled)
+        if (_gameManager.SavedGameData.SettingsData.SoundEnabled)
         {
             _neutralAudioSource.Stop();
             _lowDiffPitchAudioSource.Stop();
@@ -75,35 +92,84 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic()
+    public void PlayMusic(MusicType musicType)
     {
-        if (gameManager.SavedGameData.SettingsData.MusicEnabled)
+        if (_gameManager.SavedGameData.SettingsData.MusicEnabled)
         {
-            _musicSource.PlayOneShot(MainMusicTheme, _musicSource.volume);
+            if (_musicPlaying)
+            {
+                if (_musicTypePlaying != musicType)
+                {
+                    _musicSource.clip = GetMusicFromList(musicType);
+                    _musicSource.Play();
+                }
+                else
+                {
+                    _musicSource.UnPause();
+                }
+            }
+            else
+            {
+                _musicSource.clip = GetMusicFromList(musicType);
+                _musicSource.Play();
+            }
+            _musicPlaying = true;
+            _musicTypePlaying = musicType;
+        }
+    }
+
+    public void PauseMusic()
+    {
+        _musicPlaying = false;
+        _musicSource.Pause();
+    }
+
+    public void UnpauseMusic()
+    {
+        if (!_gameManager.HasGameEnded())
+        {
+            _musicPlaying = true;
+            _musicSource.UnPause();
+        }
+    }
+
+    private AudioClip GetMusicFromList(MusicType musicType)
+    {
+        switch (musicType)
+        {
+            case MusicType.Menu:
+                return _menuMusics.ToArray()[Random.Range(0, _menuMusics.Count)];
+            case MusicType.Classic:
+                return _classicMusics.ToArray()[Random.Range(0, _classicMusics.Count)];
+            case MusicType.Challenge:
+                return _challengeMusics.ToArray()[Random.Range(0, _challengeMusics.Count)];
+
+            default:
+                return null;
         }
     }
 
     public void ToggleSFX()
     {
-        gameManager.SavedGameData.SettingsData.SoundEnabled = !gameManager
+        _gameManager.SavedGameData.SettingsData.SoundEnabled = !_gameManager
             .SavedGameData
             .SettingsData
             .SoundEnabled;
-        gameManager.SavedGameData.PersistData();
-        _neutralAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
-        _lowDiffPitchAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
-        _highDiffPitchAudioSource.mute = !gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _gameManager.SavedGameData.PersistData();
+        _neutralAudioSource.mute = !_gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _lowDiffPitchAudioSource.mute = !_gameManager.SavedGameData.SettingsData.SoundEnabled;
+        _highDiffPitchAudioSource.mute = !_gameManager.SavedGameData.SettingsData.SoundEnabled;
     }
 
     public void ToggleMusic()
     {
-        gameManager.SavedGameData.SettingsData.MusicEnabled = !gameManager
+        _gameManager.SavedGameData.SettingsData.MusicEnabled = !_gameManager
             .SavedGameData
             .SettingsData
             .MusicEnabled;
-        gameManager.SavedGameData.PersistData();
+        _gameManager.SavedGameData.PersistData();
 
-        _musicSource.mute = !gameManager.SavedGameData.SettingsData.MusicEnabled;
+        _musicSource.mute = !_gameManager.SavedGameData.SettingsData.MusicEnabled;
         if (_musicSource.mute)
         {
             _musicSource.Pause();
@@ -116,16 +182,16 @@ public class AudioManager : MonoBehaviour
 
     public void ToggleVibration()
     {
-        gameManager.SavedGameData.SettingsData.VibrationEnabled = !gameManager
+        _gameManager.SavedGameData.SettingsData.VibrationEnabled = !_gameManager
             .SavedGameData
             .SettingsData
             .VibrationEnabled;
-        gameManager.SavedGameData.PersistData();
+        _gameManager.SavedGameData.PersistData();
     }
 
     public void Vibrate()
     {
-        if (gameManager.SavedGameData.SettingsData.VibrationEnabled)
+        if (_gameManager.SavedGameData.SettingsData.VibrationEnabled)
         {
             if (isAndroid())
             {
@@ -187,7 +253,7 @@ public class AudioManager : MonoBehaviour
             || clipToPlay == Constants.AudioClip.ChallengeFinish
         )
         {
-            _neutralAudioSource.PlayOneShot(GetAudioClip(clipToPlay), 1f);
+            PlaySFXWithSource(_neutralAudioSource, clipToPlay, 1);
         }
         else if (
             clipToPlay == Constants.AudioClip.NodeLoaded
@@ -196,7 +262,7 @@ public class AudioManager : MonoBehaviour
             || clipToPlay == Constants.AudioClip.NoHintAvailable
         )
         {
-            PlaySFXWithSource(_lowDiffPitchAudioSource, clipToPlay, 2);
+            PlaySFXWithSource(_lowDiffPitchAudioSource, clipToPlay, 3);
         }
         else if (
             clipToPlay == Constants.AudioClip.GameplayInteraction
@@ -205,6 +271,21 @@ public class AudioManager : MonoBehaviour
         )
         {
             PlaySFXWithSource(_highDiffPitchAudioSource, clipToPlay, 5);
+        }
+    }
+
+    private void PlayControlledVolume(AudioSource source, Constants.AudioClip clipToPlay)
+    {
+        if (
+            clipToPlay == Constants.AudioClip.NodeLoaded
+            || clipToPlay == Constants.AudioClip.ClassicFinish
+        )
+        {
+            source.PlayOneShot(GetAudioClip(clipToPlay), .2f);
+        }
+        else
+        {
+            source.PlayOneShot(GetAudioClip(clipToPlay), 1f);
         }
     }
 
@@ -221,7 +302,7 @@ public class AudioManager : MonoBehaviour
         {
             audioSource.pitch *= 1.059463f;
         }
-        audioSource.PlayOneShot(GetAudioClip(clipToPlay), 1f);
+        PlayControlledVolume(audioSource, clipToPlay);
     }
 
     private static bool isAndroid()

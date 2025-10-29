@@ -121,7 +121,6 @@ public class SettingsHandler : MonoBehaviour
 
     public void ChangeTheme(int selectedThemeIndex)
     {
-        _gameManager.EnableGameplayBlocks();
         if (selectedThemeIndex == 2)
         {
             if (!_gameManager.SavedGameData.PurchaseData.SunriseTheme)
@@ -165,7 +164,6 @@ public class SettingsHandler : MonoBehaviour
 
         FindObjectOfType<ColorHelper>().ApplyUpdates();
         Theme.SendAnalyticsEvent(ColourManager.Instance.SelectedPalette().Name);
-        _themeSelectPopup.ClosePopupGameplay();
     }
 
     public void RevertTheme()

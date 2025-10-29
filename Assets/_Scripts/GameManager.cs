@@ -99,6 +99,14 @@ public class GameManager : MonoBehaviour
         ActualDifficulty = GetActualDifficulty();
         _timesSolvedText = 0;
         UpdateModeTranslation();
+        if (SelectedDifficulty == Constants.Difficulty.Challenge)
+        {
+            _audioManager.PlayMusic(AudioManager.MusicType.Challenge);
+        }
+        else
+        {
+            _audioManager.PlayMusic(AudioManager.MusicType.Classic);
+        }
         LocalizationManager.OnLocalizationChanged += () => UpdateModeTranslation();
 
         if (!loadGame)
@@ -561,6 +569,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            _audioManager.PauseMusic();
             SavedGameData.IncrementHintsAvailableClassic(1);
             _timer.PauseTimer();
             SavedGameData.ClearInProgressSavedGame();
@@ -600,6 +609,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();
+        _audioManager.PauseMusic();
         CustomAnimation.AnimateButtonCallToAction(_playAgainButton);
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.HintsAvailableChallenge = 0;
@@ -961,7 +971,7 @@ public class GameManager : MonoBehaviour
 
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
-        _audioManager.PlayMusic();
+        _audioManager.PlayMusic(AudioManager.MusicType.Menu);
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
@@ -976,6 +986,7 @@ public class GameManager : MonoBehaviour
         LocalizationManager.Read();
         if (!SavedGameData.SettingsData.LanguageChangedOnce)
         {
+            _audioManager.PauseMusic();
             CustomAnimation.PopupLoad(_languagePopup.transform);
         }
         else
@@ -1124,6 +1135,7 @@ public class GameManager : MonoBehaviour
                         node.GetBlockInNode().ChangeInteraction(true);
                 });
                 _timer.UnpauseTimer();
+                FindObjectOfType<AudioManager>().UnpauseMusic();
             }
         }
     }

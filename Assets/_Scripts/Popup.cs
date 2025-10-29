@@ -35,11 +35,6 @@ public class Popup : MonoBehaviour
         ClosePopupGameplay();
     }
 
-    public void ClosePopupFromHolding()
-    {
-        ClosePopupGameplay();
-    }
-
     public void ClosePopupGameplay()
     {
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
@@ -66,6 +61,7 @@ public class Popup : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_closePopupButton.transform);
         FindObjectOfType<GameManager>().EnableGameplayBlocks();
+        FindObjectOfType<AudioManager>().UnpauseMusic();
         CustomAnimation.PopupUnload(
             _popupPanel.transform,
             _popupPanel.transform.Find("Interactible")
