@@ -47,17 +47,6 @@ public class AudioManager : MonoBehaviour
     private bool _musicPlaying = false;
     private MusicType _musicTypePlaying = MusicType.Nothing;
 
-    /*
-#if UNITY_ANDROID && !UNITY_EDITOR
-    public static AndroidJavaObject vibrator = currentActivity.Call<AndroidJavaObject>(
-        "getSystemService",
-        "vibrator"
-    );
-#else
-    public static AndroidJavaObject vibrator;
-#endif*/
-    public static AndroidJavaObject vibrator;
-
     private void Start()
     {
         PentatonicSemitones.Add(0);
@@ -195,11 +184,11 @@ public class AudioManager : MonoBehaviour
         {
             if (isAndroid())
             {
-                vibrator.Call("vibrate", 100);
+                Handheld.Vibrate();
             }
             else
             {
-                Handheld.Vibrate();
+                Debug.Log("Vibrate not implemented for other platforms yet.");
             }
         }
     }
