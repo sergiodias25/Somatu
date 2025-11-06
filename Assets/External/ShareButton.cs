@@ -45,7 +45,7 @@ public class ShareButton : MonoBehaviour
             "popup-challenge-share-text",
             Timer.FormatTimeForText(FindObjectOfType<Timer>().LastElapsedTime),
             FindObjectOfType<GameManager>()._timesSolvedText + 1,
-            "https://play.google.com/store/apps/"
+            "https://play.google.com/store/apps/details?id=com.SergioAlvesDiasGames.Somatu"
         );
 
         Debug.Log(shareMessage);

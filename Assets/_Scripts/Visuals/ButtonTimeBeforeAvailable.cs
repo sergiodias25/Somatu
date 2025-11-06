@@ -1,29 +1,20 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
-public class ButtonWaitForVideo : MonoBehaviour
+public class ButtonTimeBeforeAvailable : MonoBehaviour
 {
-    [SerializeField]
-    public VideoPlayer vid;
-    private bool videoFinished = false;
     private Button button;
 
     private void Start()
     {
         button = GetComponent<Button>();
         UpdateButtonAvailability(false);
-        vid.loopPointReached += VideoFinished;
+        Invoke("EnableButton", 5);
     }
 
-    private void VideoFinished(VideoPlayer source)
+    private void EnableButton()
     {
-        if (!videoFinished)
-        {
-            UpdateButtonAvailability(true);
-        }
-        videoFinished = true;
+        UpdateButtonAvailability(true);
     }
 
     private void UpdateButtonAvailability(bool buttonEnabled)

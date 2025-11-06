@@ -186,10 +186,6 @@ public class AudioManager : MonoBehaviour
             {
                 Handheld.Vibrate();
             }
-            else
-            {
-                Debug.Log("Vibrate not implemented for other platforms yet.");
-            }
         }
     }
 
