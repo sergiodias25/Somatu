@@ -65,7 +65,6 @@ public class Block : MonoBehaviour
             {
                 if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
                 {
-                    CustomAnimation.NumberClicked(transform);
                     _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
                     _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
                 }
@@ -102,6 +101,7 @@ public class Block : MonoBehaviour
                             && _originalNode.name != selectedBlock.GetNode().name
                         )
                         {
+                            _gameManager.DisableGameplayBlocks();
                             _originalNode.UpdateColor(
                                 ColourManager.Instance.SelectedPalette().Colours[
                                     Constants.COLOR_SELECTED_NODE
@@ -120,7 +120,7 @@ public class Block : MonoBehaviour
                             );
                             _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
                             _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
-                            _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                            await CustomAnimation.NodeClicked(nodeClickedOn.transform);
                             _uiManager.InteractionPerformed(
                                 Constants.AudioClip.GameplayInteraction
                             );
@@ -131,6 +131,7 @@ public class Block : MonoBehaviour
                             {
                                 _gameManager.ShowOnboardingClassicUndo();
                             }
+                            _gameManager.EnableGameplayBlocks();
                         }
                     }
                 }
