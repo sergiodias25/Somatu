@@ -13,14 +13,14 @@ namespace Assets.Scripts.CustomAnimation
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK = 1f;
         private static float NODE_SHRINK_ON_CLICK = 10f;
         private static float NODE_SHRINK_REVERSE_ON_CLICK = 15f;
-        private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.1f;
+        private static float BUTTON_SHRINK_ON_CLICK_TIME = 0.08f;
         private static float BUTTON_SHRINK_REVERSE_ON_CLICK_TIME = 0.05f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY = 0.6f;
         private static float BUTTON_SHRINK_ON_CLICK_OPACITY_TIME = BUTTON_SHRINK_ON_CLICK_TIME;
         private static float NUMBER_CLICKED_SIZE = 2.25f;
         private static float NUMBER_CLICKED_TIME = 0.1f;
         private static float NUMBER_DROPPED_SCALE_TIME = 0.1f;
-        private static float NUMBER_DROPPED_MOVE_TIME = 0.2f;
+        private static float NUMBER_DROPPED_MOVE_TIME = 0.175f;
         private static float SUM_CORRECT_ANIMATION_JUMP_FORCE = 0.06f;
         private static float SUM_CORRECT_ANIMATION_DURATION = 0.3f;
         private static float PUZZLE_COMPLETED_ANIMATION_DURATION = 0.5f;

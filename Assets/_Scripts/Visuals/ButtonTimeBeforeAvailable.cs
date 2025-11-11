@@ -30,14 +30,14 @@ public class ButtonTimeBeforeAvailable : MonoBehaviour
                 1
             );
         }
-        else if (!buttonEnabled && button.GetComponent<Image>().color.a != 0.5f)
+        else if (!buttonEnabled && button.GetComponent<Image>().color.a != 0.1f)
         {
             button.interactable = false;
             button.GetComponent<Image>().color = new Color(
                 originalColor.r,
                 originalColor.g,
                 originalColor.b,
-                0.5f
+                0.1f
             );
         }
     }

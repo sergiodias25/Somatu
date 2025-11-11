@@ -283,6 +283,8 @@ public class Block : MonoBehaviour
 
     public static async Task<bool> SwitchBlocksUndo(Node secondNode, Node firstNode)
     {
+        _ = CustomAnimation.NodeClicked(firstNode.transform);
+        _ = CustomAnimation.NodeClicked(secondNode.transform);
         CustomAnimation.NumberSwitched(
             firstNode.GetBlockInNode().transform,
             secondNode.transform.position
