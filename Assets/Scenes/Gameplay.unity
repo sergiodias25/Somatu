@@ -5837,7 +5837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &361328920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9956,9 +9956,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07219255
+    y: 0.00024986267
     width: 1
-    height: 0.8556149
+    height: 0.9995003
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -36022,7 +36022,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 348.07, y: -70}
-  m_SizeDelta: {x: 715.55, y: 140}
+  m_SizeDelta: {x: 715.55, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664118513
 MonoBehaviour:
