@@ -22,7 +22,7 @@ namespace Assets.Scripts.CustomAnimation
         private static float NUMBER_DROPPED_SCALE_TIME = 0.1f;
         private static float NUMBER_DROPPED_MOVE_TIME = 0.175f;
         private static float SUM_CORRECT_ANIMATION_JUMP_FORCE = 0.06f;
-        private static float SUM_CORRECT_ANIMATION_DURATION = 0.3f;
+        private static float SUM_CORRECT_ANIMATION_DURATION = 0.25f;
         private static float PUZZLE_COMPLETED_ANIMATION_DURATION = 0.5f;
         private static int WAIT_FOR_ANIMATION_TO_FINISH_DELAY = 200;
         private static float TIME_REWARD_TEXT_POP_UP_DURATION = 0.75f;
@@ -191,7 +191,7 @@ namespace Assets.Scripts.CustomAnimation
             await WaitForAnimation("MoveNumberBack");
 
             var sequence = DOTween.Sequence();
-            sequence.AppendInterval(0.5f);
+            sequence.AppendInterval(0.4f);
             sequence.Append(blocks[3].AnimatePartialSumCorrect());
             sequence.Join(blocks[4].AnimatePuzzleCompleted());
             sequence.Join(blocks[5].AnimatePuzzleCompleted());
@@ -392,6 +392,7 @@ namespace Assets.Scripts.CustomAnimation
         )
         {
             var sequence = DOTween.Sequence();
+            sequence.SetId("AnimateTimeReward");
             sequence.Append(
                 timeRewardText
                     .DOScale(1.25f, TIME_REWARD_TEXT_POP_UP_DURATION)
@@ -440,6 +441,7 @@ namespace Assets.Scripts.CustomAnimation
             Vector3 originalPosition = hintRewardText.transform.localPosition;
             var sequence = DOTween.Sequence();
 
+            sequence.SetId("AnimateHintReward");
             sequence.Append(
                 hintRewardText
                     .DOScale(1.25f, TIME_REWARD_TEXT_POP_UP_DURATION)

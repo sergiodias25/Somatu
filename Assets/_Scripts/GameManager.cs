@@ -514,7 +514,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void DoEndGameActions()
+    private async void DoEndGameActions()
     {
         _isGameFinished = true;
         FindObjectOfType<FireworkManager>().ThrowFireworks();
@@ -563,12 +563,18 @@ public class GameManager : MonoBehaviour
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHintButton(false);
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
+        _uiManager.InteractionPerformed(Constants.AudioClip.ClassicFinish);
+        _audioManager.Vibrate();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             SavedGameData.IncrementHintsAvailableChallenge(1);
             _timer.AddPuzzleSolvedBonus(ActualDifficulty);
             _uiManager.AnimateHintReward();
+            await CustomAnimation.WaitForAnimation("AnimateHintReward");
+            await CustomAnimation.WaitForAnimation("AnimateTimeReward");
+            ResetBoard(false, false, false);
+            GenerateGrid(GenerateNumbersMain(_timesSolvedText), false);
         }
         else
         {
@@ -579,17 +585,6 @@ public class GameManager : MonoBehaviour
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
-        }
-        _uiManager.InteractionPerformed(Constants.AudioClip.ClassicFinish);
-        _audioManager.Vibrate();
-
-        if (SelectedDifficulty == Constants.Difficulty.Challenge)
-        {
-            ResetBoard(false, false, false);
-            GenerateGrid(GenerateNumbersMain(_timesSolvedText), false);
-        }
-        else
-        {
             if (
                 !SavedGameData.PurchaseData.RemovedAds
                 && (Random.Range(0, 100) < Constants.ShowRemoveAdsPopupPercentage)
