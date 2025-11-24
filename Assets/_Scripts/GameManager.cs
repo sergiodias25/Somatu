@@ -578,6 +578,7 @@ public class GameManager : MonoBehaviour
             _uiManager.ShowEndOfGameButton();
         }
         _uiManager.InteractionPerformed(Constants.AudioClip.ClassicFinish);
+        _audioManager.Vibrate();
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -606,6 +607,7 @@ public class GameManager : MonoBehaviour
             node.GetBlockInNode().UpdateTextColor();
         }
         _uiManager.InteractionPerformed(Constants.AudioClip.ChallengeFinish);
+        _audioManager.Vibrate();
         _uiManager.ToggleHintButton(false);
         _uiManager.ToggleUndoButton(false);
         _uiManager.ShowEndOfGameButton();

@@ -141,12 +141,14 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _removeBannerPopup;
+    AudioManager _audioManager;
 
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _timer = FindObjectOfType<Timer>();
         _topBarManager = FindObjectOfType<TopBarManager>();
+        _audioManager = FindObjectOfType<AudioManager>();
         HideClassicMenu();
         HideObject(_gameplayStatsPanel);
         HideObject(_gameplayInGamePanel);
@@ -534,7 +536,7 @@ public class UIManager : MonoBehaviour
         {
             _gameManager.ResetBoard(false, true, true);
             _gameManager.GenerateGrid(_gameManager.GenerateNumbersMain(0), false);
-            FindObjectOfType<AudioManager>().UnpauseMusic();
+            _audioManager.UnpauseMusic();
             _playerStats.StartedGame(_gameManager.SelectedDifficulty);
             ShowGameplayButtons();
 
@@ -565,7 +567,7 @@ public class UIManager : MonoBehaviour
             _gameManager.CheckResult(false);
             _gameManager.ResetBoard(true, false, true);
         }
-        FindObjectOfType<AudioManager>().PlayMusic(AudioManager.MusicType.Menu);
+        _audioManager.PlayMusic(AudioManager.MusicType.Menu);
         HideClassicMenu();
         HideObject(_gameNodes);
         HideObject(_gameplayStatsPanel);
@@ -594,7 +596,7 @@ public class UIManager : MonoBehaviour
             }
             else if (_gameManager.SelectedDifficulty != Constants.Difficulty.Challenge)
             {
-                FindObjectOfType<AudioManager>().PauseMusic();
+                _audioManager.PauseMusic();
                 ShowObjectWithAnimation(_hintPurchasePopup);
             }
         }
@@ -789,7 +791,7 @@ public class UIManager : MonoBehaviour
         {
             if (_gameManager.IsGameInProgress())
             {
-                FindObjectOfType<AudioManager>().PauseMusic();
+                _audioManager.PauseMusic();
             }
             HideObject(_backgroundsPanel);
             HideObject(_gameplayStatsPanel);
@@ -912,7 +914,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowOnboardingClassicExplanation()
     {
-        FindObjectOfType<AudioManager>().PauseMusic();
+        _audioManager.PauseMusic();
         CustomAnimation.PopupLoad(_onboardingClassicExplanation.transform);
     }
 
@@ -923,7 +925,7 @@ public class UIManager : MonoBehaviour
             && !_gameManager.SavedGameData.Onboardings.Welcome
         )
         {
-            FindObjectOfType<AudioManager>().PauseMusic();
+            _audioManager.PauseMusic();
             _gameManager.SavedGameData.Onboardings.Welcome = true;
             CustomAnimation.PopupLoad(_onboardingWelcome.transform);
         }
@@ -931,19 +933,19 @@ public class UIManager : MonoBehaviour
 
     public void ShowOnboardingClassicHint()
     {
-        FindObjectOfType<AudioManager>().PauseMusic();
+        _audioManager.PauseMusic();
         CustomAnimation.PopupLoad(_onboardingClassicHint.transform);
     }
 
     public void ShowOnboardingClassicUndo()
     {
-        FindObjectOfType<AudioManager>().PauseMusic();
+        _audioManager.PauseMusic();
         CustomAnimation.PopupLoad(_onboardingClassicUndo.transform);
     }
 
     public void ShowOnboardingChallenge()
     {
-        FindObjectOfType<AudioManager>().PauseMusic();
+        _audioManager.PauseMusic();
         CustomAnimation.PopupLoad(_onboardingChallenge.transform);
     }
 
@@ -967,8 +969,7 @@ public class UIManager : MonoBehaviour
     {
         if (audioClip != Constants.AudioClip.NoClip)
         {
-            AudioManager audioManager = FindObjectOfType<AudioManager>();
-            audioManager.PlaySFX(audioClip);
+            _audioManager.PlaySFX(audioClip);
         }
     }
 

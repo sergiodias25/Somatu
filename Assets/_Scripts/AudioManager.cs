@@ -65,10 +65,6 @@ public class AudioManager : MonoBehaviour
         {
             ShouldChangePitch(audioClip);
         }
-        if (_gameManager.SavedGameData.SettingsData.VibrationEnabled)
-        {
-            Vibrate();
-        }
     }
 
     public void StopSFX()
