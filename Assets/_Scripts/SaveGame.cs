@@ -28,6 +28,7 @@ namespace Assets.Scripts.SaveGame
             public bool RemovedAds = false;
             public bool SunriseTheme = false;
             public bool SunsetTheme = false;
+            public bool HasRatedGame = false;
         }
 
         public class Settings
