@@ -272,11 +272,6 @@ namespace Assets.Scripts.SaveGame
             mode.GamesCompleted++;
         }
 
-        public void UpdateSolvesCountBest(ModeStats mode, int newBest)
-        {
-            mode.SolveCountBest = newBest;
-        }
-
         public void IncrementHintsUsedClassic(ModeStats mode)
         {
             mode.HintsUsed++;

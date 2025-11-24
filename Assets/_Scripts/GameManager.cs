@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _challengeFinishedPopupText;
 
     [SerializeField]
+    private TextMeshProUGUI _challengeFinishedRecordText;
+
+    [SerializeField]
     private Button _playAgainButton;
 
     private Timer _timer;
@@ -613,6 +616,25 @@ public class GameManager : MonoBehaviour
         _uiManager.ShowEndOfGameButton();
         _audioManager.PauseMusic();
         CustomAnimation.AnimateButtonCallToAction(_playAgainButton);
+        if (
+            System.Math.Round(SavedGameData.ChallengeStats.TimeBest, 0)
+            >= System.Math.Round(_elapsedTime, 0)
+        )
+        {
+            _challengeFinishedRecordText.text = LocalizationManager.Localize(
+                "challenge-personal-record",
+                Timer.FormatTimeForText(SavedGameData.ChallengeStats.TimeBest),
+                SavedGameData.ChallengeStats.SolveCountBest == 0
+                    ? 1
+                    : SavedGameData.ChallengeStats.SolveCountBest + 1
+            );
+        }
+        else
+        {
+            _challengeFinishedRecordText.text = LocalizationManager.Localize(
+                "challenge-new-personal-record"
+            );
+        }
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.HintsAvailableChallenge = 0;
         SavedGameData.PersistData();
