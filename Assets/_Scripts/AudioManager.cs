@@ -260,6 +260,7 @@ public class AudioManager : MonoBehaviour
         if (
             clipToPlay == Constants.AudioClip.NodeLoaded
             || clipToPlay == Constants.AudioClip.ClassicFinish
+            || clipToPlay == Constants.AudioClip.ChallengeFinish
         )
         {
             source.PlayOneShot(GetAudioClip(clipToPlay), .2f);

@@ -343,8 +343,22 @@ namespace Assets.Scripts.CustomAnimation
 
         internal static void NodeLoad(Transform transform)
         {
+            bool quickAnimation =
+                Object.FindObjectOfType<GameManager>().SelectedDifficulty
+                == Constants.Difficulty.Challenge
+                    ? true
+                    : false;
+
+            float animationDuration = .75f;
+            float animationDelay = .5f;
+
+            if (quickAnimation)
+            {
+                animationDuration = .5f;
+                animationDelay = .25f;
+            }
             transform
-                .DOScale(.001f, .75f)
+                .DOScale(.001f, animationDuration)
                 .From()
                 .SetEase(Ease.OutBounce)
                 .OnStart(() =>
@@ -353,7 +367,7 @@ namespace Assets.Scripts.CustomAnimation
                         .FindObjectOfType<UIManager>()
                         .InteractionPerformed(Constants.AudioClip.NodeLoaded);
                 })
-                .SetDelay(RandomizeDelayValue(0.75));
+                .SetDelay(RandomizeDelayValue(animationDelay));
         }
 
         internal static void StatsLoad(RectTransform transform)

@@ -318,7 +318,10 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.ToggleHintButton(true);
         LogSolution();
-        CustomAnimation.ButtonLoad(_gameBackground.transform);
+        if (SelectedDifficulty != Constants.Difficulty.Challenge)
+        {
+            CustomAnimation.ButtonLoad(_gameBackground.transform);
+        }
     }
 
     private Block GenerateResultBlock(int x, int y, int numberValue)
@@ -516,6 +519,7 @@ public class GameManager : MonoBehaviour
 
     private async void DoEndGameActions()
     {
+        _timer.PauseTimer();
         _isGameFinished = true;
         FindObjectOfType<FireworkManager>().ThrowFireworks();
         foreach (var node in _allNodes)
@@ -568,6 +572,7 @@ public class GameManager : MonoBehaviour
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
+            FindObjectOfType<FireworkManager>().StopFireworks();
             SavedGameData.IncrementHintsAvailableChallenge(1);
             _timer.AddPuzzleSolvedBonus(ActualDifficulty);
             _uiManager.AnimateHintReward();
@@ -580,7 +585,6 @@ public class GameManager : MonoBehaviour
         {
             _audioManager.PauseMusic();
             SavedGameData.IncrementHintsAvailableClassic(1);
-            _timer.PauseTimer();
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();

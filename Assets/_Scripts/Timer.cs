@@ -257,7 +257,6 @@ public class Timer : MonoBehaviour
 
     public void AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
     {
-        PauseTimer();
         double _elapsedTimeInSolvedPuzzle = _lastChallengeStartTime - _currentTime;
         _timeRewardText.gameObject.SetActive(true);
         Vector3 originalPosition = _timeRewardText.transform.localPosition;
