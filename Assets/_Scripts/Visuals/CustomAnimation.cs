@@ -20,7 +20,7 @@ namespace Assets.Scripts.CustomAnimation
         private static float NUMBER_CLICKED_SIZE = 2.25f;
         private static float NUMBER_CLICKED_TIME = 0.1f;
         private static float NUMBER_DROPPED_SCALE_TIME = 0.1f;
-        private static float NUMBER_DROPPED_MOVE_TIME = 0.175f;
+        private static float NUMBER_DROPPED_MOVE_TIME = .01f;
         private static float SUM_CORRECT_ANIMATION_JUMP_FORCE = 0.06f;
         private static float SUM_CORRECT_ANIMATION_DURATION = 0.25f;
         private static float PUZZLE_COMPLETED_ANIMATION_DURATION = 0.5f;
@@ -384,7 +384,7 @@ namespace Assets.Scripts.CustomAnimation
             return (float)(Random.value * delay);
         }
 
-        public static async Task NodeClicked(Transform target)
+        public static void NodeClicked(Transform target)
         {
             target.gameObject.GetComponent<BoxCollider>().enabled = false;
             var sequence = DOTween.Sequence();
@@ -394,7 +394,6 @@ namespace Assets.Scripts.CustomAnimation
             );
             sequence.SetId("NodeClick" + target.name).Play();
 
-            await WaitForAnimation("NodeClick" + target.name);
             target.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
 

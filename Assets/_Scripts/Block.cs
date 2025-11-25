@@ -5,8 +5,6 @@ using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
 using System.Threading.Tasks;
-using UnityEngine.UI;
-using System;
 
 public class Block : MonoBehaviour
 {
@@ -65,7 +63,7 @@ public class Block : MonoBehaviour
             {
                 if (_gameManager.SavedGameData.SettingsData.ControlMethodDrag)
                 {
-                    _ = CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                    CustomAnimation.NodeClicked(nodeClickedOn.transform);
                     _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
                 }
                 else
@@ -81,7 +79,7 @@ public class Block : MonoBehaviour
                             ]
                         );
                         _uiManager.InteractionPerformed(Constants.AudioClip.GameplayInteraction);
-                        await CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                        CustomAnimation.NodeClicked(nodeClickedOn.transform);
                     }
                     else if (selectedBlock._originalNode.name == _originalNode.name)
                     {
@@ -92,7 +90,7 @@ public class Block : MonoBehaviour
                             ]
                         );
                         _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
-                        await CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
+                        CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
                     }
                     else if (selectedBlock._originalNode.name != _originalNode.name)
                     {
@@ -102,11 +100,6 @@ public class Block : MonoBehaviour
                         )
                         {
                             _gameManager.DisableGameplayBlocks();
-                            _originalNode.UpdateColor(
-                                ColourManager.Instance.SelectedPalette().Colours[
-                                    Constants.COLOR_SELECTED_NODE
-                                ]
-                            );
 
                             selectedBlock._originalNode.UpdateColor(
                                 ColourManager.Instance.SelectedPalette().Colours[
@@ -119,8 +112,8 @@ public class Block : MonoBehaviour
                                 ]
                             );
                             _gameManager.StoreUndoData(selectedBlock._originalNode, _originalNode);
-                            _ = CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
-                            await CustomAnimation.NodeClicked(nodeClickedOn.transform);
+                            CustomAnimation.NodeClicked(selectedBlock._originalNode.transform);
+                            CustomAnimation.NodeClicked(nodeClickedOn.transform);
                             _uiManager.InteractionPerformed(
                                 Constants.AudioClip.GameplayInteraction
                             );
@@ -208,12 +201,12 @@ public class Block : MonoBehaviour
                     _gameManager.StoreUndoData(_originalNode, nodeWhereBlockIsDropped);
                     SwitchBlocks(nodeWhereBlockIsDropped);
                     _originalNode = nodeWhereBlockIsDropped;
-                    _ = CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
+                    CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
                 }
                 else
                 {
                     _uiManager.InteractionPerformed(Constants.AudioClip.Undo);
-                    _ = CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
+                    CustomAnimation.NodeClicked(nodeWhereBlockIsDropped.transform);
                 }
                 if (!FindObjectOfType<GameManager>().CheckResult(true))
                 {
@@ -283,8 +276,6 @@ public class Block : MonoBehaviour
 
     public static async Task<bool> SwitchBlocksUndo(Node secondNode, Node firstNode)
     {
-        _ = CustomAnimation.NodeClicked(firstNode.transform);
-        _ = CustomAnimation.NodeClicked(secondNode.transform);
         CustomAnimation.NumberSwitched(
             firstNode.GetBlockInNode().transform,
             secondNode.transform.position
@@ -293,6 +284,14 @@ public class Block : MonoBehaviour
             secondNode.GetBlockInNode().transform,
             firstNode.transform.position
         );
+        firstNode.UpdateColor(
+            ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_SELECTED_NODE]
+        );
+        secondNode.UpdateColor(
+            ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_SELECTED_NODE]
+        );
+        CustomAnimation.NodeClicked(firstNode.transform);
+        CustomAnimation.NodeClicked(secondNode.transform);
 
         secondNode.GetBlockInNode().transform.SetParent(firstNode.transform);
         secondNode.GetBlockInNode()._originalNode = firstNode;

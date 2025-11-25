@@ -72,7 +72,7 @@ public class Node : MonoBehaviour
 
     public void UpdateColor(Color newColor)
     {
-        _sprite.DOColor(newColor, 0.1f);
+        _sprite.DOColor(newColor, .25f);
     }
 
     private void OnDestroy()
