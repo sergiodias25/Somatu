@@ -25,6 +25,11 @@ public class IAPScript : MonoBehaviour
 
     public void OnPurchaseComplete(Product product)
     {
+        ProcessPurchase(product);
+    }
+
+    private void ProcessPurchase(Product product)
+    {
         switch (product.definition.id)
         {
             case HINTS_5:
@@ -66,17 +71,24 @@ public class IAPScript : MonoBehaviour
         PurchaseFailureDescription purchaseFailureDescription
     )
     {
-        Debug.LogError(
-            $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
-        );
-        switch (product.definition.id)
+        if (purchaseFailureDescription.reason == PurchaseFailureReason.DuplicateTransaction)
         {
-            case SUNRISE_THEME:
-            case SUNSET_THEME:
-                _settingsHandler.RevertTheme();
-                break;
+            ProcessPurchase(product);
         }
-        Purchase.SendAnalyticsEvent(product.definition.id, false);
+        else
+        {
+            Debug.LogError(
+                $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
+            );
+            switch (product.definition.id)
+            {
+                case SUNRISE_THEME:
+                case SUNSET_THEME:
+                    _settingsHandler.RevertTheme();
+                    break;
+            }
+            Purchase.SendAnalyticsEvent(product.definition.id, false);
+        }
     }
 
     internal void RemoveAds()
