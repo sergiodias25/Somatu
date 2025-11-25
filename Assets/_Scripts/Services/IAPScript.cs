@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Purchasing;
-using Assets.Scripts.AnalyticsEvent;
 
 public class IAPScript : MonoBehaviour
 {
@@ -63,7 +62,6 @@ public class IAPScript : MonoBehaviour
                 Debug.LogError("Unknown bought");
                 break;
         }
-        Purchase.SendAnalyticsEvent(product.definition.id, true);
     }
 
     public void OnPurchaseFailed(
@@ -87,7 +85,6 @@ public class IAPScript : MonoBehaviour
                     _settingsHandler.RevertTheme();
                     break;
             }
-            Purchase.SendAnalyticsEvent(product.definition.id, false);
         }
     }
 

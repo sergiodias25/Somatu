@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
-using Assets.Scripts.AnalyticsEvent;
 using DG.Tweening;
 using CandyCabinets.Components.Colour;
 
@@ -353,10 +352,6 @@ public class UIManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_continueGameButton.transform);
         HideObject(_mainMenuPanel);
         ShowGameplayButtons();
-
-        ClassicContinued.SendAnalyticsEvent(
-            _gameManager.SavedGameData.GameInProgressData.Difficulty.ToString()
-        );
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
             true

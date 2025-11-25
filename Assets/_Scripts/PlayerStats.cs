@@ -2,7 +2,6 @@ using UnityEngine;
 using TMPro;
 using static Constants;
 using System;
-using Assets.Scripts.AnalyticsEvent;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -100,28 +99,23 @@ public class PlayerStats : MonoBehaviour
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.EasyStats
                 );
-                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Medium:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.MediumStats
                 );
-                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Hard:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.HardStats
                 );
-                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Extreme:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.ExtremeStats
                 );
-                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Challenge:
-                ChallengePlayed.SendAnalyticsEvent();
                 break;
         }
         UpdateValues();
@@ -139,10 +133,6 @@ public class PlayerStats : MonoBehaviour
                 _gameManager.SavedGameData.IncrementGamesCompleted(
                     _gameManager.SavedGameData.EasyStats
                 );
-                GameFinished.SendAnalyticsEvent(
-                    difficulty.ToString(),
-                    Math.Round(timeToComplete, 2)
-                );
                 break;
             case Difficulty.Medium:
                 _gameManager.SavedGameData.ManageTime(
@@ -151,10 +141,6 @@ public class PlayerStats : MonoBehaviour
                 );
                 _gameManager.SavedGameData.IncrementGamesCompleted(
                     _gameManager.SavedGameData.MediumStats
-                );
-                GameFinished.SendAnalyticsEvent(
-                    difficulty.ToString(),
-                    Math.Round(timeToComplete, 2)
                 );
                 break;
             case Difficulty.Hard:
@@ -165,10 +151,6 @@ public class PlayerStats : MonoBehaviour
                 _gameManager.SavedGameData.IncrementGamesCompleted(
                     _gameManager.SavedGameData.HardStats
                 );
-                GameFinished.SendAnalyticsEvent(
-                    difficulty.ToString(),
-                    Math.Round(timeToComplete, 2)
-                );
                 break;
             case Difficulty.Extreme:
                 _gameManager.SavedGameData.ManageTime(
@@ -177,10 +159,6 @@ public class PlayerStats : MonoBehaviour
                 );
                 _gameManager.SavedGameData.IncrementGamesCompleted(
                     _gameManager.SavedGameData.ExtremeStats
-                );
-                GameFinished.SendAnalyticsEvent(
-                    difficulty.ToString(),
-                    Math.Round(timeToComplete, 2)
                 );
                 break;
             case Difficulty.Challenge:
@@ -191,11 +169,6 @@ public class PlayerStats : MonoBehaviour
                 );
                 _gameManager.SavedGameData.IncrementGamesCompleted(
                     _gameManager.SavedGameData.ChallengeStats
-                );
-                GameFinished.SendAnalyticsEvent(
-                    difficulty.ToString(),
-                    Math.Round(timeToComplete, 2),
-                    solvesCount
                 );
                 break;
         }
@@ -232,7 +205,6 @@ public class PlayerStats : MonoBehaviour
                 );
                 break;
         }
-        HintUsed.SendAnalyticsEvent(difficulty.ToString());
         UpdateValues();
     }
 

@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using CandyCabinets.Components.Colour;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
-using Unity.Services.Analytics;
-using Assets.Scripts.AnalyticsEvent;
 using Assets._Scripts;
 using UnityEngine.UI;
 
@@ -962,7 +960,6 @@ public class GameManager : MonoBehaviour
                 .ChangeInteraction(true);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
             CheckResult(true);
-            UndoUsed.SendAnalyticsEvent(SelectedDifficulty.ToString());
         }
     }
 
@@ -984,7 +981,6 @@ public class GameManager : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(5, true);
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
-        AnalyticsService.Instance.StartDataCollection();
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;

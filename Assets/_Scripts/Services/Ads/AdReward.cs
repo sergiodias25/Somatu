@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
-using Assets.Scripts.AnalyticsEvent;
 
 public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
 {
@@ -68,12 +67,10 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
                 FindObjectOfType<GameManager>().SavedGameData.IncrementHintsAvailableClassic(1);
                 GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
                 FindObjectOfType<UIManager>().ToggleHintButton(true);
-                Purchase.SendAnalyticsEvent("HINT_1_WATCHED", true);
             }
             else if (GameObject.Find("RemoveBannerPopup") != null)
             {
                 GameObject.Find("RemoveBannerPopup").GetComponent<Popup>().ClosePopupGameplay();
-                Purchase.SendAnalyticsEvent("WATCH_AD", true);
             }
         }
     }
@@ -81,13 +78,11 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        // Use the error details to determine whether to try to load another ad.
-        Purchase.SendAnalyticsEvent("HINT_1_FAILURE", false);
     }
 
     public void OnUnityAdsShowClick(string adUnitId)
     {
-        Purchase.SendAnalyticsEvent("HINT_1_CLICK", true);
+        Debug.Log($"Ad Unit with id {adUnitId} was clicked");
     }
 
     void OnDestroy()
