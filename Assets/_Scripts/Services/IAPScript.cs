@@ -47,6 +47,7 @@ public class IAPScript : MonoBehaviour
                 _gameManager.SavedGameData.RemoveAds();
                 _gameManager.SavedGameData.PersistData();
                 _adBanner.HideBannerAd();
+                GameObject.Find("RemoveBannerPopup").GetComponent<Popup>().ClosePopupGameplay();
                 break;
             case SUNRISE_THEME:
                 _gameManager.SavedGameData.EnableSunriseTheme();

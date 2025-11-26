@@ -140,6 +140,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _removeBannerPopup;
+
+    [SerializeField]
+    private Button _removeBannerPopupCloseButton;
     AudioManager _audioManager;
 
     void Start()
@@ -172,11 +175,16 @@ public class UIManager : MonoBehaviour
             }
             else if (_removeBannerPopup.activeSelf)
             {
-                CustomAnimation.PopupUnload(
-                    _removeBannerPopup.transform,
-                    _removeBannerPopup.transform.Find("Interactible")
-                );
-                InteractionPerformed(Constants.AudioClip.Undo);
+                if (_removeBannerPopupCloseButton.isActiveAndEnabled)
+                {
+                    CustomAnimation.PopupUnload(
+                        _removeBannerPopup.transform,
+                        _removeBannerPopup.transform.Find("Interactible")
+                    );
+                    _ = CustomAnimation.ButtonClicked(_removeBannerPopupCloseButton.transform);
+                    _gameManager.IncrementTimesCloseRemoveAdsPopup();
+                    InteractionPerformed(Constants.AudioClip.Undo);
+                }
             }
             else if (_onboardingWelcome.activeSelf)
             {

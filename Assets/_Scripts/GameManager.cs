@@ -587,10 +587,7 @@ public class GameManager : MonoBehaviour
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
-            if (
-                !SavedGameData.PurchaseData.RemovedAds
-                && (Random.Range(0, 100) < Constants.ShowRemoveAdsPopupPercentage)
-            )
+            if (!SavedGameData.PurchaseData.RemovedAds)
             {
                 _uiManager.ShowRemoveBannerPopup();
             }
@@ -1172,5 +1169,10 @@ public class GameManager : MonoBehaviour
         SavedGameData.Onboardings.ClassicExplanation = true;
         SavedGameData.Onboardings.ClassicHint = true;
         SavedGameData.Onboardings.ClassicUndo = true;
+    }
+
+    public void IncrementTimesCloseRemoveAdsPopup()
+    {
+        SavedGameData.PurchaseData.TimesClosedSupportUsPopup += 1;
     }
 }

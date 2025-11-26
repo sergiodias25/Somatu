@@ -91,10 +91,6 @@ public class Popup : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_actionButton.transform);
         FindObjectOfType<IAPScript>().RemoveAds();
-        CustomAnimation.PopupUnload(
-            _popupPanel.transform,
-            _popupPanel.transform.Find("Interactible")
-        );
     }
 
     public async void ActionWatchAd()

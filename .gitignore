@@ -35,6 +35,7 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user
@@ -81,3 +82,5 @@ Assets/_Scripts/obj/*
 Assets/_Scripts/bin.meta
 Assets/_Scripts/obj.meta
 Assets/MobileDependencyResolver/*
+
+.fake
