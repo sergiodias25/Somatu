@@ -3824,13 +3824,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1937531443}
-  - {fileID: 1868418730}
   - {fileID: 524845624}
-  - {fileID: 427725055}
+  - {fileID: 1868418730}
   - {fileID: 291114159}
   - {fileID: 1707851566}
+  - {fileID: 427725055}
   - {fileID: 1038902676}
+  - {fileID: 1937531443}
   - {fileID: 361328920}
   m_Father: {fileID: 104507864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9966,9 +9966,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0048961937
+    y: 0.00024986267
     width: 1
-    height: 0.9902076
+    height: 0.9995003
   near clip plane: 8
   far clip plane: 12
   field of view: 60
