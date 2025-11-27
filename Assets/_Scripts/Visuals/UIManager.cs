@@ -139,6 +139,9 @@ public class UIManager : MonoBehaviour
     private GameObject _popupTheme;
 
     [SerializeField]
+    private GameObject _creditsPopup;
+
+    [SerializeField]
     private GameObject _removeBannerPopup;
 
     [SerializeField]
@@ -171,6 +174,14 @@ public class UIManager : MonoBehaviour
                         _languagePopup.transform.Find("Interactible")
                     );
                 }
+                InteractionPerformed(Constants.AudioClip.Undo);
+            }
+            else if (_creditsPopup.activeSelf)
+            {
+                CustomAnimation.PopupUnload(
+                    _creditsPopup.transform,
+                    _creditsPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_removeBannerPopup.activeSelf)

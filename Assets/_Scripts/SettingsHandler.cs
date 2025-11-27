@@ -69,10 +69,16 @@ public class SettingsHandler : MonoBehaviour
     private GameObject _languagePopup;
 
     [SerializeField]
+    private GameObject _creditsPopup;
+
+    [SerializeField]
     private Button _supportButton;
 
     [SerializeField]
     private Button _visualAidButton;
+
+    [SerializeField]
+    private Button _creditsButton;
 
     [SerializeField]
     private CodelessIAPButton _sunriseShopButton;
@@ -277,6 +283,12 @@ public class SettingsHandler : MonoBehaviour
         CustomAnimation.PopupLoad(_languagePopup.transform);
     }
 
+    public void ShowCreditsPopup()
+    {
+        _ = CustomAnimation.ButtonClicked(_creditsButton.transform);
+        CustomAnimation.PopupLoad(_creditsPopup.transform);
+    }
+
     public void ChangeLanguage(string language)
     {
         bool _showMainMenu = false;
@@ -315,6 +327,7 @@ public class SettingsHandler : MonoBehaviour
         CustomAnimation.ButtonLoad(_soundButton.transform);
         CustomAnimation.ButtonLoad(_supportButton.transform);
         CustomAnimation.ButtonLoad(_visualAidButton.transform);
+        CustomAnimation.ButtonLoad(_creditsButton.transform);
     }
 
     public async void ChangeVisualAid()
