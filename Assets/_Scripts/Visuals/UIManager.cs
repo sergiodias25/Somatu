@@ -193,7 +193,6 @@ public class UIManager : MonoBehaviour
                         _removeBannerPopup.transform.Find("Interactible")
                     );
                     _ = CustomAnimation.ButtonClicked(_removeBannerPopupCloseButton.transform);
-                    _gameManager.IncrementTimesCloseRemoveAdsPopup();
                     InteractionPerformed(Constants.AudioClip.Undo);
                 }
             }
@@ -470,7 +469,7 @@ public class UIManager : MonoBehaviour
         ShowObjectWithAnimation(_unlockLevelPopup);
     }
 
-    public void ShowRemoveBannerPopup()
+    public void ShowRemoveAdsPopup()
     {
         CustomAnimation.PopupLoad(_removeBannerPopup.transform);
     }

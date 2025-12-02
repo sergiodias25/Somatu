@@ -29,7 +29,6 @@ namespace Assets.Scripts.SaveGame
             public bool SunriseTheme = false;
             public bool SunsetTheme = false;
             public bool HasRatedGame = false;
-            public int TimesClosedSupportUsPopup = 0;
         }
 
         public class Settings

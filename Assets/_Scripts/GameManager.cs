@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public SaveGame SavedGameData;
     private SettingsHandler _settingsHandler;
     public int _timesSolvedText;
+    private int _gamesPlayedWithoutAds = 0;
 
     void Start()
     {
@@ -597,15 +598,27 @@ public class GameManager : MonoBehaviour
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
-            if (!SavedGameData.PurchaseData.RemovedAds)
-            {
-                _uiManager.ShowRemoveBannerPopup();
-            }
+            ShowAdsAndPopup();
+        }
+    }
+
+    private void ShowAdsAndPopup()
+    {
+        _gamesPlayedWithoutAds += 1;
+        if (
+            !SavedGameData.PurchaseData.RemovedAds
+            && _gamesPlayedWithoutAds >= Constants.NumberOfGamesToShowAdPopup
+        )
+        {
+            FindObjectOfType<AdRewarded>().ShowAd();
+            _uiManager.ShowRemoveAdsPopup();
+            _gamesPlayedWithoutAds = 0;
         }
     }
 
     public void PuzzleFailed(double _elapsedTime)
     {
+        ShowAdsAndPopup();
         _isGameFinished = true;
         foreach (var node in _allNodes)
         {
@@ -1179,10 +1192,5 @@ public class GameManager : MonoBehaviour
         SavedGameData.Onboardings.ClassicExplanation = true;
         SavedGameData.Onboardings.ClassicHint = true;
         SavedGameData.Onboardings.ClassicUndo = true;
-    }
-
-    public void IncrementTimesCloseRemoveAdsPopup()
-    {
-        SavedGameData.PurchaseData.TimesClosedSupportUsPopup += 1;
     }
 }

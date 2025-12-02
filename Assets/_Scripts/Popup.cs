@@ -20,9 +20,6 @@ public class Popup : MonoBehaviour
     [SerializeField]
     private Button _secondActionButton;
 
-    [SerializeField]
-    private Button _thirdActionButton;
-
     public void OnEnable()
     {
         FindObjectOfType<GameManager>().DisableGameplayBlocks();
@@ -93,15 +90,9 @@ public class Popup : MonoBehaviour
         FindObjectOfType<IAPScript>().RemoveAds();
     }
 
-    public async void ActionWatchAd()
-    {
-        await CustomAnimation.ButtonClicked(_secondActionButton.transform);
-        FindObjectOfType<AdRewarded>().ShowAd();
-    }
-
     public async void ActionRateUs()
     {
-        await CustomAnimation.ButtonClicked(_thirdActionButton.transform);
+        await CustomAnimation.ButtonClicked(_secondActionButton.transform);
         FindObjectOfType<GameManager>().SavedGameData.PurchaseData.HasRatedGame = true;
         Application.OpenURL("market://details?id=" + Application.identifier);
         CustomAnimation.PopupUnload(

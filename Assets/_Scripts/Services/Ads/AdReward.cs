@@ -68,10 +68,6 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
                 GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
                 FindObjectOfType<UIManager>().ToggleHintButton(true);
             }
-            else if (GameObject.Find("RemoveBannerPopup") != null)
-            {
-                GameObject.Find("RemoveBannerPopup").GetComponent<Popup>().ClosePopupGameplay();
-            }
         }
     }
 
