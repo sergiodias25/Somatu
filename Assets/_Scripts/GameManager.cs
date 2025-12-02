@@ -151,9 +151,17 @@ public class GameManager : MonoBehaviour
 
     private void UpdateModeTranslation()
     {
-        _modeSelected.text = LocalizationManager.Localize(
-            "mode-" + SelectedDifficulty.ToString().ToLower()
-        );
+        if (SelectedDifficulty == Constants.Difficulty.Challenge)
+        {
+            _modeSelected.text =
+                LocalizationManager.Localize("challenge-level") + " " + (_timesSolvedText + 1);
+        }
+        else
+        {
+            _modeSelected.text = LocalizationManager.Localize(
+                "mode-" + SelectedDifficulty.ToString().ToLower()
+            );
+        }
     }
 
     public Constants.Difficulty GetActualDifficulty()
@@ -576,7 +584,9 @@ public class GameManager : MonoBehaviour
             _uiManager.AnimateHintReward();
             await CustomAnimation.WaitForAnimation("AnimateHintReward");
             await CustomAnimation.WaitForAnimation("AnimateTimeReward");
+            UpdateModeTranslation();
             ResetBoard(false, false, false);
+            CustomAnimation.AnimateTitle(_modeSelected.transform);
             GenerateGrid(GenerateNumbersMain(_timesSolvedText), false);
         }
         else
