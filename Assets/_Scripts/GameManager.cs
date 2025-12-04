@@ -570,7 +570,7 @@ public class GameManager : MonoBehaviour
         _thirdColumnResultBlock.GetNode().HideResultIcon();
 
         SavedGameData.IncrementTimesBeaten(SelectedDifficulty);
-        _timesSolvedText = _timesSolvedText + 1;
+        _timesSolvedText++;
         _uiManager.ToggleUndoButton(false);
         _uiManager.ToggleHintButton(false);
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
@@ -784,6 +784,7 @@ public class GameManager : MonoBehaviour
             if (resetChallengeActualDifficulty)
             {
                 _timesSolvedText = 0;
+                UpdateModeTranslation();
                 SavedGameData.HintsAvailableChallenge = 0;
             }
             ActualDifficulty = GetActualDifficulty();
@@ -1009,7 +1010,6 @@ public class GameManager : MonoBehaviour
 
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
-        _audioManager.PlayMusic(AudioManager.MusicType.Menu);
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
         var boardCenter = new Vector2(
             (float)(_width + 1) / 2 - 0.5f,
@@ -1032,6 +1032,7 @@ public class GameManager : MonoBehaviour
             _uiManager.ShowMainMenu();
         }
         LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
+        _audioManager.PlayMusic(AudioManager.MusicType.Menu);
     }
 
     /*     private void OnApplicationFocus(bool focusedOn)
