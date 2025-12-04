@@ -46,15 +46,18 @@ public class GradientBg : MonoBehaviour
         trianglesArray[4] = 3;
         trianglesArray[5] = 0;
 
-        mf.mesh.vertices = BackgroundPlaneVerteices;
-        mf.mesh.triangles = trianglesArray;
+        if (mf != null && mf.mesh != null)
+        {
+            mf.mesh.vertices = BackgroundPlaneVerteices;
+            mf.mesh.triangles = trianglesArray;
 
-        // here to create gradient color
-        Color[] newCcolors = new Color[mf.mesh.vertices.Length];
-        newCcolors[0] = colors[0];
-        newCcolors[1] = colors[1];
-        newCcolors[2] = colors[2];
-        newCcolors[3] = colors[3];
-        mf.mesh.colors = newCcolors;
+            // here to create gradient color
+            Color[] newCcolors = new Color[mf.mesh.vertices.Length];
+            newCcolors[0] = colors[0];
+            newCcolors[1] = colors[1];
+            newCcolors[2] = colors[2];
+            newCcolors[3] = colors[3];
+            mf.mesh.colors = newCcolors;
+        }
     }
 }

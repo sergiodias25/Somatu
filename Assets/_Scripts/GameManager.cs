@@ -999,8 +999,7 @@ public class GameManager : MonoBehaviour
 
     public async void StartGame(Canvas loadingCanvas)
     {
-        QualitySettings.SetQualityLevel(5, true);
-        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+        Application.targetFrameRate = 91;
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;
