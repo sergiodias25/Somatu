@@ -764,6 +764,8 @@ public class UIManager : MonoBehaviour
         if (_gameManager.IsGameInProgress() && !_gameManager.HasGameEnded())
         {
             _timer.UnpauseTimer();
+            _gameManager.RemoveHints();
+            _gameManager.CheckResult(false);
             ToggleUndoButton(
                 _gameManager.SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo()
             );

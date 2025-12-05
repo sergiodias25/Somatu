@@ -160,14 +160,8 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.SavedGameData.PersistData();
 
         _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
-
-        if (!_gameManager.HasGameEnded())
-        {
-            _gameManager.CheckResult(false);
-            _gameManager.RemoveHints();
-        }
-
         FindObjectOfType<ColorHelper>().ApplyUpdates();
+        FindObjectOfType<TopBarManager>().SelectSettingsButton();
     }
 
     public void RevertTheme()
