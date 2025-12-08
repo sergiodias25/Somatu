@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.google.play.games": {
+      "version": "file:C:/Users/obake/Downloads/play-games-plugin-for-unity-2.1.0/Assets/Public/GooglePlayGames/com.google.play.games",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "9.2.0",
       "depth": 1,

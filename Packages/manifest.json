@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.google.play.games": "file:C:/Users/obake/Downloads/play-games-plugin-for-unity-2.1.0/Assets/Public/GooglePlayGames/com.google.play.games",
     "com.unity.ads": "4.4.2",
     "com.unity.device-simulator.devices": "1.0.0",
     "com.unity.editorcoroutines": "1.0.0",

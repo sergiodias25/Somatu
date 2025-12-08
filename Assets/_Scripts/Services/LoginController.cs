@@ -4,6 +4,8 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class LoginController : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class LoginController : MonoBehaviour
 
     [SerializeField]
     public Slider _slider;
+    public string Token;
+    public string Error;
 
     async void Awake()
     {
@@ -21,10 +25,27 @@ public class LoginController : MonoBehaviour
             await UnityServices.InitializeAsync();
             SetupEvents();
             await SignInAnonymouslyAsync();
+            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
         }
         catch (Exception e)
         {
             Debug.LogException(e);
+        }
+    }
+
+    internal void ProcessAuthentication(SignInStatus status)
+    {
+        if (status == SignInStatus.Success)
+        {
+            // Continue with Play Games Services
+            Debug.Log("SignIn is successful.");
+        }
+        else
+        {
+            // Disable your integration with Play Games Services or show a login button
+            // to ask users to authenticate. Clicking it should call
+            // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
+            Debug.Log("SignIn has failed.");
         }
     }
 
