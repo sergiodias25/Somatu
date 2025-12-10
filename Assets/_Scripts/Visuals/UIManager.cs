@@ -97,6 +97,18 @@ public class UIManager : MonoBehaviour
     private GameObject _challengeModeButton;
 
     [SerializeField]
+    private GameObject _achievementsButton;
+
+    [SerializeField]
+    private GameObject _achievementsButtonInStats;
+
+    [SerializeField]
+    private GameObject _rankingButtonInStats;
+
+    [SerializeField]
+    private GameObject _modeSelect;
+
+    [SerializeField]
     private GameObject _difficultyLockedPopup;
 
     [SerializeField]
@@ -326,6 +338,7 @@ public class UIManager : MonoBehaviour
         ShowObject(_mainMenuPanel);
         CustomAnimation.ButtonLoad(_classicModeButton.transform);
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
+        CustomAnimation.ButtonLoad(_achievementsButton.transform);
         CustomAnimation.AnimateTitle(_mainTitle.transform);
         HideObject(_settingsPanel);
         HideObject(_supportPanel);
@@ -390,6 +403,24 @@ public class UIManager : MonoBehaviour
         {
             ShowDifficultyPopup(Constants.Difficulty.Challenge, null, null, 0);
         }
+    }
+
+    public async void ClickOnLeaderboard()
+    {
+        await CustomAnimation.ButtonClicked(_rankingButtonInStats.transform);
+        Social.ShowLeaderboardUI();
+    }
+
+    public async void ClickOnAchievements()
+    {
+        await CustomAnimation.ButtonClicked(_achievementsButton.transform);
+        Social.ShowAchievementsUI();
+    }
+
+    public async void ClickOnAchievementsInStats()
+    {
+        await CustomAnimation.ButtonClicked(_achievementsButtonInStats.transform);
+        Social.ShowAchievementsUI();
     }
 
     public async void ClickOnEasyMode()
@@ -922,6 +953,9 @@ public class UIManager : MonoBehaviour
             {
                 _timer.PauseTimer();
             }
+            CustomAnimation.ButtonLoad(_achievementsButtonInStats.transform);
+            CustomAnimation.ButtonLoad(_rankingButtonInStats.transform);
+            CustomAnimation.ButtonLoad(_modeSelect.transform);
 
             ShowObject(_profilePanel);
         }

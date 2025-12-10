@@ -14,7 +14,7 @@ public class GradientBg : MonoBehaviour
 
         //Camera.main.transform.position = Vector3.zero;
         //Camera.main.transform.rotation = Quaternion.identity;
-        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        //Camera.main.clearFlags = CameraClearFlags.SolidColor;
 
         // create the background plane
         mf = this.gameObject.AddComponent<MeshFilter>();

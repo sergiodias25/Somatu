@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Button _playAgainButton;
+    public bool IsLoggedInToGoogle = false;
+
+    [SerializeField]
+    private Canvas _gameCanvas;
 
     private Timer _timer;
     private UIManager _uiManager;
@@ -648,9 +652,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _challengeFinishedRecordText.text = LocalizationManager.Localize(
-                "challenge-new-personal-record"
-            );
+            if (IsLoggedInToGoogle)
+            {
+                _challengeFinishedRecordText.text = LocalizationManager.Localize(
+                    "challenge-new-personal-record"
+                );
+                Social.ReportScore(
+                    (long)(_elapsedTime * 1000f),
+                    GPGSIds.leaderboard_challenge,
+                    (success) =>
+                    {
+                        if (!success)
+                            Debug.Log("Failed to repsort");
+                    }
+                );
+            }
         }
         _playerStats.CompletedGame(SelectedDifficulty, _elapsedTime, _timesSolvedText);
         SavedGameData.HintsAvailableChallenge = 0;
@@ -1011,14 +1027,10 @@ public class GameManager : MonoBehaviour
         _settingsHandler.LoadData(this);
         _playerStats.LoadData(this);
         ColourManager.Instance.SelectPalette(SavedGameData.SettingsData.SelectedThemeIndex);
-        var boardCenter = new Vector2(
-            (float)(_width + 1) / 2 - 0.5f,
-            (float)(_height + 2.68) / 2 - 1.02f
-        );
-        _gameBackground.transform.position = boardCenter;
 
         FindObjectOfType<ColorHelper>().ApplyUpdates();
         _backgroundCamera.enabled = true;
+        _gameCanvas.gameObject.SetActive(true);
         loadingCanvas.gameObject.SetActive(false);
 
         LocalizationManager.Read();

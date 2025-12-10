@@ -14,10 +14,14 @@ public class LoginController : MonoBehaviour
 
     [SerializeField]
     public Slider _slider;
-    public string Token;
-    public string Error;
 
     async void Awake()
+    {
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
+    }
+
+    async void Start()
     {
         _slider.value = 0.12f;
         try
@@ -38,7 +42,13 @@ public class LoginController : MonoBehaviour
         if (status == SignInStatus.Success)
         {
             // Continue with Play Games Services
-            Debug.Log("SignIn is successful.");
+            Social.Active.localUser.Authenticate(success =>
+            {
+                if (success)
+                {
+                    FindObjectOfType<GameManager>().IsLoggedInToGoogle = true;
+                }
+            });
         }
         else
         {
