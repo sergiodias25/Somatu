@@ -270,12 +270,14 @@ public class Block : MonoBehaviour
         transform.SetParent(tempNode.transform);
         _originalNode = tempNode;
         hoveredNode.SetBlockInNode(this);
+        _gameManager.IncreaseMovesUsedThisGame();
 
         await CustomAnimation.WaitForAnimation("MoveNumberBack");
     }
 
     public static async Task<bool> SwitchBlocksUndo(Node secondNode, Node firstNode)
     {
+        FindObjectOfType<GameManager>().IncreaseMovesUsedThisGame();
         CustomAnimation.NumberSwitched(
             firstNode.GetBlockInNode().transform,
             secondNode.transform.position

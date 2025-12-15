@@ -162,6 +162,7 @@ public class SettingsHandler : MonoBehaviour
         _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
         FindObjectOfType<ColorHelper>().ApplyUpdates();
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
+        GoogleServices.UnlockAchievement(GPGSIds.achievement_look_at_all_the_pretty_colors);
     }
 
     public void RevertTheme()
@@ -252,6 +253,7 @@ public class SettingsHandler : MonoBehaviour
         }
 
         UpdateControlIcon();
+        GoogleServices.UnlockAchievement(GPGSIds.achievement_what_if_i_told_you_theres_another_way);
     }
 
     private void UpdateSetting(
@@ -281,6 +283,7 @@ public class SettingsHandler : MonoBehaviour
     {
         _ = CustomAnimation.ButtonClicked(_creditsButton.transform);
         CustomAnimation.PopupLoad(_creditsPopup.transform);
+        GoogleServices.UnlockAchievement(GPGSIds.achievement_so_you_made_a_videogame);
     }
 
     public void ChangeLanguage(string language)

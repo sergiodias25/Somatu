@@ -179,6 +179,20 @@ namespace Assets.Scripts.SaveGame
             )
             {
                 UnlockedDifficulty++;
+                switch (UnlockedDifficulty)
+                {
+                    case Constants.Difficulty.Medium:
+                        GoogleServices.UnlockAchievement(GPGSIds.achievement_math_is_easy);
+                        break;
+                    case Constants.Difficulty.Hard:
+                        GoogleServices.UnlockAchievement(
+                            GPGSIds.achievement_be_greater_than_average
+                        );
+                        break;
+                    case Constants.Difficulty.Extreme:
+                        GoogleServices.UnlockAchievement(GPGSIds.achievement_math_is_hard);
+                        break;
+                }
                 TimesBeatenCurrentDifficulty = 0;
                 UnityEngine.Object
                     .FindObjectOfType<UIManager>()

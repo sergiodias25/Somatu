@@ -22,6 +22,7 @@ public class ShareButton : MonoBehaviour
 
     private void ShareText()
     {
+        GoogleServices.UnlockAchievement(GPGSIds.achievement_sharing_is_caring);
 #if UNITY_ANDROID
 
         if (!isProcessing)

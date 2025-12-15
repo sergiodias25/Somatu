@@ -24,27 +24,25 @@
 
 public static class GPGSIds
 {
-        public const string achievement_quick_maths = "CgkI-b7Mn5IOEAIQBw"; // <GPGSID>
-        public const string achievement_confused_math = "CgkI-b7Mn5IOEAIQFA"; // <GPGSID>
-        public const string achievement_i_need_somebody = "CgkI-b7Mn5IOEAIQDw"; // <GPGSID>
-        public const string achievement_math_is_easy = "CgkI-b7Mn5IOEAIQAw"; // <GPGSID>
-        public const string achievement_challenge_accepted = "CgkI-b7Mn5IOEAIQCQ"; // <GPGSID>
-        public const string achievement_i_got_this = "CgkI-b7Mn5IOEAIQBg"; // <GPGSID>
-        public const string achievement_what_if_i_told_you_theres_another_way = "CgkI-b7Mn5IOEAIQEg"; // <GPGSID>
-        public const string achievement_challenge_master = "CgkI-b7Mn5IOEAIQCw"; // <GPGSID>
-        public const string achievement_so_you_made_a_videogame = "CgkI-b7Mn5IOEAIQEw"; // <GPGSID>
-        public const string achievement_math_is_hard = "CgkI-b7Mn5IOEAIQBQ"; // <GPGSID>
-        public const string achievement_i_like_it_a_lot = "CgkI-b7Mn5IOEAIQDQ"; // <GPGSID>
-        public const string achievement_blink_and_youll_miss_it = "CgkI-b7Mn5IOEAIQDA"; // <GPGSID>
-        public const string achievement_extreme_precision = "CgkI-b7Mn5IOEAIQFQ"; // <GPGSID>
-        public const string achievement_galaxy_brain = "CgkI-b7Mn5IOEAIQCA"; // <GPGSID>
-        public const string achievement_look_at_all_the_pretty_colors = "CgkI-b7Mn5IOEAIQEQ"; // <GPGSID>
-        public const string achievement_challenge_survivor = "CgkI-b7Mn5IOEAIQCg"; // <GPGSID>
-        public const string achievement_be_greater_than_average = "CgkI-b7Mn5IOEAIQBA"; // <GPGSID>
-        public const string leaderboard_challenge = "CgkI-b7Mn5IOEAIQAg"; // <GPGSID>
-        public const string achievement_sharing_is_caring = "CgkI-b7Mn5IOEAIQFg"; // <GPGSID>
-        public const string achievement_is_this_a_competition = "CgkI-b7Mn5IOEAIQDg"; // <GPGSID>
-        public const string achievement_i_opened_up_the_doors = "CgkI-b7Mn5IOEAIQEA"; // <GPGSID>
-
+    public const string achievement_quick_maths = "CgkI-b7Mn5IOEAIQBw"; // <GPGSID>
+    public const string achievement_confused_math = "CgkI-b7Mn5IOEAIQFA"; // <GPGSID>
+    public const string achievement_i_need_somebody = "CgkI-b7Mn5IOEAIQDw"; // <GPGSID>
+    public const string achievement_math_is_easy = "CgkI-b7Mn5IOEAIQAw"; // <GPGSID>
+    public const string achievement_challenge_accepted = "CgkI-b7Mn5IOEAIQCQ"; // <GPGSID>
+    public const string achievement_i_got_this = "CgkI-b7Mn5IOEAIQBg"; // <GPGSID>
+    public const string achievement_what_if_i_told_you_theres_another_way = "CgkI-b7Mn5IOEAIQEg"; // <GPGSID>
+    public const string achievement_challenge_master = "CgkI-b7Mn5IOEAIQCw"; // <GPGSID>
+    public const string achievement_so_you_made_a_videogame = "CgkI-b7Mn5IOEAIQEw"; // <GPGSID>
+    public const string achievement_math_is_hard = "CgkI-b7Mn5IOEAIQBQ"; // <GPGSID>
+    public const string achievement_i_like_it_a_lot = "CgkI-b7Mn5IOEAIQDQ"; // <GPGSID>
+    public const string achievement_blink_and_youll_miss_it = "CgkI-b7Mn5IOEAIQDA"; // <GPGSID>
+    public const string achievement_extreme_precision = "CgkI-b7Mn5IOEAIQFQ"; // <GPGSID>
+    public const string achievement_galaxy_brain = "CgkI-b7Mn5IOEAIQCA"; // <GPGSID>
+    public const string achievement_look_at_all_the_pretty_colors = "CgkI-b7Mn5IOEAIQEQ"; // <GPGSID>
+    public const string achievement_challenge_survivor = "CgkI-b7Mn5IOEAIQCg"; // <GPGSID>
+    public const string achievement_be_greater_than_average = "CgkI-b7Mn5IOEAIQBA"; // <GPGSID>
+    public const string leaderboard_challenge = "CgkI-b7Mn5IOEAIQAg"; // <GPGSID>
+    public const string achievement_sharing_is_caring = "CgkI-b7Mn5IOEAIQFg"; // <GPGSID>
+    public const string achievement_is_this_a_competition = "CgkI-b7Mn5IOEAIQDg"; // <GPGSID>
+    public const string achievement_i_opened_up_the_doors = "CgkI-b7Mn5IOEAIQEA"; // <GPGSID>
 }
-

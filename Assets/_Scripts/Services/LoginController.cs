@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using GooglePlayGames;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.UI;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 
 public class LoginController : MonoBehaviour
 {
@@ -29,33 +28,11 @@ public class LoginController : MonoBehaviour
             await UnityServices.InitializeAsync();
             SetupEvents();
             await SignInAnonymouslyAsync();
-            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+            GoogleServices.Authenticate();
         }
         catch (Exception e)
         {
             Debug.LogException(e);
-        }
-    }
-
-    internal void ProcessAuthentication(SignInStatus status)
-    {
-        if (status == SignInStatus.Success)
-        {
-            // Continue with Play Games Services
-            Social.Active.localUser.Authenticate(success =>
-            {
-                if (success)
-                {
-                    FindObjectOfType<GameManager>().IsLoggedInToGoogle = true;
-                }
-            });
-        }
-        else
-        {
-            // Disable your integration with Play Games Services or show a login button
-            // to ask users to authenticate. Clicking it should call
-            // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
-            Debug.Log("SignIn has failed.");
         }
     }
 

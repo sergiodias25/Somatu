@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
     private Canvas _gameCanvas;
 
     private Timer _timer;
+    private int _hintsUsedThisGame = 0;
+    private int _movesUsedThisGame = 0;
+
+    [SerializeField]
+    private double _timeAtLastMove = 0f;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();
     private List<int> _indexesUsedForSolution = new();
@@ -112,6 +117,8 @@ public class GameManager : MonoBehaviour
         else
         {
             _audioManager.PlayMusic(AudioManager.MusicType.Classic);
+            _timeAtLastMove =
+                SavedGameData != null ? SavedGameData.GameInProgressData.TimerValue : 0f;
         }
         LocalizationManager.OnLocalizationChanged += () => UpdateModeTranslation();
 
@@ -119,6 +126,7 @@ public class GameManager : MonoBehaviour
         {
             SavedGameData.GameInProgressData.UndoData.ClearUndoData();
             _uiManager.ToggleUndoButton(false);
+            _timeAtLastMove = 0f;
         }
 
         GenerateGrid(GenerateNumbersMain(_timesSolvedText), loadGame);
@@ -580,6 +588,31 @@ public class GameManager : MonoBehaviour
         SavedGameData.GameInProgressData.UndoData.ClearUndoData();
         _uiManager.InteractionPerformed(Constants.AudioClip.ClassicFinish);
         _audioManager.Vibrate();
+        if (SelectedDifficulty == Constants.Difficulty.Extreme && _hintsUsedThisGame == 0)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_i_got_this);
+        }
+        if (
+            SelectedDifficulty == Constants.Difficulty.Extreme
+            && _timer.GetTimerValue() >= 30f
+            && _timer.GetTimerValue() < 60f
+        )
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_quick_maths);
+        }
+        if (SelectedDifficulty == Constants.Difficulty.Extreme && _timer.GetTimerValue() < 30f)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_galaxy_brain);
+        }
+        if (SelectedDifficulty == Constants.Difficulty.Extreme && _movesUsedThisGame < 6)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_extreme_precision);
+        }
+        if (_timer.GetTimerValue() < 3f)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_blink_and_youll_miss_it);
+        }
+        _hintsUsedThisGame = 0;
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
@@ -593,6 +626,7 @@ public class GameManager : MonoBehaviour
             ResetBoard(false, false, false);
             CustomAnimation.AnimateTitle(_modeSelected.transform);
             GenerateGrid(GenerateNumbersMain(_timesSolvedText), false);
+            GoogleServices.IncrementAchievement(GPGSIds.achievement_is_this_a_competition, 1);
         }
         else
         {
@@ -603,6 +637,7 @@ public class GameManager : MonoBehaviour
             SavedGameData.PersistData();
             _uiManager.ShowEndOfGameButton();
             ShowAdsAndPopup();
+            GoogleServices.IncrementAchievement(GPGSIds.achievement_i_like_it_a_lot, 1);
         }
     }
 
@@ -623,6 +658,19 @@ public class GameManager : MonoBehaviour
     public void PuzzleFailed(double _elapsedTime)
     {
         ShowAdsAndPopup();
+
+        if (SavedGameData.ChallengeStats.GamesCompleted == 0)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_challenge_accepted);
+        }
+        if (_elapsedTime > 300f)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_challenge_survivor);
+        }
+        if (_elapsedTime > 600f)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_challenge_master);
+        }
         _isGameFinished = true;
         foreach (var node in _allNodes)
         {
@@ -677,6 +725,11 @@ public class GameManager : MonoBehaviour
             Timer.FormatTimeForText(_elapsedTime)
         );
         CustomAnimation.PopupLoad(_challengeFinishedPopup.transform);
+
+        if (SavedGameData.ChallengeStats.GamesCompleted >= 20)
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_is_this_a_competition);
+        }
     }
 
     private bool CheckLineOrColumnResult(int currentSum, int expectedResult, Block block)
@@ -781,6 +834,7 @@ public class GameManager : MonoBehaviour
         _indexesUsedForStartingPosition = new();
         _indexesUsedForSolution = new();
         _solutionNumbers = new();
+        _movesUsedThisGame = 0;
         if (!isExit && SavedGameData.GameInProgressData.UndoData.ThereIsDataToUndo())
         {
             SavedGameData.GameInProgressData.UndoData.ClearUndoData();
@@ -859,6 +913,9 @@ public class GameManager : MonoBehaviour
                 correctNodes.RemoveAt(randomNodeIndex);
             }
             _uiManager.InteractionPerformed(Constants.AudioClip.MenuInteraction);
+            _hintsUsedThisGame++;
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_i_need_somebody);
+            GoogleServices.IncrementAchievement(GPGSIds.achievement_i_opened_up_the_doors, 1);
             return true;
         }
         else
@@ -1204,5 +1261,19 @@ public class GameManager : MonoBehaviour
         SavedGameData.Onboardings.ClassicExplanation = true;
         SavedGameData.Onboardings.ClassicHint = true;
         SavedGameData.Onboardings.ClassicUndo = true;
+    }
+
+    public void IncreaseMovesUsedThisGame()
+    {
+        //Debug.Log("Took " + (_timer.GetTimerValue() - _timeAtLastMove) + " since last move");
+        if (
+            (_timer.GetTimerValue() - _timeAtLastMove) > 30f
+            && SelectedDifficulty != Constants.Difficulty.Challenge
+        )
+        {
+            GoogleServices.UnlockAchievement(GPGSIds.achievement_confused_math);
+        }
+        _timeAtLastMove = _timer.GetTimerValue();
+        _movesUsedThisGame++;
     }
 }
