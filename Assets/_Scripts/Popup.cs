@@ -93,7 +93,6 @@ public class Popup : MonoBehaviour
     public async void ActionRateUs()
     {
         await CustomAnimation.ButtonClicked(_secondActionButton.transform);
-        FindObjectOfType<GameManager>().SavedGameData.PurchaseData.HasRatedGame = true;
         Application.OpenURL("market://details?id=" + Application.identifier);
         CustomAnimation.PopupUnload(
             _popupPanel.transform,

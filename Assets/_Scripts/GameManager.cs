@@ -61,8 +61,6 @@ public class GameManager : MonoBehaviour
     private Timer _timer;
     private int _hintsUsedThisGame = 0;
     private int _movesUsedThisGame = 0;
-
-    [SerializeField]
     private double _timeAtLastMove = 0f;
     private UIManager _uiManager;
     private List<int> _indexesUsedForStartingPosition = new();

@@ -13071,8 +13071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
+  m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 1
 --- !u!114 &620593926
 MonoBehaviour:
@@ -13137,12 +13137,6 @@ MonoBehaviour:
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
-    PaletteColour: Colour.1
-    ColourIndex: 0
-    IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -37528,7 +37522,6 @@ GameObject:
   - component: {fileID: 1525656869}
   - component: {fileID: 1525656870}
   - component: {fileID: 1525656871}
-  - component: {fileID: 1525656872}
   m_Layer: 5
   m_Name: RemoveBannerPopup
   m_TagString: Untagged
@@ -37586,19 +37579,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1525656872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525656868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa963a154ba7a3448f37db3b87823c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rateUsButton: {fileID: 1913010474}
 --- !u!1 &1526460081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3735896641979278100, guid: a627e91ee6225354f87d97e50441274c, type: 3}
@@ -47538,8 +47518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
+  m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 1
 --- !u!114 &1902868723
 MonoBehaviour:
@@ -47604,12 +47584,6 @@ MonoBehaviour:
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
-    PaletteColour: Colour.1
-    ColourIndex: 0
-    IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -47717,8 +47691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15686275}
+  m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 1
 --- !u!114 &1913010470
 MonoBehaviour:
@@ -47783,12 +47757,6 @@ MonoBehaviour:
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
     BaseName: Outline
-    PaletteColour: Colour.1
-    ColourIndex: 0
-    IsChanged: 0
-  - Name: Shadow.Color
-    FullName: UnityEngine.UI.Shadow
-    BaseName: Shadow
     PaletteColour: Colour.1
     ColourIndex: 0
     IsChanged: 0
@@ -54184,7 +54152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 800
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_LocalScale.x
