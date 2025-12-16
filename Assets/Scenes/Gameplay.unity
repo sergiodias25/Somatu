@@ -4791,7 +4791,7 @@ MonoBehaviour:
   ChallengeFinish: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
   NodeLoaded: {fileID: 8300000, guid: b91838e7cae1efd4fa0f278cf7bc2014, type: 3}
   TimerTicking: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
-  Firework: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  Firework: {fileID: 8300000, guid: a2984039d0ebda340a4c915717ffd366, type: 3}
   MenuInteraction: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   NoHintAvailable: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!4 &279916186
