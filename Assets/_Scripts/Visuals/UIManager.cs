@@ -100,6 +100,9 @@ public class UIManager : MonoBehaviour
     private GameObject _achievementsButton;
 
     [SerializeField]
+    private GameObject _creditsButton;
+
+    [SerializeField]
     private GameObject _achievementsButtonInStats;
 
     [SerializeField]
@@ -339,6 +342,7 @@ public class UIManager : MonoBehaviour
         CustomAnimation.ButtonLoad(_classicModeButton.transform);
         CustomAnimation.ButtonLoad(_challengeModeButton.transform);
         CustomAnimation.ButtonLoad(_achievementsButton.transform);
+        CustomAnimation.ButtonLoad(_creditsButton.transform);
         CustomAnimation.AnimateTitle(_mainTitle.transform);
         HideObject(_settingsPanel);
         HideObject(_supportPanel);

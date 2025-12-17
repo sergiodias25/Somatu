@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -79,6 +80,9 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Button _creditsButton;
+
+    [SerializeField]
+    private Button _feedbackButton;
 
     [SerializeField]
     private CodelessIAPButton _sunriseShopButton;
@@ -286,6 +290,21 @@ public class SettingsHandler : MonoBehaviour
         GoogleServices.UnlockAchievement(GPGSIds.achievement_so_you_made_a_videogame);
     }
 
+    public void SendEmail()
+    {
+        _ = CustomAnimation.ButtonClicked(_feedbackButton.transform);
+        string email = "sergio.alves.dias.games@gmail.com";
+        string subject = EscapeURLAux("Somatu Feedback");
+
+        string mailto = $"mailto:{email}?subject={subject}";
+        Application.OpenURL(mailto);
+    }
+
+    private string EscapeURLAux(string text)
+    {
+        return UnityWebRequest.EscapeURL(text).Replace("+", "%20");
+    }
+
     public void ChangeLanguage(string language)
     {
         bool _showMainMenu = false;
@@ -324,7 +343,7 @@ public class SettingsHandler : MonoBehaviour
         CustomAnimation.ButtonLoad(_soundButton.transform);
         CustomAnimation.ButtonLoad(_supportButton.transform);
         CustomAnimation.ButtonLoad(_visualAidButton.transform);
-        CustomAnimation.ButtonLoad(_creditsButton.transform);
+        CustomAnimation.ButtonLoad(_feedbackButton.transform);
     }
 
     public async void ChangeVisualAid()
