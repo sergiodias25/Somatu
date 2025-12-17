@@ -411,7 +411,6 @@ public class UIManager : MonoBehaviour
 
     public async void ClickOnLeaderboard()
     {
-        await CustomAnimation.ButtonClicked(_rankingButtonInStats.transform);
         Social.ShowLeaderboardUI();
     }
 
