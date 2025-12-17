@@ -17434,9 +17434,9 @@ MonoBehaviour:
   - Name: Shadow.Color
     FullName: UnityEngine.UI.Shadow
     BaseName: Shadow
-    PaletteColour: 
+    PaletteColour: Colour.1
     ColourIndex: 0
-    IsChanged: 1
+    IsChanged: 0
 --- !u!114 &789650351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34211,7 +34211,7 @@ MonoBehaviour:
     BaseName: SpriteRenderer
     PaletteColour: Colour.10
     ColourIndex: 9
-    IsChanged: 1
+    IsChanged: 0
 --- !u!114 &1415480358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6173809450469176428, guid: 271ac83bd0e2add4e93209a4adb073ca, type: 3}
