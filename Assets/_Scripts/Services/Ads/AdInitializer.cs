@@ -12,12 +12,11 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     [SerializeField]
     bool _testMode = false;
     private string _gameId;
-    string _androidAdUnitId = "Rewarded_Android";
-
+    string _androidAdUnitIdReward = "Rewarded_Android";
+    string _androidAdUnitIdInterstitial = "Interstitial_Android";
 #pragma warning disable 414
     string _iOSAdUnitId = "Rewarded_iOS";
 #pragma warning restore 414
-    string _adUnitId = null; // This will remain null for unsupported platforms
 
     void Awake()
     {
@@ -28,13 +27,10 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     {
 #if UNITY_IOS
         _gameId = _iOSGameId;
-        _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
         _gameId = _androidGameId;
-        _adUnitId = _androidAdUnitId;
 #elif UNITY_EDITOR
         _gameId = _androidGameId; //Only for testing the functionality in the Editor
-        _adUnitId = _androidAdUnitId;
 #endif
         Advertisement.Initialize(_gameId, _testMode, this);
     }
@@ -48,7 +44,8 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IU
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
     {
-        Advertisement.Load(_adUnitId, this);
+        Advertisement.Load(_androidAdUnitIdReward, this);
+        Advertisement.Load(_androidAdUnitIdInterstitial, this);
     }
 
     // If the ad successfully loads, add a listener to the button and enable it:

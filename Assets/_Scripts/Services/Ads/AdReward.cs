@@ -2,19 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
-public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
+public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField]
-    Button _showAdButton;
-
     string _androidAdUnitId = "Rewarded_Android";
 
 #pragma warning disable 414
     string _iOSAdUnitId = "Rewarded_iOS";
 #pragma warning restore 414
     string _adUnitId = null; // This will remain null for unsupported platforms
-
-    private bool isAdsRunning = false;
 
     void Awake()
     {
@@ -33,19 +28,27 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
         {
             return;
         }
-        if (isAdsRunning)
-        {
-            return;
-        }
 
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
 
+    // Implement Load Listener and Show Listener interface methods:
+    public void OnUnityAdsAdLoaded(string adUnitId)
+    {
+        Debug.Log("Ad Loaded: " + adUnitId);
+    }
+
+    public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.Log($"Error loading Ad Unit: {_adUnitId} - {error.ToString()} - {message}");
+        // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
+    }
+
     // Ads start callback
     public void OnUnityAdsShowStart(string placementId)
     {
-        isAdsRunning = true;
+        Advertisement.Load(_adUnitId, this);
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
@@ -54,13 +57,11 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
         UnityAdsShowCompletionState showCompletionState
     )
     {
-        FindObjectOfType<AdsInitializer>().LoadAd();
         if (
             adUnitId.Equals(_adUnitId)
             && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED)
         )
         {
-            isAdsRunning = false;
             Debug.Log("Unity Ads Rewarded Ad Completed");
             if (GameObject.Find("HintPurchasePopup") != null)
             {
@@ -79,14 +80,5 @@ public class AdRewarded : MonoBehaviour, IUnityAdsShowListener
     public void OnUnityAdsShowClick(string adUnitId)
     {
         Debug.Log($"Ad Unit with id {adUnitId} was clicked");
-    }
-
-    void OnDestroy()
-    {
-        // Clean up the button listeners:
-        if (_showAdButton != null)
-        {
-            _showAdButton.onClick.RemoveAllListeners();
-        }
     }
 }

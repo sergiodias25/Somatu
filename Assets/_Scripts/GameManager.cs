@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     public SaveGame SavedGameData;
     private SettingsHandler _settingsHandler;
     public int _timesSolvedText;
-    private int _gamesPlayedWithoutAds = 0;
+    public int _gamesPlayedWithoutAds = 0;
 
     void Start()
     {
@@ -647,9 +647,8 @@ public class GameManager : MonoBehaviour
             && _gamesPlayedWithoutAds >= Constants.NumberOfGamesToShowAdPopup
         )
         {
-            FindObjectOfType<AdRewarded>().ShowAd();
+            FindObjectOfType<AdInterstitial>().ShowAd();
             _uiManager.ShowRemoveAdsPopup();
-            _gamesPlayedWithoutAds = 0;
         }
     }
 
