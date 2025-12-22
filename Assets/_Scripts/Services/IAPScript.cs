@@ -52,11 +52,13 @@ public class IAPScript : MonoBehaviour
             case SUNRISE_THEME:
                 _gameManager.SavedGameData.EnableSunriseTheme();
                 _gameManager.SavedGameData.PersistData();
+                GameObject.Find("SunrisePurchaseIcon").SetActive(false);
                 _settingsHandler.ChangeTheme(2);
                 break;
             case SUNSET_THEME:
                 _gameManager.SavedGameData.EnableSunsetTheme();
                 _gameManager.SavedGameData.PersistData();
+                GameObject.Find("SunsetPurchaseIcon").SetActive(false);
                 _settingsHandler.ChangeTheme(3);
                 break;
             default:
@@ -82,8 +84,12 @@ public class IAPScript : MonoBehaviour
             switch (product.definition.id)
             {
                 case SUNRISE_THEME:
+                    _settingsHandler.RevertTheme();
+                    GameObject.Find("SunrisePurchaseIcon").SetActive(false);
+                    break;
                 case SUNSET_THEME:
                     _settingsHandler.RevertTheme();
+                    GameObject.Find("SunsetPurchaseIcon").SetActive(false);
                     break;
             }
         }
