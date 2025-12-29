@@ -70,8 +70,8 @@ public static class Constants
     public static double ChallengeAnimatedTimeThreshold = 25f;
     public static double ChallengeBonusThresholdTimeEasy = 10f;
     public static double ChallengeBonusThresholdTimeMedium = 20f;
-    public static double ChallengeBonusThresholdTimeHard = 40f;
-    public static double ChallengeBonusThresholdTimeExtreme = 50.0f;
+    public static double ChallengeBonusThresholdTimeHard = 30f;
+    public static double ChallengeBonusThresholdTimeExtreme = 45.0f;
     public static int NumberOfGamesToShowAdPopup = 3;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
@@ -100,6 +100,8 @@ public static class Constants
                 return 4;
             case Difficulty.Hard:
                 return 4;
+            case Difficulty.Extreme:
+                return 4;
         }
         return -1;
     }
@@ -113,7 +115,7 @@ public static class Constants
             case Difficulty.Medium:
                 return 8;
             case Difficulty.Hard:
-                return 10;
+                return 12;
         }
         return -1;
     }

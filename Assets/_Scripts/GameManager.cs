@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         bool IsHalfwayThroughCurrentDifficulty = SavedGameData.IsHalfwayThroughCurrentDifficulty(
             ActualDifficulty,
             SelectedDifficulty,
-            timesSolved
+            TimesSolvedWithoutOtherDifficulties(timesSolved, ActualDifficulty)
         );
 
         if (!IsHalfwayThroughCurrentDifficulty)
@@ -158,6 +158,27 @@ public class GameManager : MonoBehaviour
             Constants.GetNumbers(ActualDifficulty),
             Constants.GetRepeatedNumbersCount(ActualDifficulty, IsHalfwayThroughCurrentDifficulty)
         );
+    }
+
+    private int TimesSolvedWithoutOtherDifficulties(
+        int timesSolved,
+        Constants.Difficulty difficulty
+    )
+    {
+        return difficulty switch
+        {
+            Constants.Difficulty.Easy => timesSolved,
+            Constants.Difficulty.Medium
+                => timesSolved
+                    - Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Easy),
+            Constants.Difficulty.Hard
+                => timesSolved
+                    - Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Medium),
+            Constants.Difficulty.Extreme
+                => timesSolved
+                    - Constants.GetNumberOfSolvesToProgressInChallenge(Constants.Difficulty.Hard),
+            _ => timesSolved,
+        };
     }
 
     private void UpdateModeTranslation()
@@ -210,7 +231,7 @@ public class GameManager : MonoBehaviour
     {
         List<int> currentPossibleValues = new List<int>(possibleValues);
         List<int> result = new();
-        int randomized = Random.Range(0, currentPossibleValues.Count);
+        int randomized = Random.Range(1, currentPossibleValues.Count);
         if (repeatedCount > 0)
         {
             for (int i = 0; i < repeatedCount; i++)
