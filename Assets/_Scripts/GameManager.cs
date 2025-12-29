@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     private GameObject _generatedNodesObject;
 
     [SerializeField]
+    private GameObject _solutionNodesObject;
+
+    [SerializeField]
     private PlayerStats _playerStats;
 
     [SerializeField]
@@ -315,7 +318,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 1; j < _height + 1; j++)
             {
-                Node node = Node.Init(_nodePrefab, i, j, "GeneratedNodes");
+                Node node = Node.Init(_nodePrefab, i, j, _generatedNodesObject.transform);
                 int generatedNumber;
                 if (loadGame && SavedGameData.GameInProgressData.GameNumbers.Count > 0)
                 {
@@ -364,7 +367,7 @@ public class GameManager : MonoBehaviour
 
     private Block GenerateResultBlock(int x, int y, int numberValue)
     {
-        Node node = Node.Init(_nodePrefab, x, y, "SolutionNodes");
+        Node node = Node.Init(_nodePrefab, x, y, _solutionNodesObject.transform);
         Block generatedBLock = SpawnBlock(node, numberValue, false);
         node.SetBlockInNode(generatedBLock);
         return generatedBLock;

@@ -18,7 +18,7 @@ public class Node : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _shadowSprite;
 
-    internal static Node Init(Node nodePrefab, int i, int j, string parentName)
+    internal static Node Init(Node nodePrefab, int i, int j, Transform parentTransform)
     {
         Node node = Instantiate(
             nodePrefab,
@@ -26,8 +26,8 @@ public class Node : MonoBehaviour
             Quaternion.identity
         );
         node.name = string.Concat("Node_", i, "_", j);
-        node.transform.SetParent(GameObject.Find(parentName).transform, true);
-        if (parentName == "GeneratedNodes")
+        node.transform.SetParent(parentTransform, true);
+        if (parentTransform.name == "GeneratedNodes")
         {
             node.transform.localScale = new Vector3(15, 15, 15);
             node._resultCornerSpace.gameObject.SetActive(false);

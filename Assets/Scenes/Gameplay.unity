@@ -42266,6 +42266,7 @@ MonoBehaviour:
   _gameBackground: {fileID: 1735692456}
   _modeSelected: {fileID: 1485985327}
   _generatedNodesObject: {fileID: 1993008454}
+  _solutionNodesObject: {fileID: 1434469179}
   _playerStats: {fileID: 165924827}
   _backgroundCamera: {fileID: 454491112}
   _languagePopup: {fileID: 254790883}
