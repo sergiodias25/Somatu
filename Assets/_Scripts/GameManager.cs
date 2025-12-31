@@ -671,7 +671,6 @@ public class GameManager : MonoBehaviour
             && _gamesPlayedWithoutAds >= Constants.NumberOfGamesToShowAdPopup
         )
         {
-            FindObjectOfType<AdInterstitial>().ShowAd();
             _uiManager.ShowRemoveAdsPopup();
         }
     }

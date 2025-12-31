@@ -72,7 +72,7 @@ public static class Constants
     public static double ChallengeBonusThresholdTimeMedium = 20f;
     public static double ChallengeBonusThresholdTimeHard = 30f;
     public static double ChallengeBonusThresholdTimeExtreme = 45.0f;
-    public static int NumberOfGamesToShowAdPopup = 3;
+    public static int NumberOfGamesToShowAdPopup = 4;
 
     public static List<int> GetNumbers(Difficulty selectedDifficulty)
     {

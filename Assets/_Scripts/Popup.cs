@@ -100,9 +100,5 @@ public class Popup : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_secondActionButton.transform);
         Application.OpenURL("market://details?id=" + Application.identifier);
-        CustomAnimation.PopupUnload(
-            _popupPanel.transform,
-            _popupPanel.transform.Find("Interactible")
-        );
     }
 }

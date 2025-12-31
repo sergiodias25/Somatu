@@ -47,16 +47,21 @@ public class AdInterstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
     {
         if (
             adUnitId.Equals(_adUnitId)
-            && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED)
+            && (
+                showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED)
+                || showCompletionState.Equals(UnityAdsShowCompletionState.SKIPPED)
+            )
         )
         {
             FindObjectOfType<GameManager>()._gamesPlayedWithoutAds = 0;
+            FindObjectOfType<UIManager>().StartGameAfterAdShown();
         }
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        FindObjectOfType<UIManager>().StartGameAfterAdShown();
     }
 
     public void OnUnityAdsShowClick(string adUnitId)
