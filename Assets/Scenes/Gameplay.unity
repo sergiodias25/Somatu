@@ -11156,10 +11156,10 @@ PrefabInstance:
       addedObject: {fileID: 1736362596}
     - targetCorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1979269126}
+      addedObject: {fileID: 1117313934}
     - targetCorrespondingSourceObject: {fileID: 3638239244077884035, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1117313934}
+      addedObject: {fileID: 1979269126}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4746356838177520282, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       insertIndex: -1
@@ -11347,9 +11347,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.00024986267
+    y: 0.07219255
     width: 1
-    height: 0.9995003
+    height: 0.8556149
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -36252,10 +36252,10 @@ PrefabInstance:
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 825d19a97d8e2404eb844e2f361980a7, type: 2}
+      objectReference: {fileID: 11400000, guid: 7fb50ea5ea110cf4ba4bb149c718d178, type: 2}
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontStyle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontColor.b
@@ -40135,6 +40135,18 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: bf058eb6d202bcf4ca68d869ccb10f24, type: 2}
+    - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
       propertyPath: m_fontSizeBase
       value: 40
