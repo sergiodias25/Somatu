@@ -66,6 +66,21 @@ public class PlayerStats : MonoBehaviour
     private TextMeshProUGUI _extremeHelpsUsedText;
 
     [SerializeField]
+    private TextMeshProUGUI _impossibleGamesPlayedText;
+
+    [SerializeField]
+    private TextMeshProUGUI _impossibleGamesCompletedText;
+
+    [SerializeField]
+    private TextMeshProUGUI _impossibleTimeFastestText;
+
+    [SerializeField]
+    private TextMeshProUGUI _impossibleTimeAverageText;
+
+    [SerializeField]
+    private TextMeshProUGUI _impossibleHelpsUsedText;
+
+    [SerializeField]
     private TextMeshProUGUI _challengeGamesPlayedText;
 
     [SerializeField]
@@ -115,6 +130,11 @@ public class PlayerStats : MonoBehaviour
                     _gameManager.SavedGameData.ExtremeStats
                 );
                 break;
+            case Difficulty.Impossible:
+                _gameManager.SavedGameData.IncrementGamesPlayed(
+                    _gameManager.SavedGameData.ImpossibleStats
+                );
+                break;
             case Difficulty.Challenge:
                 break;
         }
@@ -161,6 +181,15 @@ public class PlayerStats : MonoBehaviour
                     _gameManager.SavedGameData.ExtremeStats
                 );
                 break;
+            case Difficulty.Impossible:
+                _gameManager.SavedGameData.ManageTime(
+                    timeToComplete,
+                    ref _gameManager.SavedGameData.ImpossibleStats
+                );
+                _gameManager.SavedGameData.IncrementGamesCompleted(
+                    _gameManager.SavedGameData.ImpossibleStats
+                );
+                break;
             case Difficulty.Challenge:
                 _gameManager.SavedGameData.ManageChallengeSolves(solvesCount);
                 _gameManager.SavedGameData.ManageChallengeTime(
@@ -197,6 +226,11 @@ public class PlayerStats : MonoBehaviour
             case Difficulty.Extreme:
                 _gameManager.SavedGameData.IncrementHintsUsedClassic(
                     _gameManager.SavedGameData.ExtremeStats
+                );
+                break;
+            case Difficulty.Impossible:
+                _gameManager.SavedGameData.IncrementHintsUsedClassic(
+                    _gameManager.SavedGameData.ImpossibleStats
                 );
                 break;
             case Difficulty.Challenge:
@@ -254,6 +288,21 @@ public class PlayerStats : MonoBehaviour
             _gameManager.SavedGameData.ExtremeStats.TimeAverage
         );
         _extremeHelpsUsedText.text = _gameManager.SavedGameData.ExtremeStats.HintsUsed.ToString();
+
+        _impossibleHelpsUsedText.text =
+            _gameManager.SavedGameData.ImpossibleStats.HintsUsed.ToString();
+        _impossibleGamesPlayedText.text =
+            _gameManager.SavedGameData.ImpossibleStats.GamesPlayed.ToString();
+        _impossibleGamesCompletedText.text =
+            _gameManager.SavedGameData.ImpossibleStats.GamesCompleted.ToString();
+        _impossibleTimeFastestText.text = Timer.FormatTimeForText(
+            _gameManager.SavedGameData.ImpossibleStats.TimeBest
+        );
+        _impossibleTimeAverageText.text = Timer.FormatTimeForText(
+            _gameManager.SavedGameData.ImpossibleStats.TimeAverage
+        );
+        _impossibleHelpsUsedText.text =
+            _gameManager.SavedGameData.ImpossibleStats.HintsUsed.ToString();
 
         _challengeGamesPlayedText.text =
             _gameManager.SavedGameData.ChallengeStats.GamesCompleted.ToString();

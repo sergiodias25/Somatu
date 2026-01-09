@@ -36,22 +36,40 @@ public class Block : MonoBehaviour
         return _originalNode;
     }
 
-    public Block Init(int value, bool interactible, Node node)
+    public Block Init(int value, bool interactible, Node node, bool smallerFontSize)
     {
         Value = value;
         _text.text = value.ToString();
+        _text.fontSizeMax = GetFontSize(interactible, smallerFontSize);
         _isInteractible = interactible;
         gameObject.name = string.Concat("Block_", value.ToString());
-        if (!interactible)
-        {
-            _text.fontSizeMax = 50f;
-        }
         _originalNode = node;
         transform.SetParent(node.transform, false);
         _text.color = interactible
             ? ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_DARK_TEXT]
             : ColourManager.Instance.SelectedPalette().Colours[Constants.COLOR_LIGHT_TEXT];
         return this;
+    }
+
+    private float GetFontSize(bool IsInteractable, bool smallerFontSize)
+    {
+        if (IsInteractable && smallerFontSize)
+        {
+            _text.fontSizeMax = 65;
+        }
+        else if (IsInteractable && !smallerFontSize)
+        {
+            _text.fontSizeMax = 80;
+        }
+        else if (!IsInteractable && smallerFontSize)
+        {
+            _text.fontSizeMax = 45;
+        }
+        else if (!IsInteractable && !smallerFontSize)
+        {
+            _text.fontSizeMax = 50;
+        }
+        return _text.fontSizeMax;
     }
 
     private async void OnMouseDown()

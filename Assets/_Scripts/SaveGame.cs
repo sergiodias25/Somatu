@@ -20,6 +20,7 @@ namespace Assets.Scripts.SaveGame
         public ModeStats HardStats;
         public ModeStats ExtremeStats;
         public ModeStats ChallengeStats;
+        public ModeStats ImpossibleStats;
         public Onboarding Onboardings;
 
         public class Purchases
@@ -145,6 +146,7 @@ namespace Assets.Scripts.SaveGame
             MediumStats = new ModeStats();
             HardStats = new ModeStats();
             ExtremeStats = new ModeStats();
+            ImpossibleStats = new ModeStats();
             ChallengeStats = new ModeStats();
             Onboardings = new Onboarding();
             TimeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
@@ -161,7 +163,10 @@ namespace Assets.Scripts.SaveGame
 
         public bool IsDifficultyUnlocked(Constants.Difficulty difficulty)
         {
-            if (difficulty == Constants.Difficulty.Challenge)
+            if (
+                difficulty == Constants.Difficulty.Challenge
+                || difficulty == Constants.Difficulty.Impossible
+            )
             {
                 return Onboardings.ClassicExplanation;
             }

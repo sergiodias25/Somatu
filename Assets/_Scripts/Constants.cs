@@ -9,6 +9,90 @@ public static class Constants
     public static List<int> NumbersForMediumMode = new List<int> { 1, 2, 3, 4, 5 };
     public static List<int> NumbersForHardMode = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
     public static List<int> NumbersForExtremeMode = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public static List<int> NumbersForImpossibleMode = new List<int>
+    {
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+    };
 
     public static int GetRepeatedNumbersCount(
         Difficulty selectedDifficulty,
@@ -45,6 +129,8 @@ public static class Constants
                     return 0;
                 }
                 return 2;
+            case Difficulty.Impossible:
+                return 0;
         }
         return Random.Range(0, 10);
     }
@@ -56,7 +142,8 @@ public static class Constants
         Medium,
         Hard,
         Extreme,
-        Challenge
+        Challenge,
+        Impossible
     };
 
     public enum ControlMethod
@@ -86,6 +173,8 @@ public static class Constants
                 return NumbersForHardMode;
             case Difficulty.Extreme:
                 return NumbersForExtremeMode;
+            case Difficulty.Impossible:
+                return NumbersForImpossibleMode;
         }
         return NumbersForExtremeMode;
     }
@@ -131,6 +220,8 @@ public static class Constants
             case Difficulty.Hard:
                 return 1;
             case Difficulty.Extreme:
+                return 1;
+            case Difficulty.Impossible:
                 return 1;
         }
         return -1;

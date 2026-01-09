@@ -201,7 +201,13 @@ public class GameManager : MonoBehaviour
 
     public Constants.Difficulty GetActualDifficulty()
     {
-        if (SelectedDifficulty != Constants.Difficulty.Challenge)
+        if (
+            SelectedDifficulty == Constants.Difficulty.Easy
+            || SelectedDifficulty == Constants.Difficulty.Medium
+            || SelectedDifficulty == Constants.Difficulty.Hard
+            || SelectedDifficulty == Constants.Difficulty.Extreme
+            || SelectedDifficulty == Constants.Difficulty.Impossible
+        )
         {
             return SelectedDifficulty;
         }
@@ -376,7 +382,12 @@ public class GameManager : MonoBehaviour
     Block SpawnBlock(Node node, int value, bool interactible)
     {
         var block = Instantiate(_blockPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        return block.Init(value, interactible, node);
+        return block.Init(
+            value,
+            interactible,
+            node,
+            SelectedDifficulty == Constants.Difficulty.Impossible
+        );
     }
 
     private int GetNodesSum(int index1, int index2, int index3)
@@ -789,6 +800,7 @@ public class GameManager : MonoBehaviour
                 && ActualDifficulty == Constants.Difficulty.Extreme
             )
             || SelectedDifficulty == Constants.Difficulty.Extreme
+            || SelectedDifficulty == Constants.Difficulty.Impossible
         )
         {
             block

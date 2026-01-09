@@ -30,6 +30,9 @@ public class Profile : MonoBehaviour
     private Button _extremeButton;
 
     [SerializeField]
+    private Button _impossibleButton;
+
+    [SerializeField]
     private Button _challengeButton;
 
     private void OnEnable()
@@ -45,6 +48,14 @@ public class Profile : MonoBehaviour
         {
             _selectedDifficulty = 4;
         }
+        else if (_selectedDifficulty == 4)
+        {
+            _selectedDifficulty = 5;
+        }
+        else if (_selectedDifficulty == 5)
+        {
+            _selectedDifficulty = 3;
+        }
         else
         {
             _selectedDifficulty -= 1;
@@ -55,7 +66,15 @@ public class Profile : MonoBehaviour
 
     public void MoveForward()
     {
-        if (_selectedDifficulty == 4)
+        if (_selectedDifficulty == 3)
+        {
+            _selectedDifficulty = 5;
+        }
+        else if (_selectedDifficulty == 5)
+        {
+            _selectedDifficulty = 4;
+        }
+        else if (_selectedDifficulty == 4)
         {
             _selectedDifficulty = 0;
         }
@@ -86,6 +105,9 @@ public class Profile : MonoBehaviour
             case 4:
                 _challengeButton.Invoke("Press", 0);
                 break;
+            case 5:
+                _impossibleButton.Invoke("Press", 0);
+                break;
             default:
                 break;
         }
@@ -109,6 +131,9 @@ public class Profile : MonoBehaviour
                 break;
             case 4:
                 _modeText.text = LocalizationManager.Localize("mode-challenge");
+                break;
+            case 5:
+                _modeText.text = LocalizationManager.Localize("mode-impossible");
                 break;
             default:
                 break;

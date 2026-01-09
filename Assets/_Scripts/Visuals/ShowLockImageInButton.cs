@@ -9,7 +9,8 @@ public class ShowLockImageInButton : MonoBehaviour
         Moderate = 1,
         Hard = 2,
         Extreme = 3,
-        Challenge = 4
+        Challenge = 4,
+        Impossible = 5
     }
 
     [SerializeField]
@@ -55,6 +56,18 @@ public class ShowLockImageInButton : MonoBehaviour
                     if (
                         !_gameManager.SavedGameData.IsDifficultyUnlocked(
                             Constants.Difficulty.Extreme
+                        )
+                    )
+                    {
+                        image.SetActive(true);
+                        break;
+                    }
+                    image.SetActive(false);
+                    break;
+                case DifficultyValue.Impossible:
+                    if (
+                        !_gameManager.SavedGameData.IsDifficultyUnlocked(
+                            Constants.Difficulty.Impossible
                         )
                     )
                     {

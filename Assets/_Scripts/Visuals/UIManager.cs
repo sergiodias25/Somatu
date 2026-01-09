@@ -97,6 +97,9 @@ public class UIManager : MonoBehaviour
     private GameObject _challengeModeButton;
 
     [SerializeField]
+    private GameObject _impossibleModeButton;
+
+    [SerializeField]
     private GameObject _achievementsButton;
 
     [SerializeField]
@@ -363,6 +366,7 @@ public class UIManager : MonoBehaviour
         CustomAnimation.ButtonLoad(_mediumModeButton.transform);
         CustomAnimation.ButtonLoad(_hardModeButton.transform);
         CustomAnimation.ButtonLoad(_extremeModeButton.transform);
+        CustomAnimation.ButtonLoad(_impossibleModeButton.transform);
         ToggleContinueButton();
         _topBarManager.DeselectAll();
     }
@@ -464,7 +468,10 @@ public class UIManager : MonoBehaviour
     {
         int finalSolvesNeededText = numberOfSolvesNeeded;
         string popupTextKey = "popup-difficulty-plural";
-        if (originalDiff != Constants.Difficulty.Challenge)
+        if (
+            originalDiff != Constants.Difficulty.Challenge
+            && originalDiff != Constants.Difficulty.Impossible
+        )
         {
             if (
                 originalDiff == _gameManager.SavedGameData.UnlockedDifficulty.Value
@@ -545,6 +552,24 @@ public class UIManager : MonoBehaviour
                 LocalizationManager.Localize("mode-hard"),
                 Constants.GetNumberOfSolvesToUnlockNextDifficulty(Constants.Difficulty.Extreme - 1)
             );
+        }
+    }
+
+    public async void ClickOnImpossibleMode()
+    {
+        await CustomAnimation.ButtonClicked(_impossibleModeButton.transform);
+        if (_gameManager.SavedGameData.IsDifficultyUnlocked(Constants.Difficulty.Impossible))
+        {
+            _topBarManager.DeselectHomeButton();
+            HideObject(_mainMenuPanel);
+            ShowGameplayButtons();
+            HideClassicMenu();
+            ShowGameplayButtons();
+            _gameManager.Init(Constants.Difficulty.Impossible);
+        }
+        else
+        {
+            ShowDifficultyPopup(Constants.Difficulty.Impossible, null, null, 0);
         }
     }
 
