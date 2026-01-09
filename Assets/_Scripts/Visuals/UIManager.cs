@@ -411,23 +411,49 @@ public class UIManager : MonoBehaviour
         {
             ShowDifficultyPopup(Constants.Difficulty.Challenge, null, null, 0);
         }
+
+        if (!_gameManager.IsLoggedInToGoogle)
+        {
+            GoogleServices.Authenticate();
+        }
     }
 
     public async void ClickOnLeaderboard()
     {
-        Social.ShowLeaderboardUI();
+        if (_gameManager.IsLoggedInToGoogle)
+        {
+            Social.ShowLeaderboardUI();
+        }
+        else
+        {
+            GoogleServices.Authenticate();
+        }
     }
 
     public async void ClickOnAchievements()
     {
         await CustomAnimation.ButtonClicked(_achievementsButton.transform);
-        Social.ShowAchievementsUI();
+        if (_gameManager.IsLoggedInToGoogle)
+        {
+            Social.ShowAchievementsUI();
+        }
+        else
+        {
+            GoogleServices.Authenticate();
+        }
     }
 
     public async void ClickOnAchievementsInStats()
     {
         await CustomAnimation.ButtonClicked(_achievementsButtonInStats.transform);
-        Social.ShowAchievementsUI();
+        if (_gameManager.IsLoggedInToGoogle)
+        {
+            Social.ShowAchievementsUI();
+        }
+        else
+        {
+            GoogleServices.Authenticate();
+        }
     }
 
     public async void ClickOnEasyMode()
