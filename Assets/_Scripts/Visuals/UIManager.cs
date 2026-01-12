@@ -414,7 +414,7 @@ public class UIManager : MonoBehaviour
 
         if (!_gameManager.IsLoggedInToGoogle)
         {
-            GoogleServices.Authenticate();
+            GoogleServices.ManuallyAuthenticate();
         }
     }
 
@@ -426,7 +426,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            GoogleServices.Authenticate();
+            GoogleServices.ManuallyAuthenticate();
         }
     }
 
@@ -439,7 +439,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            GoogleServices.Authenticate();
+            GoogleServices.ManuallyAuthenticate();
         }
     }
 
@@ -452,7 +452,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            GoogleServices.Authenticate();
+            GoogleServices.ManuallyAuthenticate();
         }
     }
 

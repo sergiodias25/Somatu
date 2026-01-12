@@ -9,6 +9,11 @@ public static class GoogleServices
         PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
     }
 
+    public static void ManuallyAuthenticate()
+    {
+        PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
+    }
+
     public static void ProcessAuthentication(SignInStatus status)
     {
         if (status == SignInStatus.Success)
