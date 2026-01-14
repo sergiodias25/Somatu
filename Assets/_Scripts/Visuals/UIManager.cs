@@ -494,10 +494,7 @@ public class UIManager : MonoBehaviour
     {
         int finalSolvesNeededText = numberOfSolvesNeeded;
         string popupTextKey = "popup-difficulty-plural";
-        if (
-            originalDiff != Constants.Difficulty.Challenge
-            && originalDiff != Constants.Difficulty.Impossible
-        )
+        if (originalDiff != Constants.Difficulty.Challenge)
         {
             if (
                 originalDiff == _gameManager.SavedGameData.UnlockedDifficulty.Value
@@ -576,7 +573,7 @@ public class UIManager : MonoBehaviour
                 Constants.Difficulty.Extreme - 1,
                 LocalizationManager.Localize("mode-extreme"),
                 LocalizationManager.Localize("mode-hard"),
-                Constants.GetNumberOfSolvesToUnlockNextDifficulty(Constants.Difficulty.Extreme - 1)
+                Constants.GetNumberOfSolvesToUnlockNextDifficulty(Constants.Difficulty.Hard)
             );
         }
     }
@@ -595,7 +592,12 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            ShowDifficultyPopup(Constants.Difficulty.Impossible, null, null, 0);
+            ShowDifficultyPopup(
+                Constants.Difficulty.Impossible,
+                LocalizationManager.Localize("mode-impossible"),
+                LocalizationManager.Localize("mode-extreme"),
+                Constants.GetNumberOfSolvesToUnlockNextDifficulty(Constants.Difficulty.Extreme)
+            );
         }
     }
 

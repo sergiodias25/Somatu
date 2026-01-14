@@ -190,7 +190,7 @@ public static class Constants
             case Difficulty.Hard:
                 return 4;
             case Difficulty.Extreme:
-                return 4;
+                return 2;
         }
         return -1;
     }

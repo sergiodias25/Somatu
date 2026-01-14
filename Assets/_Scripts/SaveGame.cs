@@ -163,10 +163,7 @@ namespace Assets.Scripts.SaveGame
 
         public bool IsDifficultyUnlocked(Constants.Difficulty difficulty)
         {
-            if (
-                difficulty == Constants.Difficulty.Challenge
-                || difficulty == Constants.Difficulty.Impossible
-            )
+            if (difficulty == Constants.Difficulty.Challenge)
             {
                 return Onboardings.ClassicExplanation;
             }
@@ -176,13 +173,20 @@ namespace Assets.Scripts.SaveGame
         public void UnlockNextLevel(Constants.Difficulty difficulty)
         {
             if (
-                difficulty < Constants.Difficulty.Extreme
+                difficulty < Constants.Difficulty.Challenge
                 && difficulty >= UnlockedDifficulty
                 && TimesBeatenCurrentDifficulty
                     >= Constants.GetNumberOfSolvesToUnlockNextDifficulty(difficulty)
             )
             {
-                UnlockedDifficulty++;
+                if (difficulty != Constants.Difficulty.Extreme)
+                {
+                    UnlockedDifficulty++;
+                }
+                else
+                {
+                    UnlockedDifficulty = Constants.Difficulty.Impossible;
+                }
                 switch (UnlockedDifficulty)
                 {
                     case Constants.Difficulty.Medium:
@@ -215,11 +219,8 @@ namespace Assets.Scripts.SaveGame
                     ? TimesBeatenDifficulty
                     : TimesBeatenCurrentDifficulty;
             if (
-                (selectedDifficulty < UnlockedDifficulty)
-                || (
-                    valueToUse
-                    >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(calculatedDifficulty) / 2)
-                )
+                valueToUse
+                >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(calculatedDifficulty) / 2)
             )
             {
                 return true;
