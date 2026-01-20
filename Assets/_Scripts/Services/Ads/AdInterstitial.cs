@@ -54,14 +54,12 @@ public class AdInterstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         )
         {
             FindObjectOfType<GameManager>()._gamesPlayedWithoutAds = 0;
-            FindObjectOfType<UIManager>().StartGameAfterAdShown();
         }
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        FindObjectOfType<UIManager>().StartGameAfterAdShown();
     }
 
     public void OnUnityAdsShowClick(string adUnitId)

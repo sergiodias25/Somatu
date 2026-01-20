@@ -206,11 +206,6 @@ public class UIManager : MonoBehaviour
             {
                 if (_removeBannerPopupCloseButton.isActiveAndEnabled)
                 {
-                    CustomAnimation.PopupUnload(
-                        _removeBannerPopup.transform,
-                        _removeBannerPopup.transform.Find("Interactible")
-                    );
-                    _ = CustomAnimation.ButtonClicked(_removeBannerPopupCloseButton.transform);
                     InteractionPerformed(Constants.AudioClip.Undo);
                 }
             }
@@ -632,21 +627,7 @@ public class UIManager : MonoBehaviour
                 0.01f
             );
         await CustomAnimation.ButtonClicked(_playAgainButton.transform);
-        if (
-            !_gameManager.SavedGameData.PurchaseData.RemovedAds
-            && _gameManager._gamesPlayedWithoutAds >= Constants.NumberOfGamesToShowAdPopup
-        )
-        {
-            FindObjectOfType<AdInterstitial>().ShowAd();
-        }
-        else
-        {
-            StartGameAfterAdShown();
-        }
-    }
 
-    public void StartGameAfterAdShown()
-    {
         if (_playAgainButton.enabled)
         {
             _gameManager.ResetBoard(false, true, true);
