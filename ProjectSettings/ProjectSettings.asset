@@ -141,7 +141,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.052
+  bundleVersion: 1.0541
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -175,7 +175,7 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
-  AndroidBundleVersionCode: 107
+  AndroidBundleVersionCode: 110
   AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 35
   AndroidPreferredInstallLocation: 1
@@ -463,7 +463,7 @@ PlayerSettings:
       m_SubKind: 
     - m_Textures:
       - {fileID: 2800000, guid: 36a80f8377753134eabd54275c739af2, type: 3}
-      - {fileID: 2800000, guid: f56a7a4c237eb8248b04e70b0454f73a, type: 3}
+      - {fileID: 2800000, guid: 50315296d2ca6a6488e60ced1dbafdb9, type: 3}
       m_Width: 432
       m_Height: 432
       m_Kind: 2
