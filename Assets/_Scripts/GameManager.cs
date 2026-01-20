@@ -573,7 +573,7 @@ public class GameManager : MonoBehaviour
     {
         _timer.PauseTimer();
         _isGameFinished = true;
-        FindObjectOfType<FireworkManager>().ThrowFireworks();
+        FindObjectOfType<EndGameEffectsManager>().ThrowFireworks();
         foreach (var node in _allNodes)
         {
             node.GetBlockInNode().ChangeInteraction(false);
@@ -649,7 +649,7 @@ public class GameManager : MonoBehaviour
 
         if (SelectedDifficulty == Constants.Difficulty.Challenge)
         {
-            FindObjectOfType<FireworkManager>().StopFireworks();
+            FindObjectOfType<EndGameEffectsManager>().StopFireworks();
             SavedGameData.IncrementHintsAvailableChallenge(1);
             _timer.AddPuzzleSolvedBonus(ActualDifficulty);
             _uiManager.AnimateHintReward();
@@ -836,7 +836,7 @@ public class GameManager : MonoBehaviour
         bool resetChallengeActualDifficulty
     )
     {
-        FindObjectOfType<FireworkManager>().StopFireworks();
+        FindObjectOfType<EndGameEffectsManager>().StopFireworks();
         _isGameFinished = false;
         DOTween.Kill("NumberJump");
         DOTween.Kill("AnimatePlayAgainButtonCallToAction");

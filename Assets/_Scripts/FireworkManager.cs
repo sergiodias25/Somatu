@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace Assets._Scripts
 {
-    public class FireworkManager : MonoBehaviour
+    public class EndGameEffectsManager : MonoBehaviour
     {
         [SerializeField]
         private Firework _fireworkPrefab;
         private Firework _firework1;
         private Firework _firework2;
+
+        [SerializeField]
+        GameObject _confettiGroup;
 
         public void ThrowFireworks()
         {
@@ -33,6 +36,8 @@ namespace Assets._Scripts
 
             _firework2.Enabled = true;
             _firework2.Play();
+
+            _confettiGroup.SetActive(true);
         }
 
         public void StopFireworks()
@@ -45,6 +50,8 @@ namespace Assets._Scripts
             {
                 _firework2.Enabled = false;
             }
+
+            _confettiGroup.SetActive(false);
         }
     }
 }
