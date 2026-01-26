@@ -1132,8 +1132,22 @@ public class GameManager : MonoBehaviour
         {
             _uiManager.ShowMainMenu();
         }
-        LocalizationManager.Language = SavedGameData.SettingsData.LanguageSelected;
+        LocalizationManager.Language = GetLanguageWithoutBurmeseOrThai(
+            SavedGameData.SettingsData.LanguageSelected
+        );
         _audioManager.PlayMusic(AudioManager.MusicType.Menu);
+    }
+
+    private string GetLanguageWithoutBurmeseOrThai(string languageSelected)
+    {
+        // languages removed after deploy. safeguard if someone has them selected before the update :(
+        if (languageSelected == "Burmese" || languageSelected == "Thai")
+        {
+            SavedGameData.SettingsData.LanguageSelected = "English";
+            SavedGameData.PersistData();
+            return "English";
+        }
+        return languageSelected;
     }
 
     /*     private void OnApplicationFocus(bool focusedOn)
