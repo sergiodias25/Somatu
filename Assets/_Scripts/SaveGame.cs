@@ -217,7 +217,7 @@ namespace Assets.Scripts.SaveGame
             int valueToUse =
                 selectedDifficulty == Constants.Difficulty.Challenge
                     ? TimesBeatenDifficulty
-                    : TimesBeatenCurrentDifficulty;
+                    : GetTimesBeaten(selectedDifficulty);
             if (
                 valueToUse
                 >= (Constants.GetNumberOfSolvesToUnlockNextDifficulty(calculatedDifficulty) / 2)
@@ -226,6 +226,22 @@ namespace Assets.Scripts.SaveGame
                 return true;
             }
             return false;
+        }
+
+        private int GetTimesBeaten(Constants.Difficulty selectedDifficulty)
+        {
+            switch (selectedDifficulty)
+            {
+                case Constants.Difficulty.Easy:
+                    return EasyStats.GamesCompleted;
+                case Constants.Difficulty.Medium:
+                    return MediumStats.GamesCompleted;
+                case Constants.Difficulty.Hard:
+                    return HardStats.GamesCompleted;
+                case Constants.Difficulty.Extreme:
+                    return ExtremeStats.GamesCompleted;
+            }
+            return Constants.GetNumberOfSolvesToUnlockNextDifficulty(selectedDifficulty);
         }
 
         public void UnlockAllLevels()
