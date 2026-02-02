@@ -1,3 +1,4 @@
+using Assets.Scripts.AnalyticsEvent;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -24,6 +25,7 @@ public class IAPScript : MonoBehaviour
 
     public void OnPurchaseComplete(Product product)
     {
+        Purchase.SendAnalyticsEvent(product.definition.id, Purchase.SUCCESS);
         ProcessPurchase(product);
     }
 
@@ -74,10 +76,12 @@ public class IAPScript : MonoBehaviour
     {
         if (purchaseFailureDescription.reason == PurchaseFailureReason.DuplicateTransaction)
         {
+            Purchase.SendAnalyticsEvent(product.definition.id, Purchase.REPEATED);
             ProcessPurchase(product);
         }
         else
         {
+            Purchase.SendAnalyticsEvent(product.definition.id, Purchase.FAILED);
             Debug.LogError(
                 $"Failed to purchase {product.definition.id}. Reason: {purchaseFailureDescription.reason}"
             );

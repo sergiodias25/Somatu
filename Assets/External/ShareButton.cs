@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using Assets.SimpleLocalization.Scripts;
 using System;
+using Assets.Scripts.AnalyticsEvent;
 
 public class ShareButton : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class ShareButton : MonoBehaviour
     private void ShareText()
     {
         GoogleServices.UnlockAchievement(GPGSIds.achievement_sharing_is_caring);
+        ChallengeShared.SendAnalyticsEvent(
+            Math.Round(FindObjectOfType<Timer>().LastElapsedTime, 2),
+            FindObjectOfType<GameManager>()._timesSolvedText + 1
+        );
 #if UNITY_ANDROID
 
         if (!isProcessing)

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
 using CandyCabinets.Components.Colour;
+using Assets.Scripts.AnalyticsEvent;
 
 public class UIManager : MonoBehaviour
 {
@@ -385,6 +386,9 @@ public class UIManager : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_continueGameButton.transform);
         HideObject(_mainMenuPanel);
+        ClassicContinued.SendAnalyticsEvent(
+            _gameManager.SavedGameData.GameInProgressData.Difficulty.ToString()
+        );
         ShowGameplayButtons();
         _gameManager.Init(
             (Constants.Difficulty)_gameManager.SavedGameData.GameInProgressData.Difficulty,
@@ -417,6 +421,7 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.IsLoggedInToGoogle)
         {
+            Leaderboard.SendAnalyticsEvent();
             Social.ShowLeaderboardUI();
         }
         else
@@ -430,6 +435,7 @@ public class UIManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_achievementsButton.transform);
         if (_gameManager.IsLoggedInToGoogle)
         {
+            Achievements.SendAnalyticsEvent(Achievements.MAIN_MENU);
             Social.ShowAchievementsUI();
         }
         else
@@ -443,6 +449,7 @@ public class UIManager : MonoBehaviour
         await CustomAnimation.ButtonClicked(_achievementsButtonInStats.transform);
         if (_gameManager.IsLoggedInToGoogle)
         {
+            Achievements.SendAnalyticsEvent(Achievements.PROFILE);
             Social.ShowAchievementsUI();
         }
         else

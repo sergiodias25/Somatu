@@ -255,7 +255,7 @@ public class Timer : MonoBehaviour
         _isRunning = true;
     }
 
-    public void AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
+    public int AddPuzzleSolvedBonus(Constants.Difficulty actualDifficulty)
     {
         double _elapsedTimeInSolvedPuzzle = _lastChallengeStartTime - _currentTime;
         _timeRewardText.gameObject.SetActive(true);
@@ -292,6 +292,7 @@ public class Timer : MonoBehaviour
                     UnpauseTimer();
                 }
             });
+        return timeGained;
     }
 
     private int GetTimeBonus(

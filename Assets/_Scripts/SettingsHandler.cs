@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Assets.Scripts.AnalyticsEvent;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -166,6 +167,7 @@ public class SettingsHandler : MonoBehaviour
         _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
         FindObjectOfType<ColorHelper>().ApplyUpdates();
         FindObjectOfType<TopBarManager>().SelectSettingsButton();
+        Theme.SendAnalyticsEvent(ColourManager.Instance.SelectedPalette().Name);
         GoogleServices.UnlockAchievement(GPGSIds.achievement_look_at_all_the_pretty_colors);
     }
 
@@ -189,6 +191,7 @@ public class SettingsHandler : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_soundButton.transform);
         _audioManager.ToggleSFX();
+        Sound.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.SoundEnabled);
         UpdateSoundIcon();
     }
 
@@ -206,6 +209,7 @@ public class SettingsHandler : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_musicButton.transform);
         _audioManager.ToggleMusic();
+        Music.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.MusicEnabled);
         UpdateMusicIcon();
     }
 
@@ -223,6 +227,7 @@ public class SettingsHandler : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_vibrationButton.transform);
         _audioManager.ToggleVibration();
+        Vibration.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.VibrationEnabled);
         UpdateVibrateIcon();
     }
 
@@ -257,6 +262,7 @@ public class SettingsHandler : MonoBehaviour
         }
 
         UpdateControlIcon();
+        Control.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.ControlMethodDrag);
         GoogleServices.UnlockAchievement(GPGSIds.achievement_what_if_i_told_you_theres_another_way);
     }
 
@@ -297,6 +303,7 @@ public class SettingsHandler : MonoBehaviour
         string subject = EscapeURLAux("Somatu Feedback");
 
         string mailto = $"mailto:{email}?subject={subject}";
+        Feedback.SendAnalyticsEvent();
         Application.OpenURL(mailto);
     }
 
@@ -318,6 +325,7 @@ public class SettingsHandler : MonoBehaviour
         _gameManager.SavedGameData.SettingsData.LanguageSelected = LocalizationManager.Language;
         _gameManager.SavedGameData.PersistData();
         FindObjectOfType<UIManager>().UpdateHintButtonText();
+        Language.SendAnalyticsEvent(language);
 
         if (_showMainMenu)
         {
@@ -353,6 +361,7 @@ public class SettingsHandler : MonoBehaviour
             .SavedGameData
             .SettingsData
             .VisualAidEnabled;
+        VisualAid.SendAnalyticsEvent(_gameManager.SavedGameData.SettingsData.VisualAidEnabled);
         UpdateVisualAidIcon();
         _gameManager.CheckResult(false);
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using static Constants;
 using System;
+using Assets.Scripts.AnalyticsEvent;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -114,28 +115,34 @@ public class PlayerStats : MonoBehaviour
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.EasyStats
                 );
+                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Medium:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.MediumStats
                 );
+                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Hard:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.HardStats
                 );
+                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Extreme:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.ExtremeStats
                 );
+                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Impossible:
                 _gameManager.SavedGameData.IncrementGamesPlayed(
                     _gameManager.SavedGameData.ImpossibleStats
                 );
+                ClassicPlayed.SendAnalyticsEvent(difficulty.ToString());
                 break;
             case Difficulty.Challenge:
+                ChallengePlayed.SendAnalyticsEvent();
                 break;
         }
         UpdateValues();
@@ -143,6 +150,7 @@ public class PlayerStats : MonoBehaviour
 
     public void CompletedGame(Difficulty difficulty, double timeToComplete, int solvesCount)
     {
+        GameFinished.SendAnalyticsEvent(difficulty.ToString(), Math.Round(timeToComplete, 2));
         switch (difficulty)
         {
             case Difficulty.Easy:

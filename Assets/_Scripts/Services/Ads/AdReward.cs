@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using Assets.Scripts.AnalyticsEvent;
 
 public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -41,6 +41,7 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
 
     public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
     {
+        AdLoaded.SendAnalyticsEvent(AdLoaded.REWARD, false);
         Debug.Log($"Error loading Ad Unit: {_adUnitId} - {error.ToString()} - {message}");
         // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
     }
@@ -68,6 +69,7 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
                 FindObjectOfType<GameManager>().SavedGameData.IncrementHintsAvailableClassic(1);
                 GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
                 FindObjectOfType<UIManager>().ToggleHintButton(true);
+                AdLoaded.SendAnalyticsEvent(AdLoaded.REWARD, true);
             }
         }
     }
@@ -79,6 +81,7 @@ public class AdRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLis
 
     public void OnUnityAdsShowClick(string adUnitId)
     {
+        AdClick.SendAnalyticsEvent(AdClick.REWARD);
         Debug.Log($"Ad Unit with id {adUnitId} was clicked");
     }
 }

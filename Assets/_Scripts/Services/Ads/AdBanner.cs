@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using Assets.Scripts.AnalyticsEvent;
 
 public class AdBanner : MonoBehaviour
 {
@@ -52,6 +52,7 @@ public class AdBanner : MonoBehaviour
     // Implement code to execute when the load errorCallback event triggers:
     void OnBannerError(string message)
     {
+        AdLoaded.SendAnalyticsEvent(AdLoaded.BANNER, false);
         Debug.Log($"Banner Error: {message}");
     }
 
@@ -77,9 +78,15 @@ public class AdBanner : MonoBehaviour
         Advertisement.Banner.Hide();
     }
 
-    void OnBannerClicked() { }
+    void OnBannerClicked()
+    {
+        AdClick.SendAnalyticsEvent(AdClick.BANNER);
+    }
 
-    void OnBannerShown() { }
+    void OnBannerShown()
+    {
+        AdLoaded.SendAnalyticsEvent(AdLoaded.BANNER, true);
+    }
 
     void OnBannerHidden() { }
 }

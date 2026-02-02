@@ -1,3 +1,4 @@
+using Assets.Scripts.AnalyticsEvent;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -53,17 +54,20 @@ public class AdInterstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             )
         )
         {
+            AdLoaded.SendAnalyticsEvent(AdLoaded.INTERSTITIAL, true);
             FindObjectOfType<GameManager>()._gamesPlayedWithoutAds = 0;
         }
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
+        AdLoaded.SendAnalyticsEvent(AdLoaded.INTERSTITIAL, false);
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
     }
 
     public void OnUnityAdsShowClick(string adUnitId)
     {
+        AdClick.SendAnalyticsEvent(AdClick.INTERSTITIAL);
         Debug.Log($"Ad Unit with id {adUnitId} was clicked");
     }
 }

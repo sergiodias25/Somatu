@@ -1,3 +1,4 @@
+using Assets.Scripts.AnalyticsEvent;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine;
@@ -11,6 +12,7 @@ public static class GoogleServices
 
     public static void ManuallyAuthenticate()
     {
+        ManualLogin.SendAnalyticsEvent();
         PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
     }
 

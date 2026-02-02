@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Assets.Scripts.AnalyticsEvent;
 
 public class Profile : MonoBehaviour
 {
@@ -88,6 +89,9 @@ public class Profile : MonoBehaviour
 
     private void ChangeContentDisplayed()
     {
+        ProfileScreen.SendAnalyticsEvent(
+            Enum.GetValues(typeof(Constants.Difficulty)).GetValue(_selectedDifficulty).ToString()
+        );
         switch (_selectedDifficulty)
         {
             case 0:

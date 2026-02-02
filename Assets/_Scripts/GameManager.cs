@@ -9,6 +9,8 @@ using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
 using Assets._Scripts;
 using UnityEngine.UI;
+using Unity.Services.Analytics;
+using Assets.Scripts.AnalyticsEvent;
 
 public class GameManager : MonoBehaviour
 {
@@ -651,7 +653,13 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<EndGameEffectsManager>().StopFireworks();
             SavedGameData.IncrementHintsAvailableChallenge(1);
-            _timer.AddPuzzleSolvedBonus(ActualDifficulty);
+            int timeGained = _timer.AddPuzzleSolvedBonus(ActualDifficulty);
+            ChallengeLevelCompleted.SendAnalyticsEvent(
+                _timesSolvedText,
+                ActualDifficulty.ToString(),
+                timeGained,
+                ((int)_timer.GetTimerValue())
+            );
             _uiManager.AnimateHintReward();
             await CustomAnimation.WaitForAnimation("AnimateHintReward");
             await CustomAnimation.WaitForAnimation("AnimateTimeReward");
@@ -756,6 +764,7 @@ public class GameManager : MonoBehaviour
             Timer.FormatTimeForText(_elapsedTime)
         );
         CustomAnimation.PopupLoad(_challengeFinishedPopup.transform);
+        ChallengeFinished.SendAnalyticsEvent(_timesSolvedText + 1, _elapsedTime);
 
         if (SavedGameData.ChallengeStats.GamesCompleted >= 20)
         {
@@ -946,6 +955,7 @@ public class GameManager : MonoBehaviour
             }
             _uiManager.InteractionPerformed(Constants.AudioClip.MenuInteraction);
             _hintsUsedThisGame++;
+            HintUsed.SendAnalyticsEvent(SelectedDifficulty.ToString(), true);
             GoogleServices.UnlockAchievement(GPGSIds.achievement_i_need_somebody);
             GoogleServices.IncrementAchievement(GPGSIds.achievement_i_opened_up_the_doors, 1);
             return true;
@@ -966,6 +976,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             _uiManager.InteractionPerformed(Constants.AudioClip.NoHintAvailable);
+            HintUsed.SendAnalyticsEvent(SelectedDifficulty.ToString(), false);
         }
         return false;
     }
@@ -1085,6 +1096,7 @@ public class GameManager : MonoBehaviour
                 .GetBlockInNode()
                 .ChangeInteraction(true);
             SavedGameData.GameInProgressData.UndoData.ClearMoveUndone();
+            UndoUsed.SendAnalyticsEvent(SelectedDifficulty.ToString());
             CheckResult(true);
         }
     }
@@ -1105,6 +1117,7 @@ public class GameManager : MonoBehaviour
 
     public async void StartGame(Canvas loadingCanvas)
     {
+        AnalyticsService.Instance.StartDataCollection();
         Application.targetFrameRate = 91;
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
