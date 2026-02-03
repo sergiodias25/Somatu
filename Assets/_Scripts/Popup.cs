@@ -1,5 +1,6 @@
 using Assets.Scripts.CustomAnimation;
 using DG.Tweening;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,9 +21,16 @@ public class Popup : MonoBehaviour
     [SerializeField]
     private Button _secondActionButton;
 
+    [SerializeField]
+    private GameManager _gameManager;
+
     public void OnEnable()
     {
-        FindObjectOfType<GameManager>().DisableGameplayBlocks();
+        if (_gameManager == null)
+        {
+            _gameManager = FindObjectOfType<GameManager>();
+        }
+        _gameManager.DisableGameplayBlocks();
     }
 
     public async void ClosePopup()
@@ -105,5 +113,30 @@ public class Popup : MonoBehaviour
     {
         await CustomAnimation.ButtonClicked(_secondActionButton.transform);
         Application.OpenURL("market://details?id=" + Application.identifier);
+    }
+
+    public async void ActionConsent(bool gaveConsent)
+    {
+        _gameManager.SavedGameData.ConsentAnswered = true;
+        if (gaveConsent)
+        {
+            _gameManager.SavedGameData.ConsentGiven = true;
+            await CustomAnimation.ButtonClicked(
+                _actionButton.transform,
+                Constants.AudioClip.MenuInteraction,
+                true
+            );
+            CustomAnimation.PopupUnload(_popupPanel.transform, _popupWindow.transform);
+            AnalyticsService.Instance.StartDataCollection();
+        }
+        else
+        {
+            await CustomAnimation.ButtonClicked(
+                _secondActionButton.transform,
+                Constants.AudioClip.Undo,
+                true
+            );
+            CustomAnimation.PopupUnload(_popupPanel.transform, _popupWindow.transform);
+        }
     }
 }

@@ -118,7 +118,7 @@ Everytime you solve a puzzle you gain some time.","No modo Desafio, o tempo est�
 Cada vez que resolve um quebra-cabeças ganha um pouco de tempo.","En el modo Desafío, el tiempo corre constantemente y debes resolver tantos rompecabezas como puedas.
 Cada vez que resuelves un rompecabezas, ganas tiempo.","En mode Défi, le temps est compté et vous devez résoudre un maximum d'énigmes.
 
-Chaque énigme résolue vous fait gagner du temps.",Im Herausforderungsmodus läuft die Zeit unaufhörlich ab und du musst so viele Rätsel wie möglich lösen. Für jedes gelöste Rätsel gewinnst du etwas Zeit.,"Nella modalità Sfida, il tempo diminuisce costantemente e l'obiettivo è risolvere il maggior numero possibile di enigmi.
+Chaque énigme résolue vous fait gagner du temps.",Im Herausforderungsmodus läuft die Zeit unaufhörlich ab und du musst so viele Rätsel wie möglich lösen. Für jedes gelöste Rätsel erhältst du etwas Zeit.,"Nella modalità Sfida, il tempo diminuisce costantemente e l'obiettivo è risolvere il maggior numero possibile di enigmi.
 Ogni volta che risolvi un enigma, guadagni un po' di tempo.","В режиме «Испытание» время постоянно отсчитывается, и вам нужно решить как можно больше головоломок.
 Каждое решение головоломки приносит вам дополнительное время.",在挑战模式里，每解一个谜题就会延长倒计的时间。您要在倒计时间内解开越多的谜题以取得更多时间解题。,在挑戰模式裡，每解一個謎題就會延長倒計的時間。您要在倒計時間內解開越多的謎題以取得更多時間解題。,"チャレンジモードでは、時間は常にカウントダウンされ、できるだけ多くのパズルを解かなければなりません。
 パズルを解くたびに時間が加算されます。","चैलेंज मोड में समय लगातार कम होता जाता है और आपको यथासंभव अधिक से अधिक पहेलियाँ हल करनी होती हैं।
@@ -145,5 +145,19 @@ leaderboard,Leaderboard,Ranking,Tabla de clasificación,Classement,Rangliste,Cla
 achievements,Achievements,Conquistas,Logros,Succès,Erfolge,Risultati,Достижения,成就,成就,実績,उपलब्धियों,업적,சாதனைகள்,الإنجازات
 feedback,Send Feedback,Enviar comentários,Enviar comentarios,Envoyer des commentaires,Feedback senden,Invia feedback,Отправить отзыв,发送反馈,發送反饋,フィードバックを送信,प्रतिक्रिया भेजें,피드백 보내기,கருத்து அனுப்பு,أرسل ملاحظاتك
 credits-icon,Trophy Icon by,Ícone de Troféu por,Icono de trofeo por,Icône de trophée par,Trophäen-Symbol von,Icona del trofeo di,Значок трофея от,奖杯图来源,獎盃圖來源,トロフィーアイコン,ट्रॉफी आइकन द्वारा,트로피 아이콘,டிராபி ஐகான் வழங்கியவர்:,رمز الكأس من تصميم
-,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+consent,"Allow collection of anonymous usage data?<br>
+This data is only used for application monitoring and improvement and is not shared with third parties.","Permitir recolha anónima de dados de uso?<br>
+Estes dados são usados apenas para monitorização e melhoria da aplicação e não são partilhados com terceiros.","¿Permitir la recopilación de datos de uso anónimos?<br>
+Estos datos solo se utilizan para la monitorización y mejora de la aplicación y no se comparten con terceros.","Autoriser la collecte de données d'utilisation anonymes ?<br>
+Ces données sont utilisées uniquement pour le suivi et l'amélioration de l'application et ne sont pas partagées avec des tiers.",Erfassung anonymer Nutzungsdaten zulassen?<br> Diese Daten werden ausschließlich zur Überwachung und Verbesserung der Anwendung verwendet und nicht an Dritte weitergegeben.,"Consentire la raccolta anonima dei dati di utilizzo?
+Questi dati vengono utilizzati solo per monitorare e migliorare l'applicazione e non vengono condivisi con terze parti.","Разрешить сбор анонимных данных об использовании?<br>
+Эти данные используются только для мониторинга и улучшения приложения и не передаются третьим лицам.","允许收集匿名使用数据吗？<br>
+
+这些数据仅用于应用程序监控和改进，不会与第三方共享。",,"匿名の使用状況データの収集を許可しますか？<br>
+このデータはアプリケーションの監視と改善にのみ使用され、第三者と共有されることはありません。","क्या अनाम उपयोग डेटा एकत्र करने की अनुमति है?<br>
+यह डेटा केवल एप्लिकेशन की निगरानी और सुधार के लिए उपयोग किया जाता है और इसे किसी तीसरे पक्ष के साथ साझा नहीं किया जाता है।","익명 사용 데이터 수집을 허용하시겠습니까?<br>
+이 데이터는 애플리케이션 모니터링 및 개선에만 사용되며 제3자와 공유되지 않습니다.","அநாமதேய பயன்பாட்டுத் தரவைச் சேகரிக்க அனுமதிக்கவா?<br>
+இந்தத் தரவு பயன்பாட்டு கண்காணிப்பு மற்றும் மேம்பாட்டிற்கு மட்டுமே பயன்படுத்தப்படுகிறது மற்றும் மூன்றாம் தரப்பினருடன் பகிரப்படவில்லை.","هل تسمح بجمع بيانات الاستخدام بشكل مجهول؟
+
+تُستخدم هذه البيانات فقط لمراقبة التطبيق وتحسينه، ولا تتم مشاركتها مع أي جهات خارجية."
 ,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!

@@ -12,6 +12,8 @@ namespace Assets.Scripts.SaveGame
         public int TimesBeatenCurrentDifficulty = 0;
         public int HintsAvailableClassic = 0;
         public int HintsAvailableChallenge = 0;
+        public bool ConsentGiven = false;
+        public bool ConsentAnswered = false;
         public GameInProgress GameInProgressData;
         public Purchases PurchaseData;
         public Settings SettingsData;

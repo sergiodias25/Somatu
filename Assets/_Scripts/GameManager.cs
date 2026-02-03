@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     private GameObject _challengeFinishedPopup;
 
     [SerializeField]
+    private GameObject _consentPopup;
+
+    [SerializeField]
     private TextMeshProUGUI _challengeFinishedPopupText;
 
     [SerializeField]
@@ -1117,12 +1120,12 @@ public class GameManager : MonoBehaviour
 
     public async void StartGame(Canvas loadingCanvas)
     {
-        AnalyticsService.Instance.StartDataCollection();
         Application.targetFrameRate = 91;
         Task<SaveGame> load = SaveGame.LoadSaveGame();
         await load;
         SavedGameData = load.Result;
 
+        ShowConsentPopup();
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
 
@@ -1149,6 +1152,21 @@ public class GameManager : MonoBehaviour
             SavedGameData.SettingsData.LanguageSelected
         );
         _audioManager.PlayMusic(AudioManager.MusicType.Menu);
+    }
+
+    private void ShowConsentPopup()
+    {
+        if (!SavedGameData.ConsentAnswered)
+        {
+            CustomAnimation.PopupLoad(_consentPopup.transform);
+        }
+        else
+        {
+            if (SavedGameData.ConsentGiven)
+            {
+                AnalyticsService.Instance.StartDataCollection();
+            }
+        }
     }
 
     private string GetLanguageWithoutBurmeseOrThai(string languageSelected)
