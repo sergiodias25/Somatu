@@ -42,7 +42,7 @@ settings-music,Music,Música,Música,Musique,Musik,Musica,Музыка,音乐,�
 settings-sound,Sound,Som,Sonido,Son,Klang,Suono,Звук,声音,聲音,音,आवाज़,소리,ஒலி,صوت
 settings-vibration,Vibrate,Vibração,Vibración,Vibration,Vibration,Vibrazione,Вибрация,振动,震動,振動,कंपन,진동,அதிர்வு,اهتزاز
 settings-control-drag,Drag numbers,Arrastar números,Arrastre números,Nombres de traînée,Drag-Zahlen,Trascina i numeri,Числа сопротивления,拖放数字,拖放數字,数字をドラッグ,संख्याओं को खींचें,드래그 번호,எண்களை இழுக்கவும்,اسحب الأرقام
-settings-control-click,Tap two times,Tocar 2 vezes,Tocar dos veces,Appuyez deux fois,Zweimal tippen,Tocca due volte,Нажмите дважды,点击两次,連點兩次,タップ,दो बार टैप करें,두 번 탭하세요,இரண்டு முறை தட்டவும்,انقر مرتين
+settings-control-click,Tap two times,Tocar duas vezes,Tocar dos veces,Appuyez deux fois,Zweimal tippen,Tocca due volte,Нажмите дважды,点击两次,連點兩次,タップ,दो बार टैप करें,두 번 탭하세요,இரண்டு முறை தட்டவும்,انقر مرتين
 settings-theme,Theme,Tema,Tema,Thème,Thema,Tema,Тема,主题,主題,テーマ,विषय,주제,தீம்,سمة
 settings-support,Support,Suporte,Apoyo,Soutien,Unterstützung,Supporto,Поддерживать,支持,支持,サポート,सहायता,지원하다,ஆதரவு,يدعم
 popup-unlock-difficulty,{0} mode unlocked!<br>Change to the new mode?,Modo {0} desbloqueado!<br>Mudar para o novo modo?,¡Modo {0} desbloqueado!<br>¿Cambiar al nuevo modo?,Mode {0} déverrouillé !<br>Passer au nouveau mode ?,Modus {0} freigeschaltet!<br>Zum neuen Modus wechseln?,Modalità {0} sbloccata!<br>Passare alla nuova modalità?,Режим {0} разблокирован!<br>Переключиться на новый режим?,成功解锁0} 模式！<br>切换到新模式？,成功解鎖{0}模式! 切換到新的模式？,モード {0} のロックが解除されました。<br>新しいモードに切り替えますか?,मोड {0} अनलॉक हो गया!<br>नए मोड पर स्विच करें?,모드 {0} 잠금 해제!<br>새 모드로 전환하시겠습니까?,{0} பயன்முறை திறக்கப்பட்டது!<br>புதிய பயன்முறைக்கு மாறவா?,تم فتح الوضع {0}!<br>هل تريد التبديل إلى الوضع الجديد؟
@@ -145,7 +145,7 @@ leaderboard,Leaderboard,Ranking,Tabla de clasificación,Classement,Rangliste,Cla
 achievements,Achievements,Conquistas,Logros,Succès,Erfolge,Risultati,Достижения,成就,成就,実績,उपलब्धियों,업적,சாதனைகள்,الإنجازات
 feedback,Send Feedback,Enviar comentários,Enviar comentarios,Envoyer des commentaires,Feedback senden,Invia feedback,Отправить отзыв,发送反馈,發送反饋,フィードバックを送信,प्रतिक्रिया भेजें,피드백 보내기,கருத்து அனுப்பு,أرسل ملاحظاتك
 credits-icon,Trophy Icon by,Ícone de Troféu por,Icono de trofeo por,Icône de trophée par,Trophäen-Symbol von,Icona del trofeo di,Значок трофея от,奖杯图来源,獎盃圖來源,トロフィーアイコン,ट्रॉफी आइकन द्वारा,트로피 아이콘,டிராபி ஐகான் வழங்கியவர்:,رمز الكأس من تصميم
-consent,"Allow collection of anonymous usage data?<br>
+consent-message,"Allow collection of anonymous usage data?<br>
 This data is only used for application monitoring and improvement and is not shared with third parties.","Permitir recolha anónima de dados de uso?<br>
 Estes dados são usados apenas para monitorização e melhoria da aplicação e não são partilhados com terceiros.","¿Permitir la recopilación de datos de uso anónimos?<br>
 Estos datos solo se utilizan para la monitorización y mejora de la aplicación y no se comparten con terceros.","Autoriser la collecte de données d'utilisation anonymes ?<br>
@@ -153,11 +153,22 @@ Ces données sont utilisées uniquement pour le suivi et l'amélioration de l'ap
 Questi dati vengono utilizzati solo per monitorare e migliorare l'applicazione e non vengono condivisi con terze parti.","Разрешить сбор анонимных данных об использовании?<br>
 Эти данные используются только для мониторинга и улучшения приложения и не передаются третьим лицам.","允许收集匿名使用数据吗？<br>
 
-这些数据仅用于应用程序监控和改进，不会与第三方共享。",,"匿名の使用状況データの収集を許可しますか？<br>
+这些数据仅用于应用程序监控和改进，不会与第三方共享。","允许收集匿名使用数据吗？<br>
+
+这些数据仅用于应用程序监控和改进，不会与第三方共享。","匿名の使用状況データの収集を許可しますか？<br>
 このデータはアプリケーションの監視と改善にのみ使用され、第三者と共有されることはありません。","क्या अनाम उपयोग डेटा एकत्र करने की अनुमति है?<br>
 यह डेटा केवल एप्लिकेशन की निगरानी और सुधार के लिए उपयोग किया जाता है और इसे किसी तीसरे पक्ष के साथ साझा नहीं किया जाता है।","익명 사용 데이터 수집을 허용하시겠습니까?<br>
 이 데이터는 애플리케이션 모니터링 및 개선에만 사용되며 제3자와 공유되지 않습니다.","அநாமதேய பயன்பாட்டுத் தரவைச் சேகரிக்க அனுமதிக்கவா?<br>
 இந்தத் தரவு பயன்பாட்டு கண்காணிப்பு மற்றும் மேம்பாட்டிற்கு மட்டுமே பயன்படுத்தப்படுகிறது மற்றும் மூன்றாம் தரப்பினருடன் பகிரப்படவில்லை.","هل تسمح بجمع بيانات الاستخدام بشكل مجهول؟
 
 تُستخدم هذه البيانات فقط لمراقبة التطبيق وتحسينه، ولا تتم مشاركتها مع أي جهات خارجية."
-,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+consent,Consent,Consentimento,Consentir,Consentement,Zustimmung,Consenso,Согласие,同意,同意,同意,सहमति,동의,சம்மதம்,موافقة
+delete-data,Delete personal data,Apagar dados pessoais,Eliminar datos personales,Supprimer les données personnelles,Persönliche Daten löschen,Elimina i dati personali,Удаление персональных данных,删除个人数据,删除个人数据,個人データを削除する,व्यक्तिगत डेटा हटाएं,개인 데이터 삭제,தனிப்பட்ட தரவை நீக்கு,حذف البيانات الشخصية
+data-deleted,Data deleted,Dados apagados,Datos eliminados,Données supprimées,Daten gelöscht,Dati cancellati,Данные удалены,数据已删除,数据已删除,データが削除されました,डेटा हटा दिया गया,데이터가 삭제되었습니다.,தரவு நீக்கப்பட்டது,تم حذف البيانات
+privacy-policy,Privacy policy,Política de Privacidade,Política de privacidad,Politique de confidentialité,Datenschutzrichtlinie,politica sulla riservatezza,Политика конфиденциальности,隐私政策,隐私政策,プライバシーポリシー,गोपनीयता नीति,개인정보 보호정책,தனியுரிமைக் கொள்கை,سياسة الخصوصية
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
+,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!

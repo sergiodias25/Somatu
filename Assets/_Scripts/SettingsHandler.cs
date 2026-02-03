@@ -7,6 +7,7 @@ using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using Assets.Scripts.AnalyticsEvent;
+using Unity.Services.Analytics;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -108,6 +109,9 @@ public class SettingsHandler : MonoBehaviour
 
     [SerializeField]
     private Popup _themeSelectPopup;
+
+    [SerializeField]
+    private Popup _consentPopup;
 
     public void LoadData(GameManager gameManager)
     {
@@ -298,7 +302,6 @@ public class SettingsHandler : MonoBehaviour
 
     public void SendEmail()
     {
-        _ = CustomAnimation.ButtonClicked(_feedbackButton.transform);
         string email = "sergio.alves.dias.games@gmail.com";
         string subject = EscapeURLAux("Somatu Feedback");
 
@@ -374,5 +377,22 @@ public class SettingsHandler : MonoBehaviour
             _visualAidOnSprite,
             _visualAidOffSprite
         );
+    }
+
+    public void OpenPrivacyPolicy()
+    {
+        Application.OpenURL(
+            "https://sites.google.com/view/somatu-privacy-policy/p%C3%A1gina-inicial"
+        );
+    }
+
+    public void OpenConsentPopup()
+    {
+        CustomAnimation.PopupLoad(_consentPopup.transform);
+    }
+
+    public void RequestDataDeletion()
+    {
+        AnalyticsService.Instance.RequestDataDeletion();
     }
 }

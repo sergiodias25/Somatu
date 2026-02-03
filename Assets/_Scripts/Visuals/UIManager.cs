@@ -56,9 +56,6 @@ public class UIManager : MonoBehaviour
     private GameObject _supportPanel;
 
     [SerializeField]
-    private Button _deleteDataButton;
-
-    [SerializeField]
     private GameObject _profilePanel;
 
     [SerializeField]
@@ -164,8 +161,26 @@ public class UIManager : MonoBehaviour
     private GameObject _removeBannerPopup;
 
     [SerializeField]
+    private GameObject _consentPopup;
+
+    [SerializeField]
     private Button _removeBannerPopupCloseButton;
     AudioManager _audioManager;
+
+    [SerializeField]
+    private Button _consentButton;
+
+    [SerializeField]
+    private Button _deletePersonalDataButton;
+
+    [SerializeField]
+    private Button _privacyPolicyButton;
+
+    [SerializeField]
+    private Button _feedbackButton;
+
+    [SerializeField]
+    private GameObject _supportTitle;
 
     void Start()
     {
@@ -184,7 +199,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (_languagePopup.activeSelf)
+            if (_consentPopup.activeSelf)
+            {
+                InteractionPerformed(Constants.AudioClip.Undo);
+            }
+            else if (_languagePopup.activeSelf)
             {
                 if (_gameManager.SavedGameData.SettingsData.LanguageChangedOnce)
                 {
@@ -829,20 +848,8 @@ public class UIManager : MonoBehaviour
 
     public async void DeleteSaves()
     {
-        _gameManager.SavedGameData = new Assets.Scripts.SaveGame.SaveGame();
-        /*ISaveClient _client = new CloudSaveClient();
-        await SaveService.DeleteData(
-            _client,
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
-        );*/
-        ISaveClient _client2 = new PlayerPrefClient();
-        await SaveService.DeleteData(
-            _client2,
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
-        );
         FindObjectOfType<GameManager>().ResetSavedGameData();
         _gameManager = FindObjectOfType<GameManager>();
-        await CustomAnimation.ButtonClicked(_deleteDataButton.transform);
         QuitApplicationClick();
     }
 
@@ -961,21 +968,15 @@ public class UIManager : MonoBehaviour
             }
         }
         else
-        { /*
-            _topBarManager.SelectSettingsButton();
-            HideObject(_mainMenuPanel);
-            HideClassicMenu();
-            ToggleGameplayElements(false);
-            if (_profilePanel.activeSelf)
-            {
-                HideObject(_profilePanel);
-            }
-            if (_gameManager.IsGameInProgress())
-            {
-                _timer.PauseTimer();
-            }
-            ShowObject(_settingsPanel);
-            FindObjectOfType<SettingsHandler>().LoadSettingsButtons();*/
+        {
+            InteractionPerformed(Constants.AudioClip.MenuInteraction);
+            HideObject(_settingsPanel);
+            ShowObject(_supportPanel);
+            CustomAnimation.AnimateTitle(_supportTitle.transform);
+            CustomAnimation.ButtonLoad(_consentButton.transform);
+            CustomAnimation.ButtonLoad(_deletePersonalDataButton.transform);
+            CustomAnimation.ButtonLoad(_privacyPolicyButton.transform);
+            CustomAnimation.ButtonLoad(_feedbackButton.transform);
         }
     }
 

@@ -131,12 +131,14 @@ public class Popup : MonoBehaviour
         }
         else
         {
+            _gameManager.SavedGameData.ConsentGiven = false;
             await CustomAnimation.ButtonClicked(
                 _secondActionButton.transform,
                 Constants.AudioClip.Undo,
                 true
             );
             CustomAnimation.PopupUnload(_popupPanel.transform, _popupWindow.transform);
+            AnalyticsService.Instance.StopDataCollection();
         }
     }
 }
