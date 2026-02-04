@@ -163,8 +163,25 @@ Questi dati vengono utilizzati solo per monitorare e migliorare l'applicazione e
 
 تُستخدم هذه البيانات فقط لمراقبة التطبيق وتحسينه، ولا تتم مشاركتها مع أي جهات خارجية."
 consent,Consent,Consentimento,Consentir,Consentement,Zustimmung,Consenso,Согласие,同意,同意,同意,सहमति,동의,சம்மதம்,موافقة
-delete-data,Delete personal data,Apagar dados pessoais,Eliminar datos personales,Supprimer les données personnelles,Persönliche Daten löschen,Elimina i dati personali,Удаление персональных данных,删除个人数据,删除个人数据,個人データを削除する,व्यक्तिगत डेटा हटाएं,개인 데이터 삭제,தனிப்பட்ட தரவை நீக்கு,حذف البيانات الشخصية
-data-deleted,Data deleted,Dados apagados,Datos eliminados,Données supprimées,Daten gelöscht,Dati cancellati,Данные удалены,数据已删除,数据已删除,データが削除されました,डेटा हटा दिया गया,데이터가 삭제되었습니다.,தரவு நீக்கப்பட்டது,تم حذف البيانات
+delete-data,Delete usage data,Apagar dados de uso,Eliminar datos de uso,Supprimer les données d'utilisation,Nutzungsdaten löschen,Cancella i dati di utilizzo,Удалить данные об использовании,删除使用数据,删除使用数据,使用状況データを削除する,उपयोग डेटा हटाएं,사용량 데이터 삭제,பயன்பாட்டுத் தரவை நீக்கு,بيانات الاستخدام الواضحة
+data-deleted,"Request for data deletion sent.<br>
+Deletion can take up to 7 days to process.","Pedido de eliminação de dados enviado.<br>
+O processo pode demorar até 7 dias a ser processado.","Solicitud de eliminación de datos enviada.<br>
+El proceso de eliminación puede tardar hasta 7 días.","Demande de suppression de données envoyée.<br>
+La suppression peut prendre jusqu'à 7 jours pour être traitée.",Antrag auf Datenlöschung gesendet.<br> Die Bearbeitung der Löschung kann bis zu 7 Tage dauern.,"Richiesta di cancellazione dei dati inviata.
+
+Il completamento della procedura potrebbe richiedere fino a 7 giorni.","Запрос на удаление данных отправлен.<br>
+Обработка запроса на удаление может занять до 7 дней.","数据删除请求已发送。<br>
+
+删除处理最多可能需要 7 天时间。","数据删除请求已发送。<br>
+
+删除处理最多可能需要 7 天时间。","データ削除リクエストを送信しました。<br>
+削除処理には最大7日かかる場合があります。","डेटा हटाने का अनुरोध भेजा गया।
+डेटा हटाने की प्रक्रिया में 7 दिन तक का समय लग सकता है।","데이터 삭제 요청이 전송되었습니다.<br>
+삭제 처리에는 최대 7일이 소요될 수 있습니다.","தரவு நீக்கத்திற்கான கோரிக்கை அனுப்பப்பட்டது.<br>
+நீக்குதல் செயலாக்க 7 நாட்கள் வரை ஆகலாம்.","تم تقديم طلب حذف البيانات.
+
+قد تستغرق العملية مدة تصل إلى 7 أيام لإتمامها."
 privacy-policy,Privacy policy,Política de Privacidade,Política de privacidad,Politique de confidentialité,Datenschutzrichtlinie,politica sulla riservatezza,Политика конфиденциальности,隐私政策,隐私政策,プライバシーポリシー,गोपनीयता नीति,개인정보 보호정책,தனியுரிமைக் கொள்கை,سياسة الخصوصية
 ,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!
 ,,,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!,#VALUE!

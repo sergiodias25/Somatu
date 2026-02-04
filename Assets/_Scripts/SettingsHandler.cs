@@ -108,10 +108,10 @@ public class SettingsHandler : MonoBehaviour
     private int _previousSelectedThemeidx = 0;
 
     [SerializeField]
-    private Popup _themeSelectPopup;
+    private Popup _consentPopup;
 
     [SerializeField]
-    private Popup _consentPopup;
+    private GameObject _dataDeletionConfirmationPopup;
 
     public void LoadData(GameManager gameManager)
     {
@@ -394,5 +394,6 @@ public class SettingsHandler : MonoBehaviour
     public void RequestDataDeletion()
     {
         AnalyticsService.Instance.RequestDataDeletion();
+        CustomAnimation.PopupLoad(_dataDeletionConfirmationPopup.transform);
     }
 }

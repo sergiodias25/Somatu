@@ -182,6 +182,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _supportTitle;
 
+    [SerializeField]
+    private GameObject _dataDeletionConfirmationPopup;
+
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
@@ -201,6 +204,14 @@ public class UIManager : MonoBehaviour
         {
             if (_consentPopup.activeSelf)
             {
+                InteractionPerformed(Constants.AudioClip.Undo);
+            }
+            else if (_dataDeletionConfirmationPopup.activeSelf)
+            {
+                CustomAnimation.PopupUnload(
+                    _dataDeletionConfirmationPopup.transform,
+                    _dataDeletionConfirmationPopup.transform.Find("Interactible")
+                );
                 InteractionPerformed(Constants.AudioClip.Undo);
             }
             else if (_languagePopup.activeSelf)

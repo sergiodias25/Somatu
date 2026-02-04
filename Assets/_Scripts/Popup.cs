@@ -21,7 +21,6 @@ public class Popup : MonoBehaviour
     [SerializeField]
     private Button _secondActionButton;
 
-    [SerializeField]
     private GameManager _gameManager;
 
     public void OnEnable()
