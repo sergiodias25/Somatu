@@ -1227,6 +1227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sunriseIcon: {fileID: 1009630408}
   _sunsetIcon: {fileID: 1588457221}
+  _sunriseText: {fileID: 1668855873}
+  _sunsetText: {fileID: 1829643187}
 --- !u!1001 &88415979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23028,7 +23030,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8210192785934366650, guid: a627e91ee6225354f87d97e50441274c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3735896641979278100, guid: a627e91ee6225354f87d97e50441274c, type: 3}
     m_AddedGameObjects:
@@ -32488,7 +32491,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956126642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -49876,7 +49879,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8210192785934366650, guid: a627e91ee6225354f87d97e50441274c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3735896641979278100, guid: a627e91ee6225354f87d97e50441274c, type: 3}
     m_AddedGameObjects:
@@ -58651,6 +58655,17 @@ MonoBehaviour:
     PaletteColour: Colour.2
     ColourIndex: 1
     IsChanged: 0
+--- !u!114 &1668855873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+  m_PrefabInstance: {fileID: 1405588734}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668855868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1669322049
 GameObject:
   m_ObjectHideFlags: 0
@@ -64118,6 +64133,17 @@ MonoBehaviour:
     PaletteColour: Colour.2
     ColourIndex: 1
     IsChanged: 0
+--- !u!114 &1829643187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3632960249373220565, guid: a627e91ee6225354f87d97e50441274c, type: 3}
+  m_PrefabInstance: {fileID: 715994715}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829643182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832827772
 GameObject:
   m_ObjectHideFlags: 0
