@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using GooglePlayGames;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -16,8 +15,8 @@ public class LoginController : MonoBehaviour
 
     async void Awake()
     {
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
+        //PlayGamesPlatform.DebugLogEnabled = true;
+        //PlayGamesPlatform.Activate();
     }
 
     async void Start()
