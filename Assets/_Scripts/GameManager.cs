@@ -1329,7 +1329,6 @@ public class GameManager : MonoBehaviour
     {
         SavedGameData.UnlockAllLevels();
         SavedGameData.RemoveAds();
-        FindObjectOfType<AdBanner>().HideBannerAd();
         SavedGameData.GrantUnlimitedHints();
         SavedGameData.EnableSunriseTheme();
         SavedGameData.EnableSunsetTheme();

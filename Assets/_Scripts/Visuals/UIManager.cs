@@ -567,7 +567,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowRemoveAdsPopup()
     {
-        CustomAnimation.PopupLoad(_removeBannerPopup.transform);
+        //CustomAnimation.PopupLoad(_removeBannerPopup.transform);
     }
 
     public async void ClickOnHardMode()

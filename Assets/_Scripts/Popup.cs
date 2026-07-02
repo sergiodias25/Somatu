@@ -97,17 +97,6 @@ public class Popup : MonoBehaviour
         FindObjectOfType<IAPScript>().RemoveAds();
     }
 
-    public async void ActionWatchRewardedAd()
-    {
-        await CustomAnimation.ButtonClicked(_secondActionButton.transform);
-        FindObjectOfType<AdRewarded>().ShowAd();
-    }
-
-    public async void ActionWatchInterstitialAd()
-    {
-        FindObjectOfType<AdInterstitial>().ShowAd();
-    }
-
     public async void ActionRateUs()
     {
         await CustomAnimation.ButtonClicked(_secondActionButton.transform);

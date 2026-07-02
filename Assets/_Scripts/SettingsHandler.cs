@@ -87,12 +87,6 @@ public class SettingsHandler : MonoBehaviour
     private Button _feedbackButton;
 
     [SerializeField]
-    private CodelessIAPButton _sunriseShopButton;
-
-    [SerializeField]
-    private CodelessIAPButton _sunsetShopButton;
-
-    [SerializeField]
     private Image _visualAidImage;
 
     [SerializeField]
@@ -135,35 +129,6 @@ public class SettingsHandler : MonoBehaviour
 
     public void ChangeTheme(int selectedThemeIndex)
     {
-        if (selectedThemeIndex == 2)
-        {
-            if (!_gameManager.SavedGameData.PurchaseData.SunriseTheme)
-            {
-                _previousSelectedThemeidx = _gameManager
-                    .SavedGameData
-                    .SettingsData
-                    .SelectedThemeIndex;
-                ColourManager.Instance.SelectPalette(selectedThemeIndex);
-                _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
-                _sunriseShopButton.Invoke("PurchaseProduct", 0);
-                return;
-            }
-        }
-        if (selectedThemeIndex == 3)
-        {
-            if (!_gameManager.SavedGameData.PurchaseData.SunsetTheme)
-            {
-                _previousSelectedThemeidx = _gameManager
-                    .SavedGameData
-                    .SettingsData
-                    .SelectedThemeIndex;
-                ColourManager.Instance.SelectPalette(selectedThemeIndex);
-                _gradientBg.UpdateTheme(Constants.GetSelectedPaletteColors(selectedThemeIndex));
-                _sunsetShopButton.Invoke("PurchaseProduct", 0);
-                return;
-            }
-        }
-
         ColourManager.Instance.SelectPalette(selectedThemeIndex);
         _gameManager.SavedGameData.SettingsData.SelectedThemeIndex = selectedThemeIndex;
         _gameManager.SavedGameData.PersistData();

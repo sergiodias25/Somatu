@@ -1,5 +1,4 @@
 using Assets.Scripts.AnalyticsEvent;
-using GridSum.Assets._Scripts.Visuals;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -12,14 +11,12 @@ public class IAPScript : MonoBehaviour
     private const string SUNSET_THEME = "sunset_theme";
     public CodelessIAPButton ButtonRemoveAds;
     private GameManager _gameManager;
-    private AdBanner _adBanner;
     private UIManager _uiManager;
     private SettingsHandler _settingsHandler;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        _adBanner = FindObjectOfType<AdBanner>();
         _uiManager = FindObjectOfType<UIManager>();
         _settingsHandler = FindObjectOfType<SettingsHandler>();
     }
@@ -49,19 +46,16 @@ public class IAPScript : MonoBehaviour
             case REMOVE_ADS:
                 _gameManager.SavedGameData.RemoveAds();
                 _gameManager.SavedGameData.PersistData();
-                _adBanner.HideBannerAd();
                 GameObject.Find("RemoveBannerPopup").GetComponent<Popup>().ClosePopupGameplay();
                 break;
             case SUNRISE_THEME:
                 _gameManager.SavedGameData.EnableSunriseTheme();
                 _gameManager.SavedGameData.PersistData();
-                FindObjectOfType<HideIcons>().Process();
                 _settingsHandler.ChangeTheme(2);
                 break;
             case SUNSET_THEME:
                 _gameManager.SavedGameData.EnableSunsetTheme();
                 _gameManager.SavedGameData.PersistData();
-                FindObjectOfType<HideIcons>().Process();
                 _settingsHandler.ChangeTheme(3);
                 break;
             default:
