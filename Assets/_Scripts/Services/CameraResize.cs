@@ -38,6 +38,6 @@ public class CameraResize : MonoBehaviour
         var size =
             normalizedAspectRatio / Mathf.Max(normalizedAspectRatio.x, normalizedAspectRatio.y);
         cam.rect = new Rect(default, size) { center = rectCenter };
-        cam.clearFlags = CameraClearFlags.Nothing;
+        //cam.clearFlags = CameraClearFlags.Nothing;
     }
 }
