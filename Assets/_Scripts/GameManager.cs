@@ -675,7 +675,6 @@ public class GameManager : MonoBehaviour
         else
         {
             _audioManager.PauseMusic();
-            SavedGameData.IncrementHintsAvailableClassic(1);
             SavedGameData.ClearInProgressSavedGame();
             _playerStats.CompletedGame(SelectedDifficulty, _timer.GetTimerValue(), -1);
             SavedGameData.PersistData();
@@ -912,15 +911,11 @@ public class GameManager : MonoBehaviour
 
     public bool IsHintAvailable()
     {
-        return (
-                SelectedDifficulty != Constants.Difficulty.Challenge
-                && (
-                    SavedGameData.HintsAvailableClassic > 0
-                    || SavedGameData.PurchaseData.UnlimitedHints
-                )
-            )
-            || SelectedDifficulty == Constants.Difficulty.Challenge
-                && SavedGameData.HintsAvailableChallenge > 0;
+        return (SelectedDifficulty != Constants.Difficulty.Challenge)
+            || (
+                SelectedDifficulty == Constants.Difficulty.Challenge
+                && SavedGameData.HintsAvailableChallenge > 0
+            );
     }
 
     public bool UseHint()
@@ -1252,9 +1247,7 @@ public class GameManager : MonoBehaviour
                 _timer.PauseTimer();
                 SavedGameData.Onboardings.ClassicExplanation = true;
             }
-            else if (
-                !SavedGameData.Onboardings.ClassicHint && SavedGameData.HintsAvailableClassic > 0
-            )
+            else if (!SavedGameData.Onboardings.ClassicHint)
             {
                 _allNodes.ForEach(node =>
                 {

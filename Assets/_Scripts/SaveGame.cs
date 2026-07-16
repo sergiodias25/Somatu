@@ -10,7 +10,6 @@ namespace Assets.Scripts.SaveGame
         public double TimeStamp;
         public Constants.Difficulty? UnlockedDifficulty = Constants.Difficulty.Easy;
         public int TimesBeatenCurrentDifficulty = 0;
-        public int HintsAvailableClassic = 0;
         public int HintsAvailableChallenge = 0;
         public bool ConsentGiven = false;
         public bool ConsentAnswered = false;
@@ -27,10 +26,10 @@ namespace Assets.Scripts.SaveGame
 
         public class Purchases
         {
-            public bool UnlimitedHints = false;
-            public bool RemovedAds = false;
-            public bool SunriseTheme = false;
-            public bool SunsetTheme = false;
+            public bool UnlimitedHints = true;
+            public bool RemovedAds = true;
+            public bool SunriseTheme = true;
+            public bool SunsetTheme = true;
         }
 
         public class Settings
@@ -313,18 +312,12 @@ namespace Assets.Scripts.SaveGame
         public void IncrementHintsUsedClassic(ModeStats mode)
         {
             mode.HintsUsed++;
-            HintsAvailableClassic--;
         }
 
         public void IncrementHintsUsedChallenge(ModeStats mode)
         {
             mode.HintsUsed++;
             HintsAvailableChallenge--;
-        }
-
-        public void IncrementHintsAvailableClassic(int numberOfHintsToAdd)
-        {
-            HintsAvailableClassic += numberOfHintsToAdd;
         }
 
         public void IncrementHintsAvailableChallenge(int numberOfHintsToAdd)

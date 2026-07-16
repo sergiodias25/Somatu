@@ -716,23 +716,16 @@ public class UIManager : MonoBehaviour
 
     public void HintClick()
     {
-        if (_hintButton.enabled)
+        _ = CustomAnimation.ButtonClicked(_hintButton.transform);
+        if (_gameManager.IsHintAvailable())
         {
-            _ = CustomAnimation.ButtonClicked(_hintButton.transform);
-            if (_gameManager.IsHintAvailable())
+            if (_gameManager.UseHint())
             {
-                if (_gameManager.UseHint())
-                {
-                    _playerStats.UsedHint(_gameManager.SelectedDifficulty);
-                    UpdateHintButtonText();
-                }
-            }
-            else if (_gameManager.SelectedDifficulty != Constants.Difficulty.Challenge)
-            {
-                _audioManager.PauseMusic();
-                ShowObjectWithAnimation(_hintPurchasePopup);
+                _playerStats.UsedHint(_gameManager.SelectedDifficulty);
+                UpdateHintButtonText();
             }
         }
+
         ToggleHintButton();
     }
 
@@ -842,12 +835,9 @@ public class UIManager : MonoBehaviour
         int HintsAvailable =
             _gameManager.SelectedDifficulty == Constants.Difficulty.Challenge
                 ? _gameManager.SavedGameData.HintsAvailableChallenge
-                : _gameManager.SavedGameData.HintsAvailableClassic;
+                : 1;
         string translationText = LocalizationManager.Localize("btn-hint");
-        if (
-            _gameManager.SelectedDifficulty == Constants.Difficulty.Challenge
-            || (!_gameManager.SavedGameData.PurchaseData.UnlimitedHints && HintsAvailable > 0)
-        )
+        if (_gameManager.SelectedDifficulty == Constants.Difficulty.Challenge)
         {
             _hintButtonText.text = translationText + ": " + HintsAvailable.ToString();
         }

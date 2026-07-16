@@ -32,7 +32,6 @@ public class IAPScript : MonoBehaviour
         switch (product.definition.id)
         {
             case HINTS_5:
-                _gameManager.SavedGameData.IncrementHintsAvailableClassic(5);
                 _gameManager.SavedGameData.PersistData();
                 GameObject.Find("HintPurchasePopup").GetComponent<Popup>().ClosePopupGameplay();
                 _uiManager.ToggleHintButton(true);
