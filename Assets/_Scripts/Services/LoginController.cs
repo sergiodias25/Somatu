@@ -27,7 +27,7 @@ public class LoginController : MonoBehaviour
             await UnityServices.InitializeAsync();
             SetupEvents();
             await SignInAnonymouslyAsync();
-            GoogleServices.Authenticate();
+            await FindObjectOfType<AppleGameCenterService>().Login();
         }
         catch (Exception e)
         {
