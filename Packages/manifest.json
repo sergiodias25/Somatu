@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "com.apple.unityplugin.core": "file:../Packages/com.apple.unityplugin.core-3.1.8.tgz",
-    "com.apple.unityplugin.gamekit": "file:../Packages/com.apple.unityplugin.gamekit-3.0.2.tgz",
     "com.unity.device-simulator.devices": "1.0.1",
     "com.unity.editorcoroutines": "1.0.1",
     "com.unity.ide.vscode": "1.2.5",
@@ -11,7 +9,6 @@
     "com.unity.services.analytics": "6.2.1",
     "com.unity.services.authentication": "3.5.2",
     "com.unity.services.cloudsave": "3.4.0",
-    "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.audio": "1.0.0",
