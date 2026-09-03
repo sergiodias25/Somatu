@@ -25,9 +25,7 @@ public class LoginController : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
-            GameManager _gameManager = FindObjectOfType<GameManager>();
-            _slider.value = 0.99f;
-            _gameManager.StartGame(_loadingCanvas);
+            SetupEvents();
             await SignInAnonymouslyAsync();
         }
         catch (Exception e)
@@ -47,5 +45,39 @@ public class LoginController : MonoBehaviour
         {
             Debug.LogException(ex);
         }
+    } // Setup authentication event handlers if desired
+
+    void SetupEvents()
+    {
+        _slider.value = 0.25f;
+        AuthenticationService.Instance.SignedIn += () =>
+        {
+            // Shows how to get a playerID
+            //Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+
+            // Shows how to get an access token
+            //Debug.Log($"Access Token: {AuthenticationService.Instance.AccessToken}");
+            GameManager _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.StartGame(_loadingCanvas);
+            _slider.value = 0.99f;
+        };
+
+        AuthenticationService.Instance.SignInFailed += (err) =>
+        {
+            Debug.LogError(err);
+            GameManager _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.StartGame(_loadingCanvas);
+            _slider.value = 0.99f;
+        };
+
+        AuthenticationService.Instance.SignedOut += () =>
+        {
+            Debug.Log("Player signed out.");
+        };
+
+        AuthenticationService.Instance.Expired += () =>
+        {
+            Debug.Log("Player session could not be refreshed and expired.");
+        };
     }
 }
