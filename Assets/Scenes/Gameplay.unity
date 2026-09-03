@@ -13417,8 +13417,8 @@ MonoBehaviour:
   - Name: TextMeshProUGUI.Color
     FullName: TMPro.TextMeshProUGUI
     BaseName: TextMeshProUGUI
-    PaletteColour: Colour.8
-    ColourIndex: 7
+    PaletteColour: Colour.2
+    ColourIndex: 1
     IsChanged: 0
 --- !u!1 &327863379
 GameObject:
@@ -16958,7 +16958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &497180676
@@ -18000,10 +18000,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.08925751
-    width: 1
-    height: 0.821485
+    x: 0.09527439
+    y: 0
+    width: 0.8094512
+    height: 1
   near clip plane: 8
   far clip plane: 12
   field of view: 60
@@ -30554,7 +30554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &896110806
@@ -37407,7 +37407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143596929
@@ -52269,8 +52269,8 @@ MonoBehaviour:
   - Name: Image.Color
     FullName: UnityEngine.UI.Image
     BaseName: Image
-    PaletteColour: Colour.3
-    ColourIndex: 2
+    PaletteColour: Colour.16
+    ColourIndex: 15
     IsChanged: 0
   - Name: Outline.Color
     FullName: UnityEngine.UI.Outline
@@ -60893,7 +60893,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 600, y: 600}
+  m_ReferenceResolution: {x: 800, y: 800}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
