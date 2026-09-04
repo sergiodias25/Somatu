@@ -441,14 +441,13 @@ public class UIManager : MonoBehaviour
             ShowDifficultyPopup(Constants.Difficulty.Challenge, null, null, 0);
         }
 
-        if (!_gameManager.IsLoggedInToGoogle)
+        /*if (!_gameManager.IsLoggedInToGoogle)
         {
             GoogleServices.ManuallyAuthenticate();
-        }
+        }*/
     }
 
-    public async void ClickOnLeaderboard()
-    {
+    public async void ClickOnLeaderboard() { /*
         if (_gameManager.IsLoggedInToGoogle)
         {
             Leaderboard.SendAnalyticsEvent();
@@ -457,11 +456,10 @@ public class UIManager : MonoBehaviour
         else
         {
             GoogleServices.ManuallyAuthenticate();
-        }
+        }*/
     }
 
-    public async void ClickOnAchievements()
-    {
+    public async void ClickOnAchievements() { /*
         await CustomAnimation.ButtonClicked(_achievementsButton.transform);
         if (_gameManager.IsLoggedInToGoogle)
         {
@@ -471,11 +469,10 @@ public class UIManager : MonoBehaviour
         else
         {
             GoogleServices.ManuallyAuthenticate();
-        }
+        }*/
     }
 
-    public async void ClickOnAchievementsInStats()
-    {
+    public async void ClickOnAchievementsInStats() { /*
         await CustomAnimation.ButtonClicked(_achievementsButtonInStats.transform);
         if (_gameManager.IsLoggedInToGoogle)
         {
@@ -485,7 +482,7 @@ public class UIManager : MonoBehaviour
         else
         {
             GoogleServices.ManuallyAuthenticate();
-        }
+        }*/
     }
 
     public async void ClickOnEasyMode()

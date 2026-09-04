@@ -741,11 +741,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            _challengeFinishedRecordText.text = LocalizationManager.Localize(
+                "challenge-new-personal-record"
+            );
             if (IsLoggedInToGoogle)
             {
-                _challengeFinishedRecordText.text = LocalizationManager.Localize(
-                    "challenge-new-personal-record"
-                );
                 Social.ReportScore(
                     (long)(_elapsedTime * 1000f),
                     GPGSIds.leaderboard_challenge,
